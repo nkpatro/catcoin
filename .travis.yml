@@ -3,12 +3,8 @@
    make -f makefile.unix
  language: cpp
  before_install:
-     apt-get install -qq libssl-dev
-     apt-get install -qq libdb4.8-dev
-     apt-get install -qq libboost-dev
-     apt-get install -qq miniupnpc-dev
+  - sudo apt-get install -qq libssl-dev libdb4.8-dev libboost-dev miniupnpc-dev
 
 branches:
   only:
     - master
-    - stable
