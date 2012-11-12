@@ -1,6 +1,7 @@
+script: make -f makefile.unix
+
 install:
   - cd src
-  - make -f makefile.unix
    
 language: cpp
  
