@@ -5,6 +5,7 @@ install:
 language: cpp
  
 before_install:
+  - sudo apt-cache search libdb | grep "++-dev"
   - sudo apt-get install libssl-dev libdb4.8++-dev libboost-all-dev libminiupnpc-dev -y
 
 branches:
