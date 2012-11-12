@@ -43,6 +43,11 @@ static const int fHaveUPnP = true;
 static const int fHaveUPnP = false;
 #endif
 
+static inline std::string BlockHashStr(const uint256& hash)
+{
+    return hash.ToString();
+}
+
 
 extern CScript COINBASE_FLAGS;
 
@@ -106,8 +111,6 @@ int GetNumBlocksOfPeers();
 bool IsInitialBlockDownload();
 std::string GetWarnings(std::string strFor);
 bool GetTransaction(const uint256 &hash, CTransaction &tx, uint256 &hashBlock);
-
-
 
 
 
@@ -1005,10 +1008,10 @@ public:
     void print() const
     {
         printf("CBlock(hash=%s, PoW=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%d)\n",
-            GetHash().ToString().substr(0,20).c_str(),
+        	BlockHashStr(GetHash()).c_str(),
             GetPoWHash().ToString().substr(0,20).c_str(),
             nVersion,
-            hashPrevBlock.ToString().substr(0,20).c_str(),
+            BlockHashStr(hashPrevBlock).c_str(),
             hashMerkleRoot.ToString().substr(0,10).c_str(),
             nTime, nBits, nNonce,
             vtx.size());
@@ -1178,7 +1181,7 @@ public:
         return strprintf("CBlockIndex(nprev=%08x, pnext=%08x, nFile=%d, nBlockPos=%-6d nHeight=%d, merkle=%s, hashBlock=%s)",
             pprev, pnext, nFile, nBlockPos, nHeight,
             hashMerkleRoot.ToString().substr(0,10).c_str(),
-            GetBlockHash().ToString().substr(0,20).c_str());
+            BlockHashStr(GetBlockHash()).c_str());
     }
 
     void print() const
@@ -1245,9 +1248,9 @@ public:
         std::string str = "CDiskBlockIndex(";
         str += CBlockIndex::ToString();
         str += strprintf("\n                hashBlock=%s, hashPrev=%s, hashNext=%s)",
-            GetBlockHash().ToString().c_str(),
-            hashPrev.ToString().substr(0,20).c_str(),
-            hashNext.ToString().substr(0,20).c_str());
+            BlockHashStr(GetBlockHash()).c_str(),
+            BlockHashStr(hashPrev).c_str(),
+            BlockHashStr(hashNext).c_str());
         return str;
     }
 
