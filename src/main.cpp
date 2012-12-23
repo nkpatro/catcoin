@@ -3072,7 +3072,9 @@ bool ProcessMessages(CNode* pfrom)
 
         if (!fRet)
             printf("ProcessMessage(%s, %u bytes) FAILED\n", strCommand.c_str(), nMessageSize);
-    }
+        else
+            break; // give other peers a chance
+    } // loop
 
     vRecv.Compact();
     return true;
