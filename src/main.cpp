@@ -1823,10 +1823,23 @@ bool ProcessBlock(CNode* pfrom, CBlock* pblock)
 {
     // Check for duplicate
     uint256 hash = pblock->GetHash();
-    if (mapBlockIndex.count(hash))
-        return error("ProcessBlock() : already have block %d %s", mapBlockIndex[hash]->nHeight, hash.ToString().substr(0,20).c_str());
-    if (mapOrphanBlocks.count(hash))
-        return error("ProcessBlock() : already have block (orphan) %s", hash.ToString().substr(0,20).c_str());
+    if (mapBlockIndex.count(hash)) {
+        if (pfrom) {
+            pfrom->nDupBlocks++;
+            if (pfrom->nDupBlocks > 2) pfrom->fDisconnect = true;
+            return error("ProcessBlock() : already(%d) have block %d %s", pfrom->nDupBlocks, mapBlockIndex[hash]->nHeight, hash.ToString().substr(0,20).c_str());
+        } else
+            return error("ProcessBlock() : already have block %d %s", mapBlockIndex[hash]->nHeight, hash.ToString().substr(0,20).c_str());
+    }
+    if (mapOrphanBlocks.count(hash)) {
+        if (pfrom) {
+            pfrom->nDupBlocks++;
+            if (pfrom->nDupBlocks > 2) pfrom->fDisconnect = true;
+            return error("ProcessBlock() : already(%d) have block (orphan) %s", pfrom->nDupBlocks, hash.ToString().substr(0,20).c_str());
+        } else
+            return error("ProcessBlock() : already have block (orphan) %s", hash.ToString().substr(0,20).c_str());
+    }
+    if (pfrom) pfrom->nDupBlocks = 0; // reset the counter
 
     // Preliminary checks
     if (!pblock->CheckBlock())
