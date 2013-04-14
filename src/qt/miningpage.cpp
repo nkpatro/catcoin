@@ -10,6 +10,7 @@ MiningPage::MiningPage(QWidget *parent) :
     setFixedSize(400, 420);
 
     minerActive = false;
+    enablePoolMiningControls(false);
 
     minerProcess = new QProcess(this);
     minerProcess->setProcessChannelMode(QProcess::MergedChannels);
@@ -226,6 +227,7 @@ void MiningPage::minerFinished()
     minerActive = false;
     resetMiningButton();
     model->setMining(getMiningType(), false, initThreads, 0);
+    enablePoolMiningControls(false);
 }
 
 void MiningPage::minerStarted()
