@@ -14,7 +14,19 @@ distribution are installed, for Debian and Ubuntu these are:
 
     apt-get install qt4-qmake libqt4-dev build-essential libboost-dev libboost-system-dev \
         libboost-filesystem-dev libboost-program-options-dev libboost-thread-dev \
-        libssl-dev libdb4.8++-dev
+        libssl-dev
+
+In Ubuntu Lucid and Debian squeeze you add
+
+::
+
+    apt-get install libdb4.8++-dev
+
+In Ubuntu Oneiric and up, or Debian wheezy you add
+
+::
+
+     apt-get install libdb5.1++-dev
 
 then execute the following:
 
