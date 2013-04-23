@@ -30,7 +30,7 @@ static const unsigned int MAX_BLOCK_SIZE = 1000000;
 static const unsigned int MAX_BLOCK_SIZE_GEN = MAX_BLOCK_SIZE/2;
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
 static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
-static const int64 MIN_TX_FEE = 10000000;
+static const int64 MIN_TX_FEE = 1000000; // Adjusted down by a factor of 10 re: Issue #10
 static const int64 MIN_RELAY_TX_FEE = MIN_TX_FEE;
 static const int64 MAX_MONEY = 84000000 * COIN; // Litecoin: maximum of 840k coins
 inline bool MoneyRange(int64 nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
@@ -42,6 +42,11 @@ static const int fHaveUPnP = true;
 #else
 static const int fHaveUPnP = false;
 #endif
+
+static inline std::string BlockHashStr(const uint256& hash)
+{
+    return hash.ToString();
+}
 
 
 extern CScript COINBASE_FLAGS;
@@ -106,8 +111,6 @@ int GetNumBlocksOfPeers();
 bool IsInitialBlockDownload();
 std::string GetWarnings(std::string strFor);
 bool GetTransaction(const uint256 &hash, CTransaction &tx, uint256 &hashBlock);
-
-
 
 
 
@@ -1005,10 +1008,10 @@ public:
     void print() const
     {
         printf("CBlock(hash=%s, PoW=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%d)\n",
-            GetHash().ToString().substr(0,20).c_str(),
+        	BlockHashStr(GetHash()).c_str(),
             GetPoWHash().ToString().substr(0,20).c_str(),
             nVersion,
-            hashPrevBlock.ToString().substr(0,20).c_str(),
+            BlockHashStr(hashPrevBlock).c_str(),
             hashMerkleRoot.ToString().substr(0,10).c_str(),
             nTime, nBits, nNonce,
             vtx.size());
@@ -1178,7 +1181,7 @@ public:
         return strprintf("CBlockIndex(nprev=%08x, pnext=%08x, nFile=%d, nBlockPos=%-6d nHeight=%d, merkle=%s, hashBlock=%s)",
             pprev, pnext, nFile, nBlockPos, nHeight,
             hashMerkleRoot.ToString().substr(0,10).c_str(),
-            GetBlockHash().ToString().substr(0,20).c_str());
+            BlockHashStr(GetBlockHash()).c_str());
     }
 
     void print() const
@@ -1245,9 +1248,9 @@ public:
         std::string str = "CDiskBlockIndex(";
         str += CBlockIndex::ToString();
         str += strprintf("\n                hashBlock=%s, hashPrev=%s, hashNext=%s)",
-            GetBlockHash().ToString().c_str(),
-            hashPrev.ToString().substr(0,20).c_str(),
-            hashNext.ToString().substr(0,20).c_str());
+            BlockHashStr(GetBlockHash()).c_str(),
+            BlockHashStr(hashPrev).c_str(),
+            BlockHashStr(hashNext).c_str());
         return str;
     }
 

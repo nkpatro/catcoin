@@ -368,13 +368,13 @@ bool static ConnectSocketDirectly(const CService &addrConnect, SOCKET& hSocketRe
             int nRet = select(hSocket + 1, NULL, &fdset, NULL, &timeout);
             if (nRet == 0)
             {
-                printf("connection timeout\n");
+                printf("connect(%s) timeout \n", addrConnect.ToString().c_str());
                 closesocket(hSocket);
                 return false;
             }
             if (nRet == SOCKET_ERROR)
             {
-                printf("select() for connection failed: %i\n",WSAGetLastError());
+                printf("select(%s) for connection failed: %i\n",addrConnect.ToString().c_str(), WSAGetLastError());
                 closesocket(hSocket);
                 return false;
             }
@@ -391,7 +391,7 @@ bool static ConnectSocketDirectly(const CService &addrConnect, SOCKET& hSocketRe
             }
             if (nRet != 0)
             {
-                printf("connect() failed after select(): %s\n",strerror(nRet));
+                printf("connect(%s) failed after select(): %s\n",addrConnect.ToString().c_str(), strerror(nRet));
                 closesocket(hSocket);
                 return false;
             }
@@ -402,7 +402,7 @@ bool static ConnectSocketDirectly(const CService &addrConnect, SOCKET& hSocketRe
         else
 #endif
         {
-            printf("connect() failed: %i\n",WSAGetLastError());
+            printf("connect(%s) failed: %i\n",addrConnect.ToString().c_str(), WSAGetLastError());
             closesocket(hSocket);
             return false;
         }
