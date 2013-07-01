@@ -127,7 +127,7 @@ all: litecoind
 -include obj-test/*.P
 
 obj/scrypt.o: scrypt.c
-	gcc -c -o $@ $^
+	gcc -c $(DEFS) -o $@ $^
 
 obj/build.h: FORCE
 	/bin/sh ../share/genbuild.sh obj/build.h
