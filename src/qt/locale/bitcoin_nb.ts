@@ -1331,7 +1331,7 @@ Adresse: %4
     <message>
         <location line="+3"/>
         <source>S&amp;end</source>
-        <translation>S&amp;avslutt</translation>
+        <translation>S&amp;end</translation>
     </message>
     <message>
         <location filename="../sendcoinsdialog.cpp" line="-59"/>
