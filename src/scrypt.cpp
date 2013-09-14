@@ -33,13 +33,6 @@
 #include <string.h>
 #include <openssl/sha.h>
 
-static inline uint32_t be32dec(const void *pp)
-{
-	const uint8_t *p = (uint8_t const *)pp;
-	return ((uint32_t)(p[3]) + ((uint32_t)(p[2]) << 8) +
-	    ((uint32_t)(p[1]) << 16) + ((uint32_t)(p[0]) << 24));
-}
-
 static inline void be32enc(void *pp, uint32_t x)
 {
 	uint8_t *p = (uint8_t *)pp;
@@ -195,8 +188,9 @@ PBKDF2_SHA256(const uint8_t *passwd, size_t passwdlen, const uint8_t *salt,
 #ifdef __SSE2__
 
 #include <emmintrin.h>
+#include "util.h"
 
-static inline void xor_salsa8(__m128i B[4], const __m128i Bx[4])
+static inline void xor_salsa8_sse2(__m128i B[4], const __m128i Bx[4])
 {
 	__m128i X0, X1, X2, X3;
 	__m128i T;
@@ -253,7 +247,7 @@ static inline void xor_salsa8(__m128i B[4], const __m128i Bx[4])
 	B[3] = _mm_add_epi32(B[3], X3);
 }
 
-void scrypt_1024_1_1_256_sp(const char *input, char *output, char *scratchpad)
+void scrypt_1024_1_1_256_sp_sse2(const char *input, char *output, char *scratchpad)
 {
 	uint8_t B[128];
 	union {
@@ -276,15 +270,15 @@ void scrypt_1024_1_1_256_sp(const char *input, char *output, char *scratchpad)
 	for (i = 0; i < 1024; i++) {
 		for (k = 0; k < 8; k++)
 			V[i * 8 + k] = X.i128[k];
-		xor_salsa8(&X.i128[0], &X.i128[4]);
-		xor_salsa8(&X.i128[4], &X.i128[0]);
+		xor_salsa8_sse2(&X.i128[0], &X.i128[4]);
+		xor_salsa8_sse2(&X.i128[4], &X.i128[0]);
 	}
 	for (i = 0; i < 1024; i++) {
 		j = 8 * (X.u32[16] & 1023);
 		for (k = 0; k < 8; k++)
 			X.i128[k] = _mm_xor_si128(X.i128[k], V[j + k]);
-		xor_salsa8(&X.i128[0], &X.i128[4]);
-		xor_salsa8(&X.i128[4], &X.i128[0]);
+		xor_salsa8_sse2(&X.i128[0], &X.i128[4]);
+		xor_salsa8_sse2(&X.i128[4], &X.i128[0]);
 	}
 
 	for (k = 0; k < 2; k++) {
@@ -296,7 +290,7 @@ void scrypt_1024_1_1_256_sp(const char *input, char *output, char *scratchpad)
 	PBKDF2_SHA256((const uint8_t *)input, 80, B, 128, 1, (uint8_t *)output, 32);
 }
 
-#else /* __SSE2__ */
+#endif
 
 #define ROTL(a, b) (((a) << (b)) | ((a) >> (32 - (b))))
 
@@ -399,11 +393,15 @@ void scrypt_1024_1_1_256_sp(const char *input, char *output, char *scratchpad)
 	PBKDF2_SHA256((const uint8_t *)input, 80, B, 128, 1, (uint8_t *)output, 32);
 }
 
-#endif /* __SSE2__ */
 
 
 void scrypt_1024_1_1_256(const char *input, char *output)
 {
 	char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
-	scrypt_1024_1_1_256_sp(input, output, scratchpad);
+#ifdef USE_SSE2
+	if (fSSE2Supported)
+		scrypt_1024_1_1_256_sp_sse2(input, output, scratchpad);
+	else 
+#endif
+		scrypt_1024_1_1_256_sp(input, output, scratchpad);
 }

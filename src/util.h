@@ -144,6 +144,7 @@ extern bool fServer;
 extern bool fCommandLine;
 extern std::string strMiscWarning;
 extern bool fTestNet;
+extern bool fSSE2Supported;
 extern bool fBloomFilters;
 extern bool fNoListen;
 extern bool fLogTimestamps;
@@ -603,5 +604,11 @@ template <typename Callable> void TraceThread(const char* name,  Callable func)
         PrintException(NULL, name);
     }
 }
+
+#if !defined(__SSE__) || defined(_M_X64) || defined(__amd64__)
+int query_cpu_support(void);
+#else
+static inline int query_cpu_support(void);
+#endif
 
 #endif

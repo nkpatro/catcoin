@@ -649,6 +649,14 @@ bool AppInit2(boost::thread_group& threadGroup)
     printf("Using at most %i connections (%i file descriptors available)\n", nMaxConnections, nFD);
     std::ostringstream strErrors;
 
+#ifdef USE_SSE2
+#ifdef __SSE2__
+    printf("Compiled with SSE2 support. ");
+#endif
+    fSSE2Supported = (query_cpu_support() == 0) ? true : false;
+    printf("SSE2 runtime features supported: %s\n", fSSE2Supported ? "Yes" : "No");
+#endif
+
     if (fDaemon)
         fprintf(stdout, "Litecoin server starting\n");
 

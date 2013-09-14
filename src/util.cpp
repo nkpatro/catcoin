@@ -79,6 +79,7 @@ bool fServer = false;
 bool fCommandLine = false;
 string strMiscWarning;
 bool fTestNet = false;
+bool fSSE2Supported = false;
 bool fBloomFilters = false;
 bool fNoListen = false;
 bool fLogTimestamps = false;
@@ -1482,3 +1483,42 @@ bool NewThread(void(*pfn)(void*), void* parg)
     }
     return true;
 }
+
+/* We want to warn if we're built with SSE support, but running
+   on a host without those instructions. Therefore we disable
+   the query both if the compiler isn't supporting SSE, and on
+   targets which are guaranteed to have SSE. 
+   Credits: Opus Tools - http://wiki.xiph.org/Opus-tools
+*/
+
+# if !defined(__SSE__) || defined(_M_X64) || defined(__amd64__)
+int query_cpu_support() { return 0; }
+# else
+
+#if defined WIN32 || defined _WIN32
+#include <intrin.h>
+static inline int query_cpu_support(void)
+{
+   int buffer[4];
+   __cpuid(buffer, 1);
+   return ((buffer[3] & (1<<25)) == 0) /*SSE*/
+#  ifdef __SSE2__
+        + ((buffer[3] & (1<<26)) == 0) /*SSE2*/
+#  endif
+       ;
+}
+#else
+#include <cpuid.h>
+static inline int query_cpu_support(void)
+{
+   unsigned int eax, ebx, ecx, edx=0;
+   __get_cpuid(1, &eax, &ebx, &ecx, &edx);
+   return ((edx & 1<<25) == 0) /*SSE*/
+#ifdef __SSE2__
+        + ((edx & 1<<26) == 0) /*SSE2*/
+#endif
+       ;
+}
+#endif
+
+# endif
