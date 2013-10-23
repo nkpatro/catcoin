@@ -49,6 +49,8 @@ QMAKE_CXXFLAGS *= -D_FORTIFY_SOURCE=2
 win32:QMAKE_LFLAGS *= -Wl,--dynamicbase -Wl,--nxcompat
 # on Windows: enable GCC large address aware linker flag
 win32:QMAKE_LFLAGS *= -Wl,--large-address-aware
+# i686-w64-mingw32
+win32:QMAKE_LFLAGS *= -static-libgcc -static-libstdc++
 
 # use: qmake "USE_QRCODE=1"
 # libqrencode (http://fukuchi.org/works/qrencode/index.en.html) must be installed for support
@@ -314,6 +316,11 @@ QT += testlib
 TARGET = litecoin-qt_test
 DEFINES += BITCOIN_QT_TEST
   macx: CONFIG -= app_bundle
+}
+
+contains(USE_SSE2, 1) {
+SOURCES += src/scrypt-sse2.cpp
+DEFINES += USE_SSE2
 }
 
 # Todo: Remove this line when switching to Qt5, as that option was removed
