@@ -1196,13 +1196,13 @@ static const char *strMainNetDNSSeed[][2] = {
     {"litecoinpool.org", "dnsseed.litecoinpool.org"},
     {"xurious.com", "dnsseed.ltc.xurious.com"},
     {"koin-project.com", "dnsseed.koin-project.com"},
-    {"weminemnc.com", "dnsseed.weminemnc.com"},
+    {"wemineltc.com", "dnsseed.wemineltc.com"},
     {NULL, NULL}
 };
 
 static const char *strTestNetDNSSeed[][2] = {
     {"litecointools.com", "testnet-seed.litecointools.com"},
-    {"weminemnc.com", "testnet-seed.weminemnc.com"},
+    {"wemineltc.com", "testnet-seed.wemineltc.com"},
     {NULL, NULL}
 };
 
