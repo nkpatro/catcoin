@@ -22,7 +22,7 @@ Block style:
 
 - ANSI/Allman block style
 - 4 space indenting, no tabs
-- No extra spaces inside parenthesis; please don't do ( this )
+- No extra spaces inside parenthesis; please don't do `( this )`
 - No space after function names, one space after if, for and while
 
 Variable names begin with the type in lowercase, like nSomeVariable.
