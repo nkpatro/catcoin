@@ -1,8 +1,8 @@
-// Copyright (c) 2012 The Bitcoin developers
+// Copyright (c) 2012 The Fieldcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef BITCOIN_LEVELDB_H
-#define BITCOIN_LEVELDB_H
+#ifndef FIELDCOIN_LEVELDB_H
+#define FIELDCOIN_LEVELDB_H
 
 #include "serialize.h"
 
@@ -150,4 +150,4 @@ public:
     }
 };
 
-#endif // BITCOIN_LEVELDB_H
+#endif // FIELDCOIN_LEVELDB_H

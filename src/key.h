@@ -1,9 +1,9 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2013 The Bitcoin developers
+// Copyright (c) 2009-2013 The Fieldcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef BITCOIN_KEY_H
-#define BITCOIN_KEY_H
+#ifndef FIELDCOIN_KEY_H
+#define FIELDCOIN_KEY_H
 
 #include <vector>
 
