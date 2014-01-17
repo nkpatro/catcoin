@@ -1,74 +1,46 @@
-Fieldcoin integration/staging tree
-================================
+FieldCoin (NET) - a fork of Litecoin that combines the random superblocks. Like Litecoin it uses scrypt as a proof of work scheme.
 
-http://www.fieldcoin.org
+	- 60 seconds block time
+	- Difficulty retargets every 60 blocks
+	- Total coins will be 320,636,160
+	- 6 confirmations for transaction
+	- 50 confirmations for minted blocks
+	- 1024 coins per block, and a random super block each hour that has 8X the normal payout (8096 coins)
+	- The payout will be halved each 3 months (129,600 blocks)
+	- To enourage the early adoption, the 1st week after the launch is a bonus week:
+		- First 2 days: 5x
+		- Next 2 days: 3x
+		- Next 3 days: 2x
 
-Copyright (c) 2009-2013 Fieldcoin Developers
-Copyright (c) 2011-2013 Fieldcoin Developers
+	- The default ports: Connection 11310, and RPC 11311
 
-What is Fieldcoin?
-----------------
+	- No premine
 
-Fieldcoin is a lite version of Fieldcoin using scrypt as a proof-of-work algorithm.
- - 2.5 minute block targets
- - subsidy halves in 840k blocks (~4 years)
- - ~84 million total coins
-
-The rest is the same as Fieldcoin.
- - 50 coins per block
- - 2016 blocks to retarget difficulty
-
-For more information, as well as an immediately useable, binary version of
-the Fieldcoin client sofware, see http://www.fieldcoin.org.
-
-License
--------
-
-Fieldcoin is released under the terms of the MIT license. See `COPYING` for more
-information or see http://opensource.org/licenses/MIT.
 
 Development process
--------------------
+===================
 
-Developers work in their own trees, then submit pull requests when they think
-their feature or bug fix is ready.
+Developers work in their own trees, then submit pull requests when
+they think their feature or bug fix is ready.
 
-If it is a simple/trivial/non-controversial change, then one of the Fieldcoin
-development team members simply pulls it.
+The patch will be accepted if there is broad consensus that it is a
+good thing.  Developers should expect to rework and resubmit patches
+if they don't match the project's coding conventions (see coding.txt)
+or are controversial.
 
-If it is a *more complicated or potentially controversial* change, then the patch
-submitter will be asked to start a discussion (if they haven't already) on the
-[mailing list](http://sourceforge.net/mailarchive/forum.php?forum_name=fieldcoin-development).
+The master branch is regularly built and tested, but is not guaranteed
+to be completely stable. Tags are regularly created to indicate new
+official, stable release versions of Elephant coin.
 
-The patch will be accepted if there is broad consensus that it is a good thing.
-Developers should expect to rework and resubmit patches if the code doesn't
-match the project's coding conventions (see `doc/coding.txt`) or are
-controversial.
+Feature branches are created when there are major new features being
+worked on by several people.
 
-The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/fieldcoin/fieldcoin/tags) are created
-regularly to indicate new official, stable release versions of Fieldcoin.
+From time to time a pull request will become outdated. If this occurs, and
+the pull is no longer automatically mergeable; a comment on the pull will
+be used to issue a warning of closure. The pull will be closed 15 days
+after the warning if action is not taken by the author. Pull requests closed
+in this manner will have their corresponding issue labeled 'stagnant'.
 
-Testing
--------
-
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test. Please be patient and help out, and
-remember this is a security-critical project where any mistake might cost people
-lots of money.
-
-### Automated Testing
-
-Developers are strongly encouraged to write unit tests for new code, and to
-submit new unit tests for old code.
-
-Unit tests for the core code are in `src/test/`. To compile and run them:
-
-    cd src; make -f makefile.unix test
-
-Unit tests for the GUI code are in `src/qt/test/`. To compile and run them:
-
-    qmake FIELDCOIN_QT_TEST=1 -o Makefile.test fieldcoin-qt.pro
-    make -f Makefile.test
-    ./fieldcoin-qt_test
-
+Issues with no commits will be given a similar warning, and closed after
+15 days from their last activity. Issues closed in this manner will be 
+labeled 'stale'. 

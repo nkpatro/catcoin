@@ -1,1 +1,2 @@
-src/fieldcoind usr/bin
+debian/bin/fieldcoind usr/bin
+src/fieldcoind usr/lib/fieldcoin

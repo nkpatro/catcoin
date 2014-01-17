@@ -8,7 +8,6 @@ class OptionsDialog;
 }
 class OptionsModel;
 class MonitoredDataMapper;
-class QValidatedLineEdit;
 
 /** Preferences dialog. */
 class OptionsDialog : public QDialog
@@ -26,17 +25,12 @@ protected:
     bool eventFilter(QObject *object, QEvent *event);
 
 private slots:
-    /* enable only apply button */
-    void enableApplyButton();
-    /* disable only apply button */
-    void disableApplyButton();
     /* enable apply button and OK button */
     void enableSaveButtons();
     /* disable apply button and OK button */
     void disableSaveButtons();
     /* set apply button and OK button state (enabled / disabled) */
     void setSaveButtonState(bool fState);
-    void on_resetButton_clicked();
     void on_okButton_clicked();
     void on_cancelButton_clicked();
     void on_applyButton_clicked();
@@ -44,10 +38,9 @@ private slots:
     void showRestartWarning_Proxy();
     void showRestartWarning_Lang();
     void updateDisplayUnit();
-    void handleProxyIpValid(QValidatedLineEdit *object, bool fState);
 
 signals:
-    void proxyIpValid(QValidatedLineEdit *object, bool fValid);
+    void proxyIpValid(bool fValid);
 
 private:
     Ui::OptionsDialog *ui;

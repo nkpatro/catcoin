@@ -1,14 +1,18 @@
 #include "fieldcoinamountfield.h"
-
 #include "qvaluecombobox.h"
 #include "fieldcoinunits.h"
+
 #include "guiconstants.h"
 
+#include <QLabel>
+#include <QLineEdit>
+#include <QRegExpValidator>
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QDoubleSpinBox>
+#include <QComboBox>
 #include <QApplication>
-#include <qmath.h> // for qPow()
+#include <qmath.h>
 
 FieldcoinAmountField::FieldcoinAmountField(QWidget *parent):
         QWidget(parent), amount(0), currentUnit(-1)
@@ -98,7 +102,7 @@ bool FieldcoinAmountField::eventFilter(QObject *object, QEvent *event)
         {
             // Translate a comma into a period
             QKeyEvent periodKeyEvent(event->type(), Qt::Key_Period, keyEvent->modifiers(), ".", keyEvent->isAutoRepeat(), keyEvent->count());
-            QApplication::sendEvent(object, &periodKeyEvent);
+            qApp->sendEvent(object, &periodKeyEvent);
             return true;
         }
     }
@@ -144,11 +148,6 @@ void FieldcoinAmountField::unitChanged(int idx)
     // Set max length after retrieving the value, to prevent truncation
     amount->setDecimals(FieldcoinUnits::decimals(currentUnit));
     amount->setMaximum(qPow(10, FieldcoinUnits::amountDigits(currentUnit)) - qPow(10, -amount->decimals()));
-
-    if(currentUnit == FieldcoinUnits::uBTC)
-        amount->setSingleStep(0.01);
-    else
-        amount->setSingleStep(0.001);
 
     if(valid)
     {

@@ -28,13 +28,12 @@ public:
         Fee,               // qint64
         DisplayUnit,       // FieldcoinUnits::Unit
         DisplayAddresses,  // bool
+        DetachDatabases,   // bool
         Language,          // QString
-        CoinControlFeatures, // bool
         OptionIDRowCount,
     };
 
     void Init();
-    void Reset();
 
     /* Migrate settings from wallet.dat after app initialization */
     bool Upgrade(); /* returns true if settings upgraded */
@@ -45,12 +44,11 @@ public:
 
     /* Explicit getters */
     qint64 getTransactionFee();
-    bool getMinimizeToTray() { return fMinimizeToTray; }
-    bool getMinimizeOnClose() { return fMinimizeOnClose; }
-    int getDisplayUnit() { return nDisplayUnit; }
-    bool getDisplayAddresses() { return bDisplayAddresses; }
+    bool getMinimizeToTray();
+    bool getMinimizeOnClose();
+    int getDisplayUnit();
+    bool getDisplayAddresses();
     QString getLanguage() { return language; }
-    bool getCoinControlFeatures();
 
 private:
     int nDisplayUnit;
@@ -58,12 +56,9 @@ private:
     bool fMinimizeToTray;
     bool fMinimizeOnClose;
     QString language;
-    bool fCoinControlFeatures;
 
 signals:
     void displayUnitChanged(int unit);
-    void transactionFeeChanged(qint64);
-    void coinControlFeaturesChanged(bool);
 };
 
 #endif // OPTIONSMODEL_H

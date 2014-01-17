@@ -5,12 +5,10 @@
 #include <QAbstractListModel>
 
 /** Fieldcoin unit definitions. Encapsulates parsing and formatting
-   and serves as list model for drop-down selection boxes.
+   and serves as list model for dropdown selection boxes.
 */
 class FieldcoinUnits: public QAbstractListModel
 {
-    Q_OBJECT
-
 public:
     explicit FieldcoinUnits(QObject *parent);
 
@@ -28,7 +26,7 @@ public:
     //! Unit conversion and formatting
     ///@{
 
-    //! Get list of units, for drop-down box
+    //! Get list of units, for dropdown box
     static QList<Unit> availableUnits();
     //! Is unit ID valid?
     static bool valid(int unit);
@@ -51,7 +49,7 @@ public:
     ///@}
 
     //! @name AbstractListModel implementation
-    //! List model for unit drop-down selection box.
+    //! List model for unit dropdown selection box.
     ///@{
     enum RoleIndex {
         /** Unit identifier */
@@ -60,7 +58,6 @@ public:
     int rowCount(const QModelIndex &parent) const;
     QVariant data(const QModelIndex &index, int role) const;
     ///@}
-
 private:
     QList<FieldcoinUnits::Unit> unitlist;
 };

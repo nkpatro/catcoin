@@ -1,25 +1,20 @@
-#include <QApplication>
-
 #include "guiutil.h"
-
 #include "fieldcoinaddressvalidator.h"
 #include "walletmodel.h"
 #include "fieldcoinunits.h"
-
 #include "util.h"
 #include "init.h"
+#include "base58.h"
 
+#include <QString>
 #include <QDateTime>
 #include <QDoubleValidator>
 #include <QFont>
 #include <QLineEdit>
-#if QT_VERSION >= 0x050000
-#include <QUrlQuery>
-#else
 #include <QUrl>
-#endif
-#include <QTextDocument> // for Qt::mightBeRichText
+#include <QTextDocument> // For Qt::escape
 #include <QAbstractItemView>
+#include <QApplication>
 #include <QClipboard>
 #include <QFileDialog>
 #include <QDesktopServices>
@@ -83,20 +78,18 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
 
 bool parseFieldcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no fieldcoin URI
-    if(!uri.isValid() || uri.scheme() != QString("fieldcoin"))
+    if(uri.scheme() != QString("fieldcoin"))
+        return false;
+
+    // check if the address is valid
+    CFieldcoinAddress addressFromUri(uri.path().toStdString());
+    if (!addressFromUri.IsValid())
         return false;
 
     SendCoinsRecipient rv;
     rv.address = uri.path();
     rv.amount = 0;
-
-#if QT_VERSION < 0x050000
     QList<QPair<QString, QString> > items = uri.queryItems();
-#else
-    QUrlQuery uriQuery(uri);
-    QList<QPair<QString, QString> > items = uriQuery.queryItems();
-#endif
     for (QList<QPair<QString, QString> >::iterator i = items.begin(); i != items.end(); i++)
     {
         bool fShouldReturnFalse = false;
@@ -138,7 +131,7 @@ bool parseFieldcoinURI(QString uri, SendCoinsRecipient *out)
     // Convert fieldcoin:// to fieldcoin:
     //
     //    Cannot handle this later, because fieldcoin:// will cause Qt to see the part after // as host,
-    //    which will lower-case it (and thus invalidate the address).
+    //    which will lowercase it (and thus invalidate the address).
     if(uri.startsWith("fieldcoin://"))
     {
         uri.replace(0, 11, "fieldcoin:");
@@ -149,11 +142,7 @@ bool parseFieldcoinURI(QString uri, SendCoinsRecipient *out)
 
 QString HtmlEscape(const QString& str, bool fMultiLine)
 {
-#if QT_VERSION < 0x050000
     QString escaped = Qt::escape(str);
-#else
-    QString escaped = str.toHtmlEscaped();
-#endif
     if(fMultiLine)
     {
         escaped = escaped.replace("\n", "<br>\n");
@@ -174,17 +163,9 @@ void copyEntryData(QAbstractItemView *view, int column, int role)
 
     if(!selection.isEmpty())
     {
-        // Copy first item (global clipboard)
-        QApplication::clipboard()->setText(selection.at(0).data(role).toString(), QClipboard::Clipboard);
-        // Copy first item (global mouse selection for e.g. X11 - NOP on Windows)
-        QApplication::clipboard()->setText(selection.at(0).data(role).toString(), QClipboard::Selection);
+        // Copy first item
+        QApplication::clipboard()->setText(selection.at(0).data(role).toString());
     }
-}
-
-void setClipboard(const QString& str)
-{
-    QApplication::clipboard()->setText(str, QClipboard::Clipboard);
-    QApplication::clipboard()->setText(str, QClipboard::Selection);
 }
 
 QString getSaveFileName(QWidget *parent, const QString &caption,
@@ -196,11 +177,7 @@ QString getSaveFileName(QWidget *parent, const QString &caption,
     QString myDir;
     if(dir.isEmpty()) // Default to user documents location
     {
-#if QT_VERSION < 0x050000
         myDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
-#else
-        myDir = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
-#endif
     }
     else
     {
@@ -239,7 +216,7 @@ QString getSaveFileName(QWidget *parent, const QString &caption,
 
 Qt::ConnectionType blockingGUIThreadConnection()
 {
-    if(QThread::currentThread() != qApp->thread())
+    if(QThread::currentThread() != QCoreApplication::instance()->thread())
     {
         return Qt::BlockingQueuedConnection;
     }
@@ -251,7 +228,7 @@ Qt::ConnectionType blockingGUIThreadConnection()
 
 bool checkPoint(const QPoint &p, const QWidget *w)
 {
-    QWidget *atW = QApplication::widgetAt(w->mapToGlobal(p));
+    QWidget *atW = qApp->widgetAt(w->mapToGlobal(p));
     if (!atW) return false;
     return atW->topLevelWidget() == w;
 }
@@ -301,12 +278,12 @@ bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
 #ifdef WIN32
 boost::filesystem::path static StartupShortcutPath()
 {
-    return GetSpecialFolderPath(CSIDL_STARTUP) / "Fieldcoin.lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / "FieldCoin.lnk";
 }
 
 bool GetStartOnSystemStartup()
 {
-    // check for Fieldcoin.lnk
+    // check for FieldCoin.lnk
     return boost::filesystem::exists(StartupShortcutPath());
 }
 
@@ -424,7 +401,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         // Write a fieldcoin.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
-        optionFile << "Name=Fieldcoin\n";
+        optionFile << "Name=FieldCoin\n";
         optionFile << "Exec=" << pszExePath << " -min\n";
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -432,60 +409,10 @@ bool SetStartOnSystemStartup(bool fAutoStart)
     }
     return true;
 }
-
-#elif defined(Q_OS_MAC)
-// based on: https://github.com/Mozketo/LaunchAtLoginController/blob/master/LaunchAtLoginController.m
-
-#include <CoreFoundation/CoreFoundation.h>
-#include <CoreServices/CoreServices.h>
-
-LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl);
-LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl)
-{
-    // loop through the list of startup items and try to find the fieldcoin app
-    CFArrayRef listSnapshot = LSSharedFileListCopySnapshot(list, NULL);
-    for(int i = 0; i < CFArrayGetCount(listSnapshot); i++) {
-        LSSharedFileListItemRef item = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(listSnapshot, i);
-        UInt32 resolutionFlags = kLSSharedFileListNoUserInteraction | kLSSharedFileListDoNotMountVolumes;
-        CFURLRef currentItemURL = NULL;
-        LSSharedFileListItemResolve(item, resolutionFlags, &currentItemURL, NULL);
-        if(currentItemURL && CFEqual(currentItemURL, findUrl)) {
-            // found
-            CFRelease(currentItemURL);
-            return item;
-        }
-        if(currentItemURL) {
-            CFRelease(currentItemURL);
-        }
-    }
-    return NULL;
-}
-
-bool GetStartOnSystemStartup()
-{
-    CFURLRef fieldcoinAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, fieldcoinAppUrl);
-    return !!foundItem; // return boolified object
-}
-
-bool SetStartOnSystemStartup(bool fAutoStart)
-{
-    CFURLRef fieldcoinAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
-    LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, fieldcoinAppUrl);
-
-    if(fAutoStart && !foundItem) {
-        // add fieldcoin app to startup item list
-        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, NULL, NULL, fieldcoinAppUrl, NULL, NULL);
-    }
-    else if(!fAutoStart && foundItem) {
-        // remove item
-        LSSharedFileListItemRemove(loginItems, foundItem);
-    }
-    return true;
-}
 #else
+
+// TODO: OSX startup stuff; see:
+// https://developer.apple.com/library/mac/#documentation/MacOSX/Conceptual/BPSystemStartup/Articles/CustomLogin.html
 
 bool GetStartOnSystemStartup() { return false; }
 bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
@@ -495,7 +422,7 @@ bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
 HelpMessageBox::HelpMessageBox(QWidget *parent) :
     QMessageBox(parent)
 {
-    header = tr("Fieldcoin-Qt") + " " + tr("version") + " " +
+    header = tr("FieldCoin-Qt") + " " + tr("version") + " " +
         QString::fromStdString(FormatFullVersion()) + "\n\n" +
         tr("Usage:") + "\n" +
         "  fieldcoin-qt [" + tr("command-line options") + "]                     " + "\n";
@@ -507,9 +434,9 @@ HelpMessageBox::HelpMessageBox(QWidget *parent) :
         "  -min                   " + tr("Start minimized") + "\n" +
         "  -splash                " + tr("Show splash screen on startup (default: 1)") + "\n";
 
-    setWindowTitle(tr("Fieldcoin-Qt"));
+    setWindowTitle(tr("FieldCoin-Qt"));
     setTextFormat(Qt::PlainText);
-    // setMinimumWidth is ignored for QMessageBox so put in non-breaking spaces to make it wider.
+    // setMinimumWidth is ignored for QMessageBox so put in nonbreaking spaces to make it wider.
     setText(header + QString(QChar(0x2003)).repeated(50));
     setDetailedText(coreOptions + "\n" + uiOptions);
 }
@@ -518,13 +445,13 @@ void HelpMessageBox::printToConsole()
 {
     // On other operating systems, the expected action is to print the message to the console.
     QString strUsage = header + "\n" + coreOptions + "\n" + uiOptions;
-    fprintf(stdout, "%s", strUsage.toStdString().c_str());
+    fprintf(stderr, "%s", strUsage.toStdString().c_str());
 }
 
 void HelpMessageBox::showOrPrint()
 {
 #if defined(WIN32)
-        // On Windows, show a message box, as there is no stderr/stdout in windowed applications
+        // On windows, show a message box, as there is no stderr/stdout in windowed applications
         exec();
 #else
         // On other operating systems, print help text to console
@@ -533,3 +460,4 @@ void HelpMessageBox::showOrPrint()
 }
 
 } // namespace GUIUtil
+

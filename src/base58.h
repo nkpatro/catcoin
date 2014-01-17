@@ -1,5 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Fieldcoin Developers
+// Copyright (c) 2011-2012 Litecoin Developers
+// Copyright (c) 2013 FieldCoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -10,18 +12,16 @@
 //      could be used to create visually identical looking account numbers.
 // - A string with non-alphanumeric characters is not as easily accepted as an account number.
 // - E-mail usually won't line-break if there's no punctuation to break at.
-// - Double-clicking selects the whole number as one word if it's all alphanumeric.
+// - Doubleclicking selects the whole number as one word if it's all alphanumeric.
 //
 #ifndef FIELDCOIN_BASE58_H
 #define FIELDCOIN_BASE58_H
 
 #include <string>
 #include <vector>
-
 #include "bignum.h"
 #include "key.h"
 #include "script.h"
-#include "allocators.h"
 
 static const char* pszBase58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
 
@@ -180,13 +180,19 @@ protected:
     unsigned char nVersion;
 
     // the actually encoded data
-    typedef std::vector<unsigned char, zero_after_free_allocator<unsigned char> > vector_uchar;
-    vector_uchar vchData;
+    std::vector<unsigned char> vchData;
 
     CBase58Data()
     {
         nVersion = 0;
         vchData.clear();
+    }
+
+    ~CBase58Data()
+    {
+        // zero the memory, as it may contain sensitive data
+        if (!vchData.empty())
+            memset(&vchData[0], 0, vchData.size());
     }
 
     void SetData(int nVersionIn, const void* pdata, size_t nSize)
@@ -217,7 +223,7 @@ public:
         vchData.resize(vchTemp.size() - 1);
         if (!vchData.empty())
             memcpy(&vchData[0], &vchTemp[1], vchData.size());
-        OPENSSL_cleanse(&vchTemp[0], vchData.size());
+        memset(&vchTemp[0], 0, vchTemp.size());
         return true;
     }
 
@@ -272,7 +278,7 @@ class CFieldcoinAddress : public CBase58Data
 public:
     enum
     {
-        PUBKEY_ADDRESS = 48, // Fieldcoin addresses start with L
+        PUBKEY_ADDRESS = 112, // FieldCoin addresses start with n
         SCRIPT_ADDRESS = 5,
         PUBKEY_ADDRESS_TEST = 111,
         SCRIPT_ADDRESS_TEST = 196,
@@ -404,19 +410,21 @@ public:
         PRIVKEY_ADDRESS_TEST = CFieldcoinAddress::PUBKEY_ADDRESS_TEST + 128,
     };
 
-    void SetKey(const CKey& vchSecret)
-    {
-        assert(vchSecret.IsValid());
-        SetData(fTestNet ? PRIVKEY_ADDRESS_TEST : PRIVKEY_ADDRESS, vchSecret.begin(), vchSecret.size());
-        if (vchSecret.IsCompressed())
+    void SetSecret(const CSecret& vchSecret, bool fCompressed)
+    { 
+        assert(vchSecret.size() == 32);
+        SetData(fTestNet ? PRIVKEY_ADDRESS_TEST : PRIVKEY_ADDRESS, &vchSecret[0], vchSecret.size());
+        if (fCompressed)
             vchData.push_back(1);
     }
 
-    CKey GetKey()
+    CSecret GetSecret(bool &fCompressedOut)
     {
-        CKey ret;
-        ret.Set(&vchData[0], &vchData[32], vchData.size() > 32 && vchData[32] == 1);
-        return ret;
+        CSecret vchSecret;
+        vchSecret.resize(32);
+        memcpy(&vchSecret[0], &vchData[0], 32);
+        fCompressedOut = vchData.size() == 33;
+        return vchSecret;
     }
 
     bool IsValid() const
@@ -447,9 +455,9 @@ public:
         return SetString(strSecret.c_str());
     }
 
-    CFieldcoinSecret(const CKey& vchSecret)
+    CFieldcoinSecret(const CSecret& vchSecret, bool fCompressed)
     {
-        SetKey(vchSecret);
+        SetSecret(vchSecret, fCompressed);
     }
 
     CFieldcoinSecret()
@@ -457,4 +465,4 @@ public:
     }
 };
 
-#endif // FIELDCOIN_BASE58_H
+#endif

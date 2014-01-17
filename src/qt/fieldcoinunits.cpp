@@ -34,9 +34,9 @@ QString FieldcoinUnits::name(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("LTC");
-    case mBTC: return QString("mLTC");
-    case uBTC: return QString::fromUtf8("μLTC");
+    case BTC: return QString("NET");
+    case mBTC: return QString("mNET");
+    case uBTC: return QString::fromUtf8("μNET");
     default: return QString("???");
     }
 }
@@ -45,9 +45,9 @@ QString FieldcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Fieldcoins");
-    case mBTC: return QString("Milli-Fieldcoins (1 / 1,000)");
-    case uBTC: return QString("Micro-Fieldcoins (1 / 1,000,000)");
+    case BTC: return QString("FieldCoins");
+    case mBTC: return QString("Milli-FieldCoins (1 / 1,000)");
+    case uBTC: return QString("Micro-FieldCoins (1 / 1,000,000)");
     default: return QString("???");
     }
 }
@@ -99,7 +99,7 @@ QString FieldcoinUnits::format(int unit, qint64 n, bool fPlus)
     QString quotient_str = QString::number(quotient);
     QString remainder_str = QString::number(remainder).rightJustified(num_decimals, '0');
 
-    // Right-trim excess zeros after the decimal point
+    // Right-trim excess 0's after the decimal point
     int nTrim = 0;
     for (int i = remainder_str.size()-1; i>=2 && (remainder_str.at(i) == '0'); --i)
         ++nTrim;
