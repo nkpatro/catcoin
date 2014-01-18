@@ -1,0 +1,5 @@
+fieldcoin-qt usr/bin
+share/pixmaps/fieldcoin32.xpm usr/share/pixmaps
+share/pixmaps/fieldcoin80.xpm usr/share/pixmaps
+debian/fieldcoin-qt.desktop usr/share/applications
+debian/fieldcoin-qt.protocol usr/share/kde4/services/

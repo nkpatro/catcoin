@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Fieldcoin
+Comment=Fieldcoin P2P Cryptocurrency
+Comment[fr]=Fieldcoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Fieldcoin, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/fieldcoin-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/fieldcoin80.xpm
+MimeType=x-scheme-handler/fieldcoin;
+Categories=Office;

@@ -1,4 +1,5 @@
-// Copyright (c) 2012 The Bitcoin developers
+// Copyright (c) 2012 The Fieldcoin developers
+// Copyright (c) 2012 Litecoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <string>
@@ -6,12 +7,12 @@
 #include "version.h"
 
 // Name of client reported in the 'version' message. Report the same name
-// for both bitcoind and bitcoin-qt, to make it harder for attackers to
+// for both fieldcoind and fieldcoin-qt, to make it harder for attackers to
 // target servers or GUI users specifically.
 const std::string CLIENT_NAME("Satoshi");
 
 // Client version number
-#define CLIENT_VERSION_SUFFIX   "-beta"
+#define CLIENT_VERSION_SUFFIX   ""
 
 
 // The following part of the code determines the CLIENT_BUILD variable.
@@ -36,14 +37,16 @@ const std::string CLIENT_NAME("Satoshi");
 // git will put "#define GIT_ARCHIVE 1" on the next line inside archives. $Format:%n#define GIT_ARCHIVE 1$
 #ifdef GIT_ARCHIVE
 #    define GIT_COMMIT_ID "$Format:%h$"
-#    define GIT_COMMIT_DATE "$Format:%cD$"
+#    define GIT_COMMIT_DATE "$Format:%cD"
 #endif
 
+#define STRINGIFY(s) #s
+
 #define BUILD_DESC_FROM_COMMIT(maj,min,rev,build,commit) \
-    "v" DO_STRINGIZE(maj) "." DO_STRINGIZE(min) "." DO_STRINGIZE(rev) "." DO_STRINGIZE(build) "-g" commit
+    "v" STRINGIFY(maj) "." STRINGIFY(min) "." STRINGIFY(rev) "." STRINGIFY(build) "-g" commit
 
 #define BUILD_DESC_FROM_UNKNOWN(maj,min,rev,build) \
-    "v" DO_STRINGIZE(maj) "." DO_STRINGIZE(min) "." DO_STRINGIZE(rev) "." DO_STRINGIZE(build) "-unk"
+    "v" STRINGIFY(maj) "." STRINGIFY(min) "." STRINGIFY(rev) "." STRINGIFY(build)
 
 #ifndef BUILD_DESC
 #    ifdef GIT_COMMIT_ID

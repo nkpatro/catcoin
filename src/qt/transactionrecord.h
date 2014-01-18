@@ -14,8 +14,8 @@ class TransactionStatus
 {
 public:
     TransactionStatus():
-        confirmed(false), sortKey(""), maturity(Mature),
-        matures_in(0), status(Offline), depth(0), open_for(0), cur_num_blocks(-1)
+            confirmed(false), sortKey(""), maturity(Mature),
+            matures_in(0), status(Offline), depth(0), open_for(0), cur_num_blocks(-1)
     { }
 
     enum Maturity
@@ -47,9 +47,7 @@ public:
        @{*/
     Status status;
     int64 depth;
-    int64 open_for; /**< Timestamp if status==OpenUntilDate, otherwise number
-                      of additional blocks that need to be mined before
-                      finalization */
+    int64 open_for; /**< Timestamp if status==OpenUntilDate, otherwise number of blocks */
     /**@}*/
 
     /** Current number of blocks (to know whether cached status is still valid) */
