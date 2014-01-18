@@ -1,4 +1,4 @@
-FieldCoin (NET) - a fork of Litecoin that combines the random superblocks. Like Litecoin it uses scrypt as a proof of work scheme.
+FieldCoin (FLC) - a fork of Litecoin that serves as Fieldman's personal currency. Like Litecoin it uses scrypt as a proof of work scheme. We plan to begin doing in-person trades of FieldCoin to faciliate a starting value of $50 per FLC.
 
 	- 60 seconds block time
 	- Difficulty retargets every 60 blocks
@@ -13,8 +13,6 @@ FieldCoin (NET) - a fork of Litecoin that combines the random superblocks. Like 
 		- Next 3 days: 2x
 
 	- The default ports: Connection 11310, and RPC 11311
-
-	- No premine
 
 
 Development process
