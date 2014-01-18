@@ -12,7 +12,6 @@
 #include <QFont>
 #include <QLineEdit>
 #include <QUrl>
-#include <QTextDocument> // For Qt::escape
 #include <QAbstractItemView>
 #include <QApplication>
 #include <QClipboard>
@@ -89,6 +88,7 @@ bool parseFieldcoinURI(const QUrl &uri, SendCoinsRecipient *out)
     SendCoinsRecipient rv;
     rv.address = uri.path();
     rv.amount = 0;
+    /*
     QList<QPair<QString, QString> > items = uri.queryItems();
     for (QList<QPair<QString, QString> >::iterator i = items.begin(); i != items.end(); i++)
     {
@@ -123,6 +123,7 @@ bool parseFieldcoinURI(const QUrl &uri, SendCoinsRecipient *out)
     {
         *out = rv;
     }
+    */
     return true;
 }
 
@@ -142,7 +143,7 @@ bool parseFieldcoinURI(QString uri, SendCoinsRecipient *out)
 
 QString HtmlEscape(const QString& str, bool fMultiLine)
 {
-    QString escaped = Qt::escape(str);
+    QString escaped = str.toHtmlEscaped();
     if(fMultiLine)
     {
         escaped = escaped.replace("\n", "<br>\n");
@@ -177,7 +178,7 @@ QString getSaveFileName(QWidget *parent, const QString &caption,
     QString myDir;
     if(dir.isEmpty()) // Default to user documents location
     {
-        myDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+        myDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation)[0];
     }
     else
     {
@@ -263,7 +264,7 @@ bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
     {
         QWidget *widget = static_cast<QWidget*>(obj);
         QString tooltip = widget->toolTip();
-        if(tooltip.size() > size_threshold && !tooltip.startsWith("<qt/>") && !Qt::mightBeRichText(tooltip))
+        if(tooltip.size() > size_threshold && !tooltip.startsWith("<qt/>"))
         {
             // Prefix <qt/> to make sure Qt detects this as rich text
             // Escape the current message as HTML and replace \n by <br>

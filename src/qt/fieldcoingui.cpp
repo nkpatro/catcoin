@@ -56,6 +56,8 @@
 #include <QTimer>
 #include <QDragEnterEvent>
 #include <QUrl>
+#include <QMimeData>
+#include <QDesktopServices>
 
 #include <iostream>
 
@@ -904,7 +906,7 @@ void FieldcoinGUI::encryptWallet(bool status)
 
 void FieldcoinGUI::backupWallet()
 {
-    QString saveDir = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+    QString saveDir = QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation)[0];
     QString filename = QFileDialog::getSaveFileName(this, tr("Backup Wallet"), saveDir, tr("Wallet Data (*.dat)"));
     if(!filename.isEmpty()) {
         if(!walletModel->backupWallet(filename)) {

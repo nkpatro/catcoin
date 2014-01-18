@@ -1,10 +1,11 @@
 
 TEMPLATE = app
-TARGET =
+TARGET = fieldcoin-qt
 VERSION = 0.6.3
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE USE_IPV6
 CONFIG += no_include_pwd
+QT += widgets
 
 # for boost 1.37, add -mt to the boost libraries
 # use: qmake BOOST_LIB_SUFFIX=-mt
