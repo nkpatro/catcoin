@@ -4,7 +4,9 @@ Marscoin integration/staging tree
 http://www.marscoin.org
 
 Copyright (c) 2009-2013 Bitcoin Developers
+
 Copyright (c) 2011-2013 Litecoin Developers
+
 Copyright (c) 2013-2014 Marscoin Developers
 
 What is Marscoin?
@@ -13,12 +15,19 @@ What is Marscoin?
 Marscoin targets to become the first cryptocurrency on Mars, and functions as a proof of concept for incentivizing and privatizing space exploration funding.
 
 . Scrypt Litecoin-based CryptoCurrency
+
 . 1 block per 2 Mars minutes
+
 . 50 coins per block
+
 . 590 Blocks Per Mars Day
+
 . Difficulty retarget every 24 hours 39 Minutes (Mars day)
+
 . Subsidy halves every Mars Year
+
 . ~33 million total coins
+
 . 300k donation premined for non-profit MarsOne
 
 For more information, as well as an immediately useable, binary version of
