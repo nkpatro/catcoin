@@ -1,7 +1,7 @@
 Litecoin integration/staging tree
 ================================
 
-http://www.litecoin.org
+http://www.bobcoin.org
 
 Copyright (c) 2009-2013 Bitcoin Developers
 Copyright (c) 2011-2013 Litecoin Developers
@@ -9,7 +9,7 @@ Copyright (c) 2011-2013 Litecoin Developers
 What is Litecoin?
 ----------------
 
-Litecoin is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
+Litecoin is a bob version of Bitcoin using scrypt as a proof-of-work algorithm.
  - 2.5 minute block targets
  - subsidy halves in 840k blocks (~4 years)
  - ~84 million total coins
@@ -19,7 +19,7 @@ The rest is the same as Bitcoin.
  - 2016 blocks to retarget difficulty
 
 For more information, as well as an immediately useable, binary version of
-the Litecoin client sofware, see http://www.litecoin.org.
+the Litecoin client sofware, see http://www.bobcoin.org.
 
 License
 -------
@@ -70,5 +70,5 @@ Unit tests for the GUI code are in `src/qt/test/`. To compile and run them:
 
     qmake BITCOIN_QT_TEST=1 -o Makefile.test bitcoin-qt.pro
     make -f Makefile.test
-    ./litecoin-qt_test
+    ./bobcoin-qt_test
 
