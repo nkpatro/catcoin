@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="pl" version="2.0">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.0" language="pl">
 <defaultcodec>UTF-8</defaultcodec>
 <context>
     <name>AboutDialog</name>
@@ -23,9 +25,9 @@ This product includes software developed by the OpenSSL Project for use in the O
         <translation>
 Oprogramowanie eksperymentalne.
 
-Distributed under the MIT/X11 software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php.
+Rozpowszechniane na licencji MIT/X11, szczegóły w pliku COPYING lub na stronie http://www.opensource.org/licenses/mit-license.php.
 
-This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit (http://www.openssl.org/) and cryptographic software written by Eric Young (eay@cryptsoft.com) and UPnP software written by Thomas Bernard.</translation>
+Produkt zawiera oprogramowanie rozwijane przez &quot;Projekt OpenSSL&quot; (http://www.openssl.org/) oraz oprogramowanie kryptograficzne autorstwa Eric Young (eay@cryptsoft.com) i program UPnP autorstwa Thomas Bernard.</translation>
     </message>
     <message>
         <location filename="../aboutdialog.cpp" line="+14"/>
@@ -48,7 +50,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+19"/>
         <source>Double-click to edit address or label</source>
-        <translation>Kliknij dwukrotnie, aby edytować adres lub etykietę</translation>
+        <translation>Kliknij dwukrotnie, aby zmodyfikować adres lub etykietę</translation>
     </message>
     <message>
         <location line="+27"/>
@@ -73,7 +75,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location filename="../forms/addressbookpage.ui" line="+14"/>
         <source>&amp;Copy Address</source>
-        <translation>&amp;Kopiuj adres</translation>
+        <translation>S&amp;kopiuj adres</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -123,7 +125,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
         <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Tutaj znajdują się Twoje adresy Litecoin do wysyłania płatności. Zawsze sprawdzaj ilość i adres odbiorcy przed wysyłką monet.</translation>
+        <translation>Tutaj znajdują się twoje adresy Litecoin do wysyłania płatności. Zawsze sprawdzaj liczbę monet i adres odbiorcy przed wysyłką.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -133,7 +135,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+1"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Edytuj</translation>
+        <translation>M&amp;odyfikuj</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -214,7 +216,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+3"/>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Ta operacja wymaga hasła do portfela ażeby odblokować portfel.</translation>
+        <translation>Ta operacja wymaga hasła do portfela żeby odblokować portfel.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -224,7 +226,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+3"/>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Ta operacja wymaga hasła do portfela ażeby odszyfrować portfel.</translation>
+        <translation>Ta operacja wymaga hasła do portfela żeby odszyfrować portfel.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -276,7 +278,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="-56"/>
         <source>Litecoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your litecoins from being stolen by malware infecting your computer.</source>
-        <translation>Program Litecoin zamknie się aby dokończyć proces szyfrowania. Pamiętaj, że szyfrowanie portfela nie zabezpiecza w pełni Twoich litecoinów przed kradzieżą przez wirusy lub trojany mogące zainfekować Twój komputer.</translation>
+        <translation>Program Litecoin zamknie się aby dokończyć proces szyfrowania. Pamiętaj, że szyfrowanie portfela nie zabezpiecza w pełni twoich litecoinów przed kradzieżą przez wirusy lub trojany mogące zainfekować twój komputer.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -355,7 +357,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+7"/>
         <source>Edit the list of stored addresses and labels</source>
-        <translation>Edytuj listę zapisanych adresów i i etykiet</translation>
+        <translation type="unfinished">Edytuj listę zapisanych adresów i etykiet</translation>
     </message>
     <message>
         <location line="-14"/>
@@ -440,7 +442,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+6"/>
         <source>&amp;Debug window</source>
-        <translation>&amp;Okno debudowania</translation>
+        <translation type="unfinished">Okno &amp;debugowania</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -526,7 +528,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+9"/>
         <source>Tabs toolbar</source>
-        <translation>Pasek zakładek</translation>
+        <translation type="unfinished">Pasek kart</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -542,12 +544,16 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message numerus="yes">
         <location line="+141"/>
         <source>%n active connection(s) to Litecoin network</source>
-        <translation><numerusform>%n aktywne połączenie do sieci Litecoin</numerusform><numerusform>%n aktywne połączenia do sieci Litecoin</numerusform><numerusform>%n aktywnych połączeń do sieci Litecoin</numerusform></translation>
+        <translation>
+            <numerusform>%n aktywne połączenie do sieci Litecoin</numerusform>
+            <numerusform>%n aktywne połączenia do sieci Litecoin</numerusform>
+            <numerusform>%n aktywnych połączeń do sieci Litecoin</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+22"/>
         <source>No block source available...</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Źródło bloku nie dostępne...</translation>
     </message>
     <message>
         <location line="+12"/>
@@ -562,22 +568,34 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message numerus="yes">
         <location line="+20"/>
         <source>%n hour(s)</source>
-        <translation><numerusform>%n godzina</numerusform><numerusform>%n godzin</numerusform><numerusform>%n godzin</numerusform></translation>
+        <translation>
+            <numerusform>%n godzina</numerusform>
+            <numerusform>%n godzin</numerusform>
+            <numerusform>%n godzin</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location line="+4"/>
         <source>%n day(s)</source>
-        <translation><numerusform>%n dzień</numerusform><numerusform>%n dni</numerusform><numerusform>%n dni</numerusform></translation>
+        <translation>
+            <numerusform>%n dzień</numerusform>
+            <numerusform>%n dni</numerusform>
+            <numerusform>%n dni</numerusform>
+        </translation>
     </message>
     <message numerus="yes">
         <location line="+4"/>
         <source>%n week(s)</source>
-        <translation><numerusform>%n tydzień</numerusform><numerusform>%n tygodni</numerusform><numerusform>%n tygodni</numerusform></translation>
+        <translation>
+            <numerusform>%n tydzień</numerusform>
+            <numerusform>%n tygodni</numerusform>
+            <numerusform>%n tygodni</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+4"/>
         <source>%1 behind</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">%1 wstecz</translation>
     </message>
     <message>
         <location line="+14"/>
@@ -587,7 +605,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+2"/>
         <source>Transactions after this will not yet be visible.</source>
-        <translation type="unfinished"/>
+        <translation>Transakcje po tym czasie nie są jeszcze widoczne.</translation>
     </message>
     <message>
         <location line="+22"/>
@@ -680,7 +698,7 @@ Adres: %4
     <message>
         <location filename="../clientmodel.cpp" line="+104"/>
         <source>Network Alert</source>
-        <translation>Sieć Alert</translation>
+        <translation type="unfinished">Alarm sieci</translation>
     </message>
 </context>
 <context>
@@ -688,7 +706,7 @@ Adres: %4
     <message>
         <location filename="../forms/editaddressdialog.ui" line="+14"/>
         <source>Edit Address</source>
-        <translation>Edytuj adres</translation>
+        <translation>Modyfikuj adres</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -723,12 +741,12 @@ Adres: %4
     <message>
         <location line="+3"/>
         <source>Edit receiving address</source>
-        <translation>Edytuj adres odbioru</translation>
+        <translation>Modyfikuj adres odbioru</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Edit sending address</source>
-        <translation>Edytuj adres wysyłania</translation>
+        <translation>Modyfikuj adres wysyłania</translation>
     </message>
     <message>
         <location line="+76"/>
@@ -748,7 +766,7 @@ Adres: %4
     <message>
         <location line="+5"/>
         <source>New key generation failed.</source>
-        <translation>Tworzenie nowego klucza nie powiodło się.</translation>
+        <translation type="unfinished">Utworzenie nowego klucza nie powiodło się.</translation>
     </message>
 </context>
 <context>
@@ -810,7 +828,7 @@ Adres: %4
     <message>
         <location line="+6"/>
         <source>Optional transaction fee per kB that helps make sure your transactions are processed quickly. Most transactions are 1 kB.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Opcjonalna opłata transakcyjna (za każdy kB) pomaga zapewnić szybkie przetworzenie transakcji. Większość transakcji zajmuje 1kB.</translation>
     </message>
     <message>
         <location line="+15"/>
@@ -1070,7 +1088,7 @@ Adres: %4
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
         <source>Cannot start litecoin: click-to-pay handler</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1250,12 +1268,12 @@ Adres: %4
     <message>
         <location line="+279"/>
         <source>Debug log file</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+7"/>
         <source>Open the Litecoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+102"/>
@@ -1300,7 +1318,7 @@ Adres: %4
     <message>
         <location line="+3"/>
         <source>Add &amp;Recipient</source>
-        <translation>Dodaj Odbio&amp;rce</translation>
+        <translation type="unfinished">Dodaj Odbio&amp;rcę</translation>
     </message>
     <message>
         <location line="+20"/>
@@ -1320,7 +1338,7 @@ Adres: %4
     <message>
         <location line="+10"/>
         <source>123.456 BTC</source>
-        <translation>123.456 BTC</translation>
+        <translation type="unfinished">123.456 LTC</translation>
     </message>
     <message>
         <location line="+31"/>
@@ -1355,7 +1373,7 @@ Adres: %4
     <message>
         <location line="+23"/>
         <source>The recipient address is not valid, please recheck.</source>
-        <translation>Adres odbiorcy jest nieprawidłowy, proszę poprawić</translation>
+        <translation>Adres odbiorcy jest nieprawidłowy, proszę poprawić.</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -1414,7 +1432,7 @@ Adres: %4
         <location line="+60"/>
         <location filename="../sendcoinsentry.cpp" line="+26"/>
         <source>Enter a label for this address to add it to your address book</source>
-        <translation>Wprowadź etykietę dla tego adresu by dodać go do książki adresowej</translation>
+        <translation type="unfinished">Wprowadź etykietę tego adresu by dodać go do książki adresowej</translation>
     </message>
     <message>
         <location line="-78"/>
@@ -1540,7 +1558,7 @@ Adres: %4
     <message>
         <location line="+6"/>
         <source>Enter the signing address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Poniżej wprowadź podpisywany adres, wiadomość (upewnij się, że dokładnie skopiowano wszystkie znaki końca linii, spacje, tabulacje, itp.) oraz podpis w celu weryfikacji wiadomości. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack.</translation>
     </message>
     <message>
         <location line="+21"/>
@@ -1632,7 +1650,7 @@ Adres: %4
     <message>
         <location line="+0"/>
         <source>The signature did not match the message digest.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Podpis nie pasuje do sumy kontrolnej.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -1688,7 +1706,11 @@ Adres: %4
     <message numerus="yes">
         <location line="+7"/>
         <source>, broadcast through %n node(s)</source>
-        <translation><numerusform>, emitowany przez %n węzeł</numerusform><numerusform>, emitowany przez %n węzły</numerusform><numerusform>, emitowany przez %n węzłów</numerusform></translation>
+        <translation>
+            <numerusform>, emitowany przez %n węzeł</numerusform>
+            <numerusform>, emitowany przez %n węzły</numerusform>
+            <numerusform>, emitowany przez %n węzłów</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+4"/>
@@ -1741,7 +1763,9 @@ Adres: %4
     <message numerus="yes">
         <location line="-102"/>
         <source>matures in %n more block(s)</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation type="unfinished">
+            <numerusform></numerusform>
+        </translation>
     </message>
     <message>
         <location line="+2"/>
@@ -1824,7 +1848,11 @@ Adres: %4
     <message numerus="yes">
         <location line="-35"/>
         <source>Open for %n more block(s)</source>
-        <translation><numerusform>Otwórz dla %n bloku</numerusform><numerusform>Otwórz dla %n następnych bloków</numerusform><numerusform>Otwórz dla %n następnych bloków</numerusform></translation>
+        <translation>
+            <numerusform>Otwórz dla %n bloku</numerusform>
+            <numerusform>Otwórz dla %n następnych bloków</numerusform>
+            <numerusform>Otwórz dla %n następnych bloków</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+70"/>
@@ -1870,7 +1898,11 @@ Adres: %4
     <message numerus="yes">
         <location line="+57"/>
         <source>Open for %n more block(s)</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform>Otwórz dla %n następnych bloków</numerusform></translation>
+        <translation type="unfinished">
+            <numerusform>Otwórz dla jeszcze %n bloku</numerusform>
+            <numerusform>Otwórz dla jeszcze %n bloków</numerusform>
+            <numerusform>Otwórz dla jeszcze %n bloków</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1895,7 +1927,11 @@ Adres: %4
     <message numerus="yes">
         <location line="+8"/>
         <source>Mined balance will be available when it matures in %n more block(s)</source>
-        <translation><numerusform>Balans wydobycia będzie dostępny zaraz po tym, jak dojrzeje. Pozostał %n blok</numerusform><numerusform>Balans wydobycia będzie dostępny zaraz po tym, jak dojrzeje. Pozostało %n bloków</numerusform><numerusform>Balans wydobycia będzie dostępny zaraz po tym, jak dojrzeje. Pozostało %n bloków</numerusform></translation>
+        <translation>
+            <numerusform>Balans wydobycia będzie dostępny zaraz po tym, jak dojrzeje. Pozostał %n blok</numerusform>
+            <numerusform>Balans wydobycia będzie dostępny zaraz po tym, jak dojrzeje. Pozostało %n bloków</numerusform>
+            <numerusform>Balans wydobycia będzie dostępny zaraz po tym, jak dojrzeje. Pozostało %n bloków</numerusform>
+        </translation>
     </message>
     <message>
         <location line="+5"/>
@@ -2155,7 +2191,7 @@ Adres: %4
     <message>
         <location line="+193"/>
         <source>Backup Wallet</source>
-        <translation>Kopia Zapasowa Portfela</translation>
+        <translation type="unfinished">Kopia zapasowa portfela</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -2175,7 +2211,7 @@ Adres: %4
     <message>
         <location line="+4"/>
         <source>Backup Successful</source>
-        <translation>Wykonano Kopię Zapasową</translation>
+        <translation type="unfinished">Wykonano kopię zapasową</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -2337,12 +2373,12 @@ na przykład: alertnotify=echo %%s | mail -s &quot;Alarm Litecoin&quot; admin@fo
     <message>
         <location line="+3"/>
         <source>Error: The transaction was rejected! This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Błąd: Transakcja odrzucona! Może się to zdażyć kiedy część twoich monet w portfelu została wcześniej wydana, np. jeśli używana była kopia pliku wallet.dat i zostały z niej wydane jakieś monety to nie jest to odnotowane w aktualnie używanym portfelu.</translation>
     </message>
     <message>
         <location line="+4"/>
         <source>Error: This transaction requires a transaction fee of at least %s because of its amount, complexity, or use of recently received funds!</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Błąd: Transakcja wymaga opłaty transferowej o wysokości co najmniej %s ze względu na jej wartość, złożoność lub użycie dopiero co otrzymanych funduszy! </translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2362,7 +2398,7 @@ na przykład: alertnotify=echo %%s | mail -s &quot;Alarm Litecoin&quot; admin@fo
     <message>
         <location line="+6"/>
         <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+5"/>
@@ -2492,7 +2528,7 @@ na przykład: alertnotify=echo %%s | mail -s &quot;Alarm Litecoin&quot; admin@fo
     <message>
         <location line="+1"/>
         <source>Failed to write file info</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nie udało się zapisać informacji do pliku</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2532,7 +2568,7 @@ na przykład: alertnotify=echo %%s | mail -s &quot;Alarm Litecoin&quot; admin@fo
     <message>
         <location line="+19"/>
         <source>Not enough file descriptors available.</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Niewystarczająca ilość dostępnych identyfikatorów plików.</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -2577,12 +2613,12 @@ na przykład: alertnotify=echo %%s | mail -s &quot;Alarm Litecoin&quot; admin@fo
     <message>
         <location line="+1"/>
         <source>Invalid amount for -minrelaytxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nieprawidłowa kwota zmiennej opłaty minimalnej &quot;minrelaytxfee&quot;=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Invalid amount for -mintxfee=&lt;amount&gt;: &apos;%s&apos;</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nieprawidłowa kwota opłaty minimalnej &quot;mintxfee&quot;=&lt;amount&gt;: &apos;%s&apos;</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -2612,12 +2648,12 @@ na przykład: alertnotify=echo %%s | mail -s &quot;Alarm Litecoin&quot; admin@fo
     <message>
         <location line="+2"/>
         <source>Output extra debugging information. Implies all other -debug* options</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Output extra network debugging information</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
@@ -2662,7 +2698,7 @@ na przykład: alertnotify=echo %%s | mail -s &quot;Alarm Litecoin&quot; admin@fo
     <message>
         <location line="+1"/>
         <source>Signing transaction failed</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Nieudane podpisywanie transakcji</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -2677,17 +2713,17 @@ na przykład: alertnotify=echo %%s | mail -s &quot;Alarm Litecoin&quot; admin@fo
     <message>
         <location line="+4"/>
         <source>Transaction amount too small</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kwota transakcji jest zbyt mała</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Transaction amounts must be positive</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Kwota transakcji musi być dodatnia</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Transaction too large</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished">Transakcja zbyt duża</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -2702,7 +2738,7 @@ na przykład: alertnotify=echo %%s | mail -s &quot;Alarm Litecoin&quot; admin@fo
     <message>
         <location line="+1"/>
         <source>Use proxy to reach tor hidden services (default: same as -proxy)</source>
-        <translation type="unfinished"/>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location line="+2"/>
