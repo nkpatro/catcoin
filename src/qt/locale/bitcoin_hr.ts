@@ -4,13 +4,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Litecoin</source>
-        <translation>O Litecoin-u</translation>
+        <source>About Diffcoin</source>
+        <translation>O Diffcoin-u</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Litecoin&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;Litecoin&lt;/b&gt; verzija</translation>
+        <source>&lt;b&gt;Diffcoin&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Diffcoin&lt;/b&gt; verzija</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -29,7 +29,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+0"/>
-        <source>The Litecoin developers</source>
+        <source>The Diffcoin developers</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -62,8 +62,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your Litecoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Ovo su vaše Litecoin adrese za primanje isplate. Možda želite dati drukčiju adresu svakom primatelju tako da možete pratiti tko je platio.</translation>
+        <source>These are your Diffcoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Ovo su vaše Diffcoin adrese za primanje isplate. Možda želite dati drukčiju adresu svakom primatelju tako da možete pratiti tko je platio.</translation>
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+14"/>
@@ -77,7 +77,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Litecoin address</source>
+        <source>Sign a message to prove you own a Diffcoin address</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -102,7 +102,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified Litecoin address</source>
+        <source>Verify a message to ensure it was signed with a specified Diffcoin address</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -117,7 +117,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Diffcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -270,8 +270,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-56"/>
-        <source>Litecoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your litecoins from being stolen by malware infecting your computer.</source>
-        <translation>Litecoin će se sada zatvoriti kako bi dovršio postupak šifriranja. Zapamtite da šifriranje vašeg novčanika ne može u potpunosti zaštititi vaše litecoine od krađe preko zloćudnog softvera koji bi bio na vašem računalu.</translation>
+        <source>Diffcoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your diffcoins from being stolen by malware infecting your computer.</source>
+        <translation>Diffcoin će se sada zatvoriti kako bi dovršio postupak šifriranja. Zapamtite da šifriranje vašeg novčanika ne može u potpunosti zaštititi vaše diffcoine od krađe preko zloćudnog softvera koji bi bio na vašem računalu.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -369,8 +369,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about Litecoin</source>
-        <translation>Prikaži informacije o Litecoinu</translation>
+        <source>Show information about Diffcoin</source>
+        <translation>Prikaži informacije o Diffcoinu</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -414,13 +414,13 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a Litecoin address</source>
-        <translation>Slanje novca na litecoin adresu</translation>
+        <source>Send coins to a Diffcoin address</source>
+        <translation>Slanje novca na diffcoin adresu</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for Litecoin</source>
-        <translation>Promijeni postavke konfiguracije za litecoin</translation>
+        <source>Modify configuration options for Diffcoin</source>
+        <translation>Promijeni postavke konfiguracije za diffcoin</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -450,8 +450,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Diffcoin</source>
+        <translation>Diffcoin</translation>
     </message>
     <message>
         <location line="-530"/>
@@ -475,8 +475,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About Litecoin</source>
-        <translation>&amp;O Litecoinu</translation>
+        <source>&amp;About Diffcoin</source>
+        <translation>&amp;O Diffcoinu</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -495,12 +495,12 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
+        <source>Sign messages with your Diffcoin addresses to prove you own them</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
+        <source>Verify messages to ensure they were signed with specified Diffcoin addresses</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -531,13 +531,13 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+47"/>
-        <source>Litecoin client</source>
-        <translation>Litecoin klijent</translation>
+        <source>Diffcoin client</source>
+        <translation>Diffcoin klijent</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to Litecoin network</source>
-        <translation><numerusform>%n aktivna veza na Litecoin mrežu</numerusform><numerusform>%n aktivne veze na Litecoin mrežu</numerusform><numerusform>%n aktivnih veza na Litecoin mrežu</numerusform></translation>
+        <source>%n active connection(s) to Diffcoin network</source>
+        <translation><numerusform>%n aktivna veza na Diffcoin mrežu</numerusform><numerusform>%n aktivne veze na Diffcoin mrežu</numerusform><numerusform>%n aktivnih veza na Diffcoin mrežu</numerusform></translation>
     </message>
     <message>
         <location line="+22"/>
@@ -651,7 +651,7 @@ Adresa:%4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid Litecoin address or malformed URI parameters.</source>
+        <source>URI can not be parsed! This can be caused by an invalid Diffcoin address or malformed URI parameters.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -666,7 +666,7 @@ Adresa:%4
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+111"/>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
+        <source>A fatal error occurred. Diffcoin can no longer continue safely and will quit.</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -732,8 +732,8 @@ Adresa:%4
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Litecoin address.</source>
-        <translation>Upisana adresa &quot;%1&quot; nije valjana litecoin adresa.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Diffcoin address.</source>
+        <translation>Upisana adresa &quot;%1&quot; nije valjana diffcoin adresa.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -751,7 +751,7 @@ Adresa:%4
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>Litecoin-Qt</source>
+        <source>Diffcoin-Qt</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -814,13 +814,13 @@ Adresa:%4
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Litecoin after logging in to the system.</source>
-        <translation>Automatski pokreni Litecoin kad se uključi računalo</translation>
+        <source>Automatically start Diffcoin after logging in to the system.</source>
+        <translation>Automatski pokreni Diffcoin kad se uključi računalo</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Litecoin on system login</source>
-        <translation>&amp;Pokreni Litecoin kod pokretanja sustava</translation>
+        <source>&amp;Start Diffcoin on system login</source>
+        <translation>&amp;Pokreni Diffcoin kod pokretanja sustava</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -839,8 +839,8 @@ Adresa:%4
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatski otvori port Litecoin klijenta na ruteru. To radi samo ako ruter podržava UPnP i ako je omogućen.</translation>
+        <source>Automatically open the Diffcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatski otvori port Diffcoin klijenta na ruteru. To radi samo ako ruter podržava UPnP i ako je omogućen.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -849,7 +849,7 @@ Adresa:%4
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Litecoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <source>Connect to the Diffcoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
         <translation>Spojite se na Bitcon mrežu putem SOCKS proxy-a (npr. kod povezivanja kroz Tor)</translation>
     </message>
     <message>
@@ -924,7 +924,7 @@ Adresa:%4
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Litecoin.</source>
+        <source>The user interface language can be set here. This setting will take effect after restarting Diffcoin.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -935,11 +935,11 @@ Adresa:%4
     <message>
         <location line="+13"/>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Izaberite željeni najmanji dio litecoina koji će biti prikazan u sučelju i koji će se koristiti za plaćanje.</translation>
+        <translation>Izaberite željeni najmanji dio diffcoina koji će biti prikazan u sučelju i koji će se koristiti za plaćanje.</translation>
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Litecoin addresses in the transaction list or not.</source>
+        <source>Whether to show Diffcoin addresses in the transaction list or not.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -991,7 +991,7 @@ Adresa:%4
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Litecoin.</source>
+        <source>This setting will take effect after restarting Diffcoin.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1010,7 +1010,7 @@ Adresa:%4
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</source>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Diffcoin network after a connection is established, but this process has not completed yet.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1064,7 +1064,7 @@ Adresa:%4
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start litecoin: click-to-pay handler</source>
+        <source>Cannot start diffcoin: click-to-pay handler</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -1214,7 +1214,7 @@ Adresa:%4
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the Litecoin-Qt help message to get a list with possible Litecoin command-line options.</source>
+        <source>Show the Diffcoin-Qt help message to get a list with possible Diffcoin command-line options.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1234,12 +1234,12 @@ Adresa:%4
     </message>
     <message>
         <location line="-104"/>
-        <source>Litecoin - Debug window</source>
+        <source>Diffcoin - Debug window</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <location line="+25"/>
-        <source>Litecoin Core</source>
+        <source>Diffcoin Core</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1249,7 +1249,7 @@ Adresa:%4
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Litecoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <source>Open the Diffcoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1259,7 +1259,7 @@ Adresa:%4
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the Litecoin RPC console.</source>
+        <source>Welcome to the Diffcoin RPC console.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1443,8 +1443,8 @@ Adresa:%4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Litecoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>Unesite Litecoin adresu (npr. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>Enter a Diffcoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>Unesite Diffcoin adresu (npr. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
 </context>
 <context>
@@ -1467,7 +1467,7 @@ Adresa:%4
     <message>
         <location line="+18"/>
         <source>The address to sign the message with (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>Unesite Litecoin adresu (npr. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <translation>Unesite Diffcoin adresu (npr. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1508,7 +1508,7 @@ Adresa:%4
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Litecoin address</source>
+        <source>Sign the message to prove you own this Diffcoin address</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1540,11 +1540,11 @@ Adresa:%4
     <message>
         <location line="+21"/>
         <source>The address the message was signed with (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>Unesite Litecoin adresu (npr. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <translation>Unesite Diffcoin adresu (npr. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Litecoin address</source>
+        <source>Verify the message to ensure it was signed with the specified Diffcoin address</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1560,8 +1560,8 @@ Adresa:%4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Litecoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>Unesite Litecoin adresu (npr. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>Enter a Diffcoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>Unesite Diffcoin adresu (npr. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1570,7 +1570,7 @@ Adresa:%4
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Litecoin signature</source>
+        <source>Enter Diffcoin signature</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1644,7 +1644,7 @@ Adresa:%4
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The Litecoin developers</source>
+        <source>The Diffcoin developers</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2182,8 +2182,8 @@ Adresa:%4
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+94"/>
-        <source>Litecoin version</source>
-        <translation>Litecoin verzija</translation>
+        <source>Diffcoin version</source>
+        <translation>Diffcoin verzija</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -2192,8 +2192,8 @@ Adresa:%4
     </message>
     <message>
         <location line="-29"/>
-        <source>Send command to -server or litecoind</source>
-        <translation>Pošalji komandu usluzi -server ili litecoind</translation>
+        <source>Send command to -server or diffcoind</source>
+        <translation>Pošalji komandu usluzi -server ili diffcoind</translation>
     </message>
     <message>
         <location line="-23"/>
@@ -2212,13 +2212,13 @@ Adresa:%4
     </message>
     <message>
         <location line="+24"/>
-        <source>Specify configuration file (default: litecoin.conf)</source>
-        <translation>Odredi konfiguracijsku datoteku (ugrađeni izbor: litecoin.conf)</translation>
+        <source>Specify configuration file (default: diffcoin.conf)</source>
+        <translation>Odredi konfiguracijsku datoteku (ugrađeni izbor: diffcoin.conf)</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify pid file (default: litecoind.pid)</source>
-        <translation>Odredi proces ID datoteku (ugrađeni izbor: litecoin.pid)</translation>
+        <source>Specify pid file (default: diffcoind.pid)</source>
+        <translation>Odredi proces ID datoteku (ugrađeni izbor: diffcoin.pid)</translation>
     </message>
     <message>
         <location line="-1"/>
@@ -2295,13 +2295,13 @@ Adresa:%4
         <source>%s, you must set a rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=litecoinrpc
+rpcuser=diffcoinrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Litecoin Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Diffcoin Alert&quot; admin@foo.com
 </source>
         <translation type="unfinished"/>
     </message>
@@ -2317,7 +2317,7 @@ for example: alertnotify=echo %%s | mail -s &quot;Litecoin Alert&quot; admin@foo
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. Litecoin is probably already running.</source>
+        <source>Cannot obtain a lock on data directory %s. Diffcoin is probably already running.</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2362,8 +2362,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Litecoin Alert&quot; admin@foo
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Litecoin will not work properly.</source>
-        <translation>Upozorenje: Molimo provjerite jesu li datum i vrijeme na vašem računalu točni. Ako vaš sat ide krivo, Litecoin neće raditi ispravno.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Diffcoin will not work properly.</source>
+        <translation>Upozorenje: Molimo provjerite jesu li datum i vrijeme na vašem računalu točni. Ako vaš sat ide krivo, Diffcoin neće raditi ispravno.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2612,8 +2612,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Litecoin Alert&quot; admin@foo
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the Litecoin Wiki for SSL setup instructions)</source>
-        <translation>SSL postavke: (za detalje o podešavanju SSL opcija vidi Litecoin Wiki)</translation>
+        <source>SSL options: (see the Diffcoin Wiki for SSL setup instructions)</source>
+        <translation>SSL postavke: (za detalje o podešavanju SSL opcija vidi Diffcoin Wiki)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2802,13 +2802,13 @@ for example: alertnotify=echo %%s | mail -s &quot;Litecoin Alert&quot; admin@foo
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Litecoin</source>
-        <translation>Greška kod učitavanja wallet.dat: Novčanik zahtjeva noviju verziju Litecoina</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Diffcoin</source>
+        <translation>Greška kod učitavanja wallet.dat: Novčanik zahtjeva noviju verziju Diffcoina</translation>
     </message>
     <message>
         <location line="+93"/>
-        <source>Wallet needed to be rewritten: restart Litecoin to complete</source>
-        <translation>Novčanik je trebao prepravak: ponovo pokrenite Litecoin</translation>
+        <source>Wallet needed to be rewritten: restart Diffcoin to complete</source>
+        <translation>Novčanik je trebao prepravak: ponovo pokrenite Diffcoin</translation>
     </message>
     <message>
         <location line="-95"/>
@@ -2867,8 +2867,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Litecoin Alert&quot; admin@foo
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. Litecoin is probably already running.</source>
-        <translation>Program ne može koristiti %s na ovom računalu.  Litecoin program je vjerojatno već pokrenut.</translation>
+        <source>Unable to bind to %s on this computer. Diffcoin is probably already running.</source>
+        <translation>Program ne može koristiti %s na ovom računalu.  Diffcoin program je vjerojatno već pokrenut.</translation>
     </message>
     <message>
         <location line="+64"/>
