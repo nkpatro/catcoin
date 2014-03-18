@@ -559,8 +559,10 @@ bool CTransaction::CheckTransaction(CValidationState &state) const
     {
         if (txout.nValue < 0)
             return state.DoS(100, error("CTransaction::CheckTransaction() : txout.nValue negative"));
-        if (txout.nValue > MAX_MONEY)
+        if (txout.nValue > MAX_MONEY){
+            printf("txout.nValue: %g\n", txout.nValue);
             return state.DoS(100, error("CTransaction::CheckTransaction() : txout.nValue too high"));
+        }
         nValueOut += txout.nValue;
         if (!MoneyRange(nValueOut))
             return state.DoS(100, error("CTransaction::CheckTransaction() : txout total out of range"));
@@ -1089,7 +1091,7 @@ unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
         bnResult = bnProofOfWorkLimit;
     return bnResult.GetCompact();
 }
-
+/*
 unsigned int static GetNextWorkRequired_ORIG(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
     unsigned int nProofOfWorkLimit = bnProofOfWorkLimit.GetCompact();
@@ -1158,7 +1160,7 @@ unsigned int static GetNextWorkRequired_ORIG(const CBlockIndex* pindexLast, cons
 
     return bnNew.GetCompact();
 }
-
+*/
 
 unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBlockHeader *pblock, uint64 TargetBlocksSpacingSeconds, uint64 PastBlocksMin, uint64 PastBlocksMax) {
     /* current difficulty formula, megacoin - kimoto gravity well */
@@ -1234,7 +1236,7 @@ unsigned int static GetNextWorkRequired_V2(const CBlockIndex* pindexLast, const 
 
 unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
-    int DiffMode = 1;
+    //int DiffMode = 1;
     if (fTestNet) {
         if (pindexLast->nHeight+1 >= 120) { DiffMode = 2; }
     }
