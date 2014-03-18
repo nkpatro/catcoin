@@ -1281,14 +1281,18 @@ int64 static GetBlockValue(CBlockIndex* pindex,int nHeight, int64 nFees)
     if(!pblocktemplate.get())
         return 0;
     
-    CBlock *pblock = &pblocktemplate->block; // pointer for convenience
+    //CBlock *pblock = &pblocktemplate->block; // pointer for convenience
     
     int64 nSubsidy = pindex->nBits;// * COIN;
 
     // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
-    nSubsidy >>= (nHeight / 100); // Diffcoin: 840k blocks in ~4 years
-
-    return nSubsidy + nFees;
+    //nSubsidy >>= (nHeight / 100); // Diffcoin: 840k blocks in ~4 years
+    
+    int64 bValue =  nSubsidy + nFees;
+    
+    printf("txout.nValue: %llu\n", nSubsidy);
+    
+    return bValue;
 }
 
 
