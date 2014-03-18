@@ -1269,6 +1269,23 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     return nSubsidy + nFees;
 }
 
+int64 static GetBlockValue(CBlockIndex* pindex,int nHeight, int64 nFees)
+{   
+    // Create new block
+    auto_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
+    if(!pblocktemplate.get())
+        return 0;
+    
+    CBlock *pblock = &pblocktemplate->block; // pointer for convenience
+    
+    int64 nSubsidy = GetNextWorkRequired_V2(pindex, pblock) * COIN;
+
+    // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
+    nSubsidy >>= (nHeight / 100); // Diffcoin: 840k blocks in ~4 years
+
+    return nSubsidy + nFees;
+}
+
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits)
 {
@@ -4506,7 +4523,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn)
         nLastBlockSize = nBlockSize;
         printf("CreateNewBlock(): total size %"PRI64u"\n", nBlockSize);
 
-        pblock->vtx[0].vout[0].nValue = GetBlockValue(pindexPrev->nHeight+1, nFees);
+        pblock->vtx[0].vout[0].nValue = GetBlockValue(pindexPrev,pindexPrev->nHeight+1, nFees);
         pblocktemplate->vTxFees[0] = -nFees;
 
         // Fill in header
