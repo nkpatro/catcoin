@@ -1252,27 +1252,18 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
     return GetNextWorkRequired_V2(pindexLast, pblock);
 }
 
-
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {   
-    return GetBlockValue(pindexBest,nHeight,nFees);
-}
-
-int64 static GetBlockValue(CBlockIndex* pindex,int nHeight, int64 nFees)
-{   
-    //CBlock *pblock = &pblocktemplate->block; // pointer for convenience
-    if (pindex == NULL)
-    {
-        if (pindexBest == NULL)
+    CBlockIndex* pindex;
+    if (pindexBest == NULL)
             return 1.0;
         else
             pindex = pindexBest;
-    }
-
-    int nShift = (pindexBest->nBits >> 24) & 0xff;
+    
+    int nShift = (pindex->nBits >> 24) & 0xff;
 
     double dDiff =
-        (double)0x0000ffff / (double)(pindexBest->nBits & 0x00ffffff);
+        (double)0x0000ffff / (double)(pindex->nBits & 0x00ffffff);
 
     while (nShift < 29)
     {
@@ -4533,7 +4524,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn)
         nLastBlockSize = nBlockSize;
         printf("CreateNewBlock(): total size %"PRI64u"\n", nBlockSize);
 
-        pblock->vtx[0].vout[0].nValue = GetBlockValue(pindexPrev,pindexPrev->nHeight+1, nFees);
+        pblock->vtx[0].vout[0].nValue = GetBlockValue(pindexPrev->nHeight+1, nFees);
         pblocktemplate->vTxFees[0] = -nFees;
 
         // Fill in header
