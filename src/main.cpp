@@ -1255,43 +1255,42 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {   
-    // Create new block
-    auto_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
-    if(!pblocktemplate.get())
-        return 0;
-    
-    CBlock *pblock = &pblocktemplate->block; // pointer for convenience
-    
-    map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(pblock->hashPrevBlock);
-        
-    CBlockIndex* pindexPrev = (*mi).second;
-        
-    int64 nSubsidy = GetNextWorkRequired_V2(pindexPrev, pblock);// * COIN;
-
-    // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
-    nSubsidy >>= (nHeight / 100); // Diffcoin: 840k blocks in ~4 years
-
-    return nSubsidy + nFees;
+    return GetBlockValue(NULL,nHeight,nFees);
 }
 
 int64 static GetBlockValue(CBlockIndex* pindex,int nHeight, int64 nFees)
 {   
-    // Create new block
-    auto_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
-    if(!pblocktemplate.get())
-        return 0;
-    
     //CBlock *pblock = &pblocktemplate->block; // pointer for convenience
-    
-    int64 nSubsidy = pindex->nBits;// * COIN;
+    if (pindex == NULL)
+    {   
+        printf("GetBlockValue: NULL");
+        return 0;
+    }
+
+    int nShift = (pindex->nBits >> 24) & 0xff;
+
+    double dDiff =
+        (double)0x0000ffff / (double)(pindex->nBits & 0x00ffffff);
+
+    while (nShift < 29)
+    {
+        dDiff *= 256.0;
+        nShift++;
+    }
+    while (nShift > 29)
+    {
+        dDiff /= 256.0;
+        nShift--;
+    }
+
+    int64 nSubsidy = dDiff * COIN;
 
     // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
     //nSubsidy >>= (nHeight / 100); // Diffcoin: 840k blocks in ~4 years
     
     int64 bValue =  nSubsidy + nFees;
     
-    printf("txout.nValue: %llu\n", nSubsidy);
-    
+    printf("GetBlockValue: %llu\n", bValue);
     return bValue;
 }
 
