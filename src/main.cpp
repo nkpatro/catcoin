@@ -1067,21 +1067,19 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     auto_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
     if(!pblocktemplate.get())
         return 0;
+    
     CBlock *pblock = &pblocktemplate->block; // pointer for convenience
     
-    CBlockIndex* pindexPrev = NULL;
-    int nHeight = 0;
-        
     map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
     if (mi == mapBlockIndex.end())
         return state.DoS(10, error("AcceptBlock() : prev block not found"));
-    pindexPrev = (*mi).second;
-    nHeight = pindexPrev->nHeight+1;
+        
+    CBlockIndex* pindexPrev = (*mi).second;
         
     int64 nSubsidy = GetNextWorkRequired_V2(pindexBest, pblock) * COIN;
 
     // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
-    nSubsidy >>= (nHeight / 840000); // Diffcoin: 840k blocks in ~4 years
+    nSubsidy >>= (nHeight / 100); // Diffcoin: 840k blocks in ~4 years
 
     return nSubsidy + nFees;
 }
