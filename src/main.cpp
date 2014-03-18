@@ -560,7 +560,7 @@ bool CTransaction::CheckTransaction(CValidationState &state) const
         if (txout.nValue < 0)
             return state.DoS(100, error("CTransaction::CheckTransaction() : txout.nValue negative"));
         if (txout.nValue > MAX_MONEY){
-            printf("txout.nValue: %g\n", txout.nValue);
+            printf("txout.nValue: %llu\n", txout.nValue);
             return state.DoS(100, error("CTransaction::CheckTransaction() : txout.nValue too high"));
         }
         nValueOut += txout.nValue;
