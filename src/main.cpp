@@ -1063,7 +1063,22 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {   
-    int64 nSubsidy = GetNextWorkRequired_V2(pindexLast, pblock) * COIN;
+    // Create new block
+    auto_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
+    if(!pblocktemplate.get())
+        return 0;
+    CBlock *pblock = &pblocktemplate->block; // pointer for convenience
+    
+    CBlockIndex* pindexPrev = NULL;
+    int nHeight = 0;
+        
+    map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
+    if (mi == mapBlockIndex.end())
+        return state.DoS(10, error("AcceptBlock() : prev block not found"));
+    pindexPrev = (*mi).second;
+    nHeight = pindexPrev->nHeight+1;
+        
+    int64 nSubsidy = GetNextWorkRequired_V2(pindexBest, pblock) * COIN;
 
     // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
     nSubsidy >>= (nHeight / 840000); // Diffcoin: 840k blocks in ~4 years
@@ -4385,7 +4400,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn)
             // This is a more accurate fee-per-kilobyte than is used by the client code, because the
             // client code rounds up the size to the nearest 1K. That's good, because it gives an
             // incentive to create smaller transactions.
-            double dFeePerKb =  double(nTotalIn-tx.GetValueOut()) / (double(nTxSize)/1000.0);
+            double dFeePerKb =  double(nTotalIn-tx.GetValueOut()) / (double(nTxSize)/101000.0);
 
             if (porphan)
             {
