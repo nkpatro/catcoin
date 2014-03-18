@@ -1261,7 +1261,7 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
         
     CBlockIndex* pindexPrev = (*mi).second;
         
-    int64 nSubsidy = GetNextWorkRequired_V2(pindexBest, pblock) * COIN;
+    int64 nSubsidy = GetNextWorkRequired_V2(pindexPrev, pblock) * COIN;
 
     // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
     nSubsidy >>= (nHeight / 100); // Diffcoin: 840k blocks in ~4 years
