@@ -1070,9 +1070,7 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     
     CBlock *pblock = &pblocktemplate->block; // pointer for convenience
     
-    map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
-    if (mi == mapBlockIndex.end())
-        return state.DoS(10, error("AcceptBlock() : prev block not found"));
+    map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(pblock->hashPrevBlock);
         
     CBlockIndex* pindexPrev = (*mi).second;
         
