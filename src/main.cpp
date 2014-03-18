@@ -1061,27 +1061,6 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
     return pblock->GetHash();
 }
 
-int64 static GetBlockValue(int nHeight, int64 nFees)
-{   
-    // Create new block
-    auto_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
-    if(!pblocktemplate.get())
-        return 0;
-    
-    CBlock *pblock = &pblocktemplate->block; // pointer for convenience
-    
-    map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(pblock->hashPrevBlock);
-        
-    CBlockIndex* pindexPrev = (*mi).second;
-        
-    int64 nSubsidy = GetNextWorkRequired_V2(pindexBest, pblock) * COIN;
-
-    // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
-    nSubsidy >>= (nHeight / 100); // Diffcoin: 840k blocks in ~4 years
-
-    return nSubsidy + nFees;
-}
-
 static const int64 nTargetTimespan = 3.5 * 24 * 60 * 60; // Diffcoin: 3.5 days
 static const int64 nTargetSpacing = 2.5 * 60; // Diffcoin: 2.5 minutes
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
@@ -1267,6 +1246,29 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
     //else if (DiffMode == 2) { return GetNextWorkRequired_V2(pindexLast, pblock); }
     return GetNextWorkRequired_V2(pindexLast, pblock);
 }
+
+
+int64 static GetBlockValue(int nHeight, int64 nFees)
+{   
+    // Create new block
+    auto_ptr<CBlockTemplate> pblocktemplate(new CBlockTemplate());
+    if(!pblocktemplate.get())
+        return 0;
+    
+    CBlock *pblock = &pblocktemplate->block; // pointer for convenience
+    
+    map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(pblock->hashPrevBlock);
+        
+    CBlockIndex* pindexPrev = (*mi).second;
+        
+    int64 nSubsidy = GetNextWorkRequired_V2(pindexBest, pblock) * COIN;
+
+    // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
+    nSubsidy >>= (nHeight / 100); // Diffcoin: 840k blocks in ~4 years
+
+    return nSubsidy + nFees;
+}
+
 
 bool CheckProofOfWork(uint256 hash, unsigned int nBits)
 {
