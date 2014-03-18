@@ -1255,23 +1255,24 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {   
-    CBlockIndex* val = NULL
-    return GetBlockValue(val,nHeight,nFees);
+    return GetBlockValue(pindexBest,nHeight,nFees);
 }
 
 int64 static GetBlockValue(CBlockIndex* pindex,int nHeight, int64 nFees)
 {   
     //CBlock *pblock = &pblocktemplate->block; // pointer for convenience
     if (pindex == NULL)
-    {   
-        printf("GetBlockValue: NULL");
-        return 0;
+    {
+        if (pindexBest == NULL)
+            return 1.0;
+        else
+            pindex = pindexBest;
     }
 
-    int nShift = (pindex->nBits >> 24) & 0xff;
+    int nShift = (pindexBest->nBits >> 24) & 0xff;
 
     double dDiff =
-        (double)0x0000ffff / (double)(pindex->nBits & 0x00ffffff);
+        (double)0x0000ffff / (double)(pindexBest->nBits & 0x00ffffff);
 
     while (nShift < 29)
     {
