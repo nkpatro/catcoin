@@ -1235,17 +1235,20 @@ unsigned int static GetNextWorkRequired_V2(const CBlockIndex* pindexLast, const 
 }
 
 unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
-{
-    //int DiffMode = 1;
-    if (fTestNet) {
-        if (pindexLast->nHeight+1 >= 120) { DiffMode = 2; }
-    }
-    else {
-        if (pindexLast->nHeight+1 >= 120) { DiffMode = 2; }
-    }
-    
-    //if      (DiffMode == 1) { return GetNextWorkRequired_V1(pindexLast, pblock); }
-    //else if (DiffMode == 2) { return GetNextWorkRequired_V2(pindexLast, pblock); }
+{   
+    /*
+        int DiffMode = 1;
+        
+        if (fTestNet) {
+            if (pindexLast->nHeight+1 >= 120) { DiffMode = 2; }
+        }
+        else {
+            if (pindexLast->nHeight+1 >= 120) { DiffMode = 2; }
+        }
+        
+        if      (DiffMode == 1) { return GetNextWorkRequired_V1(pindexLast, pblock); }
+        else if (DiffMode == 2) { return GetNextWorkRequired_V2(pindexLast, pblock); }
+    */
     return GetNextWorkRequired_V2(pindexLast, pblock);
 }
 
