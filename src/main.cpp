@@ -1254,8 +1254,8 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {   
-    CBlockIndex* pindex;
-    if (pindexBest == NULL)
+    CBlockIndex* pindex = FindBlockByHeight(nHeight);
+    if (pindex == NULL)
             return 1.0;
         else
             pindex = pindexBest;
