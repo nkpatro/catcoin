@@ -1191,7 +1191,7 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     int64 nSubsidy = dDiff * COIN;
     int64 bValue =  nSubsidy + nFees;
     
-    printf("GetBlockValue: %f\n", bValue);
+    printf("GetBlockValue: %lli\n", bValue);
     return bValue;
 }
 
