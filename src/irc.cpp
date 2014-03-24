@@ -302,7 +302,7 @@ void ThreadIRCSeed2()
             //            channel_number = 0; 
             int channel_number = GetRandInt(1);
 
-            Send(hSocket, strprintf("JOIN #ddiffcoin%02d\r", channel_number).c_str());
+            Send(hSocket, strprintf("JOIN #diffcoin%02d\r", channel_number).c_str());
             Send(hSocket, strprintf("WHO #diffcoin%02d\r", channel_number).c_str());
         }
 
