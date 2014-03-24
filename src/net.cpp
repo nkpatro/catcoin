@@ -3,7 +3,10 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#ifdef USE_IRCC
 #include "irc.h"
+#endif
+
 #include "db.h"
 #include "net.h"
 #include "init.h"
@@ -1785,8 +1788,11 @@ void StartNode(boost::thread_group& threadGroup)
     MapPort(GetBoolArg("-upnp", USE_UPNP));
 #endif
 
+#ifdef USE_IRCC
     // Get addresses from IRC and advertise ours
     threadGroup.create_thread(boost::bind(&TraceThread<void (*)()>, "irc", &ThreadIRCSeed));
+#endif
+ 
  
     // Send and receive from sockets, accept connections
     threadGroup.create_thread(boost::bind(&TraceThread<void (*)()>, "net", &ThreadSocketHandler));
