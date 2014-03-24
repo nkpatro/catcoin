@@ -189,7 +189,7 @@ bool GetIPFromIRC(SOCKET hSocket, string strMyName, CNetAddr& ipRet)
 void ThreadIRCSeed()
 {
     // Make this thread recognisable as the IRC seeding thread
-    RenameThread("diff-ircseed");
+    RenameThread("diffcoin-ircseed");
 
     try
     {
