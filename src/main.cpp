@@ -1166,6 +1166,9 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {   
+    if(nHeight-1 == 0)
+        return 2500000000;
+        
     CBlockIndex* pindex = FindBlockByHeight(nHeight-1);
     if (pindex == NULL)
             return 1.0;
@@ -1191,7 +1194,6 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     int64 nSubsidy = dDiff * COIN;
     int64 bValue =  nSubsidy + nFees;
     
-    printf("GetBlockValue: %lli\n", bValue);
     return bValue;
 }
 
