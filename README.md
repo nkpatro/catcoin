@@ -11,10 +11,10 @@ What is Templecoin?
 
 Templecoin is a lite version of Bitcoin&Litecoin using scrypt as a proof-of-work algorithm.
  - 2.5 minute block targets
- - subsidy maximum 1 coin 1 block
- - doule the reward from transation fee (mostly rewarding if we got enough transation fee on the network)
+ - subsidy maximum 1 coin 1 block per minute
+ - transation fee is the factor to increase the block reward
  - KGW implmenetion
- - ~2.71 billion total coins (e)
+ - ~2.71 billion total coins
  
 The rest is the same as Bitcoin & Litecoin
  - 2016 blocks to retarget difficulty
