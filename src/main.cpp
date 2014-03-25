@@ -1167,7 +1167,7 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {   
     if(nHeight-1 == 0)
-        return 2500000000 * COIN;
+        return 25000000 * COIN;
         
     CBlockIndex* pindex = FindBlockByHeight(nHeight-1);
     if (pindex == NULL)
