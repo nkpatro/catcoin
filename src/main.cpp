@@ -34,7 +34,7 @@ unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
 //uint256 hashGenesisBlock("0xb0792b4da4974af9fec42efe585a047a78d4b005752edda0a8f08ea6f3295506");
-uint256 hashGenesisBlock("0xf4b59e55508baf1ff2634533413321bd124bfa65f841f107a59499ef6b566983");
+uint256 hashGenesisBlock("0x97252cd2a6aa87b8b20e5eda7b958d38504c5c4d367f52f77a4347112b0af18d");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Templecoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -3013,8 +3013,8 @@ bool InitBlockIndex() {
         block.nVersion = 1;
 
 	//tcgen
-        block.nTime    = 1394365991;
-        block.nBits    = 0x1e0ffff0;
+        block.nTime    = 1395705600;
+        block.nBits    = 24636688;
         block.nNonce   = 24624578;
 
         if (fTestNet)
@@ -3031,7 +3031,7 @@ bool InitBlockIndex() {
        
 		
 		
-
+/*
 		// If genesis block hash does not match, then generate new genesis hash.
         if (false)
 	//tcgen
@@ -3082,8 +3082,8 @@ bool InitBlockIndex() {
 		
 		
 		
-		
-		
+	*/	
+	
 		
 		
 		
