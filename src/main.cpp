@@ -2807,8 +2807,14 @@ bool InitBlockIndex() {
             block.nNonce   = 385270584;
         }
         
+        //// debug print
+        uint256 hash = block.GetHash();
+        printf("hash %s\n", hash.ToString().c_str());
+        printf("hashGenesisBlock %s\n", hashGenesisBlock.ToString().c_str());
+        printf("block.hashMerkleRoot %s\n", block.hashMerkleRoot.ToString().c_str());
+        assert(block.hashMerkleRoot == uint256("0x233e83f1165e6d8a06c1032119b28a3bc9b3f3a9fcebe99426eb029e1f5c2c28"));
         // If genesis block hash does not match, then generate new genesis hash.
-        if (fTestNet)
+        if (false && block.GetHash() != hashGenesisBlock)
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
@@ -2819,7 +2825,20 @@ bool InitBlockIndex() {
 
             loop
             {
+#if defined(USE_SSE2)
+                // Detection would work, but in cases where we KNOW it always has SSE2,
+                // it is faster to use directly than to use a function pointer or conditional.
+#if defined(_M_X64) || defined(__x86_64__) || defined(_M_AMD64) || (defined(MAC_OSX) && defined(__i386__))
+                // Always SSE2: x86_64 or Intel MacOS X
+                scrypt_1024_1_1_256_sp_sse2(BEGIN(block.nVersion), BEGIN(thash), scratchpad);
+#else
+                // Detect SSE2: 32bit x86 Linux or Windows
                 scrypt_1024_1_1_256_sp(BEGIN(block.nVersion), BEGIN(thash), scratchpad);
+#endif
+#else
+                // Generic scrypt
+                scrypt_1024_1_1_256_sp_generic(BEGIN(block.nVersion), BEGIN(thash), scratchpad);
+#endif
                 if (thash <= hashTarget)
                     break;
                 if ((block.nNonce & 0xFFF) == 0)
@@ -2837,13 +2856,6 @@ bool InitBlockIndex() {
             printf("block.nNonce = %u \n", block.nNonce);
             printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
         }
-        
-        //// debug print
-        uint256 hash = block.GetHash();
-        printf("hash %s\n", hash.ToString().c_str());
-        printf("hashGenesisBlock %s\n", hashGenesisBlock.ToString().c_str());
-        printf("block.hashMerkleRoot %s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x233e83f1165e6d8a06c1032119b28a3bc9b3f3a9fcebe99426eb029e1f5c2c28"));
         block.print();
         assert(hash == hashGenesisBlock);
             
