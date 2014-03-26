@@ -2806,18 +2806,9 @@ bool InitBlockIndex() {
             block.nTime    = 1317798646;
             block.nNonce   = 385270584;
         }
-
-        //// debug print
-        uint256 hash = block.GetHash();
-        printf("hash %s\n", hash.ToString().c_str());
-        printf("hashGenesisBlock %s\n", hashGenesisBlock.ToString().c_str());
-        printf("block.hashMerkleRoot %s\n", block.hashMerkleRoot.ToString().c_str());
-        assert(block.hashMerkleRoot == uint256("0x233e83f1165e6d8a06c1032119b28a3bc9b3f3a9fcebe99426eb029e1f5c2c28"));
-        block.print();
-        //assert(hash == hashGenesisBlock);
         
         // If genesis block hash does not match, then generate new genesis hash.
-        if (hash != hashGenesisBlock)
+        if (fTestNet)
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
@@ -2845,9 +2836,17 @@ bool InitBlockIndex() {
             printf("block.nTime = %u \n", block.nTime);
             printf("block.nNonce = %u \n", block.nNonce);
             printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
-            assert(hash == hashGenesisBlock);
         }
         
+        //// debug print
+        uint256 hash = block.GetHash();
+        printf("hash %s\n", hash.ToString().c_str());
+        printf("hashGenesisBlock %s\n", hashGenesisBlock.ToString().c_str());
+        printf("block.hashMerkleRoot %s\n", block.hashMerkleRoot.ToString().c_str());
+        assert(block.hashMerkleRoot == uint256("0x233e83f1165e6d8a06c1032119b28a3bc9b3f3a9fcebe99426eb029e1f5c2c28"));
+        block.print();
+        assert(hash == hashGenesisBlock);
+            
         
         // Start new block file
         try {
