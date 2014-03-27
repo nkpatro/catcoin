@@ -2800,7 +2800,7 @@ bool InitBlockIndex() {
         // block.nNonce = 484343
         // block.GetHash = 0859f5847ade20ed8faf2acbc015f7d00efd8a2e61e39e4765eba74389b917e2
         // CBlock(hash=0859f5847ade20ed8faf2acbc015f7d00efd8a2e61e39e4765eba74389b917e2, 
-    //  input=0100000000000000000000000000000000000000000000000000000000000000000000006e2888c675d091b9f0f99d92a79d0cd4260a086d25c0219fd4926867c0f0cf126f7f2653f0ff0f1ef7630700, 
+        //  input=0100000000000000000000000000000000000000000000000000000000000000000000006e2888c675d091b9f0f99d92a79d0cd4260a086d25c0219fd4926867c0f0cf126f7f2653f0ff0f1ef7630700, 
         //    PoW=00000267eca079dc623ff0ce41725e7b97904fe1f94166ab3f3bcbddeb6c461a, 
         //    ver=1, 
         //    hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, 
@@ -2824,7 +2824,7 @@ bool InitBlockIndex() {
         txNew.vout[0].scriptPubKey = CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5f") << OP_CHECKSIG;
         CBlock block;
         block.vtx.push_back(txNew);
-        block.hashPrevBlock = 0;
+        block.hashPrevBlock = NULL;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
         block.nTime    = 1395031919;
@@ -2844,7 +2844,7 @@ bool InitBlockIndex() {
         printf("block.hashMerkleRoot %s\n", block.hashMerkleRoot.ToString().c_str());
         assert(block.hashMerkleRoot == uint256("0x12cff0c0676892d49f21c0256d080a26d40c9da7929df9f0b991d075c688286e"));
         // If genesis block hash does not match, then generate new genesis hash.
-        if (true && block.GetHash() != hashGenesisBlock)
+        if (false && block.GetHash() != hashGenesisBlock)
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
