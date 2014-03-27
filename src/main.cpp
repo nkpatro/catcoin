@@ -2748,12 +2748,29 @@ bool LoadBlockIndex()
 {
     if (fTestNet)
     {
+        /*
+            block.nTime = 1395884307
+            block.nNonce = 387399579
+            block.GetHash = 118676c6fd2bcd44ca46e0d49044d362499c191f4400bad43cdc99dabd42b4df
+            CBlock(hash=118676c6fd2bcd44ca46e0d49044d362499c191f4400bad43cdc99dabd42b4df, 
+            input=0100000000000000000000000000000000000000000000000000000000000000000000006e2888c675d091b9f0f99d92a79d0cd4260a086d219fd4926867c0f0cf1213813353f0ff0f1e9b3f1717, 
+            PoW=00000114a5f03e405d99a9217c3e3821ed281e2d13759201132dcd2b67c2a4f6, ver=1, 
+            hashPrevBlock=000000000000000000000000000000000000000000000000000000000000, 
+            hashMerkleRoot=12cff0c0676892d49f21c0256d080a26d40c9da7929df9f0b991d075c688286e, 
+            nTime=1395884307, nBits=1e0ffff0, nNonce=387399579, vtx=1)
+              CTransaction(hash=12cff0c0676892d49f21c0256d080a26d40c9da7929df9f0b991d075c688286e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+                CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d010409626d6174757369616b)
+                CTxOut(nValue=0.00000000, scriptPubKey=04678afdb0fe5548271967f1a67130)
+              vMerkleTree: 12cff0c0676892d49f21c0256d080a26d40c9da7929df9f0b991d075c688286e
+            Pre-allocating up to position 0x1000000 in blk00000.dat
+            SetBestChain: new best=118676c6fd2bcd44ca46e0d49044d362499c191f4400bad43cdc99dabd42b4df  height=0  log2_work=20.000022  tx=1  date=2014-03-27 01:38:27 progress=0.165899
+
+        */
         pchMessageStart[0] = 0xfc;
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
-        hashGenesisBlock = uint256("0x0cd52d5383db108699146fec9324397cfdb4f02033a1586538659f5def050000");
-        //hashGenesisBlock = uint256("0x16dce802550c96625bb5afc3a14ada87725c069c060fae4cb28a6da014674dc8");
+        hashGenesisBlock = uint256("0x118676c6fd2bcd44ca46e0d49044d362499c191f4400bad43cdc99dabd42b4df");
     }
 
     //
