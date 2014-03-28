@@ -2886,8 +2886,6 @@ bool InitBlockIndex() {
             printf("block.nNonce = %u \n", block.nNonce);
             printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
             printf("block.hashMerkleRoot = %s\n", block.hashMerkleRoot.ToString().c_str());
-            hashGenesisBlock = block.GetHash();
-            hash = block.GetHash();
         }
         block.print();
         assert(hash == hashGenesisBlock);
