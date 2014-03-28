@@ -2827,7 +2827,7 @@ bool InitBlockIndex() {
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1395975055;
+        block.nTime    = 1395976081;
         block.nBits    = 0x1e0ffff0;
         block.nNonce   = 790382;
 
