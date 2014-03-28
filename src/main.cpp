@@ -31,7 +31,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x607e54660c8f0c435dd8a87c22ce85a03ed6083770b96f24369eb08d4ae1033d");
+uint256 hashGenesisBlock("0x449239d8eb4c2f420fa9fa0f0fac5d2a29cd9af0a82e963be27675eac5cb58ab");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Diffcoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2796,23 +2796,16 @@ bool InitBlockIndex() {
     // Only add the genesis block if not reindexing (in which case we reuse the one already on disk)
     if (!fReindex) {
         // Genesis Block:
-        // block.nTime = 1395031919
-        // block.nNonce = 484343
-        // block.GetHash = 0859f5847ade20ed8faf2acbc015f7d00efd8a2e61e39e4765eba74389b917e2
-        // CBlock(hash=0859f5847ade20ed8faf2acbc015f7d00efd8a2e61e39e4765eba74389b917e2, 
-        //  input=0100000000000000000000000000000000000000000000000000000000000000000000006e2888c675d091b9f0f99d92a79d0cd4260a086d25c0219fd4926867c0f0cf126f7f2653f0ff0f1ef7630700, 
-        //    PoW=00000267eca079dc623ff0ce41725e7b97904fe1f94166ab3f3bcbddeb6c461a, 
-        //    ver=1, 
-        //    hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, 
-        //    hashMerkleRoot=12cff0c0676892d49f21c0256d080a26d40c9da7929df9f0b991d075c688286e, 
-        //    nTime=1395031919, 
-        //    nBits=1e0ffff0, 
-        //    nNonce=484343                       , 
-        //    vtx=1)
-        //   CTransaction(hash=12cff0c0676892d49f21c0256d080a26d40c9da7929df9f0b991d075c688286e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //     CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d010409626d6174757369616b)
-        //     CTxOut(nValue=0.00000000, scriptPubKey=04678afdb0fe5548271967f1a67130)
-        //   vMerkleTree: 12cff0c0676892d49f21c0256d080a26d40c9da7929df9f0b991d075c688286e
+        // block.nTime = 1395976081
+        // block.nNonce = 2203583
+        // block.GetHash = 449239d8eb4c2f420fa9fa0f0fac5d2a29cd9af0a82e963be27675eac5cb58ab
+        // block.hashMerkleRoot = 066b74fd4413d601493f3bf060a6a5fd5b9e9086e7e0ad97b4c00f8a2007feeb
+        // CBlock(hash=449239d8eb4c2f420fa9fa0f0fac5d2a29cd9af0a82e963be27675eac5cb58ab, input=010000000000000000000000000000000000000000000000000000000000000000000000ebfe07208a0fc0b497ade0e786909e5bfda5a660f03b3f4901d61344fd746b0691e73453f0ff0f1ebf9f2100, PoW=0000073035a0f9dbbe05b583ee5a82ac5e3eaabb466a35afa7a42d0402a99f1e, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=066b74fd4413d601493f3bf060a6a5fd5b9e9086e7e0ad97b4c00f8a2007feeb, nTime=1395976081, nBits=1e0ffff0, nNonce=2203583, vtx=1)
+        //   CTransaction(hash=066b74fd4413d601493f3bf060a6a5fd5b9e9086e7e0ad97b4c00f8a2007feeb, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+        //     CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d01044c554e696e652041697220466f72636520636f6d6d616e64657273206669726564206f766572206e75636c656172206d697373696c652074657374206368656174696e6720332d32372d2d3230313420636e6e2e636f6d)
+        //     CTxOut(nValue=0.00000000, scriptPubKey=0442c8153f534c65a7797afd82212d)
+        //   vMerkleTree: 066b74fd4413d601493f3bf060a6a5fd5b9e9086e7e0ad97b4c00f8a2007feeb
+
 
         // Genesis block
         const char* pszTimestamp = "Nine Air Force commanders fired over nuclear missile test cheating 3-27--2014 cnn.com";
@@ -2829,7 +2822,7 @@ bool InitBlockIndex() {
         block.nVersion = 1;
         block.nTime    = 1395976081;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 790382;
+        block.nNonce   = 2203583;
 
         if (fTestNet)
         {
@@ -2842,7 +2835,7 @@ bool InitBlockIndex() {
         printf("hash %s\n", hash.ToString().c_str());
         printf("hashGenesisBlock %s\n", hashGenesisBlock.ToString().c_str());
         printf("block.hashMerkleRoot %s\n", block.hashMerkleRoot.ToString().c_str());
-        //assert(block.hashMerkleRoot == uint256("0x2b56889fb8123952057289b7091784dfde8b3acae672cc48494d2faf4348f49e"));
+        assert(block.hashMerkleRoot == uint256("0x066b74fd4413d601493f3bf060a6a5fd5b9e9086e7e0ad97b4c00f8a2007feeb"));
         // If genesis block hash does not match, then generate new genesis hash.
         if (true && hash != hashGenesisBlock)
         {
