@@ -2815,7 +2815,7 @@ bool InitBlockIndex() {
         //   vMerkleTree: 12cff0c0676892d49f21c0256d080a26d40c9da7929df9f0b991d075c688286e
 
         // Genesis block
-        const char* pszTimestamp = "bmatusiak";
+        const char* pszTimestamp = "Nine Air Force commanders fired over nuclear missile test cheating 3-27--2014 cnn.com";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -2827,7 +2827,7 @@ bool InitBlockIndex() {
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1395891822;
+        block.nTime    = 1395975055;
         block.nBits    = 0x1e0ffff0;
         block.nNonce   = 790382;
 
