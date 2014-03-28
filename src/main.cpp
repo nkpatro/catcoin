@@ -2819,6 +2819,7 @@ bool InitBlockIndex() {
 
         if (fTestNet)
         {
+            hashGenesisBlock = uint256("0x57c55df47e191b8c5f39cae289e41fff0d78224fc77e79d3ae0c2fd13c563cc3");
             block.nTime    = 1395974015;
             block.nNonce   = 386302190;
         }
