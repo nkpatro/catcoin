@@ -3089,7 +3089,7 @@ bool InitBlockIndex() {
 		
 		
 		
-	 assert(block.hashMerkleRoot == uint256("0x87dd1caebe015a13c1cb38a30b731ec43d96"));
+	 assert(block.hashMerkleRoot == uint256("0xdeceb268776c85c006c65804eb53e55960a85aaf75e366a5c7b0bf961b6defec"));
 		
         block.print();
         assert(hash == hashGenesisBlock);
