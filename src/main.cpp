@@ -1080,7 +1080,9 @@ int static generateMTRandom(unsigned int s, int range)
 int64 static GetBlockValue(int diffTime,int nBits,int nHeight, int64 nFees, uint256 prevHash)
 {
 	//Temple - diffblock coin implmented base on difficulty 
-
+	if (nHeight==0)
+		return 0;
+	
 	if (nHeight==1)
 		return 2713250000*COIN;
 
@@ -3004,8 +3006,8 @@ bool InitBlockIndex() {
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].nValue = 88 * COIN;
-        txNew.vout[0].scriptPubKey = CScript() << ParseHex("0x04798c6dad69b406e457605433f36f5f3652e7b0f62132f584bee3ae08b85332ea3183d9633a745a6ee829b03725885c8241c90b2846a9d3674b3051db502e7ee5") << OP_CHECKSIG;
+        txNew.vout[0].nValue = 0 * COIN;
+        txNew.vout[0].scriptPubKey = CScript() << ParseHex("04798c6dad69b406e457605433f36f5f3652e7b0f62132f584bee3ae08b85332ea3183d9633a745a6ee829b03725885c8241c90b2846a9d3674b3051db502e7ee5") << OP_CHECKSIG;
         CBlock block;
         block.vtx.push_back(txNew);
         block.hashPrevBlock = 0;
