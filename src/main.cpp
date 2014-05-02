@@ -1,3 +1,4 @@
+// Copyright (c) 2014-2014 Micro Temple
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
@@ -34,7 +35,9 @@ unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
 //uint256 hashGenesisBlock("0xb0792b4da4974af9fec42efe585a047a78d4b005752edda0a8f08ea6f3295506");
-uint256 hashGenesisBlock("0x97252cd2a6aa87b8b20e5eda7b958d38504c5c4d367f52f77a4347112b0af18d");
+//uint256 hashGenesisBlock("0x97252cd2a6aa87b8b20e5eda7b958d38504c5c4d367f52f77a4347112b0af18d");
+uint256 hashGenesisBlock("0xc741436d354a9fb337fbd79e4b2750732571f00e8b78d04493f9e9283cf4ad0b");
+
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Templecoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2968,7 +2971,7 @@ bool LoadBlockIndex()
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
-        hashGenesisBlock = uint256("0x4dcb91913e67751a8d927fa017e5ff40f9e24116b11fe530d1cd74414e2b0da0");
+        hashGenesisBlock = uint256("0xb44cc80bfa2a5629c618d5a3c07f2400462d781c1a289379576dbb4fc29618c5");
     }
 
     //
@@ -2993,21 +2996,18 @@ bool InitBlockIndex() {
 
     // Only add the genesis block if not reindexing (in which case we reuse the one already on disk)
     if (!fReindex) {
-        // Genesis Block:
-        // CBlock(hash=12a765e31ffd4059bada, PoW=0000050c34a64b415b6b, ver=1, hashPrevBlock=00000000000000000000, hashMerkleRoot=97ddfbbae6, nTime=1317972665, nBits=1e0ffff0, nNonce=2084524493, vtx=1)
-        //   CTransaction(hash=97ddfbbae6, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-        //     CTxIn(COutPoint(0000000000, -1), coinbase 04ffff001d0104404e592054696d65732030352f4f63742f32303131205374657665204a6f62732c204170706c65e280997320566973696f6e6172792c2044696573206174203536)
-        //     CTxOut(nValue=50.00000000, scriptPubKey=040184710fa689ad5023690c80f3a4)
-        //   vMerkleTree: 97ddfbbae6
-
-        // Genesis block
-			const char* pszTimestamp = "Temple coin was born on March 25th 2014 by TempleCoin.com";
+		const char* pszTimestamp = "Temple coin was born on March 25th 2014 by TempleCoin.com";
         CTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(4) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+		printf("scriptSig=%s\n", txNew.vin[0].scriptSig.ToString().c_str());
+
         txNew.vout[0].nValue = 0 * COIN;
         txNew.vout[0].scriptPubKey = CScript() << ParseHex("04798c6dad69b406e457605433f36f5f3652e7b0f62132f584bee3ae08b85332ea3183d9633a745a6ee829b03725885c8241c90b2846a9d3674b3051db502e7ee5") << OP_CHECKSIG;
+		
+		printf("scriptPubKey=%s\n", txNew.vout[0].scriptPubKey.ToString().c_str());
+		
         CBlock block;
         block.vtx.push_back(txNew);
         block.hashPrevBlock = 0;
@@ -3015,14 +3015,37 @@ bool InitBlockIndex() {
         block.nVersion = 1;
 
 	//tcgen
-        block.nTime    = 1395705600;
+        block.nTime    = 1395705600;//1395705600;
         block.nBits    = 0x1e0ffff0;
-        block.nNonce   = 24636688;
+        block.nNonce   = 24706485;
+		
+		
+	/*
+		2014-05-01 23:41:14 block.nTime = 1395705600 
+		2014-05-01 23:41:14 block.nNonce = 24706485 
+		2014-05-01 23:41:14 block.GetHash = c741436d354a9fb337fbd79e4b2750732571f00e8b78d04493f9e9283cf4ad0b
+		2014-05-01 23:41:14 CBlock(hash=c741436d354a9fb337fbd79e4b2750732571f00e8b78d04493f9e9283cf4ad0b, input=010000000000000000000000000000000000000000000000000000000000000000000000ecef6d1b96bfb0c7a566e375af5aa86059e553eb0458c606c0856c7768b2cede00c73053f0ff0f1eb5fd7801, PoW=000008e5e39594c1f6d90189eacfffa5c601b8fb25c1b2aa2f8eeb93fc090fe4, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=deceb268776c85c006c65804eb53e55960a85aaf75e366a5c7b0bf961b6defec, nTime=1395705600, nBits=1e0ffff0, nNonce=24706485, vtx=1)
+		2014-05-01 23:41:14   CTransaction(hash=deceb268776c85c006c65804eb53e55960a85aaf75e366a5c7b0bf961b6defec, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+			CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d01043954656d706c6520636f696e2077617320626f726e206f6e204d61726368203235746820323031342062792054656d706c65436f696e2e636f6d)
+			CTxOut(nValue=0.00000000, scriptPubKey=04798c6dad69b406e457605433f36f)
+		vMerkleTree: deceb268776c85c006c65804eb53e55960a85aaf75e366a5c7b0bf961b6defec 
+	*/
 
         if (fTestNet)
         {//tcgen
-            block.nTime    = 1394365993;
-            block.nNonce   = 25199890;
+            block.nTime    = 1394365990;
+            block.nNonce   = 25210602;
+
+		/*	
+			2014-05-02 00:12:10 block.nTime = 1394365990 
+			2014-05-02 00:12:10 block.nNonce = 25210602 
+			2014-05-02 00:12:10 block.GetHash = b44cc80bfa2a5629c618d5a3c07f2400462d781c1a289379576dbb4fc29618c5
+			2014-05-02 00:12:10 CBlock(hash=b44cc80bfa2a5629c618d5a3c07f2400462d781c1a289379576dbb4fc29618c5, input=010000000000000000000000000000000000000000000000000000000000000000000000ecef6d1b96bfb0c7a566e375af5aa86059e553eb0458c606c0856c7768b2cede26561c53f0ff0f1eeaae8001, PoW=00000fe2ff75d2b78f7943c11a5d3a875d37f96751382d7c65b62b6ffd0ac6db, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=deceb268776c85c006c65804eb53e55960a85aaf75e366a5c7b0bf961b6defec, nTime=1394365990, nBits=1e0ffff0, nNonce=25210602, vtx=1)
+			2014-05-02 00:12:10   CTransaction(hash=deceb268776c85c006c65804eb53e55960a85aaf75e366a5c7b0bf961b6defec, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+				CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d01043954656d706c6520636f696e2077617320626f726e206f6e204d61726368203235746820323031342062792054656d706c65436f696e2e636f6d)
+				CTxOut(nValue=0.00000000, scriptPubKey=04798c6dad69b406e457605433f36f)
+			  vMerkleTree: deceb268776c85c006c65804eb53e55960a85aaf75e366a5c7b0bf961b6defec 
+		*/	
         }
 
         //// debug print
@@ -3033,11 +3056,11 @@ bool InitBlockIndex() {
        
 		
 		
-/*
-		// If genesis block hash does not match, then generate new genesis hash.
-        if (false)
+		// If genesis block hash does not match, then generate new genesis hash.     
+	//tcgenius
 	//tcgen
-	//if (true)
+		/*
+	if (true)
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
@@ -3080,14 +3103,8 @@ bool InitBlockIndex() {
             printf("block.GetHash = %s\n", block.GetHash().ToString().c_str());
 			
         }
-
-		
-		
-		
-	*/	
-	
-		
-		
+*/
+				
 		
 	 assert(block.hashMerkleRoot == uint256("0xdeceb268776c85c006c65804eb53e55960a85aaf75e366a5c7b0bf961b6defec"));
 		
