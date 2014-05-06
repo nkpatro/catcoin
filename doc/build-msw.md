@@ -36,7 +36,7 @@ Their licenses:
 
 Versions used in this release:
 
-	OpenSSL      1.0.1c
+	OpenSSL      1.0.1g
 	Berkeley DB  4.8.30.NC
 	Boost        1.50.0
 	miniupnpc    1.6
@@ -49,7 +49,7 @@ MSYS shell:
 un-tar sources with MSYS 'tar xfz' to avoid issue with symlinks (OpenSSL ticket 2377)
 change 'MAKE' env. variable from 'C:\MinGW32\bin\mingw32-make.exe' to '/c/MinGW32/bin/mingw32-make.exe'
 
-	cd /c/openssl-1.0.1c-mgw
+	cd /c/openssl-1.0.1g
 	./config
 	make
 
@@ -57,7 +57,7 @@ Berkeley DB
 -----------
 MSYS shell:
 
-	cd /c/db-4.8.30.NC-mgw/build_unix
+	cd /c/db-4.8.30.NC/build_windows
 	sh ../dist/configure --enable-mingw --enable-cxx
 	make
 
