@@ -57,7 +57,7 @@ Berkeley DB
 -----------
 MSYS shell:
 
-	cd /c/db-4.8.30.NC/build_windows
+	cd /c/db-4.8.30.NC/build_unix
 	sh ../dist/configure --enable-mingw --enable-cxx
 	make
 
