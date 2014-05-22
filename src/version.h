@@ -24,7 +24,7 @@ extern const std::string CLIENT_DATE;
 //
 // network protocol versioning
 //
-
+									
 static const int PROTOCOL_VERSION = 70002;
 
 // intial proto version, to be increased after version/verack negotiation
