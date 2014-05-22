@@ -105,6 +105,7 @@ OverviewPage::OverviewPage(QWidget *parent) :
     currentImmatureBalance(-1),
     txdelegate(new TxViewDelegate()),
     filter(0)
+
 {
     ui->setupUi(this);
 
