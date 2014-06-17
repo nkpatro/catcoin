@@ -172,7 +172,7 @@
       <attribute name="title">
        <string>&amp;Network</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_Network">
+      <layout class="QVBoxLayout" name="verticalLayout_Network2">
        <item>
         <widget class="QCheckBox" name="mapPortUpnp">
          <property name="toolTip">
