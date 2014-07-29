@@ -18,7 +18,7 @@ Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 This product includes software developed by the OpenSSL Project for use in
-the OpenSSL Toolkit (http://www.openssl.org/).
+the OpenSSL Toolkit (https://www.openssl.org/).
 
 This product includes cryptographic software written by
 Eric Young (eay@cryptsoft.com) and UPnP software written by Thomas Bernard.
@@ -52,7 +52,7 @@ not, it's the path of least resistance to install [Github for Mac](https://mac.g
 [Git for OS X](https://code.google.com/p/git-osx-installer/). It is also
 available via Homebrew or MacPorts.
 
-You will also need to install [Homebrew](http://mxcl.github.io/homebrew/)
+You will also need to install [Homebrew](http://brew.sh/)
 or [MacPorts](https://www.macports.org/) in order to install library
 dependencies. It's largely a religious decision which to choose, but, as of
 December 2012, MacPorts is a little easier because you can just install the
@@ -97,15 +97,16 @@ Instructions: HomeBrew
 
 Note: After you have installed the dependencies, you should check that the Brew installed version of OpenSSL is the one available for compilation. You can check this by typing
 
-        openssl version
+    /usr/local/cellar/openssl/*/bin/openssl version
 
-into Terminal. You should see OpenSSL 1.0.1e 11 Feb 2013.
+into Terminal. You should see OpenSSL 1.0.1h 5 Jun 2014.
 
-If not, you can ensure that the Brew OpenSSL is correctly linked by running
+You can invoke the Homebrew OpenSSL at build-time by exercising the following lines:
 
-        brew link openssl --force
+* -L/usr/local/opt/openssl/lib
+* -I/usr/local/opt/openssl/include
 
-Rerunning "openssl version" should now return the correct version.
+But you don't need to do this if you use the patch provided for Homebrew in /contrib/homebrew/makefile.osx.patch - It is automatically done for you in that case.
 
 ### Building `litecoind`
 
