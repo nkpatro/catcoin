@@ -19,7 +19,7 @@ using namespace std;
 using namespace boost;
 
 #if defined(NDEBUG)
-# error "Litecoin cannot be compiled without assertions."
+# error "Egulden cannot be compiled without assertions."
 #endif
 
 //
@@ -1098,7 +1098,7 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     return nSubsidy + nFees;
 }
 
-static int64 nTargetTimespan = 2700000; // 3.125 days to difficulty retarget
+static int64 nTargetTimespan = 270000; // 3.125 days to difficulty retarget
 static int64 nTargetSpacing = 60;       // 1 minute between blocks
 static int64 nInterval = nTargetTimespan / nTargetSpacing;
 
