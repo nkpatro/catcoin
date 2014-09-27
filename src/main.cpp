@@ -35,7 +35,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x12a765e31ffd4059bada1e25190f6e98c99d9714d334efa41a195a7e7e04bfe2");
+uint256 hashGenesisBlock("0x6d39f28ad01a7edd3e2374b355cf8c7f8dbc1c5e4596ad3642fa6d10c2599217");
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Litecoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -68,7 +68,7 @@ map<uint256, set<uint256> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Litecoin Signed Message:\n";
+const string strMessageMagic = "Egulden Signed Message:\n";
 
 double dHashesPerSec = 0.0;
 int64 nHPSTimerStart = 0;
@@ -363,7 +363,7 @@ unsigned int LimitOrphanTxSize(unsigned int nMaxOrphans)
 bool CTxOut::IsDust() const
 {
     // Litecoin: IsDust() detection disabled, allows any valid dust to be relayed.
-    // The fees imposed on each dust txo is considered sufficient spam deterrant. 
+    // The fees imposed on each dust txo is considered sufficient spam deterrant.
     return false;
 }
 
@@ -1087,16 +1087,19 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
 
 int64 static GetBlockValue(int nHeight, int64 nFees)
 {
-    int64 nSubsidy = 50 * COIN;
+    int64 nSubsidy = 25 * COIN;
 
-    // Subsidy is cut in half every 840000 blocks, which will occur approximately every 4 years
-    nSubsidy >>= (nHeight / 840000); // Litecoin: 840k blocks in ~4 years
+    // First block is worth a lot
+    if(nHeight == 1)
+        nSubsidy = nSubsidy * 420000;
+
+    nSubsidy >>= (nHeight / 210000);
 
     return nSubsidy + nFees;
 }
 
-static const int64 nTargetTimespan = 3.5 * 24 * 60 * 60; // Litecoin: 3.5 days
-static const int64 nTargetSpacing = 2.5 * 60; // Litecoin: 2.5 minutes
+static const int64 nTargetTimespan = 2700000; // 3.125 days to difficulty retarget
+static const int64 nTargetSpacing = 60;       // 1 minute between blocks
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
 
 //
@@ -1121,7 +1124,76 @@ unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
     }
     if (bnResult > bnProofOfWorkLimit)
         bnResult = bnProofOfWorkLimit;
+
     return bnResult.GetCompact();
+}
+
+unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBlockHeader* pblock, uint64 TargetBlockSpacingSeconds, uint64 PastBlocksMin, uint64 PastBlocksMax)
+{
+	const CBlockIndex *BlockLastSolved = pindexLast;
+	const CBlockIndex *BlockReading    = pindexLast;
+
+	uint64 PastBlocksMass          = 0;
+	int64  PastRateActualSeconds   = 0;
+	int64  PastRateTargetSeconds   = 0;
+	double PastRateAdjustmentRatio = double(1);
+
+	CBigNum PastDifficultyAverage, PastDifficultyAveragePrev;
+	double  EventHorizonDeviation, EventHorizonDeviationFast, EventHorizonDeviationSlow;
+
+	if(BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64) BlockLastSolved->nHeight < PastBlocksMin)
+		return bnProofOfWorkLimit.GetCompact();
+
+	for(unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++)
+	{
+		if(PastBlocksMax > 0 && i > PastBlocksMax)
+			break;
+
+		PastBlocksMass++;
+
+		PastDifficultyAverage = (i == 0)
+			? PastDifficultyAverage.SetCompact(BlockReading->nBits)
+			: PastDifficultyAverage = ((CBigNum().SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev;
+
+		PastDifficultyAveragePrev = PastDifficultyAverage;
+
+		PastRateActualSeconds = BlockLastSolved->GetBlockTime() - BlockReading->GetBlockTime();
+		PastRateTargetSeconds = TargetBlockSpacingSeconds * PastBlocksMass;
+
+		PastRateActualSeconds = (PastRateActualSeconds < 0) ? 0 : PastRateActualSeconds;
+		PastRateAdjustmentRatio = (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0)
+			? double(PastRateTargetSeconds) / double(PastRateActualSeconds)
+			: double(1);
+
+		EventHorizonDeviation     = 1 + (0.7084 * pow((double(PastBlocksMass) / double(144)), -1.228));
+		EventHorizonDeviationFast = EventHorizonDeviation;
+		EventHorizonDeviationSlow = 1 / EventHorizonDeviation;
+
+		if( (PastBlocksMass >= PastBlocksMin && (PastRateAdjustmentRatio <= EventHorizonDeviationSlow || PastRateAdjustmentRatio >= EventHorizonDeviationFast))
+			|| (BlockReading->pprev == NULL)) {
+			assert(BlockReading);
+			break;
+		}
+
+		BlockReading = BlockReading->pprev;
+	}
+
+	CBigNum bnNew(PastDifficultyAverage);
+	if(PastRateActualSeconds != 0 && PastRateTargetSeconds != 0)
+	{
+		bnNew *= PastRateActualSeconds;
+		bnNew /= PastRateTargetSeconds;
+	}
+
+	if(bnNew > bnProofOfWorkLimit) { bnNew = bnProofOfWorkLimit; }
+
+	// Debug
+	// printf("Difficulty Retarget - Kimoto Gravity Well\n");
+	// printf("PastRateAdjustmentRatio = %g\n", PastRateAdjustmentRatio);
+	// printf("Before: %08x %s\n", BlockLastSolved->nBits, CBigNum().SetCompact(BlockLastSolved->nBits).getuint256().ToString().c_str());
+	// printf("After:  %08x %s\n", bnNew.GetCompact(), bnNew.getuint256().ToString().c_str());
+
+	return bnNew.GetCompact();
 }
 
 unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
@@ -1132,6 +1204,21 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
     if (pindexLast == NULL)
         return nProofOfWorkLimit;
 
+    if(pindexLast->nHeight >= 45000 || fTestNet)
+    {
+        nTargetTimespan = 61440;                      // ~0.711111 days difficulty retarget
+        nTargetSpacing = 60 * 2;                      // 2 minutes between blocks
+        nInterval = nTargetTimespan / nTargetSpacing; // 512 blocks difficulty retarget
+
+        unsigned int TimeDaySeconds = 60 * 60 * 24;
+        uint64       PastSecondsMin = TimeDaySeconds * 0.25;
+        uint64       PastSecondsMax = TimeDaySeconds * 7;
+        uint64       PastBlocksMin  = PastSecondsMin / nInterval;
+        uint64       PastBlocksMax  = PastSecondsMax / nInterval;
+
+        return KimotoGravityWell(pindexLast, pblock, nTargetSpacing, PastBlocksMin, PastBlocksMax);
+    }
+
     // Only change once per interval
     if ((pindexLast->nHeight+1) % nInterval != 0)
     {
@@ -1141,7 +1228,9 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
             // If the new block's timestamp is more than 2* 10 minutes
             // then allow mining of a min-difficulty block.
             if (pblock->nTime > pindexLast->nTime + nTargetSpacing*2)
+            {
                 return nProofOfWorkLimit;
+            }
             else
             {
                 // Return the last non-special-min-difficulty-rules-block
@@ -1155,9 +1244,9 @@ unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBl
         return pindexLast->nBits;
     }
 
-    // Litecoin: This fixes an issue where a 51% attack can change difficulty at will.
+    // Egulden: This fixes an issue where a 51% attack can change difficulty at will.
     // Go back the full period unless it's the first retarget after genesis. Code courtesy of Art Forz
-    int blockstogoback = nInterval-1;
+    int blockstogoback = nInterval - 1;
     if ((pindexLast->nHeight+1) != nInterval)
         blockstogoback = nInterval;
 
