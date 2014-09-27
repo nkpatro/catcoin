@@ -1098,9 +1098,9 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     return nSubsidy + nFees;
 }
 
-static const int64 nTargetTimespan = 2700000; // 3.125 days to difficulty retarget
-static const int64 nTargetSpacing = 60;       // 1 minute between blocks
-static const int64 nInterval = nTargetTimespan / nTargetSpacing;
+static int64 nTargetTimespan = 2700000; // 3.125 days to difficulty retarget
+static int64 nTargetSpacing = 60;       // 1 minute between blocks
+static int64 nInterval = nTargetTimespan / nTargetSpacing;
 
 //
 // minimum amount of work that could possibly be required nTime after
