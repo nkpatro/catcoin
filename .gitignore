@@ -1,7 +1,7 @@
 src/*.exe
-src/litecoin
-src/litecoind
-src/test_litecoin
+src/vespene
+src/vespened
+src/test_vespene
 .*.swp
 *.*~*
 *.bak
@@ -9,17 +9,17 @@ src/test_litecoin
 *.orig
 *.o
 *.patch
-.litecoin
+.vespene
 
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-litecoin-qt
-Litecoin-Qt.app
+vespene-qt
+Vespene-Qt.app
 
 # Unit-tests
 Makefile.test
-litecoin-qt_test
+vespene-qt_test
 
 # Resources cpp
 qrc_*.cpp

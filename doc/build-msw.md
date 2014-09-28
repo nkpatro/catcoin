@@ -80,10 +80,10 @@ MSYS shell:
 	mkdir miniupnpc
 	cp *.h miniupnpc/
 
-Litecoin
+Vespene
 -------
 MSYS shell:
 
-	cd \litecoin\src
+	cd \vespene\src
 	mingw32-make -f makefile.mingw
-	strip litecoind.exe
+	strip vespened.exe
