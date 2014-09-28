@@ -4,13 +4,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Egulden</source>
-        <translation>Sobre Egulden</translation>
+        <source>About e-Gulden</source>
+        <translation>Sobre e-Gulden</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Egulden&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;Egulden&lt;/b&gt; versió</translation>
+        <source>&lt;b&gt;e-Gulden&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;e-Gulden&lt;/b&gt; versió</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -29,7 +29,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+0"/>
-        <source>The Egulden developers</source>
+        <source>The e-Gulden developers</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -62,8 +62,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your Egulden addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Aquestes són les teves adreces Egulden per a rebre pagaments. Pot interesar-te proveïr diferents adreces a cadascun dels enviadors així pots identificar qui et va pagant.</translation>
+        <source>These are your e-Gulden addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Aquestes són les teves adreces e-Gulden per a rebre pagaments. Pot interesar-te proveïr diferents adreces a cadascun dels enviadors així pots identificar qui et va pagant.</translation>
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+14"/>
@@ -77,8 +77,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Egulden address</source>
-        <translation>Signa el missatge per provar que ets propietari de l&apos;adreça Egulden</translation>
+        <source>Sign a message to prove you own a e-Gulden address</source>
+        <translation>Signa el missatge per provar que ets propietari de l&apos;adreça e-Gulden</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -102,8 +102,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified Egulden address</source>
-        <translation>Verificar un missatge per asegurar-se que ha estat signat amb una adreça Egulden específica</translation>
+        <source>Verify a message to ensure it was signed with a specified e-Gulden address</source>
+        <translation>Verificar un missatge per asegurar-se que ha estat signat amb una adreça e-Gulden específica</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -117,8 +117,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your Egulden addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Aquestes són la seva adreça de Egulden per enviar els pagaments. Sempre revisi la quantitat i l&apos;adreça del destinatari abans transferència de monedes.</translation>
+        <source>These are your e-Gulden addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Aquestes són la seva adreça de e-Gulden per enviar els pagaments. Sempre revisi la quantitat i l&apos;adreça del destinatari abans transferència de monedes.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -270,8 +270,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-56"/>
-        <source>Egulden will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your eguldens from being stolen by malware infecting your computer.</source>
-        <translation>Egulden es tancarà ara per acabar el procés d&apos;encriptació. Recorda que encriptar el teu moneder no protegeix completament els teus eguldens de ser robades per programari maliciós instal·lat al teu ordinador.</translation>
+        <source>e-Gulden will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your eguldens from being stolen by malware infecting your computer.</source>
+        <translation>e-Gulden es tancarà ara per acabar el procés d&apos;encriptació. Recorda que encriptar el teu moneder no protegeix completament els teus eguldens de ser robades per programari maliciós instal·lat al teu ordinador.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -369,8 +369,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about Egulden</source>
-        <translation>Mostra informació sobre Egulden</translation>
+        <source>Show information about e-Gulden</source>
+        <translation>Mostra informació sobre e-Gulden</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -414,12 +414,12 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a Egulden address</source>
-        <translation>Enviar monedes a una adreça Egulden</translation>
+        <source>Send coins to a e-Gulden address</source>
+        <translation>Enviar monedes a una adreça e-Gulden</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for Egulden</source>
+        <source>Modify configuration options for e-Gulden</source>
         <translation>Modificar les opcions de configuració per egulden</translation>
     </message>
     <message>
@@ -450,8 +450,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>Egulden</source>
-        <translation>Egulden</translation>
+        <source>e-Gulden</source>
+        <translation>e-Gulden</translation>
     </message>
     <message>
         <location line="-530"/>
@@ -475,8 +475,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About Egulden</source>
-        <translation>&amp;Sobre Egulden</translation>
+        <source>&amp;About e-Gulden</source>
+        <translation>&amp;Sobre e-Gulden</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -495,13 +495,13 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your Egulden addresses to prove you own them</source>
-        <translation>Signa el missatges amb la seva adreça de Egulden per provar que les poseeixes</translation>
+        <source>Sign messages with your e-Gulden addresses to prove you own them</source>
+        <translation>Signa el missatges amb la seva adreça de e-Gulden per provar que les poseeixes</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Egulden addresses</source>
-        <translation>Verificar els missatges per assegurar-te que han estat signades amb una adreça Egulden específica.</translation>
+        <source>Verify messages to ensure they were signed with specified e-Gulden addresses</source>
+        <translation>Verificar els missatges per assegurar-te que han estat signades amb una adreça e-Gulden específica.</translation>
     </message>
     <message>
         <location line="+28"/>
@@ -531,13 +531,13 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+47"/>
-        <source>Egulden client</source>
-        <translation>Client Egulden</translation>
+        <source>e-Gulden client</source>
+        <translation>Client e-Gulden</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to Egulden network</source>
-        <translation><numerusform>%n connexió activa a la xarxa Egulden</numerusform><numerusform>%n connexions actives a la xarxa Egulden</numerusform></translation>
+        <source>%n active connection(s) to e-Gulden network</source>
+        <translation><numerusform>%n connexió activa a la xarxa e-Gulden</numerusform><numerusform>%n connexions actives a la xarxa e-Gulden</numerusform></translation>
     </message>
     <message>
         <location line="+22"/>
@@ -647,8 +647,8 @@ Address: %4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid Egulden address or malformed URI parameters.</source>
-        <translation>la URI no pot ser processada! Això es pot ser causat per una adreça Egulden invalida o paràmetres URI malformats.</translation>
+        <source>URI can not be parsed! This can be caused by an invalid e-Gulden address or malformed URI parameters.</source>
+        <translation>la URI no pot ser processada! Això es pot ser causat per una adreça e-Gulden invalida o paràmetres URI malformats.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -662,8 +662,8 @@ Address: %4
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+111"/>
-        <source>A fatal error occurred. Egulden can no longer continue safely and will quit.</source>
-        <translation>Ha tingut lloc un error fatal. Egulden no pot continuar executant-se de manera segura i es tancará.</translation>
+        <source>A fatal error occurred. e-Gulden can no longer continue safely and will quit.</source>
+        <translation>Ha tingut lloc un error fatal. e-Gulden no pot continuar executant-se de manera segura i es tancará.</translation>
     </message>
 </context>
 <context>
@@ -728,8 +728,8 @@ Address: %4
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Egulden address.</source>
-        <translation>L&apos;adreça introduida &quot;%1&quot; no és una adreça Egulden valida.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid e-Gulden address.</source>
+        <translation>L&apos;adreça introduida &quot;%1&quot; no és una adreça e-Gulden valida.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -747,8 +747,8 @@ Address: %4
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>Egulden-Qt</source>
-        <translation>Egulden-Qt</translation>
+        <source>e-Gulden-Qt</source>
+        <translation>e-Gulden-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -810,13 +810,13 @@ Address: %4
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Egulden after logging in to the system.</source>
-        <translation>Iniciar automàticament Egulden després de l&apos;inici de sessió del sistema.</translation>
+        <source>Automatically start e-Gulden after logging in to the system.</source>
+        <translation>Iniciar automàticament e-Gulden després de l&apos;inici de sessió del sistema.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Egulden on system login</source>
-        <translation>&amp;Iniciar Egulden al inici de sessió del sistema.</translation>
+        <source>&amp;Start e-Gulden on system login</source>
+        <translation>&amp;Iniciar e-Gulden al inici de sessió del sistema.</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -835,8 +835,8 @@ Address: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Egulden client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Obrir el port del client de Egulden al router de forma automàtica. Això només funciona quan el teu router implementa UPnP i l&apos;opció està activada.</translation>
+        <source>Automatically open the e-Gulden client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Obrir el port del client de e-Gulden al router de forma automàtica. Això només funciona quan el teu router implementa UPnP i l&apos;opció està activada.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -845,8 +845,8 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Egulden network through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>Connectar a la xarxa Egulden a través de un SOCKS proxy (per exemple connectant a través de Tor).</translation>
+        <source>Connect to the e-Gulden network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>Connectar a la xarxa e-Gulden a través de un SOCKS proxy (per exemple connectant a través de Tor).</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -920,8 +920,8 @@ Address: %4
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Egulden.</source>
-        <translation>Aquí pots definir el llenguatge de l&apos;aplicatiu. Aquesta configuració tindrà efecte un cop es reiniciï Egulden.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting e-Gulden.</source>
+        <translation>Aquí pots definir el llenguatge de l&apos;aplicatiu. Aquesta configuració tindrà efecte un cop es reiniciï e-Gulden.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -935,8 +935,8 @@ Address: %4
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Egulden addresses in the transaction list or not.</source>
-        <translation>Mostrar adreces Egulden als llistats de transaccions o no.</translation>
+        <source>Whether to show e-Gulden addresses in the transaction list or not.</source>
+        <translation>Mostrar adreces e-Gulden als llistats de transaccions o no.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -987,8 +987,8 @@ Address: %4
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Egulden.</source>
-        <translation>Aquesta configuració tindrà efecte un cop es reiniciï Egulden.</translation>
+        <source>This setting will take effect after restarting e-Gulden.</source>
+        <translation>Aquesta configuració tindrà efecte un cop es reiniciï e-Gulden.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1006,8 +1006,8 @@ Address: %4
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Egulden network after a connection is established, but this process has not completed yet.</source>
-        <translation>La informació mostrada pot no estar al día. El teu moneder es sincronitza automàticament amb la xarxa Egulden un cop s&apos;ha establert connexió, però aquest proces no s&apos;ha completat encara.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the e-Gulden network after a connection is established, but this process has not completed yet.</source>
+        <translation>La informació mostrada pot no estar al día. El teu moneder es sincronitza automàticament amb la xarxa e-Gulden un cop s&apos;ha establert connexió, però aquest proces no s&apos;ha completat encara.</translation>
     </message>
     <message>
         <location line="-124"/>
@@ -1210,8 +1210,8 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the Egulden-Qt help message to get a list with possible Egulden command-line options.</source>
-        <translation>Mostrar el missatge d&apos;ajuda de Egulden-Qt per a obtenir un llistat de possibles ordres per a la línia d&apos;ordres de Egulden.</translation>
+        <source>Show the e-Gulden-Qt help message to get a list with possible e-Gulden command-line options.</source>
+        <translation>Mostrar el missatge d&apos;ajuda de e-Gulden-Qt per a obtenir un llistat de possibles ordres per a la línia d&apos;ordres de e-Gulden.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1230,13 +1230,13 @@ Address: %4
     </message>
     <message>
         <location line="-104"/>
-        <source>Egulden - Debug window</source>
-        <translation>Egulden -Finestra de debug</translation>
+        <source>e-Gulden - Debug window</source>
+        <translation>e-Gulden -Finestra de debug</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>Egulden Core</source>
-        <translation>Nucli de Egulden</translation>
+        <source>e-Gulden Core</source>
+        <translation>Nucli de e-Gulden</translation>
     </message>
     <message>
         <location line="+279"/>
@@ -1245,8 +1245,8 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Egulden debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Obrir el dietari de debug de Egulden del directori de dades actual. Aixó pot trigar uns quants segons per a dietàris grossos.</translation>
+        <source>Open the e-Gulden debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Obrir el dietari de debug de e-Gulden del directori de dades actual. Aixó pot trigar uns quants segons per a dietàris grossos.</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -1255,8 +1255,8 @@ Address: %4
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the Egulden RPC console.</source>
-        <translation>Benvingut a la consola RPC de Egulden</translation>
+        <source>Welcome to the e-Gulden RPC console.</source>
+        <translation>Benvingut a la consola RPC de e-Gulden</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1439,8 +1439,8 @@ Address: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Egulden address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>Introdueixi una adreça de Egulden (per exemple Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>Enter a e-Gulden address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>Introdueixi una adreça de e-Gulden (per exemple Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
 </context>
 <context>
@@ -1504,8 +1504,8 @@ Address: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Egulden address</source>
-        <translation>Signa el missatge per provar que ets propietari d&apos;aquesta adreça Egulden</translation>
+        <source>Sign the message to prove you own this e-Gulden address</source>
+        <translation>Signa el missatge per provar que ets propietari d&apos;aquesta adreça e-Gulden</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1540,8 +1540,8 @@ Address: %4
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Egulden address</source>
-        <translation>Verificar el missatge per assegurar-se que ha estat signat amb una adreça Egulden específica</translation>
+        <source>Verify the message to ensure it was signed with the specified e-Gulden address</source>
+        <translation>Verificar el missatge per assegurar-se que ha estat signat amb una adreça e-Gulden específica</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1556,8 +1556,8 @@ Address: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Egulden address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>Introdueixi una adreça de Egulden (per exemple Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>Enter a e-Gulden address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>Introdueixi una adreça de e-Gulden (per exemple Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1566,8 +1566,8 @@ Address: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Egulden signature</source>
-        <translation>Introduïr una clau Egulden</translation>
+        <source>Enter e-Gulden signature</source>
+        <translation>Introduïr una clau e-Gulden</translation>
     </message>
     <message>
         <location line="+82"/>
@@ -1640,7 +1640,7 @@ Address: %4
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The Egulden developers</source>
+        <source>The e-Gulden developers</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -2178,8 +2178,8 @@ Address: %4
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+94"/>
-        <source>Egulden version</source>
-        <translation>Versió de Egulden</translation>
+        <source>e-Gulden version</source>
+        <translation>Versió de e-Gulden</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -2297,9 +2297,9 @@ rpcpassword=%s
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Egulden Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;e-Gulden Alert&quot; admin@foo.com
 </source>
-        <translation>%s has de establir una contrasenya RPC a l&apos;arxiu de configuració:\n%s\nEs recomana que useu la següent constrasenya aleatòria:\nrpcuser=eguldenrpc\nrpcpassword=%s\n(no necesiteu recordar aquesta contrsenya)\nEl nom d&apos;usuari i contrasenya NO HAN de ser els mateixos.\nSi l&apos;arxiu no existeix, crea&apos;l amb els permisos d&apos;arxiu de només lectura per al propietari.\nTambé es recomana establir la notificació d&apos;alertes i així seràs notificat de les incidències;\nper exemple: alertnotify=echo %%s | mail -s &quot;Egulden Alert&quot; admin@foo.com</translation>
+        <translation>%s has de establir una contrasenya RPC a l&apos;arxiu de configuració:\n%s\nEs recomana que useu la següent constrasenya aleatòria:\nrpcuser=eguldenrpc\nrpcpassword=%s\n(no necesiteu recordar aquesta contrsenya)\nEl nom d&apos;usuari i contrasenya NO HAN de ser els mateixos.\nSi l&apos;arxiu no existeix, crea&apos;l amb els permisos d&apos;arxiu de només lectura per al propietari.\nTambé es recomana establir la notificació d&apos;alertes i així seràs notificat de les incidències;\nper exemple: alertnotify=echo %%s | mail -s &quot;e-Gulden Alert&quot; admin@foo.com</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -2313,8 +2313,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Egulden Alert&quot; admin@foo.
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. Egulden is probably already running.</source>
-        <translation>No es pot bloquejar el directori de dades %s. Probablement Egulden ja estigui en execució.</translation>
+        <source>Cannot obtain a lock on data directory %s. e-Gulden is probably already running.</source>
+        <translation>No es pot bloquejar el directori de dades %s. Probablement e-Gulden ja estigui en execució.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2358,8 +2358,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Egulden Alert&quot; admin@foo.
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Egulden will not work properly.</source>
-        <translation>Advertència: Si us plau comprovi que la data i hora del seu computador siguin correctes! Si el seu rellotge està mal configurat, Egulden no funcionará de manera apropiada.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong e-Gulden will not work properly.</source>
+        <translation>Advertència: Si us plau comprovi que la data i hora del seu computador siguin correctes! Si el seu rellotge està mal configurat, e-Gulden no funcionará de manera apropiada.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2608,8 +2608,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Egulden Alert&quot; admin@foo.
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the Egulden Wiki for SSL setup instructions)</source>
-        <translation>Opcions SSL: (veure la Wiki de Egulden per a instruccions de configuració SSL)</translation>
+        <source>SSL options: (see the e-Gulden Wiki for SSL setup instructions)</source>
+        <translation>Opcions SSL: (veure la Wiki de e-Gulden per a instruccions de configuració SSL)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2798,13 +2798,13 @@ for example: alertnotify=echo %%s | mail -s &quot;Egulden Alert&quot; admin@foo.
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Egulden</source>
-        <translation>Error carregant wallet.dat: El moneder requereix una versió de Egulden més moderna</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of e-Gulden</source>
+        <translation>Error carregant wallet.dat: El moneder requereix una versió de e-Gulden més moderna</translation>
     </message>
     <message>
         <location line="+93"/>
-        <source>Wallet needed to be rewritten: restart Egulden to complete</source>
-        <translation>El moneder necesita ser re-escrit: re-inicia Egulden per a completar la tasca</translation>
+        <source>Wallet needed to be rewritten: restart e-Gulden to complete</source>
+        <translation>El moneder necesita ser re-escrit: re-inicia e-Gulden per a completar la tasca</translation>
     </message>
     <message>
         <location line="-95"/>
@@ -2863,8 +2863,8 @@ for example: alertnotify=echo %%s | mail -s &quot;Egulden Alert&quot; admin@foo.
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. Egulden is probably already running.</source>
-        <translation>Impossible d&apos;unir %s en aquest ordinador. Probablement Egulden ja estigui en execució.</translation>
+        <source>Unable to bind to %s on this computer. e-Gulden is probably already running.</source>
+        <translation>Impossible d&apos;unir %s en aquest ordinador. Probablement e-Gulden ja estigui en execució.</translation>
     </message>
     <message>
         <location line="+64"/>

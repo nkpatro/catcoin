@@ -22,7 +22,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui->copyrightLabel->setText(
         tr("Copyright") + QString(" &copy; 2009-%1 ").arg(COPYRIGHT_YEAR) + tr("The Bitcoin developers") + QString("<br>") +
         tr("Copyright") + QString(" &copy; ") + tr("2011-%1 The Litecoin developers").arg(ABOUTDIALOG_COPYRIGHT_YEAR) + QString("<br>") +
-        tr("Copyright") + QString(" &copy; ") + tr("%1 The Egulden developers").arg(ABOUTDIALOG_COPYRIGHT_YEAR)
+        tr("Copyright") + QString(" &copy; ") + tr("%1 The e-Gulden developers").arg(ABOUTDIALOG_COPYRIGHT_YEAR)
     );
 }
 

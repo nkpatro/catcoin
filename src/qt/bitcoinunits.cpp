@@ -49,9 +49,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Eguldens");
-    case mBTC: return QString("Milli-Eguldens (1 / 1,000)");
-    case uBTC: return QString("Micro-Eguldens (1 / 1,000,000)");
+    case BTC: return QString("e-Guldens");
+    case mBTC: return QString("Milli-e-Guldens (1 / 1,000)");
+    case uBTC: return QString("Micro-e-Guldens (1 / 1,000,000)");
     default: return QString("???");
     }
 }
