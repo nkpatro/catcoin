@@ -12,7 +12,7 @@ What is Egulden?
 
 Egulden is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
  - 2 minute block targets
- - subsidy halves in 21k blocks (~1 years)
+ - subsidy halves in 210k blocks (~293 days)
  - ~21 million total coins
  - 25 coins per block
  - KGW algorithm
