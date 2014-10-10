@@ -14,7 +14,7 @@ To Build
 	cd src/
 	make -f makefile.unix		# Headless litecoin
 
-See readme-qt.rst for instructions on building Templecoin-Qt, the graphical user interface.
+See readme-qt.rst for instructions on building Litecoin-Qt, the graphical user interface.
 
 Dependencies
 ---------------------
@@ -77,6 +77,10 @@ for other Ubuntu & Debian:
 Optional:
 
 	sudo apt-get install libminiupnpc-dev (see USE_UPNP compile flag)
+	
+
+Optional for debian one click to install enviroment:
+apt-get update && apt-get install -y git chkconfig screen  libssl-dev libdb++-dev libboost-all-dev libminiupnpc-dev
 
 
 Notes
