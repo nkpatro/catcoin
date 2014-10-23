@@ -1,3 +1,4 @@
+// Copyright (c) 2014-2014 The Templecoin developers
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -41,13 +42,14 @@ namespace Checkpoints
 		(  10000, uint256("973266a50b103d7057acbd07d49ca2b6f981fe534dae23438828221a65188639"))
 		(  100000, uint256("95dc645ee15c791b94ec4b7076d7e3922325878767921c87f154b0327a6c7c7a"))
 		(  133133, uint256("2f41bc8e8d5be6952d8d49f08c5cc2015d2b9a3f1c160116ef10f1a63355abbc"))
+        (  150879, uint256("abda2abf9abc0bd24e9827c5e3795e254ad1dcfaf307a4386c5b20fedc3c2df9"))
         ;
     static const CCheckpointData data = {
         &mapCheckpoints,
-        1410516073, // * UNIX timestamp of last checkpoint block
-        4896865,    // * total number of transactions between genesis and last checkpoint
+        1414056601, // * UNIX timestamp of last checkpoint block
+        154911,    // * total number of transactions between genesis and last checkpoint
                     //   (the tx=... number in the SetBestChain debug.log lines)
-        7000.0     // * estimated number of transactions per day after checkpoint
+        1500.0     // * estimated number of transactions per day after checkpoint
     };
 
     static MapCheckpoints mapCheckpointsTestnet =
