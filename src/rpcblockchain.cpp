@@ -268,3 +268,55 @@ Value verifychain(const Array& params, bool fHelp)
     return VerifyDB(nCheckLevel, nCheckDepth);
 }
 
+struct bootstrapparams
+{
+    string strBootstrap;
+    int nMinHeight;
+    int nMaxHeight;
+    bootstrapparams()
+    {
+        strBootstrap = "bootstrap.new.dat";
+        nMinHeight = 1;
+        nMaxHeight = nBestHeight;
+    }
+};
+
+void ThreadMakeBootstrap(void* parg)
+{
+    bootstrapparams *p = (bootstrapparams *)parg;
+    // Make this thread recognisable as the make-bootstrap thread
+    RenameThread("bitcoin-make-bootstrap");
+
+    MakeBootstrap(p->strBootstrap, p->nMinHeight, p->nMaxHeight);
+
+    delete p;
+}
+
+Value makebootstrap(const Array& params, bool fHelp)
+{
+    if (fHelp || params.size() > 3)
+        throw runtime_error(
+            "makebootstrap [filename] [max] [min]\n"
+            "Make bootstrap");
+
+    bootstrapparams *p = new bootstrapparams();
+    if (params.size() > 0)
+        p->strBootstrap = params[0].get_str();
+
+    if (params.size() > 1)
+        p->nMaxHeight = params[1].get_int();
+
+    if (params.size() > 2)
+        p->nMinHeight = params[2].get_int();
+
+    if (p->nMaxHeight < 1 || p->nMaxHeight > nBestHeight)
+        throw runtime_error("Max block number out of range.");
+
+    if (p->nMinHeight < 1 || p->nMinHeight > nBestHeight)
+        throw runtime_error("Min block number out of range.");
+
+    NewThread(ThreadMakeBootstrap, p);
+
+    return Value::null;
+}
+
