@@ -371,11 +371,16 @@ std::string HelpMessage()
         "  -maxorphantx=<n>       " + _("Keep at most <n> unconnectable transactions in memory (default: 25)") + "\n" +
         "  -reindex               " + _("Rebuild block chain index from current blk000??.dat files") + "\n" +
         "  -par=<n>               " + _("Set the number of script verification threads (up to 16, 0 = auto, <0 = leave that many cores free, default: 0)") + "\n" +
+        "  -makebootstrap=<file>  " + _("Create a bootstrap file (default: bootstrap.new.dat)") + "\n" +
 
         "\n" + _("Block creation options:") + "\n" +
         "  -blockminsize=<n>      "   + _("Set minimum block size in bytes (default: 0)") + "\n" +
         "  -blockmaxsize=<n>      "   + _("Set maximum block size in bytes (default: 250000)") + "\n" +
         "  -blockprioritysize=<n> "   + _("Set maximum size of high-priority/low-fee transactions in bytes (default: 27000)") + "\n" +
+
+        "\n" + _("Bootstrap creation options:") + "\n" +
+        "  -bootstrapmin=<n>      "   + _("Set minimum height for bootstrap (default: 1)") + "\n" +
+        "  -bootstrapmax=<n>      "   + _("Set maximum height for bootstrap (default: latest height)") + "\n" +
 
         "\n" + _("SSL options: (see the Litecoin Wiki for SSL setup instructions)") + "\n" +
         "  -rpcssl                                  " + _("Use OpenSSL (https) for JSON-RPC connections") + "\n" +
@@ -955,6 +960,21 @@ bool AppInit2(boost::thread_group& threadGroup)
     {
         PrintBlockTree();
         return false;
+    }
+
+    if (mapArgs.count("-mkbootstrap"))
+    {
+        string strBootstrap = GetArg("-mkbootstrap", "bootstrap.new.dat");
+
+        int nMaxHeight = GetArg("-bootstrapmax", nBestHeight);
+        if (nMaxHeight < 1 || nMaxHeight > nBestHeight)
+            return InitError(_("Max block number out of range"));
+
+        int nMinHeight = GetArg("-bootstrapmin", 1);
+        if (nMinHeight < 1 || nMinHeight > nBestHeight)
+            return InitError(_("Min block number out of range"));
+
+        return MakeBootstrap(strBootstrap, nMinHeight, nMaxHeight);
     }
 
     if (mapArgs.count("-printblock"))

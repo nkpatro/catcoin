@@ -14,6 +14,7 @@
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
+#include <boost/lexical_cast.hpp>
 
 using namespace std;
 using namespace boost;
@@ -2830,6 +2831,42 @@ bool InitBlockIndex() {
 }
 
 
+bool MakeBootstrap(std::string strBootstrap, int nMinHeight, int nMaxHeight)
+{
+    CDiskBlockPos blockPos;
+    CBlockIndex* pindex = pindexGenesisBlock;
+    filesystem::path pathBootstrap = GetCustomFile(strBootstrap);
+#if BOOST_VERSION >= 104400
+    filesystem::path pathBootstrapTmp = filesystem::unique_path(pathBootstrap.string() + ".%%%%-%%%%-%%%%-%%%%");
+#else
+    // ubuntu lucid lts has 1.40 boost
+    std::string tmp = boost::lexical_cast<std::string>(boost::this_thread::get_id());
+    filesystem::path pathBootstrapTmp = pathBootstrap.string() + "." + tmp;
+#endif
+    FILE *file = fopen(pathBootstrapTmp.string().c_str(), "ab");
+    CAutoFile fileout = CAutoFile(file, SER_DISK, CLIENT_VERSION);
+    if (!fileout)
+        return error("MakeBootstrap() : open failed");
+
+    for (; pindex; pindex = pindex->pnext)
+    {
+            CBlock block;
+            if (pindex->nHeight < nMinHeight) continue;
+            if (pindex->nHeight > nMaxHeight) break;
+
+            if (!block.ReadFromDisk(pindex))
+                return error("MakeBootstrap() : ReadFromDisk failed");
+
+            if (!block.WriteToDisk(fileout, blockPos))
+                return error("MakeBootstrap() : WriteToDisk failed");
+    }
+    fileout.fclose();
+
+    if (!RenameOver(pathBootstrapTmp, pathBootstrap))
+        return error("MakeBootstrap() : Rename-into-place failed");
+
+    return false;
+}
 
 void PrintBlockTree()
 {

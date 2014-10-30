@@ -146,6 +146,8 @@ bool LoadBlockIndex();
 void UnloadBlockIndex();
 /** Verify consistency of the block and coin databases */
 bool VerifyDB(int nCheckLevel, int nCheckDepth);
+/** Make a bootstrap file */
+bool MakeBootstrap(std::string strBootstrap, int nMinHeight, int nMaxHeight);
 /** Print the loaded block tree */
 void PrintBlockTree();
 /** Find a block by height in the currently-connected chain */
@@ -1453,6 +1455,11 @@ public:
         if (!fileout)
             return error("CBlock::WriteToDisk() : OpenBlockFile failed");
 
+        return WriteToDisk(fileout, pos);
+    }
+
+    bool WriteToDisk(CAutoFile& fileout, CDiskBlockPos &pos)
+    {
         // Write index header
         unsigned int nSize = fileout.GetSerializeSize(*this);
         fileout << FLATDATA(pchMessageStart) << nSize;
