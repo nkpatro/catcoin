@@ -2278,7 +2278,7 @@ int GetAuxPowStartBlock()
         //return INT_MAX; // never
         return 48493;
     else
-        return 180000; 
+        return 170500; 
 }
 
 int GetOurChainID()
