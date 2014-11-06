@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2009-2014 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #ifndef BITCOIN_MAIN_H
@@ -22,6 +22,7 @@ class CReserveKey;
 class CAddress;
 class CInv;
 class CNode;
+class CAuxPow;
 
 struct CBlockIndexWorkComparator;
 
@@ -37,10 +38,8 @@ static const unsigned int DEFAULT_BLOCK_PRIORITY_SIZE = 17000;
 static const unsigned int MAX_STANDARD_TX_SIZE = 100000;
 /** The maximum allowed number of signature check operations in a block (network rule) */
 static const unsigned int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE/50;
-/** The maximum number of orphan transactions kept in memory */
-static const unsigned int MAX_ORPHAN_TRANSACTIONS = MAX_BLOCK_SIZE/100;
-/** The maximum number of entries in an 'inv' protocol message */
-static const unsigned int MAX_INV_SZ = 50000;
+/** Default for -maxorphantx, maximum number of orphan transactions kept in memory */
+static const unsigned int DEFAULT_MAX_ORPHAN_TRANSACTIONS = 25;
 /** The maximum size of a blk?????.dat file (since 0.8) */
 static const unsigned int MAX_BLOCKFILE_SIZE = 0x8000000; // 128 MiB
 /** The pre-allocation chunk size for blk?????.dat files (since 0.8) */
@@ -165,6 +164,8 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn);
 CBlockTemplate* CreateNewBlockWithKey(CReserveKey& reservekey);
 /** Modify the extranonce in a block */
 void IncrementExtraNonce(CBlock* pblock, CBlockIndex* pindexPrev, unsigned int& nExtraNonce);
+void IncrementExtraNonceWithAux(CBlock* pblock, CBlockIndex* pindexPrev, unsigned int& nExtraNonce, std::vector<unsigned char>& vchAux);
+
 /** Do mining precalculation */
 void FormatHashBuffers(CBlock* pblock, char* pmidstate, char* pdata, char* phash1);
 /** Check mined block */
@@ -179,6 +180,8 @@ int GetNumBlocksOfPeers();
 bool IsInitialBlockDownload();
 /** Format a string that describes several potential problems detected by the core */
 std::string GetWarnings(std::string strFor);
+/** Merge mining Chain ID */
+int GetOurChainID();
 /** Retrieve a transaction (from memory pool, or from disk, if possible) */
 bool GetTransaction(const uint256 &hash, CTransaction &tx, uint256 &hashBlock, bool fAllowSlow = false);
 /** Connect/disconnect blocks until pindexNew is the new tip of the active block chain */
@@ -450,8 +453,6 @@ public:
 
     std::string ToString() const
     {
-        if (scriptPubKey.size() < 6)
-            return "CTxOut(error)";
         return strprintf("CTxOut(nValue=%"PRI64d".%08"PRI64d", scriptPubKey=%s)", nValue / COIN, nValue % COIN, scriptPubKey.ToString().substr(0,30).c_str());
     }
 
@@ -514,6 +515,11 @@ public:
     uint256 GetHash() const
     {
         return SerializeHash(*this);
+    }
+
+    uint256 GetNormalizedHash() const
+    {
+        return SignatureHash(CScript(), *this, 0, SIGHASH_ALL);
     }
 
     bool IsFinal(int nBlockHeight=0, int64 nBlockTime=0) const
@@ -684,7 +690,7 @@ void UpdateCoins(const CTransaction& tx, CValidationState &state, CCoinsViewCach
     bool CheckTransaction(CValidationState &state) const;
 
     // Try to accept this transaction into the memory pool
-    bool AcceptToMemoryPool(CValidationState &state, bool fCheckInputs=true, bool fLimitFree = true, bool* pfMissingInputs=NULL);
+    bool AcceptToMemoryPool(CValidationState &state, bool fCheckInputs=true, bool fLimitFree = true, bool* pfMissingInputs=NULL, bool fRejectInsaneFee = false);
 
 protected:
     static const CTxOut &GetOutputFor(const CTxIn& input, CCoinsViewCache& mapInputs);
@@ -1121,6 +1127,8 @@ public:
 /** A transaction with a merkle branch linking it to the block chain. */
 class CMerkleTx : public CTransaction
 {
+private:
+    int GetDepthInMainChainINTERNAL(CBlockIndex* &pindexRet) const;
 public:
     uint256 hashBlock;
     std::vector<uint256> vMerkleBranch;
@@ -1159,13 +1167,40 @@ public:
 
 
     int SetMerkleBranch(const CBlock* pblock=NULL);
+
+    // Return depth of transaction in blockchain:
+    // -1  : not in blockchain, and not in memory pool (conflicted transaction)
+    //  0  : in memory pool, waiting to be included in a block
+    // >=1 : this many blocks deep in the main chain
     int GetDepthInMainChain(CBlockIndex* &pindexRet) const;
     int GetDepthInMainChain() const { CBlockIndex *pindexRet; return GetDepthInMainChain(pindexRet); }
-    bool IsInMainChain() const { return GetDepthInMainChain() > 0; }
+    bool IsInMainChain() const { CBlockIndex *pindexRet; return GetDepthInMainChainINTERNAL(pindexRet) > 0; }
     int GetBlocksToMaturity() const;
     bool AcceptToMemoryPool(bool fCheckInputs=true, bool fLimitFree=true);
 };
 
+/**Templecoin Merge mining*/
+template <typename Stream>
+int ReadWriteAuxPow(Stream& s, const boost::shared_ptr<CAuxPow>& auxpow, int nType, int nVersion, CSerActionSerialize ser_action);
+  
+template <typename Stream>
+int ReadWriteAuxPow(Stream& s, boost::shared_ptr<CAuxPow>& auxpow, int nType, int nVersion, CSerActionUnserialize ser_action);
+  
+template <typename Stream>
+int ReadWriteAuxPow(Stream& s, const boost::shared_ptr<CAuxPow>& auxpow, int nType, int nVersion, CSerActionGetSerializeSize ser_action);
+  
+enum
+{
+    // primary version
+    BLOCK_VERSION_DEFAULT        = (1 << 0),
+
+    // modifiers
+    BLOCK_VERSION_AUXPOW         = (1 << 8),
+
+    // bits allocated for chain ID
+    BLOCK_VERSION_CHAIN_START    = (1 << 16),
+    BLOCK_VERSION_CHAIN_END      = (1 << 30),
+};
 
 
 
@@ -1285,7 +1320,9 @@ public:
     unsigned int nTime;
     unsigned int nBits;
     unsigned int nNonce;
-
+    boost::shared_ptr<CAuxPow> auxpow;
+    
+    
     CBlockHeader()
     {
         SetNull();
@@ -1299,12 +1336,31 @@ public:
         READWRITE(hashMerkleRoot);
         READWRITE(nTime);
         READWRITE(nBits);
-        READWRITE(nNonce);
+        READWRITE(nNonce);      
+        
+        nSerSize += ReadWriteAuxPow(s, auxpow, nType, nVersion, ser_action);
     )
+        
+    int GetChainID() const
+    {
+        return nVersion / BLOCK_VERSION_CHAIN_START;
+    }
+
+    uint256 GetPoWHash() const
+    {
+        uint256 thash;
+        scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+        return thash;
+    }
+	
+    void SetAuxPow(CAuxPow* pow);    
+        
 
     void SetNull()
     {
-        nVersion = CBlockHeader::CURRENT_VERSION;
+//      nVersion = CBlockHeader::CURRENT_VERSION;
+        nVersion = CBlockHeader::CURRENT_VERSION | (GetOurChainID() * BLOCK_VERSION_CHAIN_START);
+        
         hashPrevBlock = 0;
         hashMerkleRoot = 0;
         nTime = 0;
@@ -1327,6 +1383,8 @@ public:
         return (int64)nTime;
     }
 
+    bool CheckProofOfWork(int nHeight) const;
+    
     void UpdateTime(const CBlockIndex* pindexPrev);
 };
 
@@ -1363,12 +1421,12 @@ public:
         vMerkleTree.clear();
     }
 
-    uint256 GetPoWHash() const
-    {
-        uint256 thash;
-        scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
-        return thash;
-    }
+ //   uint256 GetPoWHash() const
+ //   {
+ //       uint256 thash;
+ //       scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+ //       return thash;
+//   }
 
     CBlockHeader GetBlockHeader() const
     {
@@ -1482,7 +1540,8 @@ public:
         }
 
         // Check the header
-        if (!CheckProofOfWork(GetPoWHash(), nBits))
+//        if (!CheckProofOfWork(GetPoWHash(), nBits))
+         if (!CheckProofOfWork(INT_MAX))
             return error("CBlock::ReadFromDisk() : errors in block header");
 
         return true;
@@ -1528,8 +1587,11 @@ public:
     // Add this block to the block index, and if necessary, switch the active block chain to this
     bool AddToBlockIndex(CValidationState &state, const CDiskBlockPos &pos);
 
-    // Context-independent validity checks
-    bool CheckBlock(CValidationState &state, bool fCheckPOW=true, bool fCheckMerkleRoot=true) const;
+   // Context-independent validity checks
+   // bool CheckBlock(CValidationState &state, bool fCheckPOW=true, bool fCheckMerkleRoot=true) const;
+   //  nHeight is needed to see if merged mining is allowed
+    bool CheckBlock(CValidationState &state, int nHeight, bool fCheckPOW=true, bool fCheckMerkleRoot=true) const;
+ 
 
     // Store block on disk
     // if dbp is provided, the file is known to already reside on disk
@@ -1708,6 +1770,22 @@ public:
         nBits          = block.nBits;
         nNonce         = block.nNonce;
     }
+    
+    IMPLEMENT_SERIALIZE
+    (
+        /* mutable stuff goes here, immutable stuff
+         * has SERIALIZE functions in CDiskBlockIndex */
+        if (!(nType & SER_GETHASH))
+              READWRITE(VARINT(nVersion));
+  
+        READWRITE(VARINT(nStatus));
+        if (nStatus & (BLOCK_HAVE_DATA | BLOCK_HAVE_UNDO))
+            READWRITE(VARINT(nFile));
+        if (nStatus & BLOCK_HAVE_DATA)
+            READWRITE(VARINT(nDataPos));
+        if (nStatus & BLOCK_HAVE_UNDO)
+            READWRITE(VARINT(nUndoPos));
+    )
 
     CDiskBlockPos GetBlockPos() const {
         CDiskBlockPos ret;
@@ -1727,19 +1805,21 @@ public:
         return ret;
     }
 
-    CBlockHeader GetBlockHeader() const
-    {
-        CBlockHeader block;
-        block.nVersion       = nVersion;
-        if (pprev)
-            block.hashPrevBlock = pprev->GetBlockHash();
-        block.hashMerkleRoot = hashMerkleRoot;
-        block.nTime          = nTime;
-        block.nBits          = nBits;
-        block.nNonce         = nNonce;
-        return block;
-    }
-
+    // CBlockHeader GetBlockHeader() const
+    // {
+        // CBlockHeader block;
+        // block.nVersion       = nVersion;
+        // if (pprev)
+            // block.hashPrevBlock = pprev->GetBlockHash();
+        // block.hashMerkleRoot = hashMerkleRoot;
+        // block.nTime          = nTime;
+        // block.nBits          = nBits;
+        // block.nNonce         = nNonce;
+        // return block;
+    // }
+    CBlockHeader GetBlockHeader() const; //for merge mining
+    
+    
     uint256 GetBlockHash() const
     {
         return *phashBlock;
@@ -1806,13 +1886,15 @@ public:
     static bool IsSuperMajority(int minVersion, const CBlockIndex* pstart,
                                 unsigned int nRequired, unsigned int nToCheck);
 
-    std::string ToString() const
+    std::string ToString() const;  //moved code to main.cpp because new method required access to auxpow
+#if 0
     {
         return strprintf("CBlockIndex(pprev=%p, pnext=%p, nHeight=%d, merkle=%s, hashBlock=%s)",
             pprev, pnext, nHeight,
             hashMerkleRoot.ToString().c_str(),
             GetBlockHash().ToString().c_str());
     }
+#endif  
 
     void print() const
     {
@@ -1841,28 +1923,37 @@ class CDiskBlockIndex : public CBlockIndex
 public:
     uint256 hashPrev;
 
+    // if this is an aux work block
+    boost::shared_ptr<CAuxPow> auxpow;
+
+
     CDiskBlockIndex() {
         hashPrev = 0;
+        auxpow.reset();
     }
 
-    explicit CDiskBlockIndex(CBlockIndex* pindex) : CBlockIndex(*pindex) {
+//  explicit CDiskBlockIndex(CBlockIndex* pindex) : CBlockIndex(*pindex) {
+    explicit CDiskBlockIndex(CBlockIndex* pindex, boost::shared_ptr<CAuxPow> auxpow) : CBlockIndex(*pindex) {
         hashPrev = (pprev ? pprev->GetBlockHash() : 0);
+        this->auxpow = auxpow;    
     }
 
     IMPLEMENT_SERIALIZE
     (
+        /* immutable stuff goes here, mutable stuff
+         * has SERIALIZE functions in CBlockIndex */    
         if (!(nType & SER_GETHASH))
             READWRITE(VARINT(nVersion));
 
         READWRITE(VARINT(nHeight));
-        READWRITE(VARINT(nStatus));
+//        READWRITE(VARINT(nStatus));
         READWRITE(VARINT(nTx));
-        if (nStatus & (BLOCK_HAVE_DATA | BLOCK_HAVE_UNDO))
-            READWRITE(VARINT(nFile));
-        if (nStatus & BLOCK_HAVE_DATA)
-            READWRITE(VARINT(nDataPos));
-        if (nStatus & BLOCK_HAVE_UNDO)
-            READWRITE(VARINT(nUndoPos));
+        // if (nStatus & (BLOCK_HAVE_DATA | BLOCK_HAVE_UNDO))
+            // READWRITE(VARINT(nFile));
+        // if (nStatus & BLOCK_HAVE_DATA)
+            // READWRITE(VARINT(nDataPos));
+        // if (nStatus & BLOCK_HAVE_UNDO)
+            // READWRITE(VARINT(nUndoPos));
 
         // block header
         READWRITE(this->nVersion);
@@ -1871,9 +1962,11 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
+        ReadWriteAuxPow(s, auxpow, nType, this->nVersion, ser_action);
     )
 
-    uint256 GetBlockHash() const
+//  uint256 GetBlockHash() const
+    uint256 CalcBlockHash() const        
     {
         CBlockHeader block;
         block.nVersion        = nVersion;
@@ -1886,7 +1979,8 @@ public:
     }
 
 
-    std::string ToString() const
+    std::string ToString() const;// moved code to main.cpp
+#if 0
     {
         std::string str = "CDiskBlockIndex(";
         str += CBlockIndex::ToString();
@@ -1895,6 +1989,7 @@ public:
             hashPrev.ToString().c_str());
         return str;
     }
+#endif
 
     void print() const
     {
@@ -2101,7 +2196,7 @@ public:
     std::map<uint256, CTransaction> mapTx;
     std::map<COutPoint, CInPoint> mapNextTx;
 
-    bool accept(CValidationState &state, CTransaction &tx, bool fCheckInputs, bool fLimitFree, bool* pfMissingInputs);
+    bool accept(CValidationState &state, CTransaction &tx, bool fCheckInputs, bool fLimitFree, bool* pfMissingInputs, bool fRejectInsaneFee = false);
     bool addUnchecked(const uint256& hash, const CTransaction &tx);
     bool remove(const CTransaction &tx, bool fRecursive = false);
     bool removeConflicts(const CTransaction &tx);
