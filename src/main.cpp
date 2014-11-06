@@ -2266,17 +2266,19 @@ bool CBlock::AddToBlockIndex(CValidationState &state, const CDiskBlockPos &pos)
     return true;
 }
 
-// to enable merged mining:
+// to enable merged mining: 
+//   INT_MAX; // never
 // - set a block from which it will be enabled
-// - set a unique chain ID
+// - set a unique chain ID 0x0024 == 36
 //   each merged minable scrypt_1024_1_1_256 coin should have a different one
 //   (if two have the same ID, they can't be merge mined together)
 int GetAuxPowStartBlock()
 {
    if (fTestNet)
-        return INT_MAX; // never
+        //return INT_MAX; // never
+        return 48493;
     else
-        return INT_MAX; // never
+        return 180000; 
 }
 
 int GetOurChainID()
