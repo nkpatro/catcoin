@@ -5056,6 +5056,7 @@ CBlockHeader CBlockIndex::GetBlockHeader() const
     block.nTime          = nTime;
     block.nBits          = nBits;
     block.nNonce         = nNonce;
+    block.auxpow         = auxpow;
     return block;
 }
 
