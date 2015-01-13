@@ -19,7 +19,7 @@ DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLU
 
 SYS := $(shell uname -s)
 ifneq (, $(findstring SunOS, $(SYS)))
-DEFS += $(addprefix -I,$(BDB_INCLUDE_PATH)/db4)
+DEFS += $(addprefix -I,/opt/local/include/db4)
 endif 
 
 LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH))
