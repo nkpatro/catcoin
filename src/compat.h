@@ -18,10 +18,12 @@
 #else
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <sys/fcntl.h>
+#include <fcntl.h>
 #include <arpa/inet.h>
-#include <netdb.h>
+#define map junkmap
 #include <net/if.h>
+#undef map
+#include <netdb.h>
 #include <netinet/in.h>
 #include <ifaddrs.h>
 #endif
@@ -44,6 +46,13 @@ typedef int socklen_t;
 #define WSAENOTSOCK         EBADF
 #define INVALID_SOCKET      (SOCKET)(~0)
 #define SOCKET_ERROR        -1
+#endif
+
+#ifndef WIN32
+// PRIO_MAX is not defined on Solaris
+#ifndef PRIO_MAX
+#define PRIO_MAX 20
+#endif
 #endif
 
 inline int myclosesocket(SOCKET& hSocket)
