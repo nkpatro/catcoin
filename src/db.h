@@ -11,11 +11,7 @@
 #include <string>
 #include <vector>
 
-#if defined(sun)
-#include <db4/db_cxx.h>
-#else
 #include <db_cxx.h>
-#endif
 
 class CAddress;
 class CAddrMan;

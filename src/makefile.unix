@@ -16,6 +16,12 @@ LINK:=$(CXX)
 DEFS=-DBOOST_SPIRIT_THREADSAFE -D_FILE_OFFSET_BITS=64
 
 DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH))
+
+SYS := $(shell uname -s)
+ifneq (, $(findstring SunOS, $(SYS)))
+DEFS += $(addprefix -I,$(BDB_INCLUDE_PATH)/db4)
+endif 
+
 LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH))
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
@@ -41,8 +47,8 @@ LIBS += \
    -l ssl \
    -l crypto
 
-SYS := $(shell gcc -dumpmachine)
-ifneq (, $(findstring solaris, $(SYS)))
+SYS := $(shell uname -s)
+ifneq (, $(findstring SunOS, $(SYS)))
 LIBS+= \
    -l db4_cxx$(BDB_LIB_SUFFIX)
 else
@@ -97,7 +103,12 @@ endif
     # Make some important things such as the global offset table read only as soon as
     # the dynamic linker is finished building it. This will prevent overwriting of addresses
     # which would later be jumped to.
-    LDHARDENING+=-Wl,-s
+SYS := $(shell uname -s)
+ifneq (, $(findstring SunOS, $(SYS)))
+    LDHARDENING+=-Wl
+else
+    LDHARDENING+=-Wl,-z,relro -Wl,-z,now
+endif
 
     # Build position independent code to take advantage of Address Space Layout Randomization
     # offered by some kernels.
