@@ -126,6 +126,8 @@ Rerunning "openssl version" should now return the correct version.
 
         cd src
         make -f makefile.osx
+    
+    If make command fails generating errors like "Undefined symbols for architecture x86_64:" related to boost libraries(Error example: http://pastebin.com/wiqLcSmi), you should comment out "QMAKE_CXXFLAGS += -stdlib=libstdc++" according to this issuecomment https://github.com/dogecoin/dogecoin/issues/288#issuecomment-39077768
 
 4.  It is a good idea to build and run the unit tests, too:
 
