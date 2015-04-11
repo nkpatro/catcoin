@@ -1,73 +1,42 @@
-Litecoin integration/staging tree
-================================
+# AuroraCoin AUR
 
-http://www.litecoin.org
+http://www.auroracoin.org
 
-Copyright (c) 2009-2014 Bitcoin Developers
-Copyright (c) 2011-2014 Litecoin Developers
+Follow [@auroracoinIS](http://twitter.com/auroracoinIS)
 
-What is Litecoin?
-----------------
+Copyright (c) 2009-2013 Bitcoin Developers Copyright (c) 2011-2013 Litecoin Developers
 
-Litecoin is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
- - 2.5 minute block targets
- - subsidy halves in 840k blocks (~4 years)
- - ~84 million total coins
+## What is AuroraCoin?
 
-The rest is the same as Bitcoin.
- - 50 coins per block
- - 2016 blocks to retarget difficulty
+Auroracoin is a cryptocurrency for Iceland. It is based on litecoin and is 50% premined. The premined coins will be distributed to the entire population of Iceland, commencing on midnight 25th of March 2014.
 
-For more information, as well as an immediately useable, binary version of
-the Litecoin client sofware, see http://www.litecoin.org.
 
-License
--------
+## Community
 
-Litecoin is released under the terms of the MIT license. See `COPYING` for more
-information or see http://opensource.org/licenses/MIT.
+Forums: http://auroraspjall.is/
 
-Development process
--------------------
+Irc: #aur on freenode
 
-Developers work in their own trees, then submit pull requests when they think
-their feature or bug fix is ready.
+http://www.reddit.com/r/auroracoin
 
-If it is a simple/trivial/non-controversial change, then one of the Litecoin
-development team members simply pulls it.
+http://www.reddit.com/r/AURmarket
 
-If it is a *more complicated or potentially controversial* change, then the patch
-submitter will be asked to start a discussion with the devs and community.
+https://bitcointalk.org/index.php?topic=446062.0
 
-The patch will be accepted if there is broad consensus that it is a good thing.
-Developers should expect to rework and resubmit patches if the code doesn't
-match the project's coding conventions (see `doc/coding.txt`) or are
-controversial.
 
-The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/litecoin-project/litecoin/tags) are created
-regularly to indicate new official, stable release versions of Litecoin.
+## Developers
 
-Testing
--------
+Developers are encouraged to create tools for Auroracoin to support the adoption of Auroracoin. Such software, e.g. for payments, will help Icelanders start using the currency in their daily lives.
 
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test. Please be patient and help out, and
-remember this is a security-critical project where any mistake might cost people
-lots of money.
+Interested in helping out? Please email auroracoin@auroracoin.is, and let us know how you can help.
 
-### Automated Testing
 
-Developers are strongly encouraged to write unit tests for new code, and to
-submit new unit tests for old code.
+## More information
 
-Unit tests for the core code are in `src/test/`. To compile and run them:
-
-    cd src; make -f makefile.unix test
-
-Unit tests for the GUI code are in `src/qt/test/`. To compile and run them:
-
-    qmake BITCOIN_QT_TEST=1 -o Makefile.test bitcoin-qt.pro
-    make -f Makefile.test
-    ./litecoin-qt_test
-
+- RPC: 12341
+- NET: 12340
+- Total coins: 21 million
+- 12.5 coins per block
+- Block every 5 minutes
+- Gravity Well retargeting
+- Coins mature after 100 blocks
