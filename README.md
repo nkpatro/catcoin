@@ -4,11 +4,11 @@ http://www.auroracoin.org
 
 Follow [@auroracoinIS](http://twitter.com/auroracoinIS)
 
-Copyright (c) 2009-2013 Bitcoin Developers Copyright (c) 2011-2013 Litecoin Developers
+Copyright (c) 2009-2013 Bitcoin Developers Copyright (c) 2011-2013 Auroracoin Developers
 
 ## What is AuroraCoin?
 
-Auroracoin is a cryptocurrency for Iceland. It is based on litecoin and is 50% premined. The premined coins will be distributed to the entire population of Iceland, commencing on midnight 25th of March 2014.
+Auroracoin is a cryptocurrency for Iceland. It is based on Litecoin and is 50% premined. The premined coins will be distributed to the entire population of Iceland, commencing on midnight 25th of March 2014.
 
 
 ## Community
