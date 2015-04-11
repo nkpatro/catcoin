@@ -42,4 +42,4 @@ Interested in helping out? Please email auroracoin@auroracoin.is, and let us kno
 - 12.5 coins per block
 - Block every 5 minutes
 - Gravity Well retargeting
-- Coins mature after 100 blocks
+- Coins mature after 80 blocks
