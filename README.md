@@ -4,7 +4,9 @@ http://www.auroracoin.org
 
 Follow [@auroracoinIS](http://twitter.com/auroracoinIS)
 
-Copyright (c) 2009-2013 Bitcoin Developers Copyright (c) 2011-2013 Auroracoin Developers
+Copyright (c) 2009-2013 Bitcoin Developers
+Copyright (c) 2011-2014 Litecoin Developers
+Copyright (c) 2014-2015 Auroracoin Developers
 
 ## What is AuroraCoin?
 
