@@ -14,3 +14,4 @@ script:
  - cd ..
  - qmake USE_UPNP=- 
  - make -j 5
+ 
