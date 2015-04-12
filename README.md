@@ -1,5 +1,7 @@
 # AuroraCoin AUR
 
+[![Build Status](https://travis-ci.org/aurarad/auroracoin.svg?branch=master-0.8)](https://travis-ci.org/aurarad/auroracoin)
+
 http://www.auroracoin.org
 
 Follow [@auroracoinIS](http://twitter.com/auroracoinIS)
