@@ -11,11 +11,20 @@ USE_UPNP:=0
 # :=0 --> Disable IPv6 support
 USE_IPV6:=1
 
+ifneq (, $(wildcard /etc/gentoo-release))
+  OS = gentoo
+endif
+
 LINK:=$(CXX)
 
 DEFS=-DBOOST_SPIRIT_THREADSAFE -D_FILE_OFFSET_BITS=64
 
-DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH))
+ifeq ($(OS), gentoo)
+    DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH)) -I/usr/include/db4.8
+else
+    DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH))
+endif
+
 LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH))
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
