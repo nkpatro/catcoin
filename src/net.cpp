@@ -1173,14 +1173,14 @@ void MapPort(bool)
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strMainNetDNSSeed[][2] = {
-    {"auroracointools.com", "dnsseed.auroracointools.com"},
-    {"auroracoinpool.org", "dnsseed.auroracoinpool.org"},
-    {"xurious.com", "dnsseed.ltc.xurious.com"},
-    {"koin-project.com", "dnsseed.koin-project.com"},
-    {"weminemnc.com", "dnsseed.weminemnc.com"},
+    {"luxembourgh", "s1.auroraseed.net"},
+    {"united-states", "s1.auroraseed.com"},
+    {"iceland", "s1.auroraseed.org"},
+    {"the-netherlands", "s1.auroraseed.eu"},
     {NULL, NULL}
 };
 
+// No testnet seeds for Auroracoin
 static const char *strTestNetDNSSeed[][2] = {
     {"auroracointools.com", "testnet-seed.auroracointools.com"},
     {"xurious.com", "testnet-seed.ltc.xurious.com"},
