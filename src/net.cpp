@@ -1174,7 +1174,8 @@ void MapPort(bool)
 // The second name should resolve to a list of seed addresses.
 static const char *strMainNetDNSSeed[][2] = {
     {"luxembourgh", "s1.auroraseed.net"},
-    {"united-states", "s1.auroraseed.com"},
+    {"united-states-west", "s1.auroraseed.eu"},    
+    {"united-states-east", "aurseed1.criptoe.com"},
     {"iceland", "s1.auroraseed.org"},
     {"the-netherlands", "s1.auroraseed.eu"},
     {NULL, NULL}
