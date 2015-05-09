@@ -637,7 +637,7 @@ Amount: %2
 Type: %3
 Address: %4
 </source>
-        <translation>تاریخ: %1⏎ میزان وجه : %2⏎ نوع: %3⏎ آدرس: %4⏎ 
+        <translation>تاریخ: %1⏎ میزان وجه : %2⏎ نوع: %3⏎ آدرس: %4⏎
 </translation>
     </message>
     <message>
@@ -2732,7 +2732,7 @@ for example: alertnotify=echo %%s | mail -s &quot;Auroracoin Alert&quot; admin@f
     <message>
         <location line="-120"/>
         <source>Execute command when the best block changes (%s in cmd is replaced by block hash)</source>
-        <translation>دستور را وقتی بهترین بلاک تغییر کرد اجرا کن (%s در دستور توسط block hash جایگز����ن شده است)</translation>
+        <translation>دستور را وقتی بهترین بلاک تغییر کرد اجرا کن (%s در دستور توسط block hash جایگزین شده است)</translation>
     </message>
     <message>
         <location line="+147"/>

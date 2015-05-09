@@ -1414,7 +1414,7 @@ Address: %4
         <location line="+60"/>
         <location filename="../sendcoinsentry.cpp" line="+26"/>
         <source>Enter a label for this address to add it to your address book</source>
-        <translation>Введіть мітку для цієї ад����еси для додавання її в адресну книгу</translation>
+        <translation>Введіть мітку для цієї адреси для додавання її в адресну книгу</translation>
     </message>
     <message>
         <location line="-78"/>
@@ -2198,7 +2198,7 @@ Address: %4
     <message>
         <location line="-29"/>
         <source>Send command to -server or auroracoind</source>
-        <translation>Ві��п��авити команду серверу -server чи демону</translation>
+        <translation>Відправити команду серверу -server чи демону</translation>
     </message>
     <message>
         <location line="-23"/>

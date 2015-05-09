@@ -234,7 +234,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="+1"/>
         <source>Enter the old and new passphrase to the wallet.</source>
-        <translation>कृपा करके पुर�����ना एवं नया पहचान शब्द/अक्षर वॉलेट में डालिए !</translation>
+        <translation>कृपा करके पुराना एवं नया पहचान शब्द/अक्षर वॉलेट में डालिए !</translation>
     </message>
     <message>
         <location line="+46"/>
@@ -1896,7 +1896,7 @@ Address: %4
     <message>
         <location line="+5"/>
         <source>This block was not received by any other nodes and will probably not be accepted!</source>
-        <translation>यह ब्लॉक किसी भी और नोड को मिला ���ह��� है ! शायद यह ब्लॉक कोई भी नोड स्वीकारे गा नही !</translation>
+        <translation>यह ब्लॉक किसी भी और नोड को मिला नही है ! शायद यह ब्लॉक कोई भी नोड स्वीकारे गा नही !</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2184,7 +2184,7 @@ Address: %4
     <message>
         <location filename="../bitcoinstrings.cpp" line="+94"/>
         <source>Auroracoin version</source>
-        <translation>बीट���ोइन  संस्करण</translation>
+        <translation>बीटकोइन  संस्करण</translation>
     </message>
     <message>
         <location line="+102"/>
