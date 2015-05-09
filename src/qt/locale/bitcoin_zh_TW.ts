@@ -2279,8 +2279,8 @@ Address: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9332 or testnet: 19332)</source>
-        <translation>在通訊埠 &lt;port&gt; 聽候 JSON-RPC 連線 (預設: 9332, 或若為測試網路: 19332)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 12341 or testnet: 19117)</source>
+        <translation>在通訊埠 &lt;port&gt; 聽候 JSON-RPC 連線 (預設: 12341, 或若為測試網路: 19117)</translation>
     </message>
     <message>
         <location line="+37"/>
@@ -2388,7 +2388,7 @@ alertnotify=echo %%s | mail -s &quot;Auroracoin Alert&quot; admin@foo.com
     <message>
         <location line="+3"/>
         <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Auroracoin will not work properly.</source>
-        <translation>警告: 請檢查電腦時間與日期是否正確! 莱特幣無法在時鐘不準的情況下正常運作.</translation>
+        <translation>警告: 請檢查電腦時間與�����期是否正確! 莱特幣無法在時鐘不準的情況下正常運作.</translation>
     </message>
     <message>
         <location line="+3"/>

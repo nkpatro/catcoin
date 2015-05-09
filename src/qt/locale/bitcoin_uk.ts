@@ -1414,7 +1414,7 @@ Address: %4
         <location line="+60"/>
         <location filename="../sendcoinsentry.cpp" line="+26"/>
         <source>Enter a label for this address to add it to your address book</source>
-        <translation>Введіть мітку для цієї адреси для додавання її в адресну книгу</translation>
+        <translation>Введіть мітку для цієї ад����еси для додавання її в адресну книгу</translation>
     </message>
     <message>
         <location line="-78"/>
@@ -2198,7 +2198,7 @@ Address: %4
     <message>
         <location line="-29"/>
         <source>Send command to -server or auroracoind</source>
-        <translation>Відправити команду серверу -server чи демону</translation>
+        <translation>Ві��п��авити команду серверу -server чи демону</translation>
     </message>
     <message>
         <location line="-23"/>
@@ -2272,8 +2272,8 @@ Address: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9332 or testnet: 19332)</source>
-        <translation>Прослуховувати &lt;port&gt; для JSON-RPC-з&apos;єднань (типово: 9332 або тестова мережа: 19332)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 12341 or testnet: 19117)</source>
+        <translation>Прослуховувати &lt;port&gt; для JSON-RPC-з&apos;єднань (типово: 12341 або тестова мережа: 19117)</translation>
     </message>
     <message>
         <location line="+37"/>

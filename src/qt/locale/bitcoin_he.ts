@@ -1466,7 +1466,7 @@ Address: %4
     <message>
         <location line="+6"/>
         <source>You can sign messages with your addresses to prove you own them. Be careful not to sign anything vague, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>אתה יכול לחתום על הודעות עם הכתובות שלך כדי להוכיח שהן בבעלותך. היזהר לא לחתום על משהו מעורפל, שכן התקפות פישינג עשויות לגרום לך בעורמה למסור את זהותך. חתום רק על אמרות מפורטות לחלוטין שאתה מסכים עימן.</translation>
+        <translation>אתה יכול לחתום על הודעות עם הכתובות שלך כדי להוכיח שהן בבעל����תך. היזהר לא לחתום על משהו מעורפל, שכן התקפות פישינג עשויות לגרום לך בעורמה למסור את זהותך. חתום רק על אמרות מפורטות לחלוטין שאתה מסכים עימן.</translation>
     </message>
     <message>
         <location line="+18"/>
@@ -2271,8 +2271,8 @@ Address: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9332 or testnet: 19332)</source>
-        <translation>האזן לחיבורי JSON-RPC ב- &lt;port&gt; (ברירת מחדל: 9332 או רשת בדיקה: 19332)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 12341 or testnet: 19117)</source>
+        <translation>האזן לחיבורי JSON-RPC ב- &lt;port&gt; (ברירת מחדל: 12341 או רשת בדיקה: 19117)</translation>
     </message>
     <message>
         <location line="+37"/>
@@ -2422,7 +2422,7 @@ rpcpassword=%s
     <message>
         <location line="+2"/>
         <source>Error initializing block database</source>
-        <translation>שגיאה באתחול מסד נתוני הבלוקים</translation>
+        <translation>��ג��אה באתחול מסד נתוני הבלוקים</translation>
     </message>
     <message>
         <location line="+1"/>

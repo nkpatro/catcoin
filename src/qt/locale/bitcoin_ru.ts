@@ -662,7 +662,7 @@ Address: %4
     <message>
         <location line="+17"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
-        <translation>Бумажник &lt;b&gt;зашифрован&lt;/b&gt; и в настоящее время &lt;b&gt;разблокирован&lt;/b&gt;</translation>
+        <translation>Бумажник &lt;b&gt;зашифрован&lt;/b&gt; и в настоящее ����ремя &lt;b&gt;разблокирован&lt;/b&gt;</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -1370,7 +1370,7 @@ Address: %4
     <message>
         <location line="+5"/>
         <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>Сумма превысит Ваш баланс, если комиссия в размере %1 будет добавлена к транзакции</translation>
+        <translation>Сумма превысит Ваш баланс, если комиссия в размере %1 будет ��обавлена к транзакции</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -2273,8 +2273,8 @@ Address: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9332 or testnet: 19332)</source>
-        <translation>Прослушивать подключения JSON-RPC на &lt;порту&gt; (по умолчанию: 9332 или для testnet: 19332)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 12341 or testnet: 19117)</source>
+        <translation>Прослушивать подключения JSON-RPC на &lt;порту&gt; (по умолчанию: 12341 или для testnet: 19117)</translation>
     </message>
     <message>
         <location line="+37"/>
@@ -2294,7 +2294,7 @@ Address: %4
     <message>
         <location line="-112"/>
         <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>
-        <translation>Принимать подключения извне (по умолчанию: 1, если не используется -proxy или -connect)</translation>
+        <translation>Принимать подключения изв��е (по умолчанию: 1, если не используется -proxy или -connect)</translation>
     </message>
     <message>
         <location line="-80"/>
@@ -2434,7 +2434,7 @@ rpcpassword=%s
     <message>
         <location line="+1"/>
         <source>Error loading block database</source>
-        <translation>Ошибка чтения базы данных блоков</translation>
+        <translation>Ошибка чтения базы д��нных блоков</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -2830,7 +2830,7 @@ rpcpassword=%s
     <message>
         <location line="-95"/>
         <source>Error loading wallet.dat</source>
-        <translation>Ошибка при загрузке wallet.dat</translation>
+        <translation>Ошибка при загрузк�� wallet.dat</translation>
     </message>
     <message>
         <location line="+28"/>
