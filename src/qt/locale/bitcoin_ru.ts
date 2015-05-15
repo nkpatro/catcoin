@@ -4,13 +4,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Litecoin</source>
-        <translation>&amp;О Litecoin</translation>
+        <source>About Auroracoin</source>
+        <translation>&amp;О Auroracoin</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Litecoin&lt;/b&gt; version</source>
-        <translation>&lt;b&gt;Litecoin&lt;/b&gt; версия</translation>
+        <source>&lt;b&gt;Auroracoin&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Auroracoin&lt;/b&gt; версия</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -34,8 +34,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+0"/>
-        <source>The Litecoin developers</source>
-        <translation>Разработчики Litecoin</translation>
+        <source>The Auroracoin developers</source>
+        <translation>Разработчики Auroracoin</translation>
     </message>
 </context>
 <context>
@@ -67,7 +67,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your Litecoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <source>These are your Auroracoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
         <translation>Это Ваши адреса для получения платежей. Вы можете дать разные адреса отправителям, чтобы отслеживать, кто именно вам платит.</translation>
     </message>
     <message>
@@ -82,8 +82,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Litecoin address</source>
-        <translation>Подписать сообщение, чтобы доказать владение адресом Litecoin</translation>
+        <source>Sign a message to prove you own a Auroracoin address</source>
+        <translation>Подписать сообщение, чтобы доказать владение адресом Auroracoin</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -107,8 +107,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified Litecoin address</source>
-        <translation>Проверить сообщение, чтобы убедиться, что оно было подписано указанным адресом Litecoin</translation>
+        <source>Verify a message to ensure it was signed with a specified Auroracoin address</source>
+        <translation>Проверить сообщение, чтобы убедиться, что оно было подписано указанным адресом Auroracoin</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -122,7 +122,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Auroracoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>Ваши адреса для получения средств. Совет: проверьте сумму и адрес назначения перед переводом.</translation>
     </message>
     <message>
@@ -248,8 +248,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+1"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
-        <translation>Внимание: если вы зашифруете бумажник и потеряете пароль, вы &lt;b&gt;ПОТЕРЯЕТЕ ВСЕ ВАШИ LITECOIN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR AURORACOINS&lt;/b&gt;!</source>
+        <translation>Внимание: если вы зашифруете бумажник и потеряете пароль, вы &lt;b&gt;ПОТЕРЯЕТЕ ВСЕ ВАШИ AURORACOIN&lt;/b&gt;!</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -275,8 +275,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-56"/>
-        <source>Litecoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your litecoins from being stolen by malware infecting your computer.</source>
-        <translation>Сейчас программа закроется для завершения процесса шифрования. Помните, что шифрование вашего бумажника не может полностью защитить ваши Litecoin от кражи с помощью инфицирования вашего компьютера вредоносным ПО.</translation>
+        <source>Auroracoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your auroracoins from being stolen by malware infecting your computer.</source>
+        <translation>Сейчас программа закроется для завершения процесса шифрования. Помните, что шифрование вашего бумажника не может полностью защитить ваши Auroracoin от кражи с помощью инфицирования вашего компьютера вредоносным ПО.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -374,8 +374,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about Litecoin</source>
-        <translation>Показать информацию о Litecoin&apos;е</translation>
+        <source>Show information about Auroracoin</source>
+        <translation>Показать информацию о Auroracoin&apos;е</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -419,13 +419,13 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a Litecoin address</source>
-        <translation>Отправить монеты на указанный адрес Litecoin</translation>
+        <source>Send coins to a Auroracoin address</source>
+        <translation>Отправить монеты на указанный адрес Auroracoin</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for Litecoin</source>
-        <translation>Изменить параметры конфигурации Litecoin</translation>
+        <source>Modify configuration options for Auroracoin</source>
+        <translation>Изменить параметры конфигурации Auroracoin</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -455,8 +455,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Auroracoin</source>
+        <translation>Auroracoin</translation>
     </message>
     <message>
         <location line="-530"/>
@@ -480,8 +480,8 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About Litecoin</source>
-        <translation>&amp;О Litecoin</translation>
+        <source>&amp;About Auroracoin</source>
+        <translation>&amp;О Auroracoin</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -500,13 +500,13 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
-        <translation>Подписать сообщения вашим адресом Litecoin, чтобы доказать, что вы им владеете</translation>
+        <source>Sign messages with your Auroracoin addresses to prove you own them</source>
+        <translation>Подписать сообщения вашим адресом Auroracoin, чтобы доказать, что вы им владеете</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
-        <translation>Проверить сообщения, чтобы удостовериться, что они были подписаны определённым адресом Litecoin</translation>
+        <source>Verify messages to ensure they were signed with specified Auroracoin addresses</source>
+        <translation>Проверить сообщения, чтобы удостовериться, что они были подписаны определённым адресом Auroracoin</translation>
     </message>
     <message>
         <location line="+28"/>
@@ -536,12 +536,12 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+47"/>
-        <source>Litecoin client</source>
-        <translation>Litecoin клиент</translation>
+        <source>Auroracoin client</source>
+        <translation>Auroracoin клиент</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to Litecoin network</source>
+        <source>%n active connection(s) to Auroracoin network</source>
         <translation><numerusform>%n активное соединение с сетью</numerusform><numerusform>%n активных соединений с сетью</numerusform><numerusform>%n активных соединений с сетью</numerusform></translation>
     </message>
     <message>
@@ -656,13 +656,13 @@ Address: %4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid Litecoin address or malformed URI parameters.</source>
-        <translation>Не удалось обработать URI! Это может быть связано с неверным адресом Litecoin или неправильными параметрами URI.</translation>
+        <source>URI can not be parsed! This can be caused by an invalid Auroracoin address or malformed URI parameters.</source>
+        <translation>Не удалось обработать URI! Это может быть связано с неверным адресом Auroracoin или неправильными параметрами URI.</translation>
     </message>
     <message>
         <location line="+17"/>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
-        <translation>Бумажник &lt;b&gt;зашифрован&lt;/b&gt; и в настоящее время &lt;b&gt;разблокирован&lt;/b&gt;</translation>
+        <translation>Бумажник &lt;b&gt;зашифрован&lt;/b&gt; и в настоящее ����ремя &lt;b&gt;разблокирован&lt;/b&gt;</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -671,8 +671,8 @@ Address: %4
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+111"/>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
-        <translation>Произошла неисправимая ошибка. Litecoin не может безопасно продолжать работу и будет закрыт.</translation>
+        <source>A fatal error occurred. Auroracoin can no longer continue safely and will quit.</source>
+        <translation>Произошла неисправимая ошибка. Auroracoin не может безопасно продолжать работу и будет закрыт.</translation>
     </message>
 </context>
 <context>
@@ -737,8 +737,8 @@ Address: %4
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Litecoin address.</source>
-        <translation>Введённый адрес &quot;%1&quot; не является правильным Litecoin-адресом.</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Auroracoin address.</source>
+        <translation>Введённый адрес &quot;%1&quot; не является правильным Auroracoin-адресом.</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -756,8 +756,8 @@ Address: %4
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>Litecoin-Qt</source>
-        <translation>Litecoin-Qt</translation>
+        <source>Auroracoin-Qt</source>
+        <translation>Auroracoin-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -819,13 +819,13 @@ Address: %4
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Litecoin after logging in to the system.</source>
-        <translation>Автоматически запускать Litecoin после входа в систему</translation>
+        <source>Automatically start Auroracoin after logging in to the system.</source>
+        <translation>Автоматически запускать Auroracoin после входа в систему</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Litecoin on system login</source>
-        <translation>&amp;Запускать Litecoin при входе в систему</translation>
+        <source>&amp;Start Auroracoin on system login</source>
+        <translation>&amp;Запускать Auroracoin при входе в систему</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -844,8 +844,8 @@ Address: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Автоматически открыть порт для Litecoin-клиента на роутере. Работает только если Ваш роутер поддерживает UPnP, и данная функция включена.</translation>
+        <source>Automatically open the Auroracoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Автоматически открыть порт для Auroracoin-клиента на роутере. Работает только если Ваш роутер поддерживает UPnP, и данная функция включена.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -854,8 +854,8 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Litecoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>Подключаться к сети Litecoin через прокси SOCKS (например, при подключении через Tor).</translation>
+        <source>Connect to the Auroracoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>Подключаться к сети Auroracoin через прокси SOCKS (например, при подключении через Tor).</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -929,8 +929,8 @@ Address: %4
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Litecoin.</source>
-        <translation>Здесь можно выбрать язык интерфейса. Настройки вступят в силу после перезапуска Litecoin.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Auroracoin.</source>
+        <translation>Здесь можно выбрать язык интерфейса. Настройки вступят в силу после перезапуска Auroracoin.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -944,8 +944,8 @@ Address: %4
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Litecoin addresses in the transaction list or not.</source>
-        <translation>Показывать ли адреса Litecoin в списке транзакций.</translation>
+        <source>Whether to show Auroracoin addresses in the transaction list or not.</source>
+        <translation>Показывать ли адреса Auroracoin в списке транзакций.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -996,8 +996,8 @@ Address: %4
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Litecoin.</source>
-        <translation>Эта настройка вступит в силу после перезапуска Litecoin</translation>
+        <source>This setting will take effect after restarting Auroracoin.</source>
+        <translation>Эта настройка вступит в силу после перезапуска Auroracoin</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1015,8 +1015,8 @@ Address: %4
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Отображаемая информация может быть устаревшей. Ваш бумажник автоматически синхронизируется с сетью Litecoin после подключения, но этот процесс пока не завершён.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Auroracoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Отображаемая информация может быть устаревшей. Ваш бумажник автоматически синхронизируется с сетью Auroracoin после подключения, но этот процесс пока не завершён.</translation>
     </message>
     <message>
         <location line="-124"/>
@@ -1069,8 +1069,8 @@ Address: %4
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start litecoin: click-to-pay handler</source>
-        <translation>Не удаётся запустить litecoin: обработчик click-to-pay</translation>
+        <source>Cannot start auroracoin: click-to-pay handler</source>
+        <translation>Не удаётся запустить auroracoin: обработчик click-to-pay</translation>
     </message>
 </context>
 <context>
@@ -1219,8 +1219,8 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the Litecoin-Qt help message to get a list with possible Litecoin command-line options.</source>
-        <translation>Показать помощь по Litecoin-Qt, чтобы получить список доступных параметров командной строки.</translation>
+        <source>Show the Auroracoin-Qt help message to get a list with possible Auroracoin command-line options.</source>
+        <translation>Показать помощь по Auroracoin-Qt, чтобы получить список доступных параметров командной строки.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1239,13 +1239,13 @@ Address: %4
     </message>
     <message>
         <location line="-104"/>
-        <source>Litecoin - Debug window</source>
-        <translation>Litecoin - Окно отладки</translation>
+        <source>Auroracoin - Debug window</source>
+        <translation>Auroracoin - Окно отладки</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>Litecoin Core</source>
-        <translation>Ядро Litecoin</translation>
+        <source>Auroracoin Core</source>
+        <translation>Ядро Auroracoin</translation>
     </message>
     <message>
         <location line="+279"/>
@@ -1254,8 +1254,8 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Litecoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Открыть отладочный лог-файл Litecoin из текущего каталога данных. Это может занять несколько секунд для больших лог-файлов.</translation>
+        <source>Open the Auroracoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Открыть отладочный лог-файл Auroracoin из текущего каталога данных. Это может занять несколько секунд для больших лог-файлов.</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -1264,8 +1264,8 @@ Address: %4
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the Litecoin RPC console.</source>
-        <translation>Добро пожаловать в RPC-консоль Litecoin.</translation>
+        <source>Welcome to the Auroracoin RPC console.</source>
+        <translation>Добро пожаловать в RPC-консоль Auroracoin.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1370,7 +1370,7 @@ Address: %4
     <message>
         <location line="+5"/>
         <source>The total exceeds your balance when the %1 transaction fee is included.</source>
-        <translation>Сумма превысит Ваш баланс, если комиссия в размере %1 будет добавлена к транзакции</translation>
+        <translation>Сумма превысит Ваш баланс, если комиссия в размере %1 будет ��обавлена к транзакции</translation>
     </message>
     <message>
         <location line="+6"/>
@@ -1385,7 +1385,7 @@ Address: %4
     <message>
         <location line="+5"/>
         <source>Error: The transaction was rejected. This might happen if some of the coins in your wallet were already spent, such as if you used a copy of wallet.dat and coins were spent in the copy but not marked as spent here.</source>
-        <translation>Ошибка: В транзакции отказано.  Такое может произойти, если некоторые монеты уже были потрачены, например, если Вы используете одну копию файла wallet.dat, а монеты были потрачены из другой копии, но не были отмечены как потраченные в этой.</translation>
+        <translation>Ошибка: В транзакции отказано.  Такое может произойти, если некоторые монеты уже были потрачены, например, если Вы используете одну копию файла wallet.dat, а монеты были потрачены из другой копии, но не были от��ечены как потраченные в этой.</translation>
     </message>
 </context>
 <context>
@@ -1448,8 +1448,8 @@ Address: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Litecoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>Введите Litecoin-адрес (например 1LA5FtQhnnWnkK6zjFfutR7Stiit4wKd63)</translation>
+        <source>Enter a Auroracoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>Введите Auroracoin-адрес (например 1LA5FtQhnnWnkK6zjFfutR7Stiit4wKd63)</translation>
     </message>
 </context>
 <context>
@@ -1513,8 +1513,8 @@ Address: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Litecoin address</source>
-        <translation>Подписать сообщение, чтобы доказать владение адресом Litecoin</translation>
+        <source>Sign the message to prove you own this Auroracoin address</source>
+        <translation>Подписать сообщение, чтобы доказать владение адресом Auroracoin</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1549,8 +1549,8 @@ Address: %4
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Litecoin address</source>
-        <translation>Проверить сообщение, чтобы убедиться, что оно было подписано указанным адресом Litecoin</translation>
+        <source>Verify the message to ensure it was signed with the specified Auroracoin address</source>
+        <translation>Проверить сообщение, чтобы убедиться, что оно было подписано указанным адресом Auroracoin</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1565,8 +1565,8 @@ Address: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Litecoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>Введите адрес Litecoin (напр. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>Enter a Auroracoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>Введите адрес Auroracoin (напр. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1575,8 +1575,8 @@ Address: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Litecoin signature</source>
-        <translation>Введите подпись Litecoin</translation>
+        <source>Enter Auroracoin signature</source>
+        <translation>Введите подпись Auroracoin</translation>
     </message>
     <message>
         <location line="+82"/>
@@ -1590,7 +1590,7 @@ Address: %4
         <location line="+73"/>
         <location line="+8"/>
         <source>Please check the address and try again.</source>
-        <translation>Пожалуйста, проверьте адрес и попробуйте ещё раз.</translation>
+        <translation>Пожалуйста, проверьте адре�� и попробуйте ещё раз.</translation>
     </message>
     <message>
         <location line="-81"/>
@@ -1649,8 +1649,8 @@ Address: %4
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The Litecoin developers</source>
-        <translation>Разработчики Litecoin</translation>
+        <source>The Auroracoin developers</source>
+        <translation>Разработчики Auroracoin</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1842,7 +1842,7 @@ Address: %4
     <message>
         <location line="+6"/>
         <source>This pane shows a detailed description of the transaction</source>
-        <translation>Данный диалог показывает детализированную статистику по выбранной транзакции</translation>
+        <translation>Данный диалог показывает детализирова��ную статистику по выбранной транзакции</translation>
     </message>
 </context>
 <context>
@@ -2119,12 +2119,12 @@ Address: %4
     <message>
         <location line="+0"/>
         <source>Could not write to file %1.</source>
-        <translation>Невозможно записать в файл %1.</translation>
+        <translation>Невозможно записа��ь в фай�� %1.</translation>
     </message>
     <message>
         <location line="+100"/>
         <source>Range:</source>
-        <translation>Промежуток от:</translation>
+        <translation>Промежуток ��т:</translation>
     </message>
     <message>
         <location line="+8"/>
@@ -2187,7 +2187,7 @@ Address: %4
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+94"/>
-        <source>Litecoin version</source>
+        <source>Auroracoin version</source>
         <translation>Версия</translation>
     </message>
     <message>
@@ -2197,8 +2197,8 @@ Address: %4
     </message>
     <message>
         <location line="-29"/>
-        <source>Send command to -server or litecoind</source>
-        <translation>Отправить команду на -server или litecoind</translation>
+        <source>Send command to -server or auroracoind</source>
+        <translation>Отправить команду на -server или auroracoind</translation>
     </message>
     <message>
         <location line="-23"/>
@@ -2218,13 +2218,13 @@ Address: %4
     </message>
     <message>
         <location line="+24"/>
-        <source>Specify configuration file (default: litecoin.conf)</source>
-        <translation>Указать конфигурационный файл (по умолчанию: litecoin.conf)</translation>
+        <source>Specify configuration file (default: auroracoin.conf)</source>
+        <translation>Указать конфигурационный файл (по умолчанию: auroracoin.conf)</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify pid file (default: litecoind.pid)</source>
-        <translation>Задать pid-файл (по умолчанию: litecoin.pid)</translation>
+        <source>Specify pid file (default: auroracoind.pid)</source>
+        <translation>Задать pid-файл (по умолчанию: auroracoin.pid)</translation>
     </message>
     <message>
         <location line="-1"/>
@@ -2238,8 +2238,8 @@ Address: %4
     </message>
     <message>
         <location line="-28"/>
-        <source>Listen for connections on &lt;port&gt; (default: 9333 or testnet: 19333)</source>
-        <translation>Принимать входящие подключения на &lt;port&gt; (по умолчанию: 9333 или 19333 в тестовой сети)</translation>
+        <source>Listen for connections on &lt;port&gt; (default: 12340 or testnet: 19117)</source>
+        <translation>Принимать входящие подключения на &lt;port&gt; (по умолчанию: 12340 или 19117 в тестовой сети)</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -2273,8 +2273,8 @@ Address: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9332 or testnet: 19332)</source>
-        <translation>Прослушивать подключения JSON-RPC на &lt;порту&gt; (по умолчанию: 9332 или для testnet: 19332)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 12341 or testnet: 19117)</source>
+        <translation>Прослушивать подключения JSON-RPC на &lt;порту&gt; (по умолчанию: 12341 или для testnet: 19117)</translation>
     </message>
     <message>
         <location line="+37"/>
@@ -2294,31 +2294,31 @@ Address: %4
     <message>
         <location line="-112"/>
         <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>
-        <translation>Принимать подключения извне (по умолчанию: 1, если не используется -proxy или -connect)</translation>
+        <translation>Принимать подключения изв��е (по умолчанию: 1, если не используется -proxy или -connect)</translation>
     </message>
     <message>
         <location line="-80"/>
         <source>%s, you must set a rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=litecoinrpc
+rpcuser=auroracoinrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Litecoin Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Auroracoin Alert&quot; admin@foo.com
 </source>
         <translation>%s, вы должны установить опцию rpcpassword в конфигурационном файле:
  %s
 Рекомендуется использовать следующий случайный пароль:
-rpcuser=litecoinrpc
+rpcuser=auroracoinrpc
 rpcpassword=%s
 (вам не нужно запоминать этот пароль)
 Имя и пароль ДОЛЖНЫ различаться.
 Если файл не существует, создайте его и установите права доступа только для владельца, только для чтения.
 Также рекомендуется включить alertnotify для оповещения о проблемах;
-Например: alertnotify=echo %%s | mail -s &quot;Litecoin Alert&quot; admin@foo.com
+Например: alertnotify=echo %%s | mail -s &quot;Auroracoin Alert&quot; admin@foo.com
 </translation>
     </message>
     <message>
@@ -2333,8 +2333,8 @@ rpcpassword=%s
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. Litecoin is probably already running.</source>
-        <translation>Не удаётся установить блокировку на каталог данных %s.  Возможно, Litecoin уже работает.</translation>
+        <source>Cannot obtain a lock on data directory %s. Auroracoin is probably already running.</source>
+        <translation>Не удаётся установить блокировку на каталог данных %s.  Возможно, Auroracoin уже работает.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2378,8 +2378,8 @@ rpcpassword=%s
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Litecoin will not work properly.</source>
-        <translation>Внимание: убедитесь, что дата и время на Вашем компьютере выставлены верно. Если Ваши часы идут неправильно, Litecoin будет работать некорректно.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Auroracoin will not work properly.</source>
+        <translation>Внимание: убедитесь, что дата и время на Вашем компьютере выставлены верно. Если Ваши часы идут неправильно, Auroracoin будет работать некорректно.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2434,7 +2434,7 @@ rpcpassword=%s
     <message>
         <location line="+1"/>
         <source>Error loading block database</source>
-        <translation>Ошибка чтения базы данных блоков</translation>
+        <translation>Ошибка чтения базы д��нных блоков</translation>
     </message>
     <message>
         <location line="+4"/>
@@ -2489,12 +2489,12 @@ rpcpassword=%s
     <message>
         <location line="+1"/>
         <source>Failed to write block</source>
-        <translation>Не удалось записать блок</translation>
+        <translation>Не удалось за��исать блок</translation>
     </message>
     <message>
         <location line="+1"/>
         <source>Failed to write file info</source>
-        <translation>Не удалось записать информацию файла</translation>
+        <translation>Не удалось записать ин��ормацию файла</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2628,9 +2628,9 @@ rpcpassword=%s
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the Litecoin Wiki for SSL setup instructions)</source>
+        <source>SSL options: (see the Auroracoin Wiki for SSL setup instructions)</source>
         <translation>
-Параметры SSL: (см. Litecoin Wiki для инструкций по настройке SSL)</translation>
+Параметры SSL: (см. Auroracoin Wiki для инструкций по настройке SSL)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2819,18 +2819,18 @@ rpcpassword=%s
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Litecoin</source>
-        <translation>Ошибка загрузки wallet.dat: бумажник требует более новую версию Litecoin</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Auroracoin</source>
+        <translation>Ошибка загрузки wallet.dat: бумажник требует более новую версию Auroracoin</translation>
     </message>
     <message>
         <location line="+93"/>
-        <source>Wallet needed to be rewritten: restart Litecoin to complete</source>
-        <translation>Необходимо перезаписать бумажник, перезапустите Litecoin для завершения операции.</translation>
+        <source>Wallet needed to be rewritten: restart Auroracoin to complete</source>
+        <translation>Необходимо перезаписать бумажник, перезапустите Auroracoin для завершения операции.</translation>
     </message>
     <message>
         <location line="-95"/>
         <source>Error loading wallet.dat</source>
-        <translation>Ошибка при загрузке wallet.dat</translation>
+        <translation>Ошибка при загрузк�� wallet.dat</translation>
     </message>
     <message>
         <location line="+28"/>
@@ -2884,8 +2884,8 @@ rpcpassword=%s
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. Litecoin is probably already running.</source>
-        <translation>Невозможно привязаться к %s на этом компьютере.  Возможно, Litecoin уже работает.</translation>
+        <source>Unable to bind to %s on this computer. Auroracoin is probably already running.</source>
+        <translation>Невозможно привязаться к %s на этом компьютере.  Возможно, Auroracoin уже работает.</translation>
     </message>
     <message>
         <location line="+64"/>

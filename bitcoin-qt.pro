@@ -1,6 +1,6 @@
 TEMPLATE = app
-TARGET = litecoin-qt
-macx:TARGET = "Litecoin-Qt"
+TARGET = auroracoin-qt
+macx:TARGET = "Auroracoin-Qt"
 VERSION = 0.8.7.5
 INCLUDEPATH += src src/json src/qt
 QT += core gui network
@@ -319,7 +319,7 @@ SOURCES += src/qt/test/test_main.cpp \
 HEADERS += src/qt/test/uritests.h
 DEPENDPATH += src/qt/test
 QT += testlib
-TARGET = litecoin-qt_test
+TARGET = auroracoin-qt_test
 DEFINES += BITCOIN_QT_TEST
   macx: CONFIG -= app_bundle
 }
@@ -367,11 +367,12 @@ OTHER_FILES += README.md \
 # platform specific defaults, if not overridden on command line
 isEmpty(BOOST_LIB_SUFFIX) {
     macx:BOOST_LIB_SUFFIX = -mt
-    win32:BOOST_LIB_SUFFIX = -mgw44-mt-s-1_50
+    win32:BOOST_LIB_SUFFIX = -mt
 }
 
 isEmpty(BOOST_THREAD_LIB_SUFFIX) {
     BOOST_THREAD_LIB_SUFFIX = $$BOOST_LIB_SUFFIX
+    win32:BOOST_THREAD_LIB_SUFFIX = _win32-mt
 }
 
 isEmpty(BDB_LIB_PATH) {
@@ -419,7 +420,7 @@ macx:HEADERS += src/qt/macdockiconhandler.h src/qt/macnotificationhandler.h
 macx:OBJECTIVE_SOURCES += src/qt/macdockiconhandler.mm src/qt/macnotificationhandler.mm
 macx:LIBS += -framework Foundation -framework ApplicationServices -framework AppKit -framework CoreServices
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
-macx:ICON = src/qt/res/icons/litecoin.icns
+macx:ICON = src/qt/res/icons/auroracoin.icns
 macx:QMAKE_CFLAGS_THREAD += -pthread
 macx:QMAKE_LFLAGS_THREAD += -pthread
 macx:QMAKE_CXXFLAGS_THREAD += -pthread
