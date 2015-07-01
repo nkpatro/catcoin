@@ -55,7 +55,8 @@ lots of money.
 
 Large changes should have a test plan, and should be tested by somebody other
 than the developer who wrote the code.
-See https://github.com/bitcoin/QA/ for how to create a test plan.
+See the litecion discussion forum for informaion on how to create a test plan.
+https://litecointalk.org/index.php?PHPSESSID=cetipe60buk34g5pmcm825i8l7&board=2.0
 
 Translations
 ------------
