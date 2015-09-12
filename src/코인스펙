@@ -1,0 +1,44 @@
+코인스펙
+
+
+전체 발행량 : 10억코인 (프리마이닝 + 블럭당 생성코인)
+코인단위 : COIN     (LTC -> COIN)
+블록생성타임 : 1분
+컨펌 3컨펌 이상이면 사용가능
+수수료 : 0
+시드서버 표시 필요없음
+
+합의 알고리즘: PoW, PoS, MPoS
+
+제네시스블록
+
+
+python genesis.py -z "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks"  -t 1231006505
+
+
+// 블럭 리워드 값
+
+main.cpp(1245) - GetBlockValue()
+
+
+// p2p 연결 포트 변경
+
+chainpararms.cpp(119,205)
+
+// rpc 포트 변경
+
+chainparamsbase.cpp(25, 39)
+
+// 송금 가능 블럭 설정
+
+main.h(76) COINBASE_MATURITY = 100 // 
+
+
+// 최대 송금 가능액
+amount.h(20), MAX_MONEY
+
+
+// 기본 트랜잭션 비용
+main.h(103), DEFAULT_TX_FEE = 100000; // 0.01 LTC
+
+
