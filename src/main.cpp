@@ -3495,7 +3495,7 @@ bool static AlreadyHave(const CInv& inv)
     return true;
 }
 
-
+// Block Manager
 void static ProcessGetData(CNode* pfrom)
 {
     std::deque<CInv>::iterator it = pfrom->vRecvGetData.begin();
