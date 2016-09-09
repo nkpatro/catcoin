@@ -8,4 +8,3 @@ Type=Application
 Icon=litecoin128
 MimeType=x-scheme-handler/litecoin;
 Categories=Office;Finance;
-Name[en_US]=litecoin-qt.desktop
