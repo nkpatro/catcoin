@@ -41,7 +41,7 @@ class MempoolCoinbaseTest(BitcoinTestFramework):
 
         # Mine three blocks. After this, nodes[0] blocks
         # 101, 102, and 103 are spend-able.
-        new_blocks = self.nodes[1].setgenerate(True, 4)
+        new_blocks = self.nodes[1].setgenerate(True, 5)
         self.sync_all()
 
         node0_address = self.nodes[0].getnewaddress()
