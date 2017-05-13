@@ -188,6 +188,12 @@ AC_ARG_ENABLE([zmq],
   [use_zmq=$enableval],
   [use_zmq=yes])
 
+AC_ARG_ENABLE([sse2],
+  [AS_HELP_STRING([--enable-sse2],
+  [enable SSE2 instructions in the scrypt library. (default is disabled)])],
+  [use_sse2=$enableval],
+  [use_sse2=no])
+
 AC_ARG_WITH([protoc-bindir],[AS_HELP_STRING([--with-protoc-bindir=BIN_DIR],[specify protoc bin path])], [protoc_bin_path=$withval], [])
 
 # Enable debug
@@ -1025,6 +1031,16 @@ else
   AC_MSG_RESULT([no])
 fi
 
+AC_MSG_CHECKING([whether to enable sse2 instructions])
+if test x$use_sse2 != xno; then
+  AC_MSG_RESULT(yes)
+  AC_DEFINE([USE_SSE2],[1],[Define if SSE2 support should be compiled in])
+  use_sse2=yes
+  CPPFLAGS="$CPPFLAGS -DUSE_SSE2=1"
+else
+  AC_MSG_RESULT(no)
+fi
+
 if test x$build_bitcoin_utils$build_bitcoin_libs$build_bitcoind$bitcoin_enable_qt$use_bench$use_tests = xnononononono; then
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-utils --with-libs --with-daemon --with-gui --enable-bench or --enable-tests])
 fi
@@ -1038,6 +1054,7 @@ AM_CONDITIONAL([ENABLE_QT],[test x$bitcoin_enable_qt = xyes])
 AM_CONDITIONAL([ENABLE_QT_TESTS],[test x$BUILD_TEST_QT = xyes])
 AM_CONDITIONAL([ENABLE_BENCH],[test x$use_bench = xyes])
 AM_CONDITIONAL([USE_QRCODE], [test x$use_qr = xyes])
+AM_CONDITIONAL([USE_SSE2], [test x$use_sse2 = xyes])
 AM_CONDITIONAL([USE_LCOV],[test x$use_lcov = xyes])
 AM_CONDITIONAL([USE_COMPARISON_TOOL],[test x$use_comparison_tool != xno])
 AM_CONDITIONAL([USE_COMPARISON_TOOL_REORG_TESTS],[test x$use_comparison_tool_reorg_test != xno])
@@ -1077,6 +1094,7 @@ AC_SUBST(PIE_FLAGS)
 AC_SUBST(LIBTOOL_APP_LDFLAGS)
 AC_SUBST(USE_UPNP)
 AC_SUBST(USE_QRCODE)
+AC_SUBST(USE_SSE2)
 AC_SUBST(BOOST_LIBS)
 AC_SUBST(TESTDEFS)
 AC_SUBST(LEVELDB_TARGET_FLAGS)
