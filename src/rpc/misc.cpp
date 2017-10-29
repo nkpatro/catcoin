@@ -32,6 +32,7 @@
 #include <malloc.h>
 #endif
 
+#include <boost/thread/thread.hpp> // boost::thread::interrupt
 #include <univalue.h>
 
 /**
