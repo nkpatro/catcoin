@@ -9,6 +9,7 @@
 #include "primitives/transaction.h"
 #include "serialize.h"
 #include "uint256.h"
+#include <iostream>
 
 /** Nodes collect new transactions into a block, hash them into a hash tree,
  * and scan through nonce values to make the block's hash satisfy proof-of-work
@@ -27,6 +28,8 @@ public:
     uint32_t nTime;
     uint32_t nBits;
     uint32_t nNonce;
+    uint128 hashMix;
+    int32_t height;
 
     CBlockHeader()
     {
@@ -37,12 +40,16 @@ public:
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action) {
-        READWRITE(this->nVersion);
+        READWRITE(this->nVersion);;
         READWRITE(hashPrevBlock);
         READWRITE(hashMerkleRoot);
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
+        if(this->nVersion & 0x00000100) {
+            READWRITE(hashMix);
+            READWRITE(height);
+        }
     }
 
     void SetNull()
@@ -53,6 +60,8 @@ public:
         nTime = 0;
         nBits = 0;
         nNonce = 0;
+        hashMix.SetNull();
+        height = 0;
     }
 
     bool IsNull() const
@@ -115,6 +124,8 @@ public:
         block.nTime          = nTime;
         block.nBits          = nBits;
         block.nNonce         = nNonce;
+        block.hashMix        = hashMix;
+        block.height         = height;
         return block;
     }
 

@@ -32,7 +32,7 @@
 #include "validationinterface.h"
 
 #if defined(NDEBUG)
-# error "Litecoin cannot be compiled without assertions."
+# error "Chancoin cannot be compiled without assertions."
 #endif
 
 std::atomic<int64_t> nTimeBestReceived(0); // Used only to inform the wallet of when we last received a block
@@ -1384,10 +1384,11 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         AddTimeData(pfrom->addr, nTimeOffset);
 
         // If the peer is old enough to have the old alert system, send it the final alert.
-        if (pfrom->nVersion <= 70012) {
+        /*if (pfrom->nVersion <= 70012) {
             CDataStream finalAlert(ParseHex("5c0100000015f7675900000000ffffff7f00000000ffffff7ffeffff7f0000000000ffffff7f00ffffff7f002f555247454e543a20416c657274206b657920636f6d70726f6d697365642c2075706772616465207265717569726564004630440220405f7e7572b176f3316d4e12deab75ad4ff978844f7a7bcd5ed06f6aa094eb6602207880fcc07d0a78e0f46f188d115e04ed4ad48980ea3572cb0e0cb97921048095"), SER_NETWORK, PROTOCOL_VERSION);
             connman.PushMessage(pfrom, CNetMsgMaker(nSendVersion).Make("alert", finalAlert));
-        }
+        }*/
+        //Reimplement this, resigned with Chancoin alert key
 
         // Feeler connections exist only to verify if address is online.
         if (pfrom->fFeeler) {
@@ -2291,6 +2292,14 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
 
         uint256 hashLastBlock;
         for (const CBlockHeader& header : headers) {
+            std::cout << "Header of clblock: " << std::endl
+                      << "Version: " << header.nVersion << std::endl
+                      << "Merkle root: " << header.hashMerkleRoot.ToString() << std::endl
+                      << "Prevhash: " << header.hashPrevBlock.ToString() << std::endl
+                      << "Ntime: " << header.nTime << std::endl
+                      << "Nonce: " << header.nNonce << std::endl
+                      << "Mixhash: " << header.hashMix.ToString() << std::endl
+                      << "clheight: " << header.height << std::endl;
             if (!hashLastBlock.IsNull() && header.hashPrevBlock != hashLastBlock) {
                 Misbehaving(pfrom->GetId(), 20);
                 return error("non-continuous headers sequence");
