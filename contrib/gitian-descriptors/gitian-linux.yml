@@ -1,5 +1,5 @@
 ---
-name: "allar-linux-0.15"
+name: "dallar-linux-0.15"
 enable_cache: true
 suites:
 - "trusty"
