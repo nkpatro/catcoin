@@ -1,5 +1,5 @@
 ---
-name: "litecoin-linux-0.15"
+name: "dallar-linux-0.15"
 enable_cache: true
 suites:
 - "trusty"
@@ -28,8 +28,8 @@ packages:
 - "ca-certificates"
 - "python"
 remotes:
-- "url": "https://github.com/litecoin-project/litecoin.git"
-  "dir": "litecoin"
+- "url": "https://github.com/allar/dallar.git"
+  "dir": "dallar"
 files: []
 script: |
 
@@ -113,7 +113,7 @@ script: |
   chmod +x ${WRAP_DIR}/${prog}
   done
 
-  cd litecoin
+  cd dallar
   BASEPREFIX=`pwd`/depends
   # Build dependencies for each host
   for i in $HOSTS; do
@@ -135,7 +135,7 @@ script: |
   ./autogen.sh
   CONFIG_SITE=${BASEPREFIX}/`echo "${HOSTS}" | awk '{print $1;}'`/share/config.site ./configure --prefix=/
   make dist
-  SOURCEDIST=`echo litecoin-*.tar.gz`
+  SOURCEDIST=`echo dallar-*.tar.gz`
   DISTNAME=`echo ${SOURCEDIST} | sed 's/.tar.*//'`
   # Correct tar file order
   mkdir -p temp
