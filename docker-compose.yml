@@ -5,7 +5,7 @@ services:
         container_name: veercoin
         hostname: veercoin
         volumes:
-            - .:/root
+            - .:/root/veercoin
         working_dir: /root
         network_mode: bridge
         command: tail -f /dev/null

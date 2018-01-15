@@ -18,3 +18,5 @@ RUN apt-get install -y libdb4.8-dev libdb4.8++-dev libminiupnpc-dev libzmq3-dev
 RUN apt-get install -y libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev \
                        qttools5-dev-tools libprotobuf-dev protobuf-compiler \
                        libqrencode-dev
+
+RUN mkdir -p /root/veercoin
