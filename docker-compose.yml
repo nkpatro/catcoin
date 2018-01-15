@@ -1,0 +1,11 @@
+version: '3'
+services:
+    veercoin:
+        image: veercoin-build
+        container_name: veercoin
+        hostname: veercoin
+        volumes:
+            - .:/root/veercoin
+        working_dir: /root
+        network_mode: bridge
+        command: tail -f /dev/null
