@@ -124,11 +124,11 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0x3b9aadf15f78bbc20bf898a9ec963366a986de9164e2aa7d92cc1fd5dab5454d"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-        vSeeds.emplace_back("seed-a.khmerriel.loshan.co.uk", true);
-        vSeeds.emplace_back("dnsseed.thrasher.io", true);
-        vSeeds.emplace_back("dnsseed.khmerrieltools.com", true);
-        vSeeds.emplace_back("dnsseed.khmerrielpool.org", true);
-        vSeeds.emplace_back("dnsseed.koin-project.com", false);
+        vSeeds.emplace_back("dns.khmergroup.com", true);
+//        vSeeds.emplace_back("dnsseed.thrasher.io", true);
+//        vSeeds.emplace_back("dnsseed.khmerrieltools.com", true);
+//        vSeeds.emplace_back("dnsseed.khmerrielpool.org", true);
+//        vSeeds.emplace_back("dnsseed.koin-project.com", false);
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,20);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -145,7 +145,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             {
-                {  1500, uint256S("0x841a2965955dd288cfa707a755d05a54e45f8bd476835ec9af4402a2b59a2967")},
+/*                {  1500, uint256S("0x841a2965955dd288cfa707a755d05a54e45f8bd476835ec9af4402a2b59a2967")},
                 {  4032, uint256S("0x9ce90e427198fc0ef05e5905ce3503725b80e26afd35a987965fd7e3d9cf0846")},
                 {  8064, uint256S("0xeb984353fc5190f210651f150c40b8a4bab9eeeff0b729fcb3987da694430d70")},
                 { 16128, uint256S("0x602edf1859b7f9a6af809f1d9b0e6cb66fdc1d4d9dcd7a4bec03e12a1ccd153d")},
@@ -161,6 +161,8 @@ public:
                 {456000, uint256S("0xbf34f71cc6366cd487930d06be22f897e34ca6a40501ac7d401be32456372004")},
                 {638902, uint256S("0x15238656e8ec63d28de29a8c75fcf3a5819afc953dcd9cc45cecc53baec74f38")},
                 {721000, uint256S("0x198a7b4de1df9478e2463bd99d75b714eab235a2e63e741641dc8a759a9840e5")},
+*/
+
             }
         };
 
