@@ -263,6 +263,7 @@ user can use the sudo command. Type/paste the following in the terminal:
 ```bash
 apt-get install git ruby sudo apt-cacher-ng qemu-utils debootstrap lxc python-cheetah parted kpartx bridge-utils make ubuntu-archive-keyring curl
 adduser debian sudo
+echo 'debian  ALL=(ALL:ALL) ALL' >> /etc/sudoers
 ```
 
 Then set up LXC and the rest with the following, which is a complex jumble of settings and workarounds:
