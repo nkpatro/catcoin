@@ -119,10 +119,10 @@ public:
         nDefaultPort = 9333;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1317972665, 2084524493, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1523779372, 2086250171, 0x1e0ffff0, 1, 50 * COIN); // Updated
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x12a765e31ffd4059bada1e25190f6e98c99d9714d334efa41a195a7e7e04bfe2"));
-        assert(genesis.hashMerkleRoot == uint256S("0x97ddfbbae6be97fd6cdf3e7ca13232a3afff2353e29badfab7f73011edd4ced9"));
+        assert(consensus.hashGenesisBlock == uint256S("0x79f3b52eb3fc5361bc61327541199d9671b9e0f1748feb396f4e317465b5c5e0")); // Updated
+        assert(genesis.hashMerkleRoot == uint256S("0x99652d048027ac252d71ed5f18fa0cc0badaa2e6e08d66309ec2de89109804c5")); // Updated
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.emplace_back("seed-a.flamecoin.loshan.co.uk");
