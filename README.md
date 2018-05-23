@@ -1,9 +1,7 @@
 Infcoin Core integration/staging tree
 =====================================
 
-[![Build Status](https://travis-ci.org/infcoin-project/infcoin.svg?branch=master)](https://travis-ci.org/infcoin-project/infcoin)
-
-https://infcoin.org
+http://cryptosoftwares.com/
 
 What is Infcoin?
 ----------------
