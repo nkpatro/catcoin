@@ -4,7 +4,7 @@ Hypercoin integration/staging tree
 http://www.hyper-coin.co
 
 Copyright (c) 2009-2014 Bitcoin Developers
-Copyright (c) 2011-2014 Litecoin Developers
+Copyright (c) 2011-2014 Hypercoin Developers
 Copyright (c) 2017-2018 Hypercoin Developers
 
 What is Hypercoin?
