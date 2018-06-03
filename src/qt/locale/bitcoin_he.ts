@@ -4,12 +4,12 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Litecoin</source>
+        <source>About Hypercoin</source>
         <translation>אודות לייטקוין</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Litecoin&lt;/b&gt; version</source>
+        <source>&lt;b&gt;Hypercoin&lt;/b&gt; version</source>
         <translation>גרסת &lt;b&gt;לייטקוין&lt;/b&gt;</translation>
     </message>
     <message>
@@ -34,7 +34,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+0"/>
-        <source>The Litecoin developers</source>
+        <source>The Hypercoin developers</source>
         <translation type="unfinished"/>
     </message>
 </context>
@@ -67,7 +67,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your Litecoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <source>These are your Hypercoin addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
         <translation>אלה כתובת הלייטקוין שלך עבור קבלת תשלומים. ייתכן ותרצה לתת כתובת שונה לכל שולח כדי שתוכל לעקוב אחר מי משלם לך.</translation>
     </message>
     <message>
@@ -82,7 +82,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Litecoin address</source>
+        <source>Sign a message to prove you own a Hypercoin address</source>
         <translation>חתום על הודעה בכדי להוכיח כי אתה הבעלים של כתובת לייטקוין.</translation>
     </message>
     <message>
@@ -107,7 +107,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified Litecoin address</source>
+        <source>Verify a message to ensure it was signed with a specified Hypercoin address</source>
         <translation>אמת הודעה בכדי להבטיח שהיא נחתמה עם כתובת לייטקוין מסוימת.</translation>
     </message>
     <message>
@@ -122,7 +122,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Hypercoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>אלה כתובת הלייטקוין שלך עבור שליחת תשלומים. תמיד בדוק את מספר ואת כתובות מקבלי התשלומים לפני שליחת מטבעות.</translation>
     </message>
     <message>
@@ -248,7 +248,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+1"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR HYPERCOINS&lt;/b&gt;!</source>
         <translation>אזהרה: אם אתה מצפין את הארנק ומאבד את הסיסמא, אתה &lt;b&gt;תאבד את כל הלייטקוינים שלך&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -275,7 +275,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-56"/>
-        <source>Litecoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your litecoins from being stolen by malware infecting your computer.</source>
+        <source>Hypercoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your hypercoins from being stolen by malware infecting your computer.</source>
         <translation>לייטקוין ייסגר עכשיו כדי להשלים את תהליך ההצפנה. זכור שהצפנת הארנק שלך אינו יכול להגן באופן מלא על הלייטקוינים שלך מתוכנות זדוניות המושתלות על המחשב.</translation>
     </message>
     <message>
@@ -374,7 +374,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about Litecoin</source>
+        <source>Show information about Hypercoin</source>
         <translation>הצג מידע על לייטקוין</translation>
     </message>
     <message>
@@ -419,12 +419,12 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a Litecoin address</source>
+        <source>Send coins to a Hypercoin address</source>
         <translation>שלח מטבעות לכתובת לייטקוין</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for Litecoin</source>
+        <source>Modify configuration options for Hypercoin</source>
         <translation>שנה אפשרויות תצורה עבור לייטקוין</translation>
     </message>
     <message>
@@ -455,7 +455,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>Litecoin</source>
+        <source>Hypercoin</source>
         <translation>לייטקוין</translation>
     </message>
     <message>
@@ -480,7 +480,7 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About Litecoin</source>
+        <source>&amp;About Hypercoin</source>
         <translation>אודות לייטקוין</translation>
     </message>
     <message>
@@ -500,12 +500,12 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
+        <source>Sign messages with your Hypercoin addresses to prove you own them</source>
         <translation>חתום על הודעות עם כתובות הלייטקוין שלך כדי להוכיח שהן בבעלותך</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
+        <source>Verify messages to ensure they were signed with specified Hypercoin addresses</source>
         <translation>אמת הודעות כדי להבטיח שהן נחתמו עם כתובת לייטקוין מסוימות</translation>
     </message>
     <message>
@@ -536,12 +536,12 @@ This product includes software developed by the OpenSSL Project for use in the O
     </message>
     <message>
         <location line="+47"/>
-        <source>Litecoin client</source>
+        <source>Hypercoin client</source>
         <translation>תוכנת לייטקוין</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to Litecoin network</source>
+        <source>%n active connection(s) to Hypercoin network</source>
         <translation><numerusform>חיבור פעיל אחד לרשת הלייטקוין</numerusform><numerusform>%n חיבורים פעילים לרשת הלייטקוין</numerusform></translation>
     </message>
     <message>
@@ -655,7 +655,7 @@ Address: %4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid Litecoin address or malformed URI parameters.</source>
+        <source>URI can not be parsed! This can be caused by an invalid Hypercoin address or malformed URI parameters.</source>
         <translation>לא ניתן לנתח URI! זה יכול להיגרם כתוצאה מכתובת לייטקוין לא תקינה או פרמטרי URI חסרי צורה תקינה.</translation>
     </message>
     <message>
@@ -670,7 +670,7 @@ Address: %4
     </message>
     <message>
         <location filename="../bitcoin.cpp" line="+111"/>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
+        <source>A fatal error occurred. Hypercoin can no longer continue safely and will quit.</source>
         <translation>שגיאה סופנית אירעה. לייטקוין אינו יכול להמשיך לפעול בבטחה ולכן ייסגר.</translation>
     </message>
 </context>
@@ -736,7 +736,7 @@ Address: %4
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Litecoin address.</source>
+        <source>The entered address &quot;%1&quot; is not a valid Hypercoin address.</source>
         <translation>הכתובת שהוכנסה &quot;%1&quot; אינה כתובת לייטקוין תקינה.</translation>
     </message>
     <message>
@@ -755,8 +755,8 @@ Address: %4
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>Litecoin-Qt</source>
-        <translation>Litecoin-Qt</translation>
+        <source>Hypercoin-Qt</source>
+        <translation>Hypercoin-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -818,12 +818,12 @@ Address: %4
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Litecoin after logging in to the system.</source>
+        <source>Automatically start Hypercoin after logging in to the system.</source>
         <translation>הפעל את לייטקוין באופן עצמאי לאחר התחברות למערכת.</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Litecoin on system login</source>
+        <source>&amp;Start Hypercoin on system login</source>
         <translation>התחל את לייטקוין בעת התחברות למערכת</translation>
     </message>
     <message>
@@ -843,7 +843,7 @@ Address: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the Hypercoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>פתח את פורט לייטקוין בנתב באופן אוטומטי. עובד רק אם UPnP מאופשר ונתמך ע&quot;י הנתב.</translation>
     </message>
     <message>
@@ -853,7 +853,7 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Litecoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <source>Connect to the Hypercoin network through a SOCKS proxy (e.g. when connecting through Tor).</source>
         <translation>התחבר לרשת הלייטקוין דרך פרוקסי SOCKS (למשל בעת התחברות דרך Tor).</translation>
     </message>
     <message>
@@ -928,7 +928,7 @@ Address: %4
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Litecoin.</source>
+        <source>The user interface language can be set here. This setting will take effect after restarting Hypercoin.</source>
         <translation>ניתן לקבוע כאן את שפת ממשק המשתמש. הגדרה זו תחול לאחר הפעלה מחדש של לייטקוין.</translation>
     </message>
     <message>
@@ -943,7 +943,7 @@ Address: %4
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Litecoin addresses in the transaction list or not.</source>
+        <source>Whether to show Hypercoin addresses in the transaction list or not.</source>
         <translation>האם להציג כתובות לייטקוין ברשימת הפעולות או לא.</translation>
     </message>
     <message>
@@ -995,7 +995,7 @@ Address: %4
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Litecoin.</source>
+        <source>This setting will take effect after restarting Hypercoin.</source>
         <translation>הגדרה זו תחול לאחר הפעלה מחדש של לייטקוין.</translation>
     </message>
     <message>
@@ -1014,7 +1014,7 @@ Address: %4
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</source>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Hypercoin network after a connection is established, but this process has not completed yet.</source>
         <translation>המידע המוצג עשוי להיות מיושן. הארנק שלך מסתנכרן באופן אוטומטי עם רשת הלייטקוין לאחר כינון חיבור, אך התהליך טרם הסתיים.</translation>
     </message>
     <message>
@@ -1068,7 +1068,7 @@ Address: %4
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start litecoin: click-to-pay handler</source>
+        <source>Cannot start hypercoin: click-to-pay handler</source>
         <translation>לא ניתן להתחיל את לייטקוין: מפעיל לחץ-לתשלום </translation>
     </message>
 </context>
@@ -1218,8 +1218,8 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the Litecoin-Qt help message to get a list with possible Litecoin command-line options.</source>
-        <translation>הצג את הודעה העזרה של litecoin-qt כדי לקבל רשימה של אפשרויות שורת פקודה של לייטקוין.</translation>
+        <source>Show the Hypercoin-Qt help message to get a list with possible Hypercoin command-line options.</source>
+        <translation>הצג את הודעה העזרה של hypercoin-qt כדי לקבל רשימה של אפשרויות שורת פקודה של לייטקוין.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1238,12 +1238,12 @@ Address: %4
     </message>
     <message>
         <location line="-104"/>
-        <source>Litecoin - Debug window</source>
+        <source>Hypercoin - Debug window</source>
         <translation>לייטקוין - חלון ניפוי</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>Litecoin Core</source>
+        <source>Hypercoin Core</source>
         <translation>ליבת לייטקוין</translation>
     </message>
     <message>
@@ -1253,7 +1253,7 @@ Address: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Litecoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <source>Open the Hypercoin debug log file from the current data directory. This can take a few seconds for large log files.</source>
         <translation>פתח את קובץ יומן הניפוי מתיקיית הנתונים הנוכחית. זה עשוי לקחת מספר שניות עבור קובצי יומן גדולים.</translation>
     </message>
     <message>
@@ -1263,7 +1263,7 @@ Address: %4
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the Litecoin RPC console.</source>
+        <source>Welcome to the Hypercoin RPC console.</source>
         <translation>ברוכים הבאים ללוח בקרת RPC של לייטקוין</translation>
     </message>
     <message>
@@ -1406,8 +1406,8 @@ Address: %4
     </message>
     <message>
         <location line="+34"/>
-        <source>The address to send the payment to (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>הכתובת שאליה ישלח התשלום (למשל Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>The address to send the payment to (e.g. Her4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>הכתובת שאליה ישלח התשלום (למשל Her4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
     <message>
         <location line="+60"/>
@@ -1447,8 +1447,8 @@ Address: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Litecoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>הכנס כתובת לייטקוין (למשל Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>Enter a Hypercoin address (e.g. Her4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>הכנס כתובת לייטקוין (למשל Her4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
 </context>
 <context>
@@ -1470,8 +1470,8 @@ Address: %4
     </message>
     <message>
         <location line="+18"/>
-        <source>The address to sign the message with (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>הכתובת איתה לחתום על ההודעה (למשל Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>The address to sign the message with (e.g. Her4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>הכתובת איתה לחתום על ההודעה (למשל Her4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -1512,7 +1512,7 @@ Address: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Litecoin address</source>
+        <source>Sign the message to prove you own this Hypercoin address</source>
         <translation>חתום על ההודעה כדי להוכיח שכתובת הלייטקוין הזו בבעלותך.</translation>
     </message>
     <message>
@@ -1543,12 +1543,12 @@ Address: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>The address the message was signed with (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>הכתובת איתה ההודעה נחתמה (למשל Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>The address the message was signed with (e.g. Her4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>הכתובת איתה ההודעה נחתמה (למשל Her4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Litecoin address</source>
+        <source>Verify the message to ensure it was signed with the specified Hypercoin address</source>
         <translation>אמת את ההודעה כדי להבטיח שהיא נחתמה עם כתובת הלייטקוין הנתונה</translation>
     </message>
     <message>
@@ -1564,8 +1564,8 @@ Address: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Litecoin address (e.g. Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
-        <translation>הכנס כתובת לייטקוין (למשל Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
+        <source>Enter a Hypercoin address (e.g. Her4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</source>
+        <translation>הכנס כתובת לייטקוין (למשל Her4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1574,7 +1574,7 @@ Address: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Litecoin signature</source>
+        <source>Enter Hypercoin signature</source>
         <translation>הכנס חתימת לייטקוין</translation>
     </message>
     <message>
@@ -1648,7 +1648,7 @@ Address: %4
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The Litecoin developers</source>
+        <source>The Hypercoin developers</source>
         <translation type="unfinished"/>
     </message>
     <message>
@@ -1782,8 +1782,8 @@ Address: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Generated coins must mature 120 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation>מטבעות שנוצרים חייבים להבשיל למשך 120 בלוקים לפני שניתן לנצל אותם. כשיצרת את הבלוק הזה, הוא הופץ לרשת כדי להתווסף לשרשרת הבלוקים. אם הוא אינו מצליח לביע לשרשרת, המצב שלו ישתנה ל&quot;לא התקבל&quot; ולא ניתן יהיה לנצל אותו. זה עשוי לקרות מעת לעת אם צומת אחר יוצר בלוק בטווח של מספר שניות מהבלוק שלך.</translation>
+        <source>Generated coins must mature 20 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to &quot;not accepted&quot; and it won&apos;t be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
+        <translation>מטבעות שנוצרים חייבים להבשיל למשך 20 בלוקים לפני שניתן לנצל אותם. כשיצרת את הבלוק הזה, הוא הופץ לרשת כדי להתווסף לשרשרת הבלוקים. אם הוא אינו מצליח לביע לשרשרת, המצב שלו ישתנה ל&quot;לא התקבל&quot; ולא ניתן יהיה לנצל אותו. זה עשוי לקרות מעת לעת אם צומת אחר יוצר בלוק בטווח של מספר שניות מהבלוק שלך.</translation>
     </message>
     <message>
         <location line="+7"/>
@@ -2186,7 +2186,7 @@ Address: %4
     <name>bitcoin-core</name>
     <message>
         <location filename="../bitcoinstrings.cpp" line="+94"/>
-        <source>Litecoin version</source>
+        <source>Hypercoin version</source>
         <translation>גרסת לייטקוין</translation>
     </message>
     <message>
@@ -2196,8 +2196,8 @@ Address: %4
     </message>
     <message>
         <location line="-29"/>
-        <source>Send command to -server or litecoind</source>
-        <translation>שלח פקודה ל -server או litecoind</translation>
+        <source>Send command to -server or hypercoind</source>
+        <translation>שלח פקודה ל -server או hypercoind</translation>
     </message>
     <message>
         <location line="-23"/>
@@ -2216,13 +2216,13 @@ Address: %4
     </message>
     <message>
         <location line="+24"/>
-        <source>Specify configuration file (default: litecoin.conf)</source>
-        <translation>ציין קובץ הגדרות (ברירת מחדל: litecoin.conf)</translation>
+        <source>Specify configuration file (default: hypercoin.conf)</source>
+        <translation>ציין קובץ הגדרות (ברירת מחדל: hypercoin.conf)</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify pid file (default: litecoind.pid)</source>
-        <translation>ציין קובץ pid (ברירת מחדל: litecoind.pid)</translation>
+        <source>Specify pid file (default: hypercoind.pid)</source>
+        <translation>ציין קובץ pid (ברירת מחדל: hypercoind.pid)</translation>
     </message>
     <message>
         <location line="-1"/>
@@ -2236,8 +2236,8 @@ Address: %4
     </message>
     <message>
         <location line="-28"/>
-        <source>Listen for connections on &lt;port&gt; (default: 9333 or testnet: 19333)</source>
-        <translation>האזן לחיבורים ב&lt;פורט&gt; (ברירת מחדל: 9333 או ברשת הבדיקה: 19333)</translation>
+        <source>Listen for connections on &lt;port&gt; (default: 36307 or testnet: 46307)</source>
+        <translation>האזן לחיבורים ב&lt;פורט&gt; (ברירת מחדל: 36307 או ברשת הבדיקה: 46307)</translation>
     </message>
     <message>
         <location line="+5"/>
@@ -2271,8 +2271,8 @@ Address: %4
     </message>
     <message>
         <location line="+27"/>
-        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 9332 or testnet: 19332)</source>
-        <translation>האזן לחיבורי JSON-RPC ב- &lt;port&gt; (ברירת מחדל: 9332 או רשת בדיקה: 19332)</translation>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: 36308 or testnet: 46308)</source>
+        <translation>האזן לחיבורי JSON-RPC ב- &lt;port&gt; (ברירת מחדל: 36308 או רשת בדיקה: 46308)</translation>
     </message>
     <message>
         <location line="+37"/>
@@ -2299,24 +2299,24 @@ Address: %4
         <source>%s, you must set a rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=litecoinrpc
+rpcuser=hypercoinrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;Litecoin Alert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Hypercoin Alert&quot; admin@foo.com
 </source>
         <translation>%s, עליך לקבוע סיסמת RPC בקובץ הקונפיגורציה:
  %s
 מומלץ להשתמש בסיסמא האקראית הבאה:
-rpcuser=litecoinrpc
+rpcuser=hypercoinrpc
 rpcpassword=%s
 (אין צורך לזכור את הסיסמה)
 אסור ששם המשתמש והסיסמא יהיו זהים.
 אם הקובץ אינו קיים, צור אותו עם הרשאות קריאה לבעלים בלבד.
 זה מומלץ לסמן alertnotify כדי לקבל דיווח על תקלות;
-למשל: alertnotify=echo %%s | mail -s &quot;Litecoin Alert&quot; admin@foo.com 
+למשל: alertnotify=echo %%s | mail -s &quot;Hypercoin Alert&quot; admin@foo.com 
 </translation>
     </message>
     <message>
@@ -2331,7 +2331,7 @@ rpcpassword=%s
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. Litecoin is probably already running.</source>
+        <source>Cannot obtain a lock on data directory %s. Hypercoin is probably already running.</source>
         <translation>לא מסוגל להשיג נעילה על תיקיית הנתונים %s. כנראה שלייטקוין כבר רץ.</translation>
     </message>
     <message>
@@ -2376,7 +2376,7 @@ rpcpassword=%s
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Litecoin will not work properly.</source>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Hypercoin will not work properly.</source>
         <translation>אזהרה: אנא בדוק שהתאריך והשעה של המחשב שלך נכונים! אם השעון שלך אינו נכון לייטקוין לא יעבוד כראוי.</translation>
     </message>
     <message>
@@ -2626,7 +2626,7 @@ rpcpassword=%s
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the Litecoin Wiki for SSL setup instructions)</source>
+        <source>SSL options: (see the Hypercoin Wiki for SSL setup instructions)</source>
         <translation>אפשרויות SSL: (ראה את הויקי של לייטקוין עבור הוראות הגדרת SSL)</translation>
     </message>
     <message>
@@ -2745,7 +2745,7 @@ rpcpassword=%s
         <translation>שלח פקודות לצומת ב-&lt;ip&gt; (ברירת מחדל: 127.0.0.1)</translation>
     </message>
     <message>
-        <location line="-120"/>
+        <location line="-20"/>
         <source>Execute command when the best block changes (%s in cmd is replaced by block hash)</source>
         <translation>בצע פקודה זו כשהבלוק הטוב ביותר משתנה (%s בפקודה יוחלף בגיבוב הבלוק)</translation>
     </message>
@@ -2816,12 +2816,12 @@ rpcpassword=%s
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Litecoin</source>
+        <source>Error loading wallet.dat: Wallet requires newer version of Hypercoin</source>
         <translation>שגיאה בטעינת הקובץ wallet.dat: הארנק דורש גרסה חדשה יותר של לייטקוין</translation>
     </message>
     <message>
         <location line="+93"/>
-        <source>Wallet needed to be rewritten: restart Litecoin to complete</source>
+        <source>Wallet needed to be rewritten: restart Hypercoin to complete</source>
         <translation>יש לכתוב מחדש את הארנק: אתחל את לייטקוין לסיום</translation>
     </message>
     <message>
@@ -2881,7 +2881,7 @@ rpcpassword=%s
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. Litecoin is probably already running.</source>
+        <source>Unable to bind to %s on this computer. Hypercoin is probably already running.</source>
         <translation>לא ניתן לקשור ל-%s במחשב זה. לייטקוין כנראה עדיין רץ.</translation>
     </message>
     <message>
