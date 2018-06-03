@@ -1178,7 +1178,6 @@ static const char *strMainNetDNSSeed[][2] = {
 };
 
 static const char *strTestNetDNSSeed[][2] = {
-    {"199.192.17.154", "199.192.17.154"},
     {NULL, NULL}
 };
 
