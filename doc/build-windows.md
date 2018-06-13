@@ -87,7 +87,7 @@ Ubuntu Trusty 14.04:
 Ubuntu Xenial 16.04 and Windows Subsystem for Linux <sup>[1](#footnote1),[2](#footnote2)</sup>:
 
     sudo apt install software-properties-common
-    sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu zesty universe"
+    sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu bionic universe"
     sudo apt update
     sudo apt upgrade
     sudo update-alternatives --config x86_64-w64-mingw32-g++ # Set the default mingw32 g++ compiler option to posix.
@@ -111,7 +111,7 @@ The next three steps are an example of how to acquire the source in an appropria
 Once the source code is ready the build steps are below.
 
     PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g') # strip out problematic Windows %PATH% imported var
-    cd depends
+    cd litecoin/depends
     make HOST=x86_64-w64-mingw32
     cd ..
     ./autogen.sh # not required when building from tarball
@@ -141,7 +141,7 @@ The next three steps are an example of how to acquire the source in an appropria
 Then build using:
 
     PATH=$(echo "$PATH" | sed -e 's/:\/mnt.*//g') # strip out problematic Windows %PATH% imported var
-    cd depends
+    cd litecoin/depends
     make HOST=i686-w64-mingw32
     cd ..
     ./autogen.sh # not required when building from tarball
