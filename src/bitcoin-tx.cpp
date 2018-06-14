@@ -54,10 +54,10 @@ static int AppInitRawTx(int argc, char* argv[])
     if (argc<2 || gArgs.IsArgSet("-?") || gArgs.IsArgSet("-h") || gArgs.IsArgSet("-help"))
     {
         // First part of help message is specific to this utility
-        std::string strUsage = strprintf(_("%s counoscoin-tx utility version"), _(PACKAGE_NAME)) + " " + FormatFullVersion() + "\n\n" +
+        std::string strUsage = strprintf(_("%s counoscash-tx utility version"), _(PACKAGE_NAME)) + " " + FormatFullVersion() + "\n\n" +
             _("Usage:") + "\n" +
-              "  counoscoin-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded counoscoin transaction") + "\n" +
-              "  counoscoin-tx [options] -create [commands]   " + _("Create hex-encoded counoscoin transaction") + "\n" +
+              "  counoscash-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded counoscash transaction") + "\n" +
+              "  counoscash-tx [options] -create [commands]   " + _("Create hex-encoded counoscash transaction") + "\n" +
               "\n";
 
         fprintf(stdout, "%s", strUsage.c_str());

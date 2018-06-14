@@ -1,6 +1,6 @@
 ### TestGen ###
 
-Utilities to generate test vectors for the data-driven CounosCoin tests.
+Utilities to generate test vectors for the data-driven CounosCash tests.
 
 Usage: 
 

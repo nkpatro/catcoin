@@ -126,8 +126,8 @@
         <translation>Abrir &amp;URL...</translation>
     </message>
     <message>
-        <source>Send coins to a CounosCoin address</source>
-        <translation>Enviando monedas a una dirección de CounosCoin</translation>
+        <source>Send coins to a CounosCash address</source>
+        <translation>Enviando monedas a una dirección de CounosCash</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
@@ -146,8 +146,8 @@
         <translation>&amp;Verificar Mensaje...</translation>
     </message>
     <message>
-        <source>CounosCoin</source>
-        <translation>CounosCoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -296,8 +296,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>CounosCoin Core</source>
-        <translation>CounosCoin Core</translation>
+        <source>CounosCash Core</source>
+        <translation>CounosCash Core</translation>
     </message>
     <message>
         <source>Insufficient funds</source>

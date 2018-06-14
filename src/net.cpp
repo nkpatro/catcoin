@@ -1479,7 +1479,7 @@ void ThreadMapPort()
             }
         }
 
-        std::string strDesc = "CounosCoin " + FormatFullVersion();
+        std::string strDesc = "CounosCash " + FormatFullVersion();
 
         try {
             while (true) {

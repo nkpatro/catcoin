@@ -38,8 +38,8 @@
         <translation>Билдирүүнү &amp;текшерүү...</translation>
     </message>
     <message>
-        <source>CounosCoin</source>
-        <translation>CounosCoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     <message>
         <source>Wallet</source>

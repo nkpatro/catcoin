@@ -142,8 +142,8 @@
         <translation>Cargando el index de bloques...</translation>
     </message>
     <message>
-        <source>Send coins to a CounosCoin address</source>
-        <translation>Enviar monedas a una dirección counoscoin</translation>
+        <source>Send coins to a CounosCash address</source>
+        <translation>Enviar monedas a una dirección counoscash</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -166,8 +166,8 @@
         <translation>Verificar mensaje....</translation>
     </message>
     <message>
-        <source>CounosCoin</source>
-        <translation>CounosCoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -186,7 +186,7 @@
         <translation>&amp;Mostrar/Ocultar</translation>
     </message>
     <message>
-        <source>Sign messages with your CounosCoin addresses to prove you own them</source>
+        <source>Sign messages with your CounosCash addresses to prove you own them</source>
         <translation>Firmar un mensaje para provar que usted es dueño de esta dirección</translation>
     </message>
     <message>
@@ -206,8 +206,8 @@
         <translation>Barra de pestañas</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and counoscoin: URIs)</source>
-        <translation>Pide pagos (genera codigos QR and counoscoin: URls)</translation>
+        <source>Request payments (generates QR codes and counoscash: URIs)</source>
+        <translation>Pide pagos (genera codigos QR and counoscash: URls)</translation>
     </message>
     <message>
         <source>Error</source>
@@ -363,8 +363,8 @@
         <translation>experto</translation>
     </message>
     <message>
-        <source>Automatically open the CounosCoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abre automáticamente el puerto del cliente CounosCoin en el router. Esto funciona solo cuando tu router es compatible con UPnP y está habilitado.</translation>
+        <source>Automatically open the CounosCash client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abre automáticamente el puerto del cliente CounosCash en el router. Esto funciona solo cuando tu router es compatible con UPnP y está habilitado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -687,7 +687,7 @@
         <translation>Firma</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this CounosCoin address</source>
+        <source>Sign the message to prove you own this CounosCash address</source>
         <translation>Firmar un mensjage para probar que usted es dueño de esta dirección</translation>
     </message>
     <message>
@@ -772,8 +772,8 @@
 </translation>
     </message>
     <message>
-        <source>CounosCoin Core</source>
-        <translation>counoscoin core</translation>
+        <source>CounosCash Core</source>
+        <translation>counoscash core</translation>
     </message>
     <message>
         <source>Error loading block database</source>

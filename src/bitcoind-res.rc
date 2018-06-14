@@ -16,14 +16,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "CounosCoin"
-            VALUE "FileDescription",    "counoscoind (CounosCoin node with a JSON-RPC server)"
+            VALUE "CompanyName",        "CounosCash"
+            VALUE "FileDescription",    "counoscashd (CounosCash node with a JSON-RPC server)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "counoscoind"
+            VALUE "InternalName",       "counoscashd"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "counoscoind.exe"
-            VALUE "ProductName",        "counoscoind"
+            VALUE "OriginalFilename",   "counoscashd.exe"
+            VALUE "ProductName",        "counoscashd"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END

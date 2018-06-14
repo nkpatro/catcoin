@@ -142,8 +142,8 @@
         <translation>Deschide &amp;URI...</translation>
     </message>
     <message>
-        <source>Send coins to a CounosCoin address</source>
-        <translation>Trimite monedele către o adresă CounosCoin</translation>
+        <source>Send coins to a CounosCash address</source>
+        <translation>Trimite monedele către o adresă CounosCash</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -166,8 +166,8 @@
         <translation>&amp;Verifică mesajul...</translation>
     </message>
     <message>
-        <source>CounosCoin</source>
-        <translation>CounosCoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -194,12 +194,12 @@
         <translation>Criptează cheile private care aparțin portofelului tău.</translation>
     </message>
     <message>
-        <source>Sign messages with your CounosCoin addresses to prove you own them</source>
-        <translation>Semnează mesajele cu adresa ta de CounosCoin pentru a face dovada că îți aparțin.</translation>
+        <source>Sign messages with your CounosCash addresses to prove you own them</source>
+        <translation>Semnează mesajele cu adresa ta de CounosCash pentru a face dovada că îți aparțin.</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified CounosCoin addresses</source>
-        <translation>Verifică mesajele cu scopul de a asigura faptul că au fost semnate cu adresa de CounosCoin specificată.</translation>
+        <source>Verify messages to ensure they were signed with specified CounosCash addresses</source>
+        <translation>Verifică mesajele cu scopul de a asigura faptul că au fost semnate cu adresa de CounosCash specificată.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -214,12 +214,12 @@
         <translation>&amp;Ajutor</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and counoscoin: URIs)</source>
-        <translation>Cerere plată (generează coduri QR și counoscoin: URIs)</translation>
+        <source>Request payments (generates QR codes and counoscash: URIs)</source>
+        <translation>Cerere plată (generează coduri QR și counoscash: URIs)</translation>
     </message>
     <message>
-        <source>Open a counoscoin: URI or payment request</source>
-        <translation>Deschide un counoscoin: URI sau cerere de plată</translation>
+        <source>Open a counoscash: URI or payment request</source>
+        <translation>Deschide un counoscash: URI sau cerere de plată</translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -748,8 +748,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>CounosCoin Core</source>
-        <translation>CounosCoin Core</translation>
+        <source>CounosCash Core</source>
+        <translation>CounosCash Core</translation>
     </message>
     <message>
         <source>Information</source>

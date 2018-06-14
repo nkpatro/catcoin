@@ -142,8 +142,8 @@
         <translation>Reindexando bloques en disco...</translation>
     </message>
     <message>
-        <source>Send coins to a CounosCoin address</source>
-        <translation>Enviar monedas a una dirección CounosCoin</translation>
+        <source>Send coins to a CounosCash address</source>
+        <translation>Enviar monedas a una dirección CounosCash</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -166,8 +166,8 @@
         <translation>&amp;Verificar mensaje...</translation>
     </message>
     <message>
-        <source>CounosCoin</source>
-        <translation>CounosCoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -194,12 +194,12 @@
         <translation>Cifrar las claves privadas de su monedero</translation>
     </message>
     <message>
-        <source>Sign messages with your CounosCoin addresses to prove you own them</source>
-        <translation>Firmar mensajes con sus direcciones CounosCoin para demostrar la propiedad</translation>
+        <source>Sign messages with your CounosCash addresses to prove you own them</source>
+        <translation>Firmar mensajes con sus direcciones CounosCash para demostrar la propiedad</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified CounosCoin addresses</source>
-        <translation>Verificar mensajes comprobando que están firmados con direcciones CounosCoin concretas</translation>
+        <source>Verify messages to ensure they were signed with specified CounosCash addresses</source>
+        <translation>Verificar mensajes comprobando que están firmados con direcciones CounosCash concretas</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -218,8 +218,8 @@
         <translation>Barra de pestañas</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and counoscoin: URIs)</source>
-        <translation>Solicitar pagos (genera codigo QR y URL's de CounosCoin)</translation>
+        <source>Request payments (generates QR codes and counoscash: URIs)</source>
+        <translation>Solicitar pagos (genera codigo QR y URL's de CounosCash)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -230,8 +230,8 @@
         <translation>Muestra la lista de direcciones de recepción y etiquetas</translation>
     </message>
     <message>
-        <source>Open a counoscoin: URI or payment request</source>
-        <translation>Abrir un counoscoin: URI o petición de pago</translation>
+        <source>Open a counoscash: URI or payment request</source>
+        <translation>Abrir un counoscash: URI o petición de pago</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -494,8 +494,8 @@
         <translation>Experto</translation>
     </message>
     <message>
-        <source>Automatically open the CounosCoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abrir automáticamente el puerto del cliente CounosCoin en el router. Esta opción solo funciona si el router admite UPnP y está activado.</translation>
+        <source>Automatically open the CounosCash client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir automáticamente el puerto del cliente CounosCash en el router. Esta opción solo funciona si el router admite UPnP y está activado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -589,8 +589,8 @@
         <translation>Desde</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the CounosCoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red CounosCoin después de que se haya establecido una conexión, pero este proceso aún no se ha completado.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the CounosCash network after a connection is established, but this process has not completed yet.</source>
+        <translation>La información mostrada puede estar desactualizada. Su monedero se sincroniza automáticamente con la red CounosCash después de que se haya establecido una conexión, pero este proceso aún no se ha completado.</translation>
     </message>
     <message>
         <source>Your current spendable balance</source>
@@ -1019,8 +1019,8 @@
         <translation>Copiar la firma actual al portapapeles del sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this CounosCoin address</source>
-        <translation>Firmar el mensaje para demostrar que se posee esta dirección CounosCoin</translation>
+        <source>Sign the message to prove you own this CounosCash address</source>
+        <translation>Firmar el mensaje para demostrar que se posee esta dirección CounosCash</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -1039,8 +1039,8 @@
         <translation>&amp;Verificar mensaje</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified CounosCoin address</source>
-        <translation>Verificar el mensaje para comprobar que fue firmado con la dirección CounosCoin indicada</translation>
+        <source>Verify the message to ensure it was signed with the specified CounosCash address</source>
+        <translation>Verificar el mensaje para comprobar que fue firmado con la dirección CounosCash indicada</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1123,8 +1123,8 @@
 </translation>
     </message>
     <message>
-        <source>CounosCoin Core</source>
-        <translation>Núcleo de CounosCoin</translation>
+        <source>CounosCash Core</source>
+        <translation>Núcleo de CounosCash</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>

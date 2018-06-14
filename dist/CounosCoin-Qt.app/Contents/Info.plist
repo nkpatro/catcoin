@@ -17,7 +17,7 @@
   <string>APPL</string>
 
   <key>CFBundleGetInfoString</key>
-  <string>0.15.1, Copyright © 2009-2018 The CounosCoin Core developers</string>
+  <string>0.15.1, Copyright © 2009-2018 The CounosCash Core developers</string>
 
   <key>CFBundleShortVersionString</key>
   <string>0.15.1</string>
@@ -29,16 +29,16 @@
   <string>????</string>
 
   <key>CFBundleExecutable</key>
-  <string>CounosCoin-Qt</string>
+  <string>CounosCash-Qt</string>
   
   <key>CFBundleName</key>
-  <string>CounosCoin-Qt</string>
+  <string>CounosCash-Qt</string>
 
   <key>LSHasLocalizedDisplayName</key>
   <true/>
 
   <key>CFBundleIdentifier</key>
-  <string>org.counoscoin.CounosCoin-Qt</string>
+  <string>org.counoscash.CounosCash-Qt</string>
 
   <key>CFBundleURLTypes</key>
   <array>
@@ -46,10 +46,10 @@
       <key>CFBundleTypeRole</key>
       <string>Editor</string>
       <key>CFBundleURLName</key>
-      <string>org.counoscoin.CounosCoinPayment</string>
+      <string>org.counoscash.CounosCashPayment</string>
       <key>CFBundleURLSchemes</key>
       <array>
-        <string>counoscoin</string>
+        <string>counoscash</string>
       </array>
     </dict>
   </array>
@@ -58,9 +58,9 @@
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
-      <string>org.counoscoin.paymentrequest</string>
+      <string>org.counoscash.paymentrequest</string>
       <key>UTTypeDescription</key>
-      <string>CounosCoin payment request</string>
+      <string>CounosCash payment request</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>
@@ -68,10 +68,10 @@
       <key>UTTypeTagSpecification</key>
       <dict>
         <key>public.mime-type</key>
-        <string>application/x-counoscoin-payment-request</string>
+        <string>application/x-counoscash-payment-request</string>
         <key>public.filename-extension</key>
         <array>
-          <string>counoscoinpaymentrequest</string>
+          <string>counoscashpaymentrequest</string>
         </array>
       </dict>
     </dict>
@@ -84,7 +84,7 @@
       <string>Editor</string>
       <key>LSItemContentTypes</key>
       <array>
-        <string>org.counoscoin.paymentrequest</string>
+        <string>org.counoscash.paymentrequest</string>
       </array>
       <key>LSHandlerRank</key>
       <string>Owner</string>

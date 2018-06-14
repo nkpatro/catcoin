@@ -4,26 +4,26 @@ TOPDIR=${TOPDIR:-$(git rev-parse --show-toplevel)}
 SRCDIR=${SRCDIR:-$TOPDIR/src}
 MANDIR=${MANDIR:-$TOPDIR/doc/man}
 
-COUNOSCOIND=${COUNOSCOIND:-$SRCDIR/counoscoind}
-COUNOSCOINCLI=${COUNOSCOINCLI:-$SRCDIR/counoscoin-cli}
-COUNOSCOINTX=${COUNOSCOINTX:-$SRCDIR/counoscoin-tx}
-COUNOSCOINQT=${COUNOSCOINQT:-$SRCDIR/qt/counoscoin-qt}
+COUNOSCASHD=${COUNOSCASHD:-$SRCDIR/counoscashd}
+COUNOSCASHCLI=${COUNOSCASHCLI:-$SRCDIR/counoscash-cli}
+COUNOSCASHTX=${COUNOSCASHTX:-$SRCDIR/counoscash-tx}
+COUNOSCASHQT=${COUNOSCASHQT:-$SRCDIR/qt/counoscash-qt}
 
-[ ! -x $COUNOSCOIND ] && echo "$COUNOSCOIND not found or not executable." && exit 1
+[ ! -x $COUNOSCASHD ] && echo "$COUNOSCASHD not found or not executable." && exit 1
 
 # The autodetected version git tag can screw up manpage output a little bit
-CSCVER=($($COUNOSCOINCLI --version | head -n1 | awk -F'[ -]' '{ print $6, $7 }'))
+CSHVER=($($COUNOSCASHCLI --version | head -n1 | awk -F'[ -]' '{ print $6, $7 }'))
 
 # Create a footer file with copyright content.
 # This gets autodetected fine for bitcoind if --version-string is not set,
 # but has different outcomes for bitcoin-qt and bitcoin-cli.
 echo "[COPYRIGHT]" > footer.h2m
-$COUNOSCOIND --version | sed -n '1!p' >> footer.h2m
+$COUNOSCASHD --version | sed -n '1!p' >> footer.h2m
 
-for cmd in $COUNOSCOIND $COUNOSCOINCLI $COUNOSCOINTX $COUNOSCOINQT; do
+for cmd in $COUNOSCASHD $COUNOSCASHCLI $COUNOSCASHTX $COUNOSCASHQT; do
   cmdname="${cmd##*/}"
-  help2man -N --version-string=${CSCVER[0]} --include=footer.h2m -o ${MANDIR}/${cmdname}.1 ${cmd}
-  sed -i "s/\\\-${CSCVER[1]}//g" ${MANDIR}/${cmdname}.1
+  help2man -N --version-string=${CSHVER[0]} --include=footer.h2m -o ${MANDIR}/${cmdname}.1 ${cmd}
+  sed -i "s/\\\-${CSHVER[1]}//g" ${MANDIR}/${cmdname}.1
 done
 
 rm -f footer.h2m

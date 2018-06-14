@@ -130,8 +130,8 @@
         <translation>Промени &amp;лозинку...</translation>
     </message>
     <message>
-        <source>Send coins to a CounosCoin address</source>
-        <translation>Пошаљите новац на counoscoin адресу</translation>
+        <source>Send coins to a CounosCash address</source>
+        <translation>Пошаљите новац на counoscash адресу</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>

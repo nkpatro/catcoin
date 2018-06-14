@@ -90,8 +90,8 @@
         <translation>&amp;செய்தியை சரிசெய்...</translation>
     </message>
     <message>
-        <source>CounosCoin</source>
-        <translation>CounosCoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -708,8 +708,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>CounosCoin Core</source>
-        <translation>CounosCoin மையம்</translation>
+        <source>CounosCash Core</source>
+        <translation>CounosCash மையம்</translation>
     </message>
     <message>
         <source>(default: %u)</source>

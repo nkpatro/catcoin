@@ -54,8 +54,8 @@
         <translation>&amp;Odaberi</translation>
     </message>
     <message>
-        <source>These are your CounosCoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ovo su vaše CounosCoin adrese za slanje novca. Uvijek provjerite iznos i adresu primatelja prije slanja novca.</translation>
+        <source>These are your CounosCash addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Ovo su vaše CounosCash adrese za slanje novca. Uvijek provjerite iznos i adresu primatelja prije slanja novca.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -174,8 +174,8 @@
         <translation>Re-indeksiranje blokova na disku...</translation>
     </message>
     <message>
-        <source>Send coins to a CounosCoin address</source>
-        <translation>Slanje novca na counoscoin adresu</translation>
+        <source>Send coins to a CounosCash address</source>
+        <translation>Slanje novca na counoscash adresu</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -198,8 +198,8 @@
         <translation>&amp;Potvrdite poruku...</translation>
     </message>
     <message>
-        <source>CounosCoin</source>
-        <translation>CounosCoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -226,12 +226,12 @@
         <translation>Šifriranje privatnih ključeva koji u novčaniku</translation>
     </message>
     <message>
-        <source>Sign messages with your CounosCoin addresses to prove you own them</source>
-        <translation>Poruku potpišemo s counoscoin adresom, kako bi dokazali vlasništvo nad tom adresom</translation>
+        <source>Sign messages with your CounosCash addresses to prove you own them</source>
+        <translation>Poruku potpišemo s counoscash adresom, kako bi dokazali vlasništvo nad tom adresom</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified CounosCoin addresses</source>
-        <translation>Provjeravanje poruke, kao dokaz, da je potpisana navedenom counoscoin adresom</translation>
+        <source>Verify messages to ensure they were signed with specified CounosCash addresses</source>
+        <translation>Provjeravanje poruke, kao dokaz, da je potpisana navedenom counoscash adresom</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -250,8 +250,8 @@
         <translation>Traka kartica</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and counoscoin: URIs)</source>
-        <translation>Zatraži uplatu (stvara QR kod i counoscoin: URI adresu)</translation>
+        <source>Request payments (generates QR codes and counoscash: URIs)</source>
+        <translation>Zatraži uplatu (stvara QR kod i counoscash: URI adresu)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -262,16 +262,16 @@
         <translation>Prikaži popis korištenih adresa i oznaka za primanje novca</translation>
     </message>
     <message>
-        <source>Open a counoscoin: URI or payment request</source>
-        <translation>Otvori counoscoin: URI adresu ili zahtjev za uplatu</translation>
+        <source>Open a counoscash: URI or payment request</source>
+        <translation>Otvori counoscash: URI adresu ili zahtjev za uplatu</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>Opcije &amp;naredbene linije</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to CounosCoin network</source>
-        <translation><numerusform>%n aktivna veza na CounosCoin mrežu</numerusform><numerusform>%n aktivnih veza na CounosCoin mrežu</numerusform><numerusform>%n aktivnih veza na CounosCoin mrežu</numerusform></translation>
+        <source>%n active connection(s) to CounosCash network</source>
+        <translation><numerusform>%n aktivna veza na CounosCash mrežu</numerusform><numerusform>%n aktivnih veza na CounosCash mrežu</numerusform><numerusform>%n aktivnih veza na CounosCash mrežu</numerusform></translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
@@ -423,11 +423,11 @@
     </message>
     <message>
         <source>The label associated with this address list entry</source>
-        <translation>Oznaka counoscoin adrese</translation>
+        <translation>Oznaka counoscash adrese</translation>
     </message>
     <message>
         <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>CounosCoin adresa. Izmjene adrese su moguće samo za adrese za slanje.</translation>
+        <translation>CounosCash adresa. Izmjene adrese su moguće samo za adrese za slanje.</translation>
     </message>
     <message>
         <source>&amp;Address</source>
@@ -568,8 +568,8 @@
         <translation>&amp;Trošenje nepotvrđenih vraćenih iznosa</translation>
     </message>
     <message>
-        <source>Automatically open the CounosCoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatski otvori port CounosCoin klijenta na ruteru. To radi samo ako ruter podržava UPnP i ako je omogućen.</translation>
+        <source>Automatically open the CounosCash client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatski otvori port CounosCash klijenta na ruteru. To radi samo ako ruter podržava UPnP i ako je omogućen.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -617,7 +617,7 @@
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Izaberite željeni najmanji dio counoscoina koji će biti prikazan u sučelju i koji će se koristiti za plaćanje.</translation>
+        <translation>Izaberite željeni najmanji dio counoscasha koji će biti prikazan u sučelju i koji će se koristiti za plaćanje.</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -643,8 +643,8 @@
         <translation>Oblik</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the CounosCoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Prikazani podatci mogu biti zastarjeli. Vaš novčanik se automatski sinkronizira s CounosCoin mrežom kada je veza uspostavljena, ali taj proces još nije završen.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the CounosCash network after a connection is established, but this process has not completed yet.</source>
+        <translation>Prikazani podatci mogu biti zastarjeli. Vaš novčanik se automatski sinkronizira s CounosCash mrežom kada je veza uspostavljena, ali taj proces još nije završen.</translation>
     </message>
     <message>
         <source>Total:</source>
@@ -1034,8 +1034,8 @@
         <translation>Izvršavaj u pozadini kao uslužnik i prihvaćaj komande</translation>
     </message>
     <message>
-        <source>CounosCoin Core</source>
-        <translation>CounosCoin Core</translation>
+        <source>CounosCash Core</source>
+        <translation>CounosCash Core</translation>
     </message>
     <message>
         <source>Block creation options:</source>

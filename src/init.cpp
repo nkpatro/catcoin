@@ -531,8 +531,8 @@ std::string HelpMessage(HelpMessageMode mode)
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/counoscoin-project/counoscoin>";
-    const std::string URL_WEBSITE = "<https://counoscoin.org>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/counoscash-project/counoscash>";
+    const std::string URL_WEBSITE = "<https://counoscash.org>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2011, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
@@ -830,7 +830,7 @@ void InitLogging()
     fLogIPs = gArgs.GetBoolArg("-logips", DEFAULT_LOGIPS);
 
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("CounosCoin version %s\n", FormatFullVersion());
+    LogPrintf("CounosCash version %s\n", FormatFullVersion());
 }
 
 namespace { // Variables internal to initialization process only

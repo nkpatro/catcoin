@@ -14,8 +14,8 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <source>CounosCoin</source>
-        <translation>CounosCoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     </context>
 <context>
@@ -156,8 +156,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>CounosCoin Core</source>
-        <translation>CounosCoin Jezrga</translation>
+        <source>CounosCash Core</source>
+        <translation>CounosCash Jezrga</translation>
     </message>
     </context>
 </TS>

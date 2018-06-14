@@ -50,7 +50,7 @@
 #include <boost/thread.hpp>
 
 #if defined(NDEBUG)
-# error "CounosCoin cannot be compiled without assertions."
+# error "CounosCash cannot be compiled without assertions."
 #endif
 
 /**
@@ -93,7 +93,7 @@ static void CheckBlockIndex(const Consensus::Params& consensusParams);
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const std::string strMessageMagic = "CounosCoin Signed Message:\n";
+const std::string strMessageMagic = "CounosCash Signed Message:\n";
 
 // Internal stuff
 namespace {
@@ -860,7 +860,7 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         // Remove conflicting transactions from the mempool
         for (const CTxMemPool::txiter it : allConflicting)
         {
-            LogPrint(BCLog::MEMPOOL, "replacing tx %s with %s for %s CSC additional fees, %d delta bytes\n",
+            LogPrint(BCLog::MEMPOOL, "replacing tx %s with %s for %s CSH additional fees, %d delta bytes\n",
                     it->GetTx().GetHash().ToString(),
                     hash.ToString(),
                     FormatMoney(nModifiedFees - nConflictingFees),
@@ -1042,14 +1042,15 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 {
     int halvings = nHeight / consensusParams.nSubsidyHalvingInterval;
     // Force block reward to zero when right shift is undefined.
-    if (halvings >= 10)
+    if (nHeight >= 10063)
         return 0;
-CAmount nSubsidy =  COIN;
-   if(nHeight ==3)
-      nSubsidy = 16812000 * COIN;
-   else 
-           nSubsidy = 4 * COIN;
-    // Subsidy is cut in half every 524,000 blocks which will occur approximately every 10 years.
+
+    CAmount nSubsidy = 50 * COIN;
+    if ( nHeight >10 && nHeight < 63)
+     {
+       nSubsidy = 400000 * COIN;
+}
+    // Subsidy is cut in half every 210,000 blocks which will occur approximately every 4 years.
     nSubsidy >>= halvings;
     return nSubsidy;
 }

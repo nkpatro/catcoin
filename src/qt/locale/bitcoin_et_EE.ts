@@ -130,8 +130,8 @@
         <translation>Kõvakettal olevate plokkide reindekseerimine...</translation>
     </message>
     <message>
-        <source>CounosCoin</source>
-        <translation>CounosCoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -760,8 +760,8 @@
         <translation>Valikud:</translation>
     </message>
     <message>
-        <source>CounosCoin Core</source>
-        <translation>CounosCoin Core</translation>
+        <source>CounosCash Core</source>
+        <translation>CounosCash Core</translation>
     </message>
     <message>
         <source>Information</source>

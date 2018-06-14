@@ -5,7 +5,7 @@ Before every release candidate:
 
 * Update translations (ping wumpus on IRC) see [translation_process.md](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#synchronising-translations).
 
-* Update manpages, see [gen-manpages.sh](https://github.com/counoscoin-project/counoscoin/blob/master/contrib/devtools/README.md#gen-manpagessh).
+* Update manpages, see [gen-manpages.sh](https://github.com/counoscash-project/counoscash/blob/master/contrib/devtools/README.md#gen-manpagessh).
 
 Before every minor and major release:
 
@@ -33,12 +33,12 @@ If you're using the automated script (found in [contrib/gitian-build.sh](/contri
 Check out the source code in the following directory hierarchy.
 
     cd /path/to/your/toplevel/build
-    git clone https://github.com/counoscoin-project/gitian.sigs.ltc.git
-    git clone https://github.com/counoscoin-project/counoscoin-detached-sigs.git
+    git clone https://github.com/counoscash-project/gitian.sigs.ltc.git
+    git clone https://github.com/counoscash-project/counoscash-detached-sigs.git
     git clone https://github.com/devrandom/gitian-builder.git
-    git clone https://github.com/counoscoin-project/counoscoin.git
+    git clone https://github.com/counoscash-project/counoscash.git
 
-### CounosCoin maintainers/release engineers, suggestion for writing release notes
+### CounosCash maintainers/release engineers, suggestion for writing release notes
 
 Write release notes. git shortlog helps a lot, for example:
 
@@ -61,7 +61,7 @@ If you're using the automated script (found in [contrib/gitian-build.sh](/contri
 
 Setup Gitian descriptors:
 
-    pushd ./counoscoin
+    pushd ./counoscash
     export SIGNER=(your Gitian key, ie bluematt, sipa, etc)
     export VERSION=(new version, e.g. 0.8.0)
     git fetch
@@ -95,7 +95,7 @@ Create the OS X SDK tarball, see the [OS X readme](README_osx.md) for details, a
 By default, Gitian will fetch source files as needed. To cache them ahead of time:
 
     pushd ./gitian-builder
-    make -C ../counoscoin/depends download SOURCES_PATH=`pwd`/cache/common
+    make -C ../counoscash/depends download SOURCES_PATH=`pwd`/cache/common
     popd
 
 Only missing files will be fetched, so this is safe to re-run for each build.
@@ -103,50 +103,50 @@ Only missing files will be fetched, so this is safe to re-run for each build.
 NOTE: Offline builds must use the --url flag to ensure Gitian fetches only from local URLs. For example:
 
     pushd ./gitian-builder
-    ./bin/gbuild --url counoscoin=/path/to/counoscoin,signature=/path/to/sigs {rest of arguments}
+    ./bin/gbuild --url counoscash=/path/to/counoscash,signature=/path/to/sigs {rest of arguments}
     popd
 
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-### Build and sign CounosCoin Core for Linux, Windows, and OS X:
+### Build and sign CounosCash Core for Linux, Windows, and OS X:
 
     pushd ./gitian-builder
-    ./bin/gbuild --num-make 2 --memory 3000 --commit counoscoin=v${VERSION} ../counoscoin/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs.ltc/ ../counoscoin/contrib/gitian-descriptors/gitian-linux.yml
-    mv build/out/counoscoin-*.tar.gz build/out/src/counoscoin-*.tar.gz ../
+    ./bin/gbuild --num-make 2 --memory 3000 --commit counoscash=v${VERSION} ../counoscash/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs.ltc/ ../counoscash/contrib/gitian-descriptors/gitian-linux.yml
+    mv build/out/counoscash-*.tar.gz build/out/src/counoscash-*.tar.gz ../
 
-    ./bin/gbuild --num-make 2 --memory 3000 --commit counoscoin=v${VERSION} ../counoscoin/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs.ltc/ ../counoscoin/contrib/gitian-descriptors/gitian-win.yml
-    mv build/out/counoscoin-*-win-unsigned.tar.gz inputs/counoscoin-win-unsigned.tar.gz
-    mv build/out/counoscoin-*.zip build/out/counoscoin-*.exe ../
+    ./bin/gbuild --num-make 2 --memory 3000 --commit counoscash=v${VERSION} ../counoscash/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs.ltc/ ../counoscash/contrib/gitian-descriptors/gitian-win.yml
+    mv build/out/counoscash-*-win-unsigned.tar.gz inputs/counoscash-win-unsigned.tar.gz
+    mv build/out/counoscash-*.zip build/out/counoscash-*.exe ../
 
-    ./bin/gbuild --num-make 2 --memory 3000 --commit counoscoin=v${VERSION} ../counoscoin/contrib/gitian-descriptors/gitian-osx.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs.ltc/ ../counoscoin/contrib/gitian-descriptors/gitian-osx.yml
-    mv build/out/counoscoin-*-osx-unsigned.tar.gz inputs/counoscoin-osx-unsigned.tar.gz
-    mv build/out/counoscoin-*.tar.gz build/out/counoscoin-*.dmg ../
+    ./bin/gbuild --num-make 2 --memory 3000 --commit counoscash=v${VERSION} ../counoscash/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs.ltc/ ../counoscash/contrib/gitian-descriptors/gitian-osx.yml
+    mv build/out/counoscash-*-osx-unsigned.tar.gz inputs/counoscash-osx-unsigned.tar.gz
+    mv build/out/counoscash-*.tar.gz build/out/counoscash-*.dmg ../
     popd
 
 Build output expected:
 
-  1. source tarball (`counoscoin-${VERSION}.tar.gz`)
-  2. linux 32-bit and 64-bit dist tarballs (`counoscoin-${VERSION}-linux[32|64].tar.gz`)
-  3. windows 32-bit and 64-bit unsigned installers and dist zips (`counoscoin-${VERSION}-win[32|64]-setup-unsigned.exe`, `counoscoin-${VERSION}-win[32|64].zip`)
-  4. OS X unsigned installer and dist tarball (`counoscoin-${VERSION}-osx-unsigned.dmg`, `counoscoin-${VERSION}-osx64.tar.gz`)
+  1. source tarball (`counoscash-${VERSION}.tar.gz`)
+  2. linux 32-bit and 64-bit dist tarballs (`counoscash-${VERSION}-linux[32|64].tar.gz`)
+  3. windows 32-bit and 64-bit unsigned installers and dist zips (`counoscash-${VERSION}-win[32|64]-setup-unsigned.exe`, `counoscash-${VERSION}-win[32|64].zip`)
+  4. OS X unsigned installer and dist tarball (`counoscash-${VERSION}-osx-unsigned.dmg`, `counoscash-${VERSION}-osx64.tar.gz`)
   5. Gitian signatures (in `gitian.sigs.ltc/${VERSION}-<linux|{win,osx}-unsigned>/(your Gitian key)/`)
 
 ### Verify other gitian builders signatures to your own. (Optional)
 
 Add other gitian builders keys to your gpg keyring, and/or refresh keys.
 
-    gpg --import counoscoin/contrib/gitian-keys/*.pgp
+    gpg --import counoscash/contrib/gitian-keys/*.pgp
     gpg --refresh-keys
 
 Verify the signatures
 
     pushd ./gitian-builder
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-linux ../counoscoin/contrib/gitian-descriptors/gitian-linux.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-win-unsigned ../counoscoin/contrib/gitian-descriptors/gitian-win.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-unsigned ../counoscoin/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-linux ../counoscash/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-win-unsigned ../counoscash/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-unsigned ../counoscash/contrib/gitian-descriptors/gitian-osx.yml
     popd
 
 ### Next steps:
@@ -167,22 +167,22 @@ Codesigner only: Create Windows/OS X detached signatures:
 
 Codesigner only: Sign the osx binary:
 
-    transfer counoscoin-osx-unsigned.tar.gz to osx for signing
-    tar xf counoscoin-osx-unsigned.tar.gz
+    transfer counoscash-osx-unsigned.tar.gz to osx for signing
+    tar xf counoscash-osx-unsigned.tar.gz
     ./detached-sig-create.sh -s "Key ID"
     Enter the keychain password and authorize the signature
     Move signature-osx.tar.gz back to the gitian host
 
 Codesigner only: Sign the windows binaries:
 
-    tar xf counoscoin-win-unsigned.tar.gz
+    tar xf counoscash-win-unsigned.tar.gz
     ./detached-sig-create.sh -key /path/to/codesign.key
     Enter the passphrase for the key when prompted
     signature-win.tar.gz will be created
 
 Codesigner only: Commit the detached codesign payloads:
 
-    cd ~/counoscoin-detached-sigs
+    cd ~/counoscash-detached-sigs
     checkout the appropriate branch for this release series
     rm -rf *
     tar xf signature-osx.tar.gz
@@ -195,25 +195,25 @@ Codesigner only: Commit the detached codesign payloads:
 Non-codesigners: wait for Windows/OS X detached signatures:
 
 - Once the Windows/OS X builds each have 3 matching signatures, they will be signed with their respective release keys.
-- Detached signatures will then be committed to the [counoscoin-detached-sigs](https://github.com/counoscoin-project/counoscoin-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+- Detached signatures will then be committed to the [counoscash-detached-sigs](https://github.com/counoscash-project/counoscash-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
 Create (and optionally verify) the signed OS X binary:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../counoscoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs.ltc/ ../counoscoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-signed ../counoscoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-    mv build/out/counoscoin-osx-signed.dmg ../counoscoin-${VERSION}-osx.dmg
+    ./bin/gbuild -i --commit signature=v${VERSION} ../counoscash/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs.ltc/ ../counoscash/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-signed ../counoscash/contrib/gitian-descriptors/gitian-osx-signer.yml
+    mv build/out/counoscash-osx-signed.dmg ../counoscash-${VERSION}-osx.dmg
     popd
 
 Create (and optionally verify) the signed Windows binaries:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../counoscoin/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs.ltc/ ../counoscoin/contrib/gitian-descriptors/gitian-win-signer.yml
-    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-win-signed ../counoscoin/contrib/gitian-descriptors/gitian-win-signer.yml
-    mv build/out/counoscoin-*win64-setup.exe ../counoscoin-${VERSION}-win64-setup.exe
-    mv build/out/counoscoin-*win32-setup.exe ../counoscoin-${VERSION}-win32-setup.exe
+    ./bin/gbuild -i --commit signature=v${VERSION} ../counoscash/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs.ltc/ ../counoscash/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-win-signed ../counoscash/contrib/gitian-descriptors/gitian-win-signer.yml
+    mv build/out/counoscash-*win64-setup.exe ../counoscash-${VERSION}-win64-setup.exe
+    mv build/out/counoscash-*win32-setup.exe ../counoscash-${VERSION}-win32-setup.exe
     popd
 
 Commit your signature for the signed OS X/Windows binaries:
@@ -235,23 +235,23 @@ sha256sum * > SHA256SUMS
 
 The list of files should be:
 ```
-counoscoin-${VERSION}-aarch64-linux-gnu.tar.gz
-counoscoin-${VERSION}-arm-linux-gnueabihf.tar.gz
-counoscoin-${VERSION}-i686-pc-linux-gnu.tar.gz
-counoscoin-${VERSION}-x86_64-linux-gnu.tar.gz
-counoscoin-${VERSION}-osx64.tar.gz
-counoscoin-${VERSION}-osx.dmg
-counoscoin-${VERSION}.tar.gz
-counoscoin-${VERSION}-win32-setup.exe
-counoscoin-${VERSION}-win32.zip
-counoscoin-${VERSION}-win64-setup.exe
-counoscoin-${VERSION}-win64.zip
+counoscash-${VERSION}-aarch64-linux-gnu.tar.gz
+counoscash-${VERSION}-arm-linux-gnueabihf.tar.gz
+counoscash-${VERSION}-i686-pc-linux-gnu.tar.gz
+counoscash-${VERSION}-x86_64-linux-gnu.tar.gz
+counoscash-${VERSION}-osx64.tar.gz
+counoscash-${VERSION}-osx.dmg
+counoscash-${VERSION}.tar.gz
+counoscash-${VERSION}-win32-setup.exe
+counoscash-${VERSION}-win32.zip
+counoscash-${VERSION}-win64-setup.exe
+counoscash-${VERSION}-win64.zip
 ```
 The `*-debug*` files generated by the gitian build contain debug symbols
 for troubleshooting by developers. It is assumed that anyone that is interested
 in debugging can run gitian to generate the files for themselves. To avoid
 end-user confusion about which file to pick, as well as save storage
-space *do not upload these to the counoscoin.org server, nor put them in the torrent*.
+space *do not upload these to the counoscash.org server, nor put them in the torrent*.
 
 - GPG-sign it, delete the unsigned file:
 ```
@@ -261,24 +261,24 @@ rm SHA256SUMS
 (the digest algorithm is forced to sha256 to avoid confusion of the `Hash:` header that GPG adds with the SHA256 used for the files)
 Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spurious/nonsensical entry.
 
-- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the counoscoin.org server.
+- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the counoscash.org server.
 
 ```
 
-- Update counoscoin.org version
+- Update counoscash.org version
 
 - Announce the release:
 
-  - counoscoin-dev and counoscoin-dev mailing list
+  - counoscash-dev and counoscash-dev mailing list
 
-  - blog.counoscoin.org blog post
+  - blog.counoscash.org blog post
 
-  - Update title of #counoscoin and #counoscoin-dev on Freenode IRC
+  - Update title of #counoscash and #counoscash-dev on Freenode IRC
 
-  - Optionally twitter, reddit /r/CounosCoin, ... but this will usually sort out itself
+  - Optionally twitter, reddit /r/CounosCash, ... but this will usually sort out itself
 
   - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
 
-  - Create a [new GitHub release](https://github.com/counoscoin-project/counoscoin/releases/new) with a link to the archived release notes.
+  - Create a [new GitHub release](https://github.com/counoscash-project/counoscash/releases/new) with a link to the archived release notes.
 
   - Celebrate
