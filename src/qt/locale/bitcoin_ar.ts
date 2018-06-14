@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation>قم بنسخ العنوان المختار لحافظة النظام</translation>
+        <translation>قم بنسخ القوانين المختارة لحافظة النظام</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -55,18 +55,18 @@
     </message>
     <message>
         <source>Sending addresses</source>
-        <translation>عناوين الإرسال</translation>
+        <translation>ارسال العناوين</translation>
     </message>
     <message>
         <source>Receiving addresses</source>
-        <translation>عناوين الاستقبال</translation>
+        <translation>استقبال العناوين</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your CounosCoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>هذه هي عناوين Litecion التابعة لك من أجل إرسال الدفعات. تحقق دائما من المبلغ و عنوان المرسل المستقبل قبل إرسال العملات</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your CounosCoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>هذه هي عناوين Litecion التابعة لك من أجل إستقبال الدفعات. ينصح استخدام عنوان جديد من أجل كل صفقة</translation>
     </message>
     <message>
@@ -129,15 +129,11 @@
     </message>
     <message>
         <source>Repeat new passphrase</source>
-        <translation>اعد كتابة كلمة السر</translation>
-    </message>
-    <message>
-        <source>Show password</source>
-        <translation>إعرض كلمة السر</translation>
+        <translation>ادخل كلمة المرور الجديدة مرة أخرى</translation>
     </message>
     <message>
         <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>أدخل عبارة مرور جديدة إلى المحفظة. الرجاء استخدام عبارة مرور تتكون من10 حروف عشوائية على الاقل, أو ثمانية كلمات على الاقل.</translation>
+        <translation>أدخل عبارة مرور جديدة إلى المحفظة. الرجاء استخدام عبارة مرور تتكون من10 حروف عشوائية على الاقل, أو أكثر من 7 كلمات</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
@@ -172,8 +168,8 @@
         <translation>تأكيد تشفير المحفظة</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
-        <translation>تحذير: إذا قمت بتشفير محفظتك وفقدت كلمة المرور الخاص بك, ستفقد كل عملات LITECOINS الخاصة بك.</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR COUNOSCOINS&lt;/b&gt;!</source>
+        <translation>تحذير: إذا قمت بتشفير محفظتك وفقدت كلمة المرور الخاص بك, ستفقد كل عملات COUNOSCOINS الخاصة بك.</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -307,11 +303,11 @@
     </message>
     <message>
         <source>&amp;Sending addresses...</source>
-        <translation>&amp;عناوين الإرسال...</translation>
+        <translation>ارسال العناوين.</translation>
     </message>
     <message>
         <source>&amp;Receiving addresses...</source>
-        <translation>&amp;عناوين الاستقبال...</translation>
+        <translation>استقبال العناوين</translation>
     </message>
     <message>
         <source>Open &amp;URI...</source>
@@ -334,8 +330,8 @@
         <translation>إعادة الفهرسة الكتل على القرص ...</translation>
     </message>
     <message>
-        <source>Send coins to a Litecoin address</source>
-        <translation>ارسل عملات الى عنوان Litecoin</translation>
+        <source>Send coins to a CounosCoin address</source>
+        <translation>ارسل عملات الى عنوان CounosCoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -358,8 +354,8 @@
         <translation>&amp;التحقق من الرسالة...</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>بتكوين</translation>
+        <source>CounosCoin</source>
+        <translation>بت كوين</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -386,12 +382,12 @@
         <translation>تشفير المفتاح الخاص بمحفظتك</translation>
     </message>
     <message>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
-        <translation>وقَع الرسائل بواسطة ال: Litecoin الخاص بك لإثبات امتلاكك لهم</translation>
+        <source>Sign messages with your CounosCoin addresses to prove you own them</source>
+        <translation>وقَع الرسائل بواسطة ال: CounosCoin الخاص بك لإثبات امتلاكك لهم</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
-        <translation>تحقق من الرسائل للتأكد من أنَها وُقعت برسائل Litecoin محدَدة</translation>
+        <source>Verify messages to ensure they were signed with specified CounosCoin addresses</source>
+        <translation>تحقق من الرسائل للتأكد من أنَها وُقعت برسائل CounosCoin محدَدة</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -410,7 +406,7 @@
         <translation>شريط أدوات علامات التبويب</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and litecoin: URIs)</source>
+        <source>Request payments (generates QR codes and counoscoin: URIs)</source>
         <translation>أطلب دفعات (يولد كودات الرمز المربع وبيت كوين: العناوين المعطاة)</translation>
     </message>
     <message>
@@ -422,8 +418,8 @@
         <translation>عرض قائمة عناوين الإستقبال المستخدمة والملصقات</translation>
     </message>
     <message>
-        <source>Open a litecoin: URI or payment request</source>
-        <translation>فتح URI : Litecoin أو طلب دفع</translation>
+        <source>Open a counoscoin: URI or payment request</source>
+        <translation>فتح URI : CounosCoin أو طلب دفع</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -466,16 +462,12 @@
         <translation>محدث</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Litecoin command-line options</source>
+        <source>Show the %1 help message to get a list with possible CounosCoin command-line options</source>
         <translation>بين اشارة المساعدة %1 للحصول على قائمة من خيارات اوامر البت كوين المحتملة </translation>
     </message>
     <message>
         <source>%1 client</source>
         <translation>الزبون %1</translation>
-    </message>
-    <message>
-        <source>Connecting to peers...</source>
-        <translation>اتصال إلي القرناء...</translation>
     </message>
     <message>
         <source>Catching up...</source>
@@ -530,8 +522,8 @@
         <translation>المحفظة &lt;b&gt;مشفرة&lt;/b&gt; و &lt;b&gt;مقفلة&lt;/b&gt; حاليا</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
-        <translation>خطأ فادح حدث . لا يمكن اتمام Litecoin بامان سيتم الخروج</translation>
+        <source>A fatal error occurred. CounosCoin can no longer continue safely and will quit.</source>
+        <translation>خطأ فادح حدث . لا يمكن اتمام CounosCoin بامان سيتم الخروج</translation>
     </message>
 </context>
 <context>
@@ -696,7 +688,7 @@
         <translation>تعديل عنوان الارسال</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Litecoin address.</source>
+        <source>The entered address "%1" is not a valid CounosCoin address.</source>
         <translation>العنوان المدخل "%1" ليس عنوان بيت كوين صحيح.</translation>
     </message>
     <message>
@@ -809,10 +801,6 @@
         <translation>استخدام دليل بيانات مخصص:</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>بتكوين</translation>
-    </message>
-    <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
         <translation>خطأ: لا يمكن تكوين دليل بيانات مخصص ل %1</translation>
     </message>
@@ -828,32 +816,8 @@
         <translation>نمودج</translation>
     </message>
     <message>
-        <source>Number of blocks left</source>
-        <translation>عدد الكتل الفاضلة</translation>
-    </message>
-    <message>
         <source>Unknown...</source>
         <translation>غير معرف</translation>
-    </message>
-    <message>
-        <source>Last block time</source>
-        <translation>اخر وقت الكتلة</translation>
-    </message>
-    <message>
-        <source>Progress</source>
-        <translation>تقدم</translation>
-    </message>
-    <message>
-        <source>Progress increase per hour</source>
-        <translation>تقدم يزيد بلساعة</translation>
-    </message>
-    <message>
-        <source>calculating...</source>
-        <translation>تحسب الان...</translation>
-    </message>
-    <message>
-        <source>Estimated time left until synced</source>
-        <translation>الوقت المتبقي للمزامنة</translation>
     </message>
     <message>
         <source>Hide</source>
@@ -894,8 +858,12 @@
         <translation>م ب</translation>
     </message>
     <message>
-        <source>Open Configuration File</source>
-        <translation>فتح ملف الإعدادات</translation>
+        <source>Accept connections from outside</source>
+        <translation>إقبل التواصل من الخارج</translation>
+    </message>
+    <message>
+        <source>Third party transaction URLs</source>
+        <translation>عنوان النطاق للطرف الثالث</translation>
     </message>
     <message>
         <source>&amp;Reset Options</source>
@@ -930,20 +898,12 @@
         <translation>مستخدم للاتصال بالاصدقاء من خلال:</translation>
     </message>
     <message>
-        <source>IPv4</source>
-        <translation>IPv4</translation>
-    </message>
-    <message>
-        <source>IPv6</source>
-        <translation>IPv6</translation>
-    </message>
-    <message>
-        <source>Tor</source>
-        <translation>تور</translation>
-    </message>
-    <message>
         <source>&amp;Window</source>
         <translation>نافذه</translation>
+    </message>
+    <message>
+        <source>Hide tray icon</source>
+        <translation>اخفاء لوحة الايقون</translation>
     </message>
     <message>
         <source>&amp;Display</source>
@@ -972,14 +932,6 @@
     <message>
         <source>Confirm options reset</source>
         <translation>تأكيد استعادة الخيارات</translation>
-    </message>
-    <message>
-        <source>Configuration options</source>
-        <translation>إعداد الخيارات</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation>خطأ</translation>
     </message>
     <message>
         <source>The supplied proxy address is invalid.</source>
@@ -1022,15 +974,7 @@
     </context>
 <context>
     <name>PeerTableModel</name>
-    <message>
-        <source>Sent</source>
-        <translation>تم الإرسال</translation>
-    </message>
-    <message>
-        <source>Received</source>
-        <translation>إستقبل</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QObject</name>
     <message>
@@ -1053,27 +997,7 @@
         <source>%1 and %2</source>
         <translation>%1 و %2</translation>
     </message>
-    <message>
-        <source>%1 B</source>
-        <translation>%1 بايت</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 كيلو بايت</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 ميقا بايت</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 قيقا بايت</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>غير معروف</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QObject::QObject</name>
     </context>
@@ -1135,10 +1059,6 @@
         <translation>عدد الاتصالات</translation>
     </message>
     <message>
-        <source>Block chain</source>
-        <translation>سلسلة الكتل</translation>
-    </message>
-    <message>
         <source>Received</source>
         <translation>إستقبل</translation>
     </message>
@@ -1155,14 +1075,6 @@
         <translation>جهة</translation>
     </message>
     <message>
-        <source>Version</source>
-        <translation>الإصدار</translation>
-    </message>
-    <message>
-        <source>Starting Block</source>
-        <translation>كتلة البداية</translation>
-    </message>
-    <message>
         <source>Services</source>
         <translation>خدمات</translation>
     </message>
@@ -1175,16 +1087,16 @@
         <translation>آخر إرسال</translation>
     </message>
     <message>
-        <source>Last block time</source>
-        <translation>اخر وقت الكتلة</translation>
-    </message>
-    <message>
         <source>&amp;Open</source>
         <translation>الفتح</translation>
     </message>
     <message>
         <source>&amp;Network Traffic</source>
         <translation>&amp;حركة مرور الشبكة</translation>
+    </message>
+    <message>
+        <source>&amp;Clear</source>
+        <translation>&amp;مسح</translation>
     </message>
     <message>
         <source>Totals</source>
@@ -1213,6 +1125,26 @@
     <message>
         <source>1 &amp;year</source>
         <translation>1 &amp; سنة</translation>
+    </message>
+    <message>
+        <source>Use up and down arrows to navigate history, and &lt;b&gt;Ctrl-L&lt;/b&gt; to clear screen.</source>
+        <translation>استخدم اسهم الاعلى و الاسفل للتنقل بين السجلات و &lt;b&gt;Ctrl-L&lt;/b&gt;  لمسح الشاشة</translation>
+    </message>
+    <message>
+        <source>%1 B</source>
+        <translation>%1 بايت</translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation>%1 كيلو بايت</translation>
+    </message>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 ميقا بايت</translation>
+    </message>
+    <message>
+        <source>%1 GB</source>
+        <translation>%1 قيقا بايت</translation>
     </message>
     <message>
         <source>never</source>
@@ -1395,12 +1327,16 @@
         <translation>رسوم المعاملة:</translation>
     </message>
     <message>
-        <source>Choose...</source>
-        <translation>إختر …</translation>
-    </message>
-    <message>
         <source>Hide</source>
         <translation>إخفاء</translation>
+    </message>
+    <message>
+        <source>normal</source>
+        <translation>طبيعي</translation>
+    </message>
+    <message>
+        <source>fast</source>
+        <translation>سريع</translation>
     </message>
     <message>
         <source>Send to multiple recipients at once</source>
@@ -1510,7 +1446,7 @@
         <translation>هذا دفع اعتيادي</translation>
     </message>
     <message>
-        <source>The Litecoin address to send the payment to</source>
+        <source>The CounosCoin address to send the payment to</source>
         <translation>عنوان البت كوين المرسل اليه الدفع</translation>
     </message>
     <message>
@@ -1587,7 +1523,7 @@
         <translation>التوقيع</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Litecoin address</source>
+        <source>Sign the message to prove you own this CounosCoin address</source>
         <translation>وقع الرسالة لتثبت انك تمتلك عنوان البت كوين هذا</translation>
     </message>
     <message>
@@ -1716,10 +1652,6 @@
         <translation>عنوانه</translation>
     </message>
     <message>
-        <source>watch-only</source>
-        <translation>مشاهدة فقط</translation>
-    </message>
-    <message>
         <source>label</source>
         <translation>علامة</translation>
     </message>
@@ -1830,10 +1762,6 @@
         <translation>Mined</translation>
     </message>
     <message>
-        <source>watch-only</source>
-        <translation>مشاهدة فقط</translation>
-    </message>
-    <message>
         <source>(n/a)</source>
         <translation>غير متوفر</translation>
     </message>
@@ -1843,7 +1771,7 @@
     </message>
     <message>
         <source>Transaction status. Hover over this field to show number of confirmations.</source>
-        <translation>حالة التحويل. مرر فوق هذا الحقل لعرض عدد  التأكيدات.</translation>
+        <translation>حالة المعاملة. تحوم حول هذا الحقل لعرض عدد  التأكيدات.</translation>
     </message>
     <message>
         <source>Date and time that the transaction was received.</source>
@@ -1907,6 +1835,10 @@
     <message>
         <source>Other</source>
         <translation>اخرى</translation>
+    </message>
+    <message>
+        <source>Enter address or label to search</source>
+        <translation>ادخل عنوان أووصف للبحث</translation>
     </message>
     <message>
         <source>Min amount</source>
@@ -1986,26 +1918,14 @@
     </context>
 <context>
     <name>WalletFrame</name>
-    <message>
-        <source>No wallet has been loaded.</source>
-        <translation>لا يوجد محفظة تم تحميلها.</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>WalletModel</name>
     <message>
         <source>Send Coins</source>
         <translation>إرسال Coins</translation>
     </message>
-    <message>
-        <source>Current fee:</source>
-        <translation>الأجر الحالي:</translation>
-    </message>
-    <message>
-        <source>New fee:</source>
-        <translation>أجر جديد:</translation>
-    </message>
-    </context>
+</context>
 <context>
     <name>WalletView</name>
     <message>
@@ -2040,16 +1960,12 @@
         <translation>حدد مجلد المعلومات</translation>
     </message>
     <message>
-        <source>Litecoin Core</source>
-        <translation>جوهر Litecoin</translation>
+        <source>CounosCoin Core</source>
+        <translation>جوهر البيت كوين</translation>
     </message>
     <message>
-        <source>Accept connections from outside (default: 1 if no -proxy or -connect)</source>
-        <translation>قبول الاتصالات من خارج</translation>
-    </message>
-    <message>
-        <source>Connection options:</source>
-        <translation>خيارات الاتصال:</translation>
+        <source>The %s developers</source>
+        <translation>%s المبرمجون</translation>
     </message>
     <message>
         <source>Error: Disk space is low!</source>
@@ -2060,20 +1976,12 @@
         <translation>فشل في الاستماع على أي منفذ. استخدام الاستماع = 0 إذا كنت تريد هذا.</translation>
     </message>
     <message>
-        <source>Importing...</source>
-        <translation>استيراد...</translation>
+        <source>Invalid -onion address: '%s'</source>
+        <translation>عنوان اونيون غير صحيح : '%s'</translation>
     </message>
     <message>
-        <source>Loading P2P addresses...</source>
-        <translation>تحميل عناوين P2P...</translation>
-    </message>
-    <message>
-        <source>Use the test chain</source>
-        <translation>إستخدم السلسلة التجريبية</translation>
-    </message>
-    <message>
-        <source>Verifying blocks...</source>
-        <translation>التحقق من الكتل...</translation>
+        <source>Verifying wallet...</source>
+        <translation>التحقق من المحفظة ...</translation>
     </message>
     <message>
         <source>Wallet options:</source>
@@ -2088,36 +1996,24 @@
         <translation>فشل توقيع المعاملة</translation>
     </message>
     <message>
-        <source>The transaction amount is too small to pay the fee</source>
-        <translation>قيمة المعاملة صغيرة جدا لدفع الأجر</translation>
-    </message>
-    <message>
-        <source>This is experimental software.</source>
-        <translation>هذا برنامج تجريبي.</translation>
-    </message>
-    <message>
         <source>Transaction amount too small</source>
         <translation>قيمة العملية صغيره جدا</translation>
     </message>
     <message>
-        <source>Transaction too large for fee policy</source>
-        <translation>قيمة المعاملة كبيرة جدا لسياسة الأجر</translation>
-    </message>
-    <message>
         <source>Transaction too large</source>
-        <translation>المعاملة كبيرة جدا</translation>
-    </message>
-    <message>
-        <source>Verifying wallet(s)...</source>
-        <translation>التحقق من المحفظة (المحافظ)...</translation>
+        <translation>المعاملة طويلة جدا</translation>
     </message>
     <message>
         <source>Warning</source>
         <translation>تحذير</translation>
     </message>
     <message>
-        <source>%s is set very high!</source>
-        <translation>%s عالٍ جداً</translation>
+        <source>Loading addresses...</source>
+        <translation>تحميل العنوان</translation>
+    </message>
+    <message>
+        <source>Invalid -proxy address: '%s'</source>
+        <translation>عنوان البروكسي غير صحيح : '%s'</translation>
     </message>
     <message>
         <source>Make the wallet broadcast transactions</source>
@@ -2138,6 +2034,10 @@
     <message>
         <source>Cannot downgrade wallet</source>
         <translation>لا يمكن تخفيض قيمة المحفظة</translation>
+    </message>
+    <message>
+        <source>Cannot write default address</source>
+        <translation>لايمكن كتابة العنوان الافتراضي</translation>
     </message>
     <message>
         <source>Rescanning...</source>

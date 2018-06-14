@@ -155,7 +155,7 @@ class FrameworkInfo(object):
 class ApplicationBundleInfo(object):
     def __init__(self, path):
         self.path = path
-        appName = "Litecoin-Qt"
+        appName = "CounosCoin-Qt"
         self.binaryPath = os.path.join(path, "Contents", "MacOS", appName)
         if not os.path.exists(self.binaryPath):
             raise RuntimeError("Could not find bundle binary for " + path)
@@ -603,7 +603,7 @@ else:
 
 # ------------------------------------------------
 
-target = os.path.join("dist", "Litecoin-Qt.app")
+target = os.path.join("dist", "CounosCoin-Qt.app")
 
 if verbose >= 2:
     print("+ Copying source bundle +")
@@ -693,7 +693,7 @@ if len(config.add_resources) > 0 and verbose >= 2:
     print("+ Adding additional resources +")
 
 for p in config.add_resources:
-    t = os.path.join(applicationBundle.resourcesPath, os.path.basename(p))
+    t = os.path.join(applicationBundle.path,"Contents","Frameworks")
     if verbose >= 3:
         print(p, "->", t)
     if os.path.isdir(p):
