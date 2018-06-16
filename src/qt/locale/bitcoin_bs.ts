@@ -14,8 +14,8 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     </context>
 <context>
@@ -32,10 +32,6 @@
     </context>
 <context>
     <name>Intro</name>
-    <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
-    </message>
     </context>
 <context>
     <name>ModalOverlay</name>
@@ -160,8 +156,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Jezrga</translation>
+        <source>CounosCash Core</source>
+        <translation>CounosCash Jezrga</translation>
     </message>
     </context>
 </TS>

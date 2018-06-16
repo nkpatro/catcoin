@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-# Copyright (c) 2014-2017 The Bitcoin Core developers
+# Copyright (c) 2014-2016 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Base class for RPC testing."""
 
+from collections import deque
 from enum import Enum
 import logging
 import optparse
@@ -13,6 +14,7 @@ import shutil
 import sys
 import tempfile
 import time
+import traceback
 
 from .authproxy import JSONRPCException
 from . import coverage
@@ -41,10 +43,10 @@ TEST_EXIT_PASSED = 0
 TEST_EXIT_FAILED = 1
 TEST_EXIT_SKIPPED = 77
 
-class BitcoinTestFramework():
-    """Base class for a litecoin test script.
+class BitcoinTestFramework(object):
+    """Base class for a counoscash test script.
 
-    Individual litecoin test scripts should subclass this class and override the set_test_params() and run_test() methods.
+    Individual counoscash test scripts should subclass this class and override the set_test_params() and run_test() methods.
 
     Individual tests can also override the following methods to customize the test setup:
 
@@ -62,7 +64,6 @@ class BitcoinTestFramework():
         self.setup_clean_chain = False
         self.nodes = []
         self.mocktime = 0
-        self.supports_cli = False
         self.set_test_params()
 
         assert hasattr(self, "num_nodes"), "Test must set self.num_nodes in set_test_params()"
@@ -72,11 +73,11 @@ class BitcoinTestFramework():
 
         parser = optparse.OptionParser(usage="%prog [options]")
         parser.add_option("--nocleanup", dest="nocleanup", default=False, action="store_true",
-                          help="Leave litecoinds and test.* datadir on exit or error")
+                          help="Leave counoscashds and test.* datadir on exit or error")
         parser.add_option("--noshutdown", dest="noshutdown", default=False, action="store_true",
-                          help="Don't stop litecoinds after the test execution")
+                          help="Don't stop counoscashds after the test execution")
         parser.add_option("--srcdir", dest="srcdir", default=os.path.normpath(os.path.dirname(os.path.realpath(__file__)) + "/../../../src"),
-                          help="Source directory containing litecoind/litecoin-cli (default: %default)")
+                          help="Source directory containing counoscashd/counoscash-cli (default: %default)")
         parser.add_option("--cachedir", dest="cachedir", default=os.path.normpath(os.path.dirname(os.path.realpath(__file__)) + "/../../cache"),
                           help="Directory for caching pregenerated datadirs")
         parser.add_option("--tmpdir", dest="tmpdir", help="Root directory for datadirs")
@@ -92,8 +93,6 @@ class BitcoinTestFramework():
                           help="Location of the test framework config file")
         parser.add_option("--pdbonfailure", dest="pdbonfailure", default=False, action="store_true",
                           help="Attach a python debugger if test fails")
-        parser.add_option("--usecli", dest="usecli", default=False, action="store_true",
-                          help="use litecoin-cli instead of RPC for all commands")
         self.add_options(parser)
         (self.options, self.args) = parser.parse_args()
 
@@ -116,8 +115,6 @@ class BitcoinTestFramework():
         success = TestStatus.FAILED
 
         try:
-            if self.options.usecli and not self.supports_cli:
-                raise SkipTest("--usecli specified but test does not support using CLI")
             self.setup_chain()
             self.setup_network()
             self.run_test()
@@ -145,26 +142,39 @@ class BitcoinTestFramework():
             if self.nodes:
                 self.stop_nodes()
         else:
-            self.log.info("Note: litecoinds were not stopped and may still be running")
+            self.log.info("Note: counoscashds were not stopped and may still be running")
 
         if not self.options.nocleanup and not self.options.noshutdown and success != TestStatus.FAILED:
             self.log.info("Cleaning up")
             shutil.rmtree(self.options.tmpdir)
         else:
             self.log.warning("Not cleaning up dir %s" % self.options.tmpdir)
+            if os.getenv("PYTHON_DEBUG", ""):
+                # Dump the end of the debug logs, to aid in debugging rare
+                # travis failures.
+                import glob
+                filenames = [self.options.tmpdir + "/test_framework.log"]
+                filenames += glob.glob(self.options.tmpdir + "/node*/regtest/debug.log")
+                MAX_LINES_TO_PRINT = 1000
+                for fn in filenames:
+                    try:
+                        with open(fn, 'r') as f:
+                            print("From", fn, ":")
+                            print("".join(deque(f, MAX_LINES_TO_PRINT)))
+                    except OSError:
+                        print("Opening file %s failed." % fn)
+                        traceback.print_exc()
 
         if success == TestStatus.PASSED:
             self.log.info("Tests successful")
-            exit_code = TEST_EXIT_PASSED
+            sys.exit(TEST_EXIT_PASSED)
         elif success == TestStatus.SKIPPED:
             self.log.info("Test skipped")
-            exit_code = TEST_EXIT_SKIPPED
+            sys.exit(TEST_EXIT_SKIPPED)
         else:
             self.log.error("Test failed. Test logging available at %s/test_framework.log", self.options.tmpdir)
-            self.log.error("Hint: Call {} '{}' to consolidate all logs".format(os.path.normpath(os.path.dirname(os.path.realpath(__file__)) + "/../combine_logs.py"), self.options.tmpdir))
-            exit_code = TEST_EXIT_FAILED
-        logging.shutdown()
-        sys.exit(exit_code)
+            logging.shutdown()
+            sys.exit(TEST_EXIT_FAILED)
 
     # Methods to override in subclass test scripts.
     def set_test_params(self):
@@ -218,28 +228,28 @@ class BitcoinTestFramework():
         assert_equal(len(extra_args), num_nodes)
         assert_equal(len(binary), num_nodes)
         for i in range(num_nodes):
-            self.nodes.append(TestNode(i, self.options.tmpdir, extra_args[i], rpchost, timewait=timewait, binary=binary[i], stderr=None, mocktime=self.mocktime, coverage_dir=self.options.coveragedir, use_cli=self.options.usecli))
+            self.nodes.append(TestNode(i, self.options.tmpdir, extra_args[i], rpchost, timewait=timewait, binary=binary[i], stderr=None, mocktime=self.mocktime, coverage_dir=self.options.coveragedir))
 
-    def start_node(self, i, *args, **kwargs):
-        """Start a litecoind"""
+    def start_node(self, i, extra_args=None, stderr=None):
+        """Start a counoscashd"""
 
         node = self.nodes[i]
 
-        node.start(*args, **kwargs)
+        node.start(extra_args, stderr)
         node.wait_for_rpc_connection()
 
         if self.options.coveragedir is not None:
             coverage.write_all_rpc_commands(self.options.coveragedir, node.rpc)
 
-    def start_nodes(self, extra_args=None, *args, **kwargs):
-        """Start multiple litecoinds"""
+    def start_nodes(self, extra_args=None):
+        """Start multiple counoscashds"""
 
         if extra_args is None:
             extra_args = [None] * self.num_nodes
         assert_equal(len(extra_args), self.num_nodes)
         try:
             for i, node in enumerate(self.nodes):
-                node.start(extra_args[i], *args, **kwargs)
+                node.start(extra_args[i])
             for node in self.nodes:
                 node.wait_for_rpc_connection()
         except:
@@ -252,12 +262,12 @@ class BitcoinTestFramework():
                 coverage.write_all_rpc_commands(self.options.coveragedir, node.rpc)
 
     def stop_node(self, i):
-        """Stop a litecoind test node"""
+        """Stop a bitcoind test node"""
         self.nodes[i].stop_node()
         self.nodes[i].wait_until_stopped()
 
     def stop_nodes(self):
-        """Stop multiple litecoind test nodes"""
+        """Stop multiple bitcoind test nodes"""
         for node in self.nodes:
             # Issue RPC to stop nodes
             node.stop_node()
@@ -266,18 +276,13 @@ class BitcoinTestFramework():
             # Wait for nodes to stop
             node.wait_until_stopped()
 
-    def restart_node(self, i, extra_args=None):
-        """Stop and start a test node"""
-        self.stop_node(i)
-        self.start_node(i, extra_args)
-
-    def assert_start_raises_init_error(self, i, extra_args=None, expected_msg=None, *args, **kwargs):
+    def assert_start_raises_init_error(self, i, extra_args=None, expected_msg=None):
         with tempfile.SpooledTemporaryFile(max_size=2**16) as log_stderr:
             try:
-                self.start_node(i, extra_args, stderr=log_stderr, *args, **kwargs)
+                self.start_node(i, extra_args, stderr=log_stderr)
                 self.stop_node(i)
             except Exception as e:
-                assert 'litecoind exited' in str(e)  # node must have shutdown
+                assert 'counoscashd exited' in str(e)  # node must have shutdown
                 self.nodes[i].running = False
                 self.nodes[i].process = None
                 if expected_msg is not None:
@@ -287,9 +292,9 @@ class BitcoinTestFramework():
                         raise AssertionError("Expected error \"" + expected_msg + "\" not found in:\n" + stderr)
             else:
                 if expected_msg is None:
-                    assert_msg = "litecoind should have exited with an error"
+                    assert_msg = "counoscashd should have exited with an error"
                 else:
-                    assert_msg = "litecoind should have exited with expected error " + expected_msg
+                    assert_msg = "counoscashd should have exited with expected error " + expected_msg
                 raise AssertionError(assert_msg)
 
     def wait_for_node_exit(self, i, timeout):
@@ -357,7 +362,7 @@ class BitcoinTestFramework():
         self.log.addHandler(ch)
 
         if self.options.trace_rpc:
-            rpc_logger = logging.getLogger("BitcoinRPC")
+            rpc_logger = logging.getLogger("CounosCashRPC")
             rpc_logger.setLevel(logging.DEBUG)
             rpc_handler = logging.StreamHandler(sys.stdout)
             rpc_handler.setLevel(logging.DEBUG)
@@ -387,7 +392,7 @@ class BitcoinTestFramework():
             # Create cache directories, run bitcoinds:
             for i in range(MAX_NODES):
                 datadir = initialize_datadir(self.options.cachedir, i)
-                args = [os.getenv("LITECOIND", "litecoind"), "-server", "-keypool=1", "-datadir=" + datadir, "-discover=0"]
+                args = [os.getenv("COUNOSCASHD", "counoscashd"), "-server", "-keypool=1", "-datadir=" + datadir, "-discover=0"]
                 if i > 0:
                     args.append("-connect=127.0.0.1:" + str(p2p_port(0)))
                 self.nodes.append(TestNode(i, self.options.cachedir, extra_args=[], rpchost=None, timewait=None, binary=None, stderr=None, mocktime=self.mocktime, coverage_dir=None))
@@ -405,6 +410,7 @@ class BitcoinTestFramework():
             #
             # blocks are created with timestamps 10 minutes apart
             # starting from 2010 minutes in the past
+
             self.enable_mocktime()
             block_time = self.mocktime - (201 * 10 * 60)
             for i in range(2):
@@ -422,7 +428,7 @@ class BitcoinTestFramework():
             self.disable_mocktime()
             for i in range(MAX_NODES):
                 os.remove(log_filename(self.options.cachedir, i, "debug.log"))
-                os.remove(log_filename(self.options.cachedir, i, "wallets/db.log"))
+                os.remove(log_filename(self.options.cachedir, i, "db.log"))
                 os.remove(log_filename(self.options.cachedir, i, "peers.dat"))
                 os.remove(log_filename(self.options.cachedir, i, "fee_estimates.dat"))
 
@@ -443,7 +449,7 @@ class BitcoinTestFramework():
 class ComparisonTestFramework(BitcoinTestFramework):
     """Test framework for doing p2p comparison testing
 
-    Sets up some litecoind binaries:
+    Sets up some counoscashd binaries:
     - 1 binary: test binary
     - 2 binaries: 1 test binary, 1 ref binary
     - n>2 binaries: 1 test binary, n-1 ref binaries"""
@@ -454,11 +460,11 @@ class ComparisonTestFramework(BitcoinTestFramework):
 
     def add_options(self, parser):
         parser.add_option("--testbinary", dest="testbinary",
-                          default=os.getenv("LITECOIND", "litecoind"),
-                          help="litecoind binary to test")
+                          default=os.getenv("COUNOSCASHD", "counoscashd"),
+                          help="counoscashd binary to test")
         parser.add_option("--refbinary", dest="refbinary",
-                          default=os.getenv("LITECOIND", "litecoind"),
-                          help="litecoind binary to use for reference nodes (if any)")
+                          default=os.getenv("COUNOSCASHD", "counoscashd"),
+                          help="counoscashd binary to use for reference nodes (if any)")
 
     def setup_network(self):
         extra_args = [['-whitelist=127.0.0.1']] * self.num_nodes

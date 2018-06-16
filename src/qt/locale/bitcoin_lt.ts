@@ -3,7 +3,7 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation>Spustelėkite dešinįjį klavišą norint keisti adresą arba etiketę</translation>
+        <translation>Spustelėkite dešinįjį klaviša norint keisti adresą arba etiketę</translation>
     </message>
     <message>
         <source>Create a new address</source>
@@ -162,8 +162,8 @@
         <translation>Blokai iš naujo indeksuojami...</translation>
     </message>
     <message>
-        <source>Send coins to a Litecoin address</source>
-        <translation>Siųsti monetas Litecoin adresui</translation>
+        <source>Send coins to a CounosCash address</source>
+        <translation>Siųsti monetas CounosCash adresui</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -186,8 +186,8 @@
         <translation>&amp;Tikrinti žinutę...</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>CounosCash</source>
+        <translation>CounosCash</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -383,10 +383,6 @@
         <translation>Sveiki</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Klaida</translation>
     </message>
@@ -436,8 +432,8 @@
         <translation>Piniginė</translation>
     </message>
     <message>
-        <source>Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatiškai atidaryti Litecoin kliento prievadą maršrutizatoriuje. Tai veikia tik tada, kai jūsų maršrutizatorius palaiko UPnP ir ji įjungta.</translation>
+        <source>Automatically open the CounosCash client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatiškai atidaryti CounosCash kliento prievadą maršrutizatoriuje. Tai veikia tik tada, kai jūsų maršrutizatorius palaiko UPnP ir ji įjungta.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -524,10 +520,6 @@
         <translation>Kliento perkrovimas reikalingas nustatymų aktyvavimui</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation>Klaida</translation>
-    </message>
-    <message>
         <source>This change would require a client restart.</source>
         <translation>Šis pakeitimas reikalautų kliento perkrovimo</translation>
     </message>
@@ -572,11 +564,7 @@
     </context>
 <context>
     <name>PeerTableModel</name>
-    <message>
-        <source>Received</source>
-        <translation>Gauta</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QObject</name>
     <message>
@@ -595,27 +583,7 @@
         <source>N/A</source>
         <translation>nėra</translation>
     </message>
-    <message>
-        <source>%1 B</source>
-        <translation>%1 B</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 KB</translation>
-    </message>
-    <message>
-        <source>%1 MB</source>
-        <translation>%1 MB</translation>
-    </message>
-    <message>
-        <source>%1 GB</source>
-        <translation>%1 GB</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>nežinomas</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>QObject::QObject</name>
     </context>
@@ -689,6 +657,10 @@
         <translation>&amp;Konsolė</translation>
     </message>
     <message>
+        <source>&amp;Clear</source>
+        <translation>Išvalyti</translation>
+    </message>
+    <message>
         <source>Totals</source>
         <translation>Viso:</translation>
     </message>
@@ -699,6 +671,22 @@
     <message>
         <source>Clear console</source>
         <translation>Išvalyti konsolę</translation>
+    </message>
+    <message>
+        <source>%1 B</source>
+        <translation>%1 B</translation>
+    </message>
+    <message>
+        <source>%1 KB</source>
+        <translation>%1 KB</translation>
+    </message>
+    <message>
+        <source>%1 MB</source>
+        <translation>%1 MB</translation>
+    </message>
+    <message>
+        <source>%1 GB</source>
+        <translation>%1 GB</translation>
     </message>
     <message>
         <source>never</source>
@@ -877,7 +865,7 @@
         <translation>Įveskite pranešimą, kurį norite pasirašyti čia</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Litecoin address</source>
+        <source>Sign the message to prove you own this CounosCash address</source>
         <translation>Registruotis žinute įrodymuii, kad turite šį adresą</translation>
     </message>
     <message>
@@ -893,8 +881,8 @@
         <translation>&amp;Patikrinti žinutę</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Litecoin address</source>
-        <translation>Patikrinkite žinutę, jog įsitikintumėte, kad ją pasirašė nurodytas Litecoin adresas</translation>
+        <source>Verify the message to ensure it was signed with the specified CounosCash address</source>
+        <translation>Patikrinkite žinutę, jog įsitikintumėte, kad ją pasirašė nurodytas CounosCash adresas</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -970,8 +958,8 @@
         <translation>Dirbti fone kaip šešėlyje ir priimti komandas</translation>
     </message>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin branduolys</translation>
+        <source>CounosCash Core</source>
+        <translation>CounosCash branduolys</translation>
     </message>
     <message>
         <source>Error opening block database</source>
@@ -980,6 +968,10 @@
     <message>
         <source>Verifying blocks...</source>
         <translation>Tikrinami blokai...</translation>
+    </message>
+    <message>
+        <source>Verifying wallet...</source>
+        <translation>Tikrinama piniginė...</translation>
     </message>
     <message>
         <source>Information</source>
@@ -1006,6 +998,14 @@
         <translation>Leisti DNS paiešką sujungimui ir mazgo pridėjimui</translation>
     </message>
     <message>
+        <source>Loading addresses...</source>
+        <translation>Užkraunami adresai...</translation>
+    </message>
+    <message>
+        <source>Invalid -proxy address: '%s'</source>
+        <translation>Neteisingas proxy adresas: '%s'</translation>
+    </message>
+    <message>
         <source>Insufficient funds</source>
         <translation>Nepakanka lėšų</translation>
     </message>
@@ -1014,8 +1014,16 @@
         <translation>Įkeliamas blokų indeksas...</translation>
     </message>
     <message>
+        <source>Add a node to connect to and attempt to keep the connection open</source>
+        <translation>Pridėti mazgą prie sujungti su and attempt to keep the connection open</translation>
+    </message>
+    <message>
         <source>Loading wallet...</source>
         <translation>Užkraunama piniginė...</translation>
+    </message>
+    <message>
+        <source>Cannot write default address</source>
+        <translation>Negalima parašyti įprasto adreso</translation>
     </message>
     <message>
         <source>Rescanning...</source>
