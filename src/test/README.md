@@ -5,42 +5,42 @@ and tests weren't explicitly disabled.
 
 After configuring, they can be run with `make check`.
 
-To run the litecoind tests manually, launch `src/test/test_litecoin`. To recompile
+To run the infcoind tests manually, launch `src/test/test_infcoin`. To recompile
 after a test file was modified, run `make` and then run the test again. If you
 modify a non-test file, use `make -C src/test` to recompile only what's needed
-to run the litecoind tests.
+to run the infcoind tests.
 
-To add more litecoind tests, add `BOOST_AUTO_TEST_CASE` functions to the existing
+To add more infcoind tests, add `BOOST_AUTO_TEST_CASE` functions to the existing
 .cpp files in the `test/` directory or add new .cpp files that
 implement new BOOST_AUTO_TEST_SUITE sections.
 
-To run the litecoin-qt tests manually, launch `src/qt/test/test_litecoin-qt`
+To run the infcoin-qt tests manually, launch `src/qt/test/test_infcoin-qt`
 
-To add more litecoin-qt tests, add them to the `src/qt/test/` directory and
+To add more infcoin-qt tests, add them to the `src/qt/test/` directory and
 the `src/qt/test/test_main.cpp` file.
 
 ### Running individual tests
 
-test_litecoin has some built-in command-line arguments; for
+test_infcoin has some built-in command-line arguments; for
 example, to run just the getarg_tests verbosely:
 
-    test_litecoin --log_level=all --run_test=getarg_tests
+    test_infcoin --log_level=all --run_test=getarg_tests
 
 ... or to run just the doubledash test:
 
-    test_litecoin --run_test=getarg_tests/doubledash
+    test_infcoin --run_test=getarg_tests/doubledash
 
-Run `test_litecoin --help` for the full list.
+Run `test_infcoin --help` for the full list.
 
 ### Note on adding test cases
 
 The sources in this directory are unit test cases.  Boost includes a
-unit testing framework, and since litecoin already uses boost, it makes
+unit testing framework, and since infcoin already uses boost, it makes
 sense to simply use this framework rather than require developers to
 configure some other framework (we want as few impediments to creating
 unit tests as possible).
 
-The build system is setup to compile an executable called "test_litecoin"
+The build system is setup to compile an executable called "test_infcoin"
 that runs all of the unit tests.  The main source file is called
 test_bitcoin.cpp, which simply includes other files that contain the
 actual unit tests (outside of a couple required preprocessor
