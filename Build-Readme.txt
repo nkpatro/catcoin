@@ -3,7 +3,7 @@ Start here:
 https://github.com/litecoin-project/litecoin/blob/master/doc/build-unix.md
 
 
-The Litecoin build instructions are insufficient for Windows.
+The Positive build instructions are insufficient for Windows.
 
 First be sure you have dos2unix because several of the problems relate to line endings.
 
