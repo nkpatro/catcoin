@@ -1,50 +1,48 @@
-Litecoin Core integration/staging tree
+Kevacoin Core integration/staging tree
 =====================================
 
-[![Build Status](https://travis-ci.org/litecoin-project/litecoin.svg?branch=master)](https://travis-ci.org/litecoin-project/litecoin)
+https://kevacoin.org
 
-https://litecoin.org
-
-What is Litecoin?
+What is Kevacoin?
 ----------------
 
-Litecoin is an experimental digital currency that enables instant payments to
-anyone, anywhere in the world. Litecoin uses peer-to-peer technology to operate
-with no central authority: managing transactions and issuing money are carried
-out collectively by the network. Litecoin Core is the name of open source
-software which enables the use of this currency.
+Kevacoin is a decentralized open source key-value data store based on the Litecoin (which is in turn based on Bitcoin) cryptocurrency. Kevacoin is significantly influenced by Namecoin [https://namecoin.org](https://namecoin.org), even though it serves very different purposes. Its source code is based Namecoin's with lots of modification.
+
+What does it do?
+----------------
+* Securely record keys and their values. Size of value is up to 3072 bytes. No hard limits on the number of keys.
+* Update or delete the keys and their values.
+* Maintain network-unqiue namespaces. Keys are grouped under namespaces to avoid name conflicts.
+* Transact the digital currency kevacoins (KVA).
+
+What can it be used for?
+------------------------
+As a decentralized key-value database, it can be used to store data for all kinds of applications, such as social media, microblogging, public identity information, notary service. Kevacoin has limited support for smart contracts (similar to Bitcoin and Litecoin), but one can still develop decentralized apps (dApps) on Kevacoin. The data is decentralized while the application logic is developed off the blockchain.
 
 For more information, as well as an immediately useable, binary version of
-the Litecoin Core software, see [https://litecoin.org](https://litecoin.org).
+the Kevacoin Core software, see [https://kevacoin.org](https://kevacoin.org).
 
 License
 -------
 
-Litecoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
+Kevacoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see https://opensource.org/licenses/MIT.
 
 Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/litecoin-project/litecoin/tags) are created
-regularly to indicate new official, stable release versions of Litecoin Core.
+completely stable. [Tags](https://github.com/kevacoin-project/litecoin/tags) are created
+regularly to indicate new official, stable release versions of Kevacoin Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-The developer [mailing list](https://groups.google.com/forum/#!forum/litecoin-dev)
-should be used to discuss complicated or controversial changes before working
-on a patch set.
-
-Developer IRC can be found on Freenode at #litecoin-dev.
 
 Testing
 -------
 
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test on short notice. Please be patient and help out by testing
-other people's pull requests, and remember this is a security-critical project where any mistake might cost people
-lots of money.
+Testing and code review is the bottleneck for development; we need to carefully review and test the pull requests. Please be patient and help out by testing
+other people's pull requests, and remember this is a security-critical project where any mistake might cost people money and data.
 
 ### Automated Testing
 
@@ -70,7 +68,7 @@ Translations
 ------------
 
 We only accept translation fixes that are submitted through [Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcoin/).
-Translations are converted to Litecoin periodically.
+Translations are converted to Kevacoin periodically.
 
 Translations are periodically pulled from Transifex and merged into the git repository. See the
 [translation process](doc/translation_process.md) for details on how this works.
