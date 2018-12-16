@@ -66,10 +66,10 @@ class CMainParams : public CChainParams {
 public:
     CMainParams() {
         strNetworkID = "main";
-        consensus.nSubsidyHalvingInterval = 13440000;
+        consensus.nSubsidyHalvingInterval = 1050000; // 210000 * 5
         consensus.BIP16Height = 1;
-        consensus.BIP34Height = 200;
-        consensus.BIP34Hash = uint256S("0x581cc1e4153a2a367012d3678f0f83f7d62286d84e69ab860804acf3ff2f572b"); // Genesis
+        consensus.BIP34Height = 10;
+        //consensus.BIP34Hash = uint256S("0x581cc1e4153a2a367012d3678f0f83f7d62286d84e69ab860804acf3ff2f572b");
         consensus.BIP65Height = 1;
         consensus.BIP66Height = 1;
         consensus.powLimit = uint256S("000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
