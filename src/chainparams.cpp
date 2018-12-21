@@ -220,18 +220,20 @@ public:
         pchMessageStart[3] = 0xe4;
         nDefaultPort = 19335;
         nPruneAfterHeight = 1000;
-        genesis = CreateGenesisBlock(1542309299, 14580, 0x1f0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1543789622, 1592, 0x1f0ffff0, 1, 500 * COIN);
 
 #if 0
         arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
         uint256 hashGenesisBlock = uint256S("0x01");
         if (genesis.GetHash() != hashGenesisBlock) {
-            printf("recalculating params for mainnet.\n");
+            printf("recalculating params for testnet.\n");
             printf("old testnet genesis nonce: %d\n", genesis.nNonce);
             printf("old testnet genesis hash:  %s\n", hashGenesisBlock.ToString().c_str());
             // deliberately empty for loop finds nonce value.
             for(genesis.nNonce = 500; hashTarget < UintToArith256(genesis.GetPoWHash()); genesis.nNonce++) {
-                printf("nNonce: %d\n\n", genesis.nNonce);
+                if ((genesis.nNonce % 500) == 1) {
+                    printf("nNonce: %d\n\n", genesis.nNonce);
+                }
             }
             printf("new testnet genesis merkle root: %s\n", genesis.hashMerkleRoot.ToString().c_str());
             printf("new testnet genesis nonce: %d\n", genesis.nNonce);
@@ -240,8 +242,8 @@ public:
 #endif
 
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("ff628438a3818f53874f6b3d125a39edac0ee2557a1d41befeae712f3029b650"));
-        assert(genesis.hashMerkleRoot == uint256S("677b0cc3aa49a118484f34bc1b1065e4ecdbd9a895e43d7fcd1c4b74beb492da"));
+        assert(consensus.hashGenesisBlock == uint256S("860764b471430b96f15c145a44fd854f89d3be6f9ae054ef46e4c8473259bae3"));
+        assert(genesis.hashMerkleRoot == uint256S("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
