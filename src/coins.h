@@ -214,7 +214,7 @@ public:
     bool BatchWrite(CCoinsMap &mapCoins, const uint256 &hashBlock, const CKevaCache &names) override;
     CCoinsViewCursor *Cursor() const override;
     size_t EstimateSize() const override;
-    bool ValidateNameDB() const;
+    bool ValidateNameDB() const override;
 };
 
 
