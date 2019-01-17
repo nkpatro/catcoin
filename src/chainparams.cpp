@@ -115,7 +115,10 @@ public:
         const uint32_t genesisBlockReward = 0.00001 * COIN; // A small reward for the core developers :-)
         genesis = CreateGenesisBlock(1543789622, 3302, 0x1f0ffff0, 1, genesisBlockReward);
 
-#if 0
+#if 1
+        printf("\nMainnet is not live yet, use -testnet to connect to the testnet.\n\n");
+        exit(1);
+#else
         arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
         uint256 hashGenesisBlock = uint256S("0x01");
         if (genesis.GetHash() != hashGenesisBlock) {
