@@ -39,7 +39,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
 
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    // JWU TODO: change timestamp
+    // RELEASE TODO: change timestamp
     const char* pszTimestamp = "The Economist 05/Dec/2018 The US-China trade war is on hold";
     const CScript genesisOutputScript = CScript() << ParseHex("a914676a24ba4bfadd458e5245b26fa57f9a62ca185087");
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
@@ -141,6 +141,8 @@ public:
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.emplace_back("dnsseed.kevacoin.org");
         vSeeds.emplace_back("dnsseed.kevacoin.com");
+        vSeeds.emplace_back("dnsseed.honourchat.com");
+        vSeeds.emplace_back("dnsseed.remlec.com");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,45); // K
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -250,6 +252,8 @@ public:
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
         vSeeds.emplace_back("testnet-seed.kevacoin.org");
+        vSeeds.emplace_back("testnet-seed.honourchat.com");
+        vSeeds.emplace_back("testnet-seed.remlec.com");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,45); // K
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
