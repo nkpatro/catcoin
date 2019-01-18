@@ -95,10 +95,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000000000000000ffff");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100000");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x66f49ad85624c33e4fd61aa45c54012509ed4a53308908dd07f56346c7939273"); //1441280
+        consensus.defaultAssumeValid = uint256S("0x66f49ad85624c33e4fd61aa45c54012509ed4a53308908dd07f56346c7939273");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -113,39 +113,20 @@ public:
         nPruneAfterHeight = 100000;
 
         const uint32_t genesisBlockReward = 0.00001 * COIN; // A small reward for the core developers :-)
+        //TODO: target: 0x1e0fffff, update timestampe and nonce.
         genesis = CreateGenesisBlock(1543789622, 3302, 0x1f0ffff0, 1, genesisBlockReward);
 
 #if 1
         printf("\nMainnet is not live yet, use -testnet to connect to the testnet.\n\n");
         exit(1);
-#else
-        arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
-        uint256 hashGenesisBlock = uint256S("0x01");
-        if (genesis.GetHash() != hashGenesisBlock) {
-            printf("recalculating params for mainnet.\n");
-            printf("old mainnet genesis nonce: %d\n", genesis.nNonce);
-            printf("old mainnet genesis hash:  %s\n", hashGenesisBlock.ToString().c_str());
-            // deliberately empty for loop finds nonce value.
-            for(genesis.nNonce = 500; hashTarget < UintToArith256(genesis.GetPoWHash()); genesis.nNonce++) {
-                if ((genesis.nNonce % 500) == 1) {
-                    printf("nNonce: %d\n\n", genesis.nNonce);
-                }
-            }
-            printf("new mainnet genesis merkle root: %s\n", genesis.hashMerkleRoot.ToString().c_str());
-            printf("new mainnet genesis nonce: %d\n", genesis.nNonce);
-            printf("new mainnet genesis hash: %s\n", genesis.GetHash().ToString().c_str());
-        }
 #endif
-
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x77c037d74bc51b535629537c8e9530340ea12272f43d261a0ee59e8f2ad0e6f6"));
         assert(genesis.hashMerkleRoot == uint256S("0xb21d4680875c0e472b7dbf3dbab2aaeb2dbbb5fa8b154f978b5ea0706d1fd5b9"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.emplace_back("dnsseed.kevacoin.org");
-        vSeeds.emplace_back("dnsseed.kevacoin.com");
         vSeeds.emplace_back("dnsseed.honourchat.com");
-        vSeeds.emplace_back("dnsseed.remlec.com");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,45); // K
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -188,7 +169,7 @@ public:
         consensus.nSubsidyHalvingInterval = 840000;
         consensus.BIP16Height = 0; // always enforce P2SH BIP16 on regtest
         consensus.BIP34Height = 1;
-        consensus.BIP34Hash = uint256S("0x581cc1e4153a2a367012d3678f0f83f7d62286d84e69ab860804acf3ff2f572b"); // Genesis
+        consensus.BIP34Hash = uint256S("0xa8dbaa66a9266348f6527fe528efea73227d51938befb81d5a1521cebd319c4a"); // Genesis
         consensus.BIP65Height = 1;
         consensus.BIP66Height = 1;
         consensus.powLimit = uint256S("000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
@@ -215,10 +196,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000000000000000ffff");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100000");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x1efb29c8187d5a496a33377941d1df415169c3ce5d8c05d055f25b683ec3f9a3"); //612653
+        consensus.defaultAssumeValid = uint256S("0x1efb29c8187d5a496a33377941d1df415169c3ce5d8c05d055f25b683ec3f9a3");
 
         pchMessageStart[0] = 0xfe;
         pchMessageStart[1] = 0xec;
@@ -226,29 +207,9 @@ public:
         pchMessageStart[3] = 0xe4;
         nDefaultPort = 19335;
         nPruneAfterHeight = 1000;
-        genesis = CreateGenesisBlock(1543789622, 1592, 0x1f0ffff0, 1, 500 * COIN);
-
-#if 0
-        arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
-        uint256 hashGenesisBlock = uint256S("0x01");
-        if (genesis.GetHash() != hashGenesisBlock) {
-            printf("recalculating params for testnet.\n");
-            printf("old testnet genesis nonce: %d\n", genesis.nNonce);
-            printf("old testnet genesis hash:  %s\n", hashGenesisBlock.ToString().c_str());
-            // deliberately empty for loop finds nonce value.
-            for(genesis.nNonce = 500; hashTarget < UintToArith256(genesis.GetPoWHash()); genesis.nNonce++) {
-                if ((genesis.nNonce % 500) == 1) {
-                    printf("nNonce: %d\n\n", genesis.nNonce);
-                }
-            }
-            printf("new testnet genesis merkle root: %s\n", genesis.hashMerkleRoot.ToString().c_str());
-            printf("new testnet genesis nonce: %d\n", genesis.nNonce);
-            printf("new testnet genesis hash: %s\n", genesis.GetHash().ToString().c_str());
-        }
-#endif
-
+        genesis = CreateGenesisBlock(1543789622, 0x80074e7c, 0x1e0fffff, 1, 500 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("860764b471430b96f15c145a44fd854f89d3be6f9ae054ef46e4c8473259bae3"));
+        assert(consensus.hashGenesisBlock == uint256S("a8dbaa66a9266348f6527fe528efea73227d51938befb81d5a1521cebd319c4a"));
         assert(genesis.hashMerkleRoot == uint256S("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"));
 
         vFixedSeeds.clear();
@@ -256,7 +217,6 @@ public:
         // nodes with support for servicebits filtering should be at the top
         vSeeds.emplace_back("testnet-seed.kevacoin.org");
         vSeeds.emplace_back("testnet-seed.honourchat.com");
-        vSeeds.emplace_back("testnet-seed.remlec.com");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,45); // K
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
