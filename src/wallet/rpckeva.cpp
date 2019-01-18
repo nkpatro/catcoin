@@ -584,10 +584,6 @@ getKevaInfo (const valtype& name, const valtype& value, const COutPoint& outp,
   else
     addrStr = "<nonstandard>";
   obj.pushKV("address", addrStr);
-
-  /* Calculate expiration data.  */
-  const int curHeight = chainActive.Height ();
-  const Consensus::Params& params = Params ().GetConsensus ();
   obj.pushKV("height", height);
 
   return obj;
