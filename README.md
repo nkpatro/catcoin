@@ -1,6 +1,8 @@
 Kevacoin Core integration/staging tree
 =====================================
 
+[![Gitter][gitter-image]][gitter-url]
+
 https://kevacoin.org
 
 What is Kevacoin?
@@ -82,3 +84,6 @@ Translations are periodically pulled from Transifex and merged into the git repo
 
 **Important**: We do not accept translation changes as GitHub pull requests because the next
 pull from Transifex would automatically overwrite them again.
+
+[gitter-image]: http://img.shields.io/badge/+%20GITTER-JOIN%20CHAT%20%E2%86%92-1DCE73.svg?style=flat-square
+[gitter-url]: https://gitter.im/kevacoin-project/community
