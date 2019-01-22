@@ -116,10 +116,6 @@ public:
         //TODO: target: 0x1e0fffff, update timestampe and nonce.
         genesis = CreateGenesisBlock(1543789622, 3302, 0x1f0ffff0, 1, genesisBlockReward);
 
-#if 1
-        printf("\nMainnet is not live yet, use -testnet to connect to the testnet.\n\n");
-        exit(1);
-#endif
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x77c037d74bc51b535629537c8e9530340ea12272f43d261a0ee59e8f2ad0e6f6"));
         assert(genesis.hashMerkleRoot == uint256S("0xb21d4680875c0e472b7dbf3dbab2aaeb2dbbb5fa8b154f978b5ea0706d1fd5b9"));

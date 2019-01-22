@@ -100,6 +100,14 @@ bool AppInit(int argc, char* argv[])
             fprintf(stderr,"Error reading configuration file: %s\n", e.what());
             return false;
         }
+
+#if 1
+        if (ChainNameFromCommandLine() == CBaseChainParams::MAIN) {
+            printf("\nMainnet is not live yet, use \"-testnet\" option to connect to the testnet.\n\n");
+            exit(1);
+        }
+#endif
+
         // Check for -testnet or -regtest parameter (Params() calls are only valid after this clause)
         try {
             SelectParams(ChainNameFromCommandLine());
