@@ -8,7 +8,7 @@ https://kevacoin.org
 What is Kevacoin?
 ----------------
 
-Kevacoin is a decentralized open source key-value data store based on the Litecoin (which is in turn based on Bitcoin) cryptocurrency. Kevacoin is largely influenced by Namecoin [https://namecoin.org](https://namecoin.org), even though it serves very different purposes. Its source code is based Namecoin's with lots of modification.
+Kevacoin is a decentralized open source key-value data store based on the Litecoin (which is in turn based on Bitcoin) cryptocurrency. Kevacoin is largely influenced by Namecoin [https://namecoin.org](https://namecoin.org), even though it serves very different purposes and works very differently.
 
 What does it do?
 ----------------
