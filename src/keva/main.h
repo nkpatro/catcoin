@@ -270,8 +270,8 @@ bool UnexpireNames (unsigned nHeight, CBlockUndo& undo,
                     CCoinsViewCache& view, std::set<valtype>& names);
 
 /**
- * Check the name database consistency.  This calls CCoinsView::ValidateNameDB,
- * but only if applicable depending on the -checknamedb setting.  If it fails,
+ * Check the name database consistency.  This calls CCoinsView::ValidateKevaDB,
+ * but only if applicable depending on the -checkkevadb setting.  If it fails,
  * this throws an assertion failure.
  * @param disconnect Whether we are disconnecting blocks.
  */

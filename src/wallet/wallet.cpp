@@ -1790,7 +1790,7 @@ CAmount CWalletTx::GetDebit(const isminefilter& filter, bool fExcludeKeva) const
     if(filter & ISMINE_WATCH_ONLY)
     {
         if(fWatchDebitCached) {
-            debit += (fExcludeKeva ? nWatchDebitCached : nWatchDebitWithKevaCached, false);
+            debit += (fExcludeKeva ? nWatchDebitCached : nWatchDebitWithKevaCached);
         }
         else
         {

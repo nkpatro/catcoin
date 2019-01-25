@@ -16,7 +16,11 @@ bool CCoinsView::GetNamesForHeight(unsigned nHeight, std::set<valtype>& names) c
 CKevaIterator* CCoinsView::IterateKeys(const valtype& nameSpace) const { assert (false); }
 bool CCoinsView::BatchWrite(CCoinsMap &mapCoins, const uint256 &hashBlock, const CKevaCache &names) { return false; }
 CCoinsViewCursor *CCoinsView::Cursor() const { return nullptr; }
-bool CCoinsView::ValidateNameDB() const { return false; }
+bool CCoinsView::ValidateKevaDB() const {
+    // TODO: return false, and implement it in txdb.cpp.
+    // Need to figure out what to check.
+    return true;
+}
 
 bool CCoinsView::HaveCoin(const COutPoint &outpoint) const
 {
@@ -45,7 +49,7 @@ bool CCoinsViewBacked::BatchWrite(CCoinsMap &mapCoins, const uint256 &hashBlock,
 }
 CCoinsViewCursor *CCoinsViewBacked::Cursor() const { return base->Cursor(); }
 size_t CCoinsViewBacked::EstimateSize() const { return base->EstimateSize(); }
-bool CCoinsViewBacked::ValidateNameDB() const { return base->ValidateNameDB(); }
+bool CCoinsViewBacked::ValidateKevaDB() const { return base->ValidateKevaDB(); }
 
 SaltedOutpointHasher::SaltedOutpointHasher() : k0(GetRand(std::numeric_limits<uint64_t>::max())), k1(GetRand(std::numeric_limits<uint64_t>::max())) {}
 

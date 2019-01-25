@@ -145,7 +145,7 @@ UniValue getnewaddress(const JSONRPCRequest& request)
             "so payments received with the address will be credited to 'account'.\n"
             "\nArguments:\n"
             "1. \"account\"        (string, optional) DEPRECATED. The account name for the address to be linked to. If not provided, the default account \"\" is used. It can also be set to the empty string \"\" to represent the default account. The account does not need to exist, it will be created if there is no account by the given name.\n"
-            "2. \"address_type\"   (string, optional) The address type to use. Options are \"legacy\", \"p2sh-segwit\", and \"bech32\". Default is set by -addresstype.\n"
+            "2. \"address_type\"   (string, optional) The address type to use. Options are \"p2sh-segwit\" and \"bech32\". Default is set by -addresstype.\n"
             "\nResult:\n"
             "\"address\"    (string) The new kevacoin address\n"
             "\nExamples:\n"
@@ -165,6 +165,9 @@ UniValue getnewaddress(const JSONRPCRequest& request)
         output_type = ParseOutputType(request.params[1].get_str(), g_address_type);
         if (output_type == OUTPUT_TYPE_NONE) {
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, strprintf("Unknown address type '%s'", request.params[1].get_str()));
+        }
+        if (output_type == OUTPUT_TYPE_LEGACY) {
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, strprintf("Legacy address type not supported"));
         }
     }
 

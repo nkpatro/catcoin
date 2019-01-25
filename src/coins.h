@@ -184,7 +184,7 @@ public:
     virtual CCoinsViewCursor *Cursor() const;
 
     // Validate the name database.
-    virtual bool ValidateNameDB() const;
+    virtual bool ValidateKevaDB() const;
 
     //! As we use CCoinsViews polymorphically, have a virtual destructor
     virtual ~CCoinsView() {}
@@ -214,7 +214,7 @@ public:
     bool BatchWrite(CCoinsMap &mapCoins, const uint256 &hashBlock, const CKevaCache &names) override;
     CCoinsViewCursor *Cursor() const override;
     size_t EstimateSize() const override;
-    bool ValidateNameDB() const override;
+    bool ValidateKevaDB() const override;
 };
 
 

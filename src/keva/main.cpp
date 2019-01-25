@@ -400,7 +400,7 @@ void
 CheckNameDB (bool disconnect)
 {
   const int option
-    = gArgs.GetArg ("-checknamedb", Params().DefaultCheckNameDB ());
+    = gArgs.GetArg ("-checkkevadb", Params().DefaultCheckKevaDB ());
 
   if (option == -1)
     return;
@@ -413,7 +413,7 @@ CheckNameDB (bool disconnect)
     }
 
   pcoinsTip->Flush ();
-  const bool ok = pcoinsTip->ValidateNameDB();
+  const bool ok = pcoinsTip->ValidateKevaDB();
 
   /* The DB is inconsistent (mismatch between UTXO set and names DB) between
      (roughly) blocks 139,000 and 180,000.  This is caused by libcoin's
