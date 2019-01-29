@@ -17,8 +17,16 @@
         }
     ],
     [
-        "MabRDMfcZ7GGgg8odQmfUavAwZJvFec24oTjHv5VjhqQ39gACb9D",
-        "1db843e5b6ff52c0cd10f845bea1acfc7521ce17d03abdd66a419ff3605c7997",
+        "TPjFpBXnHtWQor2GtDdEaDJPaG3krHEBQk",
+        "a91496ee490592fe4802908ebedc0766f6759fab2fc587",
+        {
+            "isPrivkey": false,
+            "chain": "test"
+        }
+    ],
+    [
+        "9hiKJzEfitCmaMKQTo3HA1K4388xC1UanyQuDUVd9F1oLjSCH4gL",
+        "d34d5fa151df1abd508daa35b1f20db705ef11a4e304c0bde8db4eb2806e3932",
         {
             "isCompressed": true,
             "isPrivkey": true,

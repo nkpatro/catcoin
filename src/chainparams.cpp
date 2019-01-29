@@ -214,10 +214,10 @@ public:
         vSeeds.emplace_back("testnet-seed.kevacoin.org");
         vSeeds.emplace_back("testnet-seed.honourchat.com");
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,45); // K
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,55); // P
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
-        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,70); // V
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,139); // M
+        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,65); // T
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,58); // 9
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
         base58Prefixes[KEVA_NAMESPACE] = std::vector<unsigned char>(1,53); // N
