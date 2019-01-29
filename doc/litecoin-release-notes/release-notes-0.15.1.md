@@ -1,25 +1,25 @@
-Litecoin Core version *0.15.1* is now available from:
+Kevacoin Core version *0.15.1* is now available from:
 
-  <https://download.litecoin.org/litecoin-0.15.1/>
+  <https://download.kevacoin.org/kevacoin-0.15.1/>
 
 This is a new minor version release, including various bugfixes and
 performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/litecoin-project/litecoin/issues>
+  <https://github.com/kevacoin-project/kevacoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://groups.google.com/forum/#!forum/litecoin-dev>
+  <https://groups.google.com/forum/#!forum/kevacoin-dev>
 
 How to Upgrade
 ==============
 
 If you are running an older version, shut it down. Wait until it has completely
-shut down (which might take a few minutes for older versions), then run the 
-installer (on Windows) or just copy over `/Applications/Litecoin-Qt` (on Mac)
-or `litecoind`/`litecoin-qt` (on Linux).
+shut down (which might take a few minutes for older versions), then run the
+installer (on Windows) or just copy over `/Applications/Kevacoin-Qt` (on Mac)
+or `kevacoind`/`kevacoin-qt` (on Linux).
 
 The first time you run version 0.15.0 or higher, your chainstate database will
 be converted to a new format, which will take anywhere from a few minutes to
@@ -48,10 +48,10 @@ processing the entire blockchain.
 Compatibility
 ==============
 
-Litecoin Core is extensively tested on multiple operating systems using
+Kevacoin Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
 
-Litecoin Core should also work on most other Unix-like systems but is not
+Kevacoin Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 
@@ -61,12 +61,12 @@ Notable changes
 Network fork safety enhancements
 --------------------------------
 
-A number of changes to the way Litecoin Core deals with peer connections and invalid blocks
+A number of changes to the way Kevacoin Core deals with peer connections and invalid blocks
 have been made, as a safety precaution against blockchain forks and misbehaving peers.
 
 - Unrequested blocks with less work than the minimum-chain-work are now no longer processed even
 if they have more work than the tip (a potential issue during IBD where the tip may have low-work).
-This prevents peers wasting the resources of a node. 
+This prevents peers wasting the resources of a node.
 
 - Peers which provide a chain with less work than the minimum-chain-work during IBD will now be disconnected.
 
@@ -255,7 +255,7 @@ Thanks to everyone who directly contributed to this release:
 - aunyks
 - coblee
 - gabrieldov
-- Martin Smith 
+- Martin Smith
 - ppm0
 - romanornr
 - shaolinfry

@@ -8,7 +8,7 @@ https://kevacoin.org
 What is Kevacoin?
 ----------------
 
-Kevacoin is a decentralized open source key-value data store based on the Litecoin (which is in turn based on Bitcoin) cryptocurrency. Kevacoin is largely influenced by Namecoin [https://namecoin.org](https://namecoin.org), even though it serves very different purposes and works very differently.
+Kevacoin is a decentralized open source key-value data store based on the Kevacoin (which is in turn based on Bitcoin) cryptocurrency. Kevacoin is largely influenced by Namecoin [https://namecoin.org](https://namecoin.org), even though it serves very different purposes and works very differently.
 
 What does it do?
 ----------------
@@ -19,7 +19,7 @@ What does it do?
 
 What can it be used for?
 ------------------------
-As a decentralized key-value database, it can be used to store data for all kinds of applications, such as social media, microblogging, public identity information, notary service. Kevacoin has limited support for smart contracts (similar to Bitcoin and Litecoin), but one can still develop decentralized apps (dApps) on Kevacoin. The data is decentralized while the application logic is developed off the blockchain.
+As a decentralized key-value database, it can be used to store data for all kinds of applications, such as social media, microblogging, public identity information, notary service. Kevacoin has limited support for smart contracts (similar to Bitcoin and Kevacoin), but one can still develop decentralized apps (dApps) on Kevacoin. The data is decentralized while the application logic is developed off the blockchain.
 
 For more information, as well as an immediately useable, binary version of
 the Kevacoin Core software, see [https://kevacoin.org](https://kevacoin.org).
@@ -41,7 +41,7 @@ Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/kevacoin-project/litecoin/tags) are created
+completely stable. [Tags](https://github.com/kevacoin-project/kevacoin/tags) are created
 regularly to indicate new official, stable release versions of Kevacoin Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).

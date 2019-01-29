@@ -666,7 +666,7 @@ class FullBlockTest(ComparisonTestFramework):
         s = ser_uint256(b46.hashMerkleRoot)
         yield rejected(RejectResult(16, b'bad-blk-length'))
 
-        # Litecoin: Temporarily disable test
+        # Kevacoin: Temporarily disable test
         # A block with invalid work
         #tip(44)
         #b47 = block(47, solve=False)
@@ -743,7 +743,7 @@ class FullBlockTest(ComparisonTestFramework):
         #                                                \-> b56p2 (16)
         #                                                \-> b56   (16)
         #
-        # Merkle tree malleability (CVE-2012-2459): repeating sequences of transactions in a block without 
+        # Merkle tree malleability (CVE-2012-2459): repeating sequences of transactions in a block without
         #                           affecting the merkle root of a block, while still invalidating it.
         #                           See:  src/consensus/merkle.h
         #
