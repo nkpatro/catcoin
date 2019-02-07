@@ -167,7 +167,9 @@ UniValue getnewaddress(const JSONRPCRequest& request)
             throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, strprintf("Unknown address type '%s'", request.params[1].get_str()));
         }
         if (output_type == OUTPUT_TYPE_LEGACY) {
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, strprintf("Legacy address type not supported"));
+            if (ChainNameFromCommandLine() != CBaseChainParams::REGTEST) {
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, strprintf("Legacy address type not supported"));
+            }
         }
     }
 
