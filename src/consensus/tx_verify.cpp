@@ -208,14 +208,14 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state, bool fChe
 
 bool Consensus::CheckTxInputs(const CTransaction& tx, CValidationState& state, const CCoinsViewCache& inputs, int nSpendHeight, unsigned flags, CAmount& txfee)
 {
-    if (!CheckKevaTransaction (tx, nSpendHeight, inputs, state, flags)) {
-        return state.Invalid(false, 0, "", "Tx invalid for Kevacoin");
-    }
-
     // are the actual inputs available?
     if (!inputs.HaveInputs(tx)) {
         return state.DoS(100, false, REJECT_INVALID, "bad-txns-inputs-missingorspent", false,
                          strprintf("%s: inputs missing/spent", __func__));
+    }
+
+    if (!CheckKevaTransaction (tx, nSpendHeight, inputs, state, flags)) {
+        return state.Invalid(false, 0, "", "Tx invalid for Kevacoin");
     }
 
     CAmount nValueIn = 0;
