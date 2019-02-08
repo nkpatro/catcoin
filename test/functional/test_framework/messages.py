@@ -23,7 +23,7 @@ import socket
 import struct
 import time
 
-import litecoin_scrypt
+import pycryptonight
 from test_framework.siphash import siphash256
 from test_framework.util import hex_str_to_bytes, bytes_to_hex_str
 
@@ -33,7 +33,7 @@ MY_SUBVERSION = b"/python-mininode-tester:0.0.3/"
 MY_RELAY = 1 # from version 70001 onwards, fRelay should be appended to version messages (BIP37)
 
 MAX_INV_SZ = 50000
-MAX_BLOCK_BASE_SIZE = 1000000
+MAX_BLOCK_BASE_SIZE = 1500000
 
 COIN = 100000000 # 1 btc in satoshis
 
@@ -546,7 +546,7 @@ class CBlockHeader():
             r += struct.pack("<I", self.nNonce)
             self.sha256 = uint256_from_str(hash256(r))
             self.hash = encode(hash256(r)[::-1], 'hex_codec').decode('ascii')
-            self.scrypt256 = uint256_from_str(litecoin_scrypt.getPoWHash(r))
+            self.scrypt256 = uint256_from_str(pycryptonight.cn_slow_hash(r, 2))
 
     def rehash(self):
         self.sha256 = None
