@@ -1936,7 +1936,7 @@ class SegWitTest(BitcoinTestFramework):
         self.test_p2sh_witness(segwit_activated=True)
         self.test_witness_commitments()
         self.test_block_malleability()
-        #self.test_witness_block_size()
+        self.test_witness_block_size()
         self.test_submit_block()
         self.test_extra_witness_data()
         self.test_max_witness_push_length()
