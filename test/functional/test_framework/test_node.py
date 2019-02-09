@@ -27,7 +27,7 @@ from .util import (
 # For Python 3.4 compatibility
 JSONDecodeError = getattr(json, "JSONDecodeError", ValueError)
 
-BITCOIND_PROC_WAIT_TIMEOUT = 60
+BITCOIND_PROC_WAIT_TIMEOUT = 180
 
 class TestNode():
     """A class for representing a bitcoind node under test.
@@ -50,8 +50,8 @@ class TestNode():
         if timewait:
             self.rpc_timeout = timewait
         else:
-            # Wait for up to 60 seconds for the RPC server to respond
-            self.rpc_timeout = 60
+            # Wait for up to 180 seconds for the RPC server to respond
+            self.rpc_timeout = 180
         if binary is None:
             self.binary = os.getenv("LITECOIND", "kevacoind")
         else:
