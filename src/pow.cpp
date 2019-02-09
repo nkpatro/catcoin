@@ -15,6 +15,9 @@
 // Copy and modified from CalculateDogecoinNextWorkRequired (dogecoin.cpp)
 unsigned int CalculateDigishieldNextWorkRequired(const CBlockIndex* pindexLast, int64_t nFirstBlockTime, const Consensus::Params& params)
 {
+    if (params.fPowNoRetargeting)
+        return pindexLast->nBits;
+
     const int64_t retargetTimespan = params.nPowTargetTimespan;
     const int64_t nActualTimespan = pindexLast->GetBlockTime() - nFirstBlockTime;
     int64_t nModulatedTimespan = nActualTimespan;

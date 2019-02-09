@@ -345,25 +345,25 @@ class P2PInterface(P2PConnection):
 
     # Connection helper methods
 
-    def wait_for_disconnect(self, timeout=60):
+    def wait_for_disconnect(self, timeout=360):
         test_function = lambda: self.state != "connected"
         wait_until(test_function, timeout=timeout, lock=mininode_lock)
 
     # Message receiving helper methods
 
-    def wait_for_block(self, blockhash, timeout=60):
+    def wait_for_block(self, blockhash, timeout=360):
         test_function = lambda: self.last_message.get("block") and self.last_message["block"].block.rehash() == blockhash
         wait_until(test_function, timeout=timeout, lock=mininode_lock)
 
-    def wait_for_getdata(self, timeout=60):
+    def wait_for_getdata(self, timeout=360):
         test_function = lambda: self.last_message.get("getdata")
         wait_until(test_function, timeout=timeout, lock=mininode_lock)
 
-    def wait_for_getheaders(self, timeout=60):
+    def wait_for_getheaders(self, timeout=360):
         test_function = lambda: self.last_message.get("getheaders")
         wait_until(test_function, timeout=timeout, lock=mininode_lock)
 
-    def wait_for_inv(self, expected_inv, timeout=60):
+    def wait_for_inv(self, expected_inv, timeout=360):
         """Waits for an INV message and checks that the first inv object in the message was as expected."""
         if len(expected_inv) > 1:
             raise NotImplementedError("wait_for_inv() will only verify the first inv object")
@@ -372,7 +372,7 @@ class P2PInterface(P2PConnection):
                                 self.last_message["inv"].inv[0].hash == expected_inv[0].hash
         wait_until(test_function, timeout=timeout, lock=mininode_lock)
 
-    def wait_for_verack(self, timeout=60):
+    def wait_for_verack(self, timeout=360):
         test_function = lambda: self.message_count["verack"]
         wait_until(test_function, timeout=timeout, lock=mininode_lock)
 
@@ -383,7 +383,7 @@ class P2PInterface(P2PConnection):
         self.sync_with_ping()
 
     # Sync up with the node
-    def sync_with_ping(self, timeout=60):
+    def sync_with_ping(self, timeout=360):
         self.send_message(msg_ping(nonce=self.ping_counter))
         test_function = lambda: self.last_message.get("pong") and self.last_message["pong"].nonce == self.ping_counter
         wait_until(test_function, timeout=timeout, lock=mininode_lock)

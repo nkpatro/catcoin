@@ -825,7 +825,7 @@ class FullBlockTest(ComparisonTestFramework):
         # tx with output value > input value out of range
         tip(57)
         b59 = block(59)
-        tx = create_and_sign_tx(out[17].tx, out[17].n, 51*COIN)
+        tx = create_and_sign_tx(out[17].tx, out[17].n, 510*COIN)
         b59 = update_block(59, [tx])
         yield rejected(RejectResult(16, b'bad-txns-in-belowout'))
 
@@ -844,13 +844,14 @@ class FullBlockTest(ComparisonTestFramework):
         # not-fully-spent transaction in the same chain. To test, make identical coinbases;
         # the second one should be rejected.
         #
-        tip(60)
-        b61 = block(61, spend=out[18])
-        b61.vtx[0].vin[0].scriptSig = b60.vtx[0].vin[0].scriptSig  #equalize the coinbases
-        b61.vtx[0].rehash()
-        b61 = update_block(61, [])
-        assert_equal(b60.vtx[0].serialize(), b61.vtx[0].serialize())
-        yield rejected(RejectResult(16, b'bad-txns-BIP30'))
+        # Kevacoin - BIP34 is activated since beginning, no need for BIP30, test case skipped.
+        #tip(60)
+        #b61 = block(61, spend=out[18])
+        #b61.vtx[0].vin[0].scriptSig = b60.vtx[0].vin[0].scriptSig  #equalize the coinbases
+        #b61.vtx[0].rehash()
+        #b61 = update_block(61, [])
+        #assert_equal(b60.vtx[0].serialize(), b61.vtx[0].serialize())
+        #yield rejected(RejectResult(16, b'bad-txns-BIP30'))
 
 
         # Test tx.isFinal is properly rejected (not an exhaustive tx.isFinal test, that should be in data-driven transaction tests)

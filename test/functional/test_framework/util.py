@@ -202,7 +202,7 @@ def satoshi_round(amount):
 
 def wait_until(predicate, *, attempts=float('inf'), timeout=float('inf'), lock=None):
     if attempts == float('inf') and timeout == float('inf'):
-        timeout = 60
+        timeout = 600
     attempt = 0
     timeout += time.time()
 
