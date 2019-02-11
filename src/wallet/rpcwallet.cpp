@@ -3666,9 +3666,7 @@ static const CRPCCommand commands[] =
     { "kevacoin",           "keva_list_namespaces",     &keva_list_namespaces,     {} },
     { "kevacoin",           "keva_put",                 &keva_put,                 {"namespace", "key", "value"} },
     { "kevacoin",           "keva_delete",              &keva_delete,              {"namespace", "key"} },
-    { "kevacoin",           "keva_get",                 &keva_get,                 {"namespace", "key"} },
-    { "kevacoin",           "keva_pending",             &keva_pending,             {"namespace"} },
-    { "kevacoin",           "keva_filter",              &keva_filter,              {"namespace", "regexp", "from", "nb", "stat"} }
+    { "kevacoin",           "keva_pending",             &keva_pending,             {"namespace"} }
 };
 
 void RegisterWalletRPCCommands(CRPCTable &t)

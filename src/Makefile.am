@@ -218,6 +218,7 @@ libbitcoin_server_a_SOURCES = \
   rpc/rawtransaction.cpp \
   rpc/safemode.cpp \
   rpc/server.cpp \
+  rpc/rpckeva_nonwallet.cpp \
   script/sigcache.cpp \
   script/ismine.cpp \
   timedata.cpp \
