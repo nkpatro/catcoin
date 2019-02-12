@@ -157,36 +157,7 @@ bool CCoinsViewDB::GetName(const valtype &nameSpace, const valtype &key, CKevaDa
 }
 
 bool CCoinsViewDB::GetNamesForHeight(unsigned nHeight, std::set<valtype>& names) const {
-    names.clear();
-#if 0
-    /* It seems that there are no "const iterators" for LevelDB.  Since we
-       only need read operations on it, use a const-cast to get around
-       that restriction.  */
-    boost::scoped_ptr<CDBIterator> pcursor(const_cast<CDBWrapper*>(&db)->NewIterator());
-
-    const CKevaCache::ExpireEntry seekEntry(nHeight, valtype ());
-    pcursor->Seek(std::make_pair(DB_NAME_EXPIRY, seekEntry));
-
-    for (; pcursor->Valid(); pcursor->Next())
-    {
-        std::pair<char, CKevaCache::ExpireEntry> key;
-        if (!pcursor->GetKey(key) || key.first != DB_NAME_EXPIRY)
-            break;
-        const CKevaCache::ExpireEntry& entry = key.second;
-
-        assert (entry.nHeight >= nHeight);
-        if (entry.nHeight > nHeight)
-          break;
-
-        const valtype& name = entry.name;
-        if (names.count(name) > 0) {
-            return error("%s : duplicate name '%s' in expire index",
-                                    __func__, ValtypeToString(name).c_str());
-        }
-        names.insert(name);
-    }
-#endif
-    return true;
+    return false;
 }
 
 bool CCoinsViewDB::BatchWrite(CCoinsMap &mapCoins, const uint256 &hashBlock, const CKevaCache &names) {

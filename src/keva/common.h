@@ -309,12 +309,20 @@ private:
     inline bool operator() (const std::tuple<valtype, valtype> a,
                             const std::tuple<valtype, valtype> b) const
     {
-      unsigned int aSize = std::get<0>(a).size() + std::get<1>(a).size();
-      unsigned int bSize = std::get<0>(b).size() + std::get<1>(b).size();
-      if (aSize != bSize) {
-        return aSize < bSize;
+      // This is how namespace/key pairs are sorted in database.
+      auto nsA = std::get<0>(a);
+      auto nsB = std::get<0>(b);
+      if (nsA == nsB) {
+        auto aKey = std::get<1>(a);
+        auto bKey = std::get<1>(b);
+        uint32_t aKeySize = aKey.size();
+        uint32_t bKeySize = bKey.size();
+        if (aKeySize == bKeySize) {
+          return aKey < bKey;
+        }
+        return aKeySize < bKeySize;
       }
-      return a < b;
+      return nsA < nsB;
     }
   };
 

@@ -127,27 +127,38 @@ bool CCacheKeyIterator::next(valtype& key, CKevaData& data)
 {
   /* Exit early if no more data is available in either the cache
      nor the base iterator.  */
-  if (!baseHasMore && cacheIter == cache.entries.end())
+
+  bool endOfCacheNamespace = false;
+  if (cacheIter != cache.entries.end()) {
+    valtype curNameSpace = std::get<0>(cacheIter->first);
+    if (curNameSpace != nameSpace) {
+      endOfCacheNamespace = true;
+    }
+  }
+  bool noMoreCache = (cacheIter == cache.entries.end()) || endOfCacheNamespace;
+  if (!baseHasMore && noMoreCache) {
     return false;
+  }
 
   /* Determine which source to use for the next.  */
-  bool useBase;
-  if (!baseHasMore)
+  bool useBase = false;
+  if (!baseHasMore) {
     useBase = false;
-  else if (cacheIter == cache.entries.end())
+  } else if (cacheIter == cache.entries.end()) {
     useBase = true;
-  else {
-    /* A special case is when both iterators are equal.  In this case,
+  } else {
+    if (baseKey == std::get<1>(cacheIter->first)) {
+      /* A special case is when both iterators are equal.  In this case,
         we want to use the cached version.  We also have to advance
         the base iterator.  */
-    if (baseKey == std::get<1>(cacheIter->first))
       advanceBaseIterator ();
+    }
 
     /* Due to advancing the base iterator above, it may happen that
         no more base entries are present.  Handle this gracefully.  */
-    if (!baseHasMore)
+    if (!baseHasMore) {
       useBase = false;
-    else {
+    } else {
       assert(baseKey != std::get<1>(cacheIter->first));
 
       CKevaCache::KeyComparator cmp;
