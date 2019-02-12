@@ -113,7 +113,7 @@ CDbKeyIterator::~CDbKeyIterator() {
 }
 
 CDbKeyIterator::CDbKeyIterator(const CDBWrapper& db, const valtype& ns)
-    : iter(const_cast<CDBWrapper*>(&db)->NewIterator()), CKevaIterator(ns)
+    : CKevaIterator(ns), iter(const_cast<CDBWrapper*>(&db)->NewIterator())
 {
     seek(valtype());
 }
@@ -130,6 +130,10 @@ bool CDbKeyIterator::next(valtype& key, CKevaData& data) {
     if (!iter->GetKey(curKey) || curKey.first != DB_NAME)
         return false;
 
+    valtype curNameSpace = std::get<0>(curKey.second);
+    if (curNameSpace != nameSpace) {
+        return false;
+    }
     key = std::get<1>(curKey.second);
 
     if (!iter->GetValue(data)) {
