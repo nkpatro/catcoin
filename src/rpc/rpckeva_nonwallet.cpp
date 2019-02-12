@@ -108,7 +108,7 @@ std::string getKevaInfoHelp (const std::string& indent, const std::string& trail
 
 /**
  * Utility routine to construct a "name info" object to return.  This is used
- * for name_show and also name_list.
+ * for keva_filter.
  * @param name The name.
  * @param value The name's value.
  * @param outp The last update's outpoint.
@@ -172,7 +172,6 @@ UniValue keva_filter(const JSONRPCRequest& request)
         "  ...\n"
         "]\n"
         "\nExamples:\n"
-        + HelpExampleCli ("keva_filter", "\"\" 5")
         + HelpExampleCli ("keva_filter", "\"^id/\"")
         + HelpExampleCli ("keva_filter", "\"^id/\" 36000 0 0 \"stat\"")
         + HelpExampleRpc ("keva_filter", "\"^d/\"")
@@ -202,7 +201,6 @@ UniValue keva_filter(const JSONRPCRequest& request)
 
   if (request.params.size() >= 1) {
     const std::string namespaceStr = request.params[0].get_str();
-    valtype nameSpace;
     if (!DecodeKevaNamespace(namespaceStr, Params(), nameSpace)) {
       throw JSONRPCError (RPC_INVALID_PARAMETER, "invalid namespace id");
     }

@@ -91,7 +91,7 @@ public:
 };
 
 CCacheKeyIterator::CCacheKeyIterator(const CKevaCache& c, CKevaIterator* b)
-  : cache(c), base(b), CKevaIterator(b->getNamespace())
+  : CKevaIterator(b->getNamespace()), cache(c), base(b)
 {
   /* Add a seek-to-start to ensure that everything is consistent.  This call
      may be superfluous if we seek to another position afterwards anyway,
