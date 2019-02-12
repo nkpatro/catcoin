@@ -268,11 +268,10 @@ UniValue keva_put(const JSONRPCRequest& request)
   CPubKey pubKeyReserve;
   const bool ok = keyName.GetReservedKey(pubKeyReserve, true);
   assert(ok);
-  bool usedKey = false;
-
-  CScript addrName;
-  usedKey = true;
-  addrName = GetScriptForDestination(pubKeyReserve.GetID());
+  CKeyID keyId = pubKeyReserve.GetID();
+  CScript redeemScript = GetScriptForDestination(WitnessV0KeyHash(keyId));
+  CScriptID scriptHash = CScriptID(redeemScript);
+  CScript addrName = GetScriptForDestination(scriptHash);
 
   const CScript kevaScript = CKevaScript::buildKevaPut(addrName, nameSpace, key, value);
 
@@ -282,10 +281,7 @@ UniValue keva_put(const JSONRPCRequest& request)
   SendMoneyToScript(pwallet, kevaScript, &txIn, empty,
                      KEVA_LOCKED_AMOUNT, false, wtx, coinControl);
 
-  if (usedKey) {
-    keyName.KeepKey ();
-  }
-
+  keyName.KeepKey();
   return wtx.GetHash().GetHex();
 }
 
