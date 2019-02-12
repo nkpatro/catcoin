@@ -3167,8 +3167,14 @@ bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, CCon
         {
             // Broadcast
             if (!wtx.AcceptToMemoryPool(maxTxFee, state)) {
-                LogPrintf("CommitTransaction(): Transaction cannot be broadcast immediately, %s\n", state.GetRejectReason());
+                auto rejectReason = state.GetRejectReason();
+                LogPrintf("CommitTransaction(): Transaction cannot be broadcast immediately, %s\n", rejectReason);
                 // TODO: if we expect the failure to be long term or permanent, instead delete wtx from the wallet and return failure.
+                if (rejectReason == "too-long-mempool-chain") {
+                    LogPrintf("Abandon the too-long-mempool-chain Tx: %s \n", wtx.GetHash().ToString().c_str());
+                    AbandonTransaction(wtx.GetHash());
+                    return false;
+                }
             } else {
                 wtx.RelayWalletTransaction(connman);
             }

@@ -91,37 +91,37 @@ std::string getKevaInfoHelp (const std::string& indent, const std::string& trail
   std::ostringstream res;
 
   res << indent << "{" << std::endl;
-  res << indent << "  \"name\": xxxxx,           "
-      << "(string) the requested name" << std::endl;
+  res << indent << "  \"key\": xxxxx,           "
+      << "(string) the requested key" << std::endl;
   res << indent << "  \"value\": xxxxx,          "
-      << "(string) the name's current value" << std::endl;
+      << "(string) the key's current value" << std::endl;
   res << indent << "  \"txid\": xxxxx,           "
-      << "(string) the name's last update tx" << std::endl;
+      << "(string) the key's last update tx" << std::endl;
   res << indent << "  \"address\": xxxxx,        "
-      << "(string) the address holding the name" << std::endl;
+      << "(string) the address holding the key" << std::endl;
   res << indent << "  \"height\": xxxxx,         "
-      << "(numeric) the name's last update height" << std::endl;
+      << "(numeric) the key's last update height" << std::endl;
   res << indent << "}" << trailing << std::endl;
 
   return res.str ();
 }
 
 /**
- * Utility routine to construct a "name info" object to return.  This is used
+ * Utility routine to construct a "keva info" object to return.  This is used
  * for keva_filter.
- * @param name The name.
- * @param value The name's value.
+ * @param key The key.
+ * @param value The key's value.
  * @param outp The last update's outpoint.
- * @param addr The name's address script.
- * @param height The name's last update height.
+ * @param addr The key's address script.
+ * @param height The key's last update height.
  * @return A JSON object to return.
  */
 UniValue
-getKevaInfo (const valtype& name, const valtype& value, const COutPoint& outp,
+getKevaInfo(const valtype& key, const valtype& value, const COutPoint& outp,
              const CScript& addr, int height)
 {
   UniValue obj(UniValue::VOBJ);
-  obj.pushKV("name", ValtypeToString(name));
+  obj.pushKV("key", ValtypeToString(key));
   obj.pushKV("value", ValtypeToString(value));
   obj.pushKV("txid", outp.hash.GetHex());
   obj.pushKV("vout", static_cast<int>(outp.n));
@@ -141,15 +141,15 @@ getKevaInfo (const valtype& name, const valtype& value, const COutPoint& outp,
 }
 
 /**
- * Return name info object for a CNameData object.
- * @param name The name.
- * @param data The name's data.
+ * Return keva info object for a CKevaData object.
+ * @param key The key.
+ * @param data The key's data.
  * @return A JSON object to return.
  */
 UniValue
-getKevaInfo (const valtype& name, const CKevaData& data)
+getKevaInfo(const valtype& key, const CKevaData& data)
 {
-  return getKevaInfo(name, data.getValue(), data.getUpdateOutpoint(),
+  return getKevaInfo(key, data.getValue(), data.getUpdateOutpoint(),
                       data.getAddress(), data.getHeight());
 }
 
