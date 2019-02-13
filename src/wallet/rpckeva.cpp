@@ -360,11 +360,10 @@ UniValue keva_delete(const JSONRPCRequest& request)
   CPubKey pubKeyReserve;
   const bool ok = keyName.GetReservedKey(pubKeyReserve, true);
   assert(ok);
-  bool usedKey = false;
 
-  CScript addrName;
-  usedKey = true;
-  addrName = GetScriptForDestination(pubKeyReserve.GetID());
+  CScript redeemScript = GetScriptForDestination(WitnessV0KeyHash(pubKeyReserve.GetID()));
+  CScriptID scriptHash = CScriptID(redeemScript);
+  CScript addrName = GetScriptForDestination(scriptHash);
 
   const CScript kevaScript = CKevaScript::buildKevaDelete(addrName, nameSpace, key);
 
@@ -374,9 +373,7 @@ UniValue keva_delete(const JSONRPCRequest& request)
   SendMoneyToScript(pwallet, kevaScript, &txIn, empty,
                      KEVA_LOCKED_AMOUNT, false, wtx, coinControl);
 
-  if (usedKey) {
-    keyName.KeepKey();
-  }
+  keyName.KeepKey();
 
   UniValue obj(UniValue::VOBJ);
   obj.pushKV("txid", wtx.GetHash().GetHex());

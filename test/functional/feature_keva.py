@@ -92,5 +92,12 @@ class KevaTest(BitcoinTestFramework):
         response = self.nodes[0].keva_get(namespaceId, keyToDelete)
         assert(response['value'] == '')
 
+        self.log.info("Test reset the value after deleting")
+        newValue = 'This is the new value'
+        self.nodes[0].keva_put(namespaceId, keyToDelete, newValue)
+        self.nodes[0].generate(1)
+        response = self.nodes[0].keva_get(namespaceId, keyToDelete)
+        assert(response['value'] == newValue)
+
 if __name__ == '__main__':
     KevaTest().main()
