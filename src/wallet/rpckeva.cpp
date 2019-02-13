@@ -100,13 +100,10 @@ UniValue keva_namespace(const JSONRPCRequest& request)
   LogPrintf("keva_namespace: namespace=%s, displayName=%s, tx=%s\n",
              kevaNamespaceBase58.c_str(), displayNameStr.c_str(), txid.c_str());
 
-  UniValue res(UniValue::VARR);
   UniValue obj(UniValue::VOBJ);
   obj.pushKV("txid", txid);
   obj.pushKV("namespaceId", kevaNamespaceBase58);
-  res.push_back(obj);
-
-  return res;
+  return obj;
 }
 
 UniValue keva_list_namespaces(const JSONRPCRequest& request)
@@ -282,7 +279,9 @@ UniValue keva_put(const JSONRPCRequest& request)
                      KEVA_LOCKED_AMOUNT, false, wtx, coinControl);
 
   keyName.KeepKey();
-  return wtx.GetHash().GetHex();
+  UniValue obj(UniValue::VOBJ);
+  obj.pushKV("txid", wtx.GetHash().GetHex());
+  return obj;
 }
 
 UniValue keva_delete(const JSONRPCRequest& request)
@@ -379,7 +378,9 @@ UniValue keva_delete(const JSONRPCRequest& request)
     keyName.KeepKey();
   }
 
-  return wtx.GetHash().GetHex();
+  UniValue obj(UniValue::VOBJ);
+  obj.pushKV("txid", wtx.GetHash().GetHex());
+  return obj;
 }
 
 UniValue keva_pending(const JSONRPCRequest& request)

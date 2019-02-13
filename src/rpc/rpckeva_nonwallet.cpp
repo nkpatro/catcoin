@@ -56,14 +56,14 @@ UniValue keva_get(const JSONRPCRequest& request)
   if (nameSpace.size() > MAX_NAMESPACE_LENGTH)
     throw JSONRPCError (RPC_INVALID_PARAMETER, "the namespace is too long");
 
-  const std::string keyStr = request.params[1].get_str ();
-  const valtype key = ValtypeFromString (keyStr);
+  const std::string keyStr = request.params[1].get_str();
+  const valtype key = ValtypeFromString(keyStr);
   if (key.size() > MAX_KEY_LENGTH)
-    throw JSONRPCError (RPC_INVALID_PARAMETER, "the key is too long");
+    throw JSONRPCError(RPC_INVALID_PARAMETER, "the key is too long");
 
   CKevaData data;
   {
-    LOCK (cs_main);
+    LOCK(cs_main);
     pcoinsTip->GetName(nameSpace, key, data);
   }
 
@@ -77,7 +77,10 @@ UniValue keva_get(const JSONRPCRequest& request)
     }
   }
 
-  return ValtypeToString(value);
+  UniValue obj(UniValue::VOBJ);
+  obj.pushKV("key", keyStr);
+  obj.pushKV("value", ValtypeToString(value));
+  return obj;
 }
 
 /**
