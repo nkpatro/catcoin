@@ -147,18 +147,17 @@ public:
   }
 
   /**
-   * Add an entry without checking it.  It should have been checked
-   * already.  If this conflicts with the mempool, it may throw.
+   * Added unconfirmed keva values.
    * @param hash The tx hash.
-   * @param entry The new mempool entry.
+   * @param entry The new keva entry.
    */
-  void addUnchecked (const uint256& hash, const CTxMemPoolEntry& entry);
+  void addUnchecked(const uint256& hash, const CKevaScript& kevaOp);
 
   /**
    * Remove the given mempool entry.  It is assumed that it is present.
    * @param entry The entry to remove.
    */
-  void remove (const CTxMemPoolEntry& entry);
+  void remove(const CTxMemPoolEntry& entry);
 
   /**
    * Remove conflicts for the given tx, based on name operations.  I. e.,
@@ -167,7 +166,7 @@ public:
    * @param tx The transaction for which we look for conflicts.
    * @param removed Put removed tx here.
    */
-  void removeConflicts (const CTransaction& tx);
+  void removeConflicts(const CTransaction& tx);
 
   /**
    * Check if a tx can be added (based on name criteria) without
@@ -175,7 +174,7 @@ public:
    * @param tx The transaction to check.
    * @return True if it doesn't conflict.
    */
-  bool checkTx (const CTransaction& tx) const;
+  bool checkTx(const CTransaction& tx) const;
 
   /** Keva get unconfirmed namespaces. */
   void getUnconfirmedNamespaceList(std::vector<std::tuple<valtype, valtype, uint256>>& nameSpaces) const;

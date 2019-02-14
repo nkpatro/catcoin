@@ -184,7 +184,8 @@ UniValue keva_list_namespaces(const JSONRPCRequest& request)
   UniValue res(UniValue::VARR);
   for (const auto& item : mapObjects) {
     UniValue obj(UniValue::VOBJ);
-    obj.pushKV(item.first, item.second);
+    obj.pushKV("namespaceId", item.first);
+    obj.pushKV("displayName", item.second);
     res.push_back(obj);
   }
 

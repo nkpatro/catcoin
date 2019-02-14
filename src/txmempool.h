@@ -693,6 +693,12 @@ public:
         return kevaMemPool.checkTx(tx);
     }
 
+    inline void addKevaUnchecked(const uint256& hash, const CKevaScript& kevaOp)
+    {
+        AssertLockHeld(cs);
+        kevaMemPool.addUnchecked(hash, kevaOp);
+    }
+
     /** Keva get unconfirmed key values. */
     bool getUnconfirmedKeyValue(const valtype& nameSpace, const valtype& key, valtype& value) const;
 

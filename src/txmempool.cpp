@@ -423,7 +423,6 @@ bool CTxMemPool::addUnchecked(const uint256& hash, const CTxMemPoolEntry &entry,
     nTransactionsUpdated++;
     totalTxSize += entry.GetTxSize();
     if (minerPolicyEstimator) {minerPolicyEstimator->processTransaction(entry, validFeeEstimate);}
-    kevaMemPool.addUnchecked (hash, entry);
 
     vTxHashes.emplace_back(tx.GetWitnessHash(), newit);
     newit->vTxHashesIdx = vTxHashes.size() - 1;

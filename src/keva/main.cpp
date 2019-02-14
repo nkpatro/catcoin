@@ -36,33 +36,35 @@ CKevaTxUndo::fromOldState(const valtype& nameSpace, const valtype& key, const CC
 void
 CKevaTxUndo::apply(CCoinsViewCache& view) const
 {
-  if (isNew)
+  if (isNew) {
     view.DeleteName(nameSpace, key);
-  else
+  }
+  else {
     view.SetName(nameSpace, key, oldData, true);
+  }
 }
 
 /* ************************************************************************** */
 /* CKevaMemPool.  */
 
 void
-CKevaMemPool::addUnchecked (const uint256& hash, const CTxMemPoolEntry& entry)
+CKevaMemPool::addUnchecked(const uint256& hash, const CKevaScript& kevaOp)
 {
   AssertLockHeld (pool.cs);
-  if (entry.isNamespaceRegistration()) {
-    const valtype& nameSpace = entry.getNamespace();
-    listUnconfirmedNamespaces.push_back(std::make_tuple(hash, nameSpace, entry.getDisplayName()));
+  if (kevaOp.isNamespaceRegistration()) {
+    const valtype& nameSpace = kevaOp.getOpNamespace();
+    listUnconfirmedNamespaces.push_back(std::make_tuple(hash, nameSpace, kevaOp.getOpNamespaceDisplayName()));
   }
 
-  if (entry.isKeyUpdate()) {
-    const valtype& nameSpace = entry.getNamespace();
-    listUnconfirmedKeyValues.push_back(std::make_tuple(hash, nameSpace, entry.getKey(), entry.getValue()));
+  if (kevaOp.getKevaOp() == OP_KEVA_PUT) {
+    const valtype& nameSpace = kevaOp.getOpNamespace();
+    listUnconfirmedKeyValues.push_back(std::make_tuple(hash, nameSpace, kevaOp.getOpKey(), kevaOp.getOpValue()));
   }
 
-  if (entry.isKeyDelete()) {
-    const valtype& nameSpace = entry.getNamespace();
+  if (kevaOp.getKevaOp() == OP_KEVA_DELETE) {
+    const valtype& nameSpace = kevaOp.getOpNamespace();
     const valtype& empty = ValtypeFromString("");
-    listUnconfirmedKeyValues.push_back(std::make_tuple(hash, nameSpace, entry.getKey(), empty));
+    listUnconfirmedKeyValues.push_back(std::make_tuple(hash, nameSpace, kevaOp.getOpKey(), empty));
   }
 }
 
@@ -375,8 +377,8 @@ void ApplyKevaTransaction(const CTransaction& tx, unsigned nHeight,
     } else if (op.isAnyUpdate()) {
       const valtype& nameSpace = op.getOpNamespace();
       const valtype& key = op.getOpKey();
-      LogPrint (BCLog::KEVA, "Updating name at height %d: %s\n",
-                nHeight, ValtypeToString (nameSpace).c_str ());
+      LogPrint (BCLog::KEVA, "Updating key at height %d: %s %s\n",
+                nHeight, ValtypeToString(nameSpace).c_str(), ValtypeToString(key).c_str());
 
       CKevaTxUndo opUndo;
       opUndo.fromOldState(nameSpace, key, view);

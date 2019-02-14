@@ -226,8 +226,9 @@ CKevaCache::remove(const valtype& nameSpace, const valtype& key)
 {
   auto name = std::make_tuple(nameSpace, key);
   const EntryMap::iterator ei = entries.find(name);
-  if (ei != entries.end())
+  if (ei != entries.end()) {
     entries.erase(ei);
+  }
 
   deleted.insert(name);
 }

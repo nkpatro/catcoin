@@ -3176,6 +3176,20 @@ bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, CCon
                     return false;
                 }
             } else {
+                CKevaScript kevaOp;
+                auto _tx = wtx.tx;
+                if (_tx->IsKevacoin()) {
+                    for (const auto& txOut : _tx->vout) {
+                        const CKevaScript curKevaOp(txOut.scriptPubKey);
+                        if (!curKevaOp.isKevaOp()) {
+                            continue;
+                        }
+                        assert(!kevaOp.isKevaOp());
+                        kevaOp = curKevaOp;
+                    }
+                    assert(kevaOp.isKevaOp());
+                    mempool.addKevaUnchecked(wtx.GetHash(), kevaOp);
+                }
                 wtx.RelayWalletTransaction(connman);
             }
         }
