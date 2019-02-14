@@ -38,22 +38,42 @@ class KevaTest(BitcoinTestFramework):
         assert(len(response) == 2)
         self.sync_all()
 
-    def run_test_disconnect_block(self, namespaceId):
+    def run_test_disconnect_block(self):
+        displayName = 'namespace_to_test'
+        response = self.nodes[0].keva_namespace(displayName)
+        namespaceId = response['namespaceId']
+        self.nodes[0].generate(1)
+
         key = 'This is the test key'
-        value = 'This is the test value'
-        self.nodes[0].keva_put(namespaceId, key, value)
+        value1 = 'This is the test value 1'
+        value2 = 'This is the test value 1'
+        self.nodes[0].keva_put(namespaceId, key, value1)
         self.nodes[0].generate(1)
         response = self.nodes[0].keva_get(namespaceId, key)
-        assert(response['value'] == value)
+        assert(response['value'] == value1)
+        self.nodes[0].keva_put(namespaceId, key, value2)
+        self.nodes[0].generate(1)
+        response = self.nodes[0].keva_get(namespaceId, key)
+        assert(response['value'] == value2)
         # Disconnect the block
         self.sync_all()
         self.nodes[0].invalidateblock(self.nodes[0].getbestblockhash())
         self.nodes[1].invalidateblock(self.nodes[1].getbestblockhash())
         self.sync_all()
         response = self.nodes[0].keva_get(namespaceId, key)
+        assert(response['value'] == value1)
+        # Disconnect the block again
+        self.sync_all()
+        self.nodes[0].invalidateblock(self.nodes[0].getbestblockhash())
+        self.nodes[1].invalidateblock(self.nodes[1].getbestblockhash())
+        self.sync_all()
+        response = self.nodes[0].keva_get(namespaceId, key)
         assert(response['value'] == '')
+        response = self.nodes[0].keva_get(namespaceId, '_KEVA_NS_')
+        assert(response['value'] == displayName)
 
         self.log.info("Test undeleting after disconnecting blocks")
+        self.nodes[0].generate(1)
         keyToDelete = 'This is the test key to delete'
         valueToDelete = 'This is the test value of the key'
         self.nodes[0].keva_put(namespaceId, keyToDelete, valueToDelete)
@@ -81,7 +101,6 @@ class KevaTest(BitcoinTestFramework):
         self.nodes[0].generate(1)
         response = self.nodes[0].keva_list_namespaces()
         found = False
-        print(response)
         for ns in response:
             if (ns['namespaceId'] == newNamespaceId):
                 found = True
@@ -91,6 +110,11 @@ class KevaTest(BitcoinTestFramework):
         self.nodes[0].invalidateblock(self.nodes[0].getbestblockhash())
         self.nodes[1].invalidateblock(self.nodes[1].getbestblockhash())
         self.sync_all()
+        # The namespace display name should not be set.
+        response = self.nodes[0].keva_get(newNamespaceId, '_KEVA_NS_')
+        assert(response['value'] == '')
+        # The namespace should not appear in the result of keva_list_namespaces
+        response = self.nodes[0].keva_list_namespaces()
         found = False
         for ns in response:
             if (ns['namespaceId'] == newNamespaceId):
@@ -179,7 +203,7 @@ class KevaTest(BitcoinTestFramework):
         assert(response['value'] == newValue)
 
         self.log.info("Test disconnecting blocks")
-        self.run_test_disconnect_block(namespaceId)
+        self.run_test_disconnect_block()
 
 
 if __name__ == '__main__':

@@ -120,7 +120,7 @@ UniValue keva_list_namespaces(const JSONRPCRequest& request)
         "\nArguments:\n"
         "\nResult:\n"
         "[\n"
-        "  xxxxx: display_name   (string) namespace id : (string) display name\n"
+        "  { namespaceId: <namespce Id>, displayName: <display name> }\n"
         "  ...\n"
         "]\n"
         "\nExamples:\n"
@@ -133,28 +133,26 @@ UniValue keva_list_namespaces(const JSONRPCRequest& request)
 
   std::map<std::string, std::string> mapObjects;
   {
-  LOCK2 (cs_main, pwallet->cs_wallet);
-  for (const auto& item : pwallet->mapWallet)
-    {
+    LOCK2 (cs_main, pwallet->cs_wallet);
+    for (const auto& item : pwallet->mapWallet) {
       const CWalletTx& tx = item.second;
-      if (!tx.tx->IsKevacoin ())
+      if (!tx.tx->IsKevacoin()) {
         continue;
+      }
 
       CKevaScript kevaOp;
       int nOut = -1;
-      for (unsigned i = 0; i < tx.tx->vout.size(); ++i)
-        {
-          const CKevaScript cur(tx.tx->vout[i].scriptPubKey);
-          if (cur.isKevaOp ())
-            {
-              if (nOut != -1) {
-                LogPrintf ("ERROR: wallet contains tx with multiple name outputs");
-              } else {
-                kevaOp = cur;
-                nOut = i;
-              }
-            }
+      for (unsigned i = 0; i < tx.tx->vout.size(); ++i) {
+        const CKevaScript cur(tx.tx->vout[i].scriptPubKey);
+        if (cur.isKevaOp()) {
+          if (nOut != -1) {
+            LogPrintf ("ERROR: wallet contains tx with multiple name outputs");
+          } else {
+            kevaOp = cur;
+            nOut = i;
+          }
         }
+      }
 
       if (nOut == -1) {
         continue;
@@ -172,7 +170,7 @@ UniValue keva_list_namespaces(const JSONRPCRequest& request)
         continue;
       }
 
-      const bool mine = IsMine(*pwallet, kevaOp.getAddress ());
+      const bool mine = IsMine(*pwallet, kevaOp.getAddress());
       CKevaData data;
       if (mine && pcoinsTip->GetNamespace(nameSpace, data)) {
         std::string displayName = ValtypeToString(data.getValue());

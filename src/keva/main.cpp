@@ -293,7 +293,7 @@ CheckKevaTransaction (const CTransaction& tx, unsigned nHeight,
     return true;
   }
 
-  assert(tx.IsKevacoin ());
+  assert(tx.IsKevacoin());
   if (nameOut == -1) {
     return state.Invalid (error ("%s: Kevacoin tx %s has no keva outputs", __func__, txid));
   }
