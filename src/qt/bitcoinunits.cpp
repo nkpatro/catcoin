@@ -41,8 +41,8 @@ QString BitcoinUnits::longName(int unit)
     switch(unit)
     {
     case BTC: return QString("KVA");
-    case mBTC: return QString("k");
-    case uBTC: return QString("m");
+    case mBTC: return QString("va");
+    case uBTC: return QString("mva");
     default: return QString("???");
     }
 }

@@ -109,7 +109,7 @@ public:
         pchMessageStart[1] = 0xc6;
         pchMessageStart[2] = 0x07;
         pchMessageStart[3] = 0x9a;
-        nDefaultPort = 9333;
+        nDefaultPort = 9338;
         nPruneAfterHeight = 100000;
 
         const uint32_t genesisBlockReward = 0.00001 * COIN; // A small reward for the core developers :-)
