@@ -833,21 +833,23 @@ BOOST_AUTO_TEST_CASE(keva_mempool)
 
   /* Add a name registration.  */
   const LockPoints lp;
-  const CTxMemPoolEntry entryReg(MakeTransactionRef(txNew1), 0, 0, 100,
+  CTxMemPoolEntry entryReg(MakeTransactionRef(txNew1), 0, 0, 100,
                                  false, 1, lp);
   BOOST_CHECK(entryReg.isNamespaceRegistration() && !entryReg.isKeyUpdate());
   BOOST_CHECK(entryReg.getNamespace() == nameSpace1);
   mempool.addUnchecked(entryReg.GetTx().GetHash(), entryReg);
+  mempool.addKevaUnchecked(entryReg.GetTx().GetHash(), entryReg.GetKevaOp());
   mempool.getUnconfirmedNamespaceList(unconfirmedNamespace);
   BOOST_CHECK(unconfirmedNamespace.size() == 1);
   BOOST_CHECK(std::get<0>(unconfirmedNamespace[0]) == nameSpace1);
 
   /* Add a name update.  */
-  const CTxMemPoolEntry entryUpd(MakeTransactionRef(txUpd1), 0, 0, 100,
+  CTxMemPoolEntry entryUpd(MakeTransactionRef(txUpd1), 0, 0, 100,
                                  false, 1, lp);
   BOOST_CHECK(!entryUpd.isNamespaceRegistration() && entryUpd.isKeyUpdate());
   BOOST_CHECK(entryUpd.getNamespace() == nameSpace1);
   mempool.addUnchecked (entryUpd.GetTx().GetHash(), entryUpd);
+  mempool.addKevaUnchecked(entryUpd.GetTx().GetHash(), entryUpd.GetKevaOp());
   valtype valResult;
   mempool.getUnconfirmedKeyValue(nameSpace1, keyA, valResult);
   BOOST_CHECK(valResult == valueA);

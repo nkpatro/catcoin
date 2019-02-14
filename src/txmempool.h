@@ -132,6 +132,11 @@ public:
     CAmount GetModFeesWithAncestors() const { return nModFeesWithAncestors; }
     int64_t GetSigOpCostWithAncestors() const { return nSigOpCostWithAncestors; }
 
+    inline CKevaScript& GetKevaOp()
+    {
+        return kevaOp;
+    }
+
     inline bool isNamespaceRegistration() const
     {
         return kevaOp.isKevaOp() && kevaOp.getKevaOp() == OP_KEVA_NAMESPACE;
