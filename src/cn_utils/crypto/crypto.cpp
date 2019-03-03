@@ -12,7 +12,7 @@
 #include <mutex>
 
 #include "common/varint.h"
-#include "warnings.h"
+#include "epee/include/warnings.h"
 #include "crypto.h"
 #include "hash.h"
 

@@ -15,7 +15,7 @@
 #include "miner.h"
 #include "connection_context.h"
 #include "cryptonote_core/cryptonote_stat_info.h"
-#include "warnings.h"
+#include "epee/include/warnings.h"
 #include "crypto/hash.h"
 
 PUSH_WARNINGS

@@ -10,7 +10,7 @@ Public domain.
 
 #include "chacha8.h"
 #include "common/int-util.h"
-#include "warnings.h"
+#include "epee/include/warnings.h"
 
 /*
  * The following macros are used to obtain exact-width results.

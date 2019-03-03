@@ -13,7 +13,7 @@
 #include <boost/type_traits/make_unsigned.hpp>
 
 #include "common/varint.h"
-#include "warnings.h"
+#include "epee/include/warnings.h"
 
 PUSH_WARNINGS
 DISABLE_VS_WARNINGS(4244)

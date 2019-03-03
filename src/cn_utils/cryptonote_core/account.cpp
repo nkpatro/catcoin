@@ -8,7 +8,7 @@
 
 #include "include_base_utils.h"
 #include "account.h"
-#include "warnings.h"
+#include "epee/include/warnings.h"
 #include "crypto/crypto.h"
 #include "cryptonote_core/cryptonote_basic_impl.h"
 #include "cryptonote_core/cryptonote_format_utils.h"

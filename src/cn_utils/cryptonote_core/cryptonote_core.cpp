@@ -11,7 +11,7 @@ using namespace epee;
 #include "cryptonote_core.h"
 #include "common/command_line.h"
 #include "common/util.h"
-#include "warnings.h"
+#include "epee/include/warnings.h"
 #include "crypto/crypto.h"
 #include "cryptonote_config.h"
 #include "cryptonote_format_utils.h"
@@ -27,7 +27,7 @@ namespace cryptonote
               m_mempool(m_blockchain_storage),
               m_blockchain_storage(m_mempool),
               m_miner(this),
-              m_miner_address(boost::value_initialized<account_public_address>()), 
+              m_miner_address(boost::value_initialized<account_public_address>()),
               m_starter_message_showed(false)
   {
     set_cryptonote_protocol(pprotocol);
@@ -499,14 +499,14 @@ namespace cryptonote
   {
     if(!m_starter_message_showed)
     {
-      LOG_PRINT_L0(ENDL << "**********************************************************************" << ENDL 
-        << "The daemon will start synchronizing with the network. It may take up to several hours." << ENDL 
+      LOG_PRINT_L0(ENDL << "**********************************************************************" << ENDL
+        << "The daemon will start synchronizing with the network. It may take up to several hours." << ENDL
         << ENDL
         << "You can set the level of process detailization by using command \"set_log <level>\", where <level> is either 0 (no details), 1 (current block height synchronized), or 2 (all details)." << ENDL
         << ENDL
         << "Use \"help\" command to see the list of available commands." << ENDL
         << ENDL
-        << "Note: in case you need to interrupt the process, use \"exit\" command. Otherwise, the current progress won't be saved." << ENDL 
+        << "Note: in case you need to interrupt the process, use \"exit\" command. Otherwise, the current progress won't be saved." << ENDL
         << "**********************************************************************");
       m_starter_message_showed = true;
     }

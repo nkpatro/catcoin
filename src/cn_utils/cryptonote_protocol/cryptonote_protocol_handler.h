@@ -7,7 +7,7 @@
 #include <boost/program_options/variables_map.hpp>
 
 #include "storages/levin_abstract_invoke2.h"
-#include "warnings.h"
+#include "epee/include/warnings.h"
 #include "cryptonote_protocol_defs.h"
 #include "cryptonote_protocol_handler_common.h"
 #include "cryptonote_core/connection_context.h"
@@ -22,7 +22,7 @@ namespace cryptonote
 
   template<class t_core>
   class t_cryptonote_protocol_handler:  public i_cryptonote_protocol
-  { 
+  {
   public:
     typedef cryptonote_connection_context connection_context;
     typedef core_stat_info stat_info;

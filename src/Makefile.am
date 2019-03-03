@@ -28,6 +28,7 @@ LIBBITCOIN_COMMON=libbitcoin_common.a
 LIBBITCOIN_CONSENSUS=libbitcoin_consensus.a
 LIBBITCOIN_CLI=libbitcoin_cli.a
 LIBBITCOIN_UTIL=libbitcoin_util.a
+LIBBITCOIN_CNUTILS=libbitcoin_cnutils.a
 LIBBITCOIN_CRYPTO=crypto/libbitcoin_crypto.a
 LIBBITCOINQT=qt/libbitcoinqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
@@ -50,6 +51,7 @@ $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
 EXTRA_LIBRARIES += \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBBITCOIN_UTIL) \
+  $(LIBBITCOIN_CNUTILS) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_CONSENSUS) \
   $(LIBBITCOIN_SERVER) \
@@ -366,6 +368,20 @@ libbitcoin_common_a_SOURCES = \
   keva/common.cpp \
   $(BITCOIN_CORE_H)
 
+# cnutils: shared between bitcoind, and bitcoin-qt and non-server tools
+libbitcoin_cnutils_a_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/cn_utils -I$(srcdir)/cn_utils/contrib -I$(srcdir)/cn_utils/contrib/epee/include
+libbitcoin_cnutils_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitcoin_cnutils_a_SOURCES = \
+  cn_utils/cnutils.cpp \
+  cn_utils/cryptonote_core/cryptonote_format_utils.cpp \
+  cn_utils/crypto/tree-hash.c \
+  cn_utils/crypto/crypto.cpp \
+  cn_utils/crypto/crypto-ops.c \
+  cn_utils/crypto/crypto-ops-data.c \
+  cn_utils/crypto/hash.c \
+  cn_utils/crypto/keccak.c \
+  cn_utils/common/base58.cpp
+
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
 # backward-compatibility objects and their sanity checks are linked.
@@ -420,6 +436,7 @@ kevacoind_LDADD = \
   $(LIBBITCOIN_COMMON) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
+  $(LIBBITCOIN_CNUTILS) \
   $(LIBBITCOIN_WALLET) \
   $(LIBBITCOIN_ZMQ) \
   $(LIBBITCOIN_CONSENSUS) \
@@ -445,6 +462,7 @@ kevacoin_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
+  $(LIBBITCOIN_CNUTILS) \
   $(LIBBITCOIN_CRYPTO)
 
 kevacoin_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
@@ -464,6 +482,7 @@ kevacoin_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
+  $(LIBBITCOIN_CNUTILS) \
   $(LIBBITCOIN_CONSENSUS) \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)

@@ -15,7 +15,7 @@
 #include "common/boost_serialization_helper.h"
 #include "common/int-util.h"
 #include "misc_language.h"
-#include "warnings.h"
+#include "epee/include/warnings.h"
 #include "crypto/hash.h"
 
 DISABLE_VS_WARNINGS(4244 4345 4503) //'boost::foreach_detail_::or_' : decorated name length exceeded, name was truncated
