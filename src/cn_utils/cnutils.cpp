@@ -9,6 +9,7 @@
 #include "crypto/hash.h"
 #include "common/base58.h"
 #include "serialization/binary_utils.h"
+#include "cnutils.h"
 
 
 uint32_t convert_blob(const char *blob, size_t len, char *out) {

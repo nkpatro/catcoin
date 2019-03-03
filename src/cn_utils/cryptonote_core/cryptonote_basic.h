@@ -17,7 +17,7 @@
 #include "serialization/json_archive.h"
 #include "serialization/debug_archive.h"
 #include "serialization/crypto.h"
-#include "serialization/keyvalue_serialization.h" // eepe named serialization
+#include "epee/include/serialization/keyvalue_serialization.h" // eepe named serialization
 #include "string_tools.h"
 #include "cryptonote_config.h"
 #include "crypto/crypto.h"
@@ -562,12 +562,12 @@ namespace cryptonote
   struct integrated_address {
           account_public_address adr;
           crypto::hash8 payment_id;
-    
+
           BEGIN_SERIALIZE_OBJECT()
           FIELD(adr)
           FIELD(payment_id)
           END_SERIALIZE()
-    
+
           BEGIN_KV_SERIALIZE_MAP()
           KV_SERIALIZE(adr)
           KV_SERIALIZE(payment_id)
