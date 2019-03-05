@@ -62,24 +62,7 @@ double GetDifficulty(const CChain& chain, const CBlockIndex* blockindex)
             blockindex = chain.Tip();
     }
 
-    int nShift = (blockindex->nBits >> 24) & 0xff;
-
-    // Difficulty 1 is: 0x2100ffff
-    double dDiff =
-        (double)0x00ffff / (double)(blockindex->nBits & 0x00ffffff);
-
-    while (nShift < 33)
-    {
-        dDiff *= 256.0;
-        nShift++;
-    }
-    while (nShift > 33)
-    {
-        dDiff /= 256.0;
-        nShift--;
-    }
-
-    return dDiff;
+    return ConvertNBitsToDiff(blockindex->nBits);
 }
 
 double GetDifficulty(const CBlockIndex* blockindex)

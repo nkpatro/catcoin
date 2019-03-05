@@ -785,6 +785,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
 
     std::string strMode = "template";
 #if 0
+    // TODO: IMPORTANT!!!! uncomment the following!!!
     if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0)
         throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Kevacoin is not connected!");
 
@@ -825,50 +826,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     UpdateTime(pblock, consensusParams, pindexPrev);
     pblock->nNonce = 0;
 
-    UniValue transactions(UniValue::VARR);
-    std::map<uint256, int64_t> setTxIndex;
-    int i = 0;
-    for (const auto& it : pblock->vtx) {
-        const CTransaction& tx = *it;
-        uint256 txHash = tx.GetHash();
-        setTxIndex[txHash] = i++;
-
-        if (tx.IsCoinBase())
-            continue;
-
-        UniValue entry(UniValue::VOBJ);
-
-        entry.push_back(Pair("data", EncodeHexTx(tx)));
-        entry.push_back(Pair("txid", txHash.GetHex()));
-        entry.push_back(Pair("hash", tx.GetWitnessHash().GetHex()));
-
-        UniValue deps(UniValue::VARR);
-        for (const CTxIn &in : tx.vin)
-        {
-            if (setTxIndex.count(in.prevout.hash))
-                deps.push_back(setTxIndex[in.prevout.hash]);
-        }
-        entry.push_back(Pair("depends", deps));
-
-        int index_in_template = i - 1;
-        entry.push_back(Pair("fee", pblocktemplate->vTxFees[index_in_template]));
-        int64_t nTxSigOps = pblocktemplate->vTxSigOpsCost[index_in_template];
-        entry.push_back(Pair("sigops", nTxSigOps));
-        entry.push_back(Pair("weight", GetTransactionWeight(tx)));
-
-        transactions.push_back(entry);
-    }
-
-    UniValue aux(UniValue::VOBJ);
-    aux.push_back(Pair("flags", HexStr(COINBASE_FLAGS.begin(), COINBASE_FLAGS.end())));
-
-    arith_uint256 hashTarget = arith_uint256().SetCompact(pblock->nBits);
-
-    UniValue aMutable(UniValue::VARR);
-    aMutable.push_back("time");
-    aMutable.push_back("transactions");
-    aMutable.push_back("prevblock");
-
+    std::set<std::string> setClientRules;
     UniValue aRules(UniValue::VARR);
     UniValue vbavailable(UniValue::VOBJ);
     for (int j = 0; j < (int)Consensus::MAX_VERSION_BITS_DEPLOYMENTS; ++j) {
@@ -887,6 +845,12 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
             {
                 const struct VBDeploymentInfo& vbinfo = VersionBitsDeploymentInfo[pos];
                 vbavailable.push_back(Pair(gbt_vb_name(pos), consensusParams.vDeployments[pos].bit));
+                if (setClientRules.find(vbinfo.name) == setClientRules.end()) {
+                    if (!vbinfo.gbt_force) {
+                        // If the client doesn't support this, don't indicate it in the [default] version
+                        pblock->nVersion &= ~VersionBitsMask(consensusParams, pos);
+                    }
+                }
                 break;
             }
             case THRESHOLD_ACTIVE:
@@ -894,44 +858,21 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
                 // Add to rules only
                 const struct VBDeploymentInfo& vbinfo = VersionBitsDeploymentInfo[pos];
                 aRules.push_back(gbt_vb_name(pos));
+                if (setClientRules.find(vbinfo.name) == setClientRules.end()) {
+                    // Not supported by the client; make sure it's safe to proceed
+                    if (!vbinfo.gbt_force) {
+                        // If we do anything other than throw an exception here, be sure version/force isn't sent to old clients
+                        throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf("Support for '%s' rule requires explicit client support", vbinfo.name));
+                    }
+                }
                 break;
             }
         }
     }
 
-    // Update witness commitment after adding the transactions.
-    pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, consensusParams);
+    // Generate the merkle root as all the transactions (including coinbase) are known.
     BlockMerkleRoot(*pblock);
     uint256 blockHash = pblock->GetHash();
-
-#if 0
-    result.push_back(Pair("version", pblock->nVersion));
-    result.push_back(Pair("rules", aRules));
-    result.push_back(Pair("vbavailable", vbavailable));
-    result.push_back(Pair("vbrequired", int(0)));
-
-    result.push_back(Pair("previousblockhash", pblock->hashPrevBlock.GetHex()));
-    result.push_back(Pair("transactions", transactions));
-    result.push_back(Pair("coinbaseaux", aux));
-    result.push_back(Pair("coinbasevalue", (int64_t)pblock->vtx[0]->vout[0].nValue));
-    result.push_back(Pair("longpollid", chainActive.Tip()->GetBlockHash().GetHex() + i64tostr(nTransactionsUpdatedLast)));
-    result.push_back(Pair("target", hashTarget.GetHex()));
-    result.push_back(Pair("mintime", (int64_t)pindexPrev->GetMedianTimePast()+1));
-    result.push_back(Pair("mutable", aMutable));
-    result.push_back(Pair("noncerange", "00000000ffffffff"));
-    int64_t nSigOpLimit = MAX_BLOCK_SIGOPS_COST;
-    int64_t nSizeLimit = MAX_BLOCK_SERIALIZED_SIZE;
-    result.push_back(Pair("sigoplimit", nSigOpLimit));
-    result.push_back(Pair("sizelimit", nSizeLimit));
-    result.push_back(Pair("weightlimit", (int64_t)MAX_BLOCK_WEIGHT));
-    result.push_back(Pair("curtime", pblock->GetBlockTime()));
-    result.push_back(Pair("bits", strprintf("%08x", pblock->nBits)));
-    result.push_back(Pair("height", (int64_t)(pindexPrev->nHeight+1)));
-
-    if (!pblocktemplate->vchCoinbaseCommitment.empty() && fSupportsSegwit) {
-        result.push_back(Pair("default_witness_commitment", HexStr(pblocktemplate->vchCoinbaseCommitment.begin(), pblocktemplate->vchCoinbaseCommitment.end())));
-    }
-#endif
 
     cryptonote::block cn_block;
     // block_header
@@ -939,7 +880,8 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     cn_block.major_version = 8; // cn variant 2
     cn_block.minor_version = 0;
     cn_block.timestamp = pblock->GetBlockTime();
-    memcpy(&(cn_block.prev_id), pblock->hashPrevBlock.begin(), sizeof(pblock->hashPrevBlock));
+    // The prev_id is used to store kevacoin block hash, as a proof of work.
+    memcpy(&(cn_block.prev_id), blockHash.begin(), blockHash.size());
     cn_block.nonce = 0;
 
     // block
@@ -982,42 +924,27 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
       throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: Failed to calculate offset");
     }
 
-    // No transactions other than base one.
+    // No transactions other than coinbase.
     cn_block.tx_hashes.clear();
 
-    // Copy kevacoin block hash to the extra field, as a proof that the work has
-    // been done for the block.
-    // Copy all the txs to extra so that later we can use them to
-    // reconstruct the block.
-    const uint32_t blockHashSize = blockHash.size();
-    const uint32_t txTotalSize = 1 + blockHashSize + 1 + 4 + pblock->vtx.size() * sizeof(CTransaction);
-    cn_block.miner_tx.extra.resize(cn_block.miner_tx.extra.size() + txTotalSize, 0);
-    size_t lastOffset = cn_block.miner_tx.extra.size();
-    uint8_t miningTag = TX_EXTRA_KEVA_BLOCKHASH_TAG;
-    memcpy(cn_block.miner_tx.extra.data() + lastOffset, &miningTag, 1);
-    lastOffset ++;
-    memcpy(cn_block.miner_tx.extra.data() + lastOffset, blockHash.begin(), blockHashSize);
-    lastOffset += blockHashSize;
-    uint8_t kevaTxsTag = TX_EXTRA_KEVA_TX_LIST_TAG;
-    memcpy(cn_block.miner_tx.extra.data() + lastOffset, &kevaTxsTag, 1);
-    lastOffset ++;
-    uint32_t txsSize = ;
-    // This is not right! Need to serialize the transactions.
-    // Maybe using SerializationOp of CBlock to serialize the all block instead?
-    memcpy(cn_block.miner_tx.extra.data() + lastOffset, pblock->vtx.data(), pblock->vtx.size() * sizeof(CTransaction));
+    // Copy keva block to extra so that we can use it in submitblock.
+    CDataStream stream(SER_NETWORK, PROTOCOL_VERSION);
+    stream << *pblock;
+    std::string kevaBlockData = HexStr(stream.begin(), stream.end());
+    cryptonote::tx_extra_keva_block extra_keva_block;
+    extra_keva_block.keva_block = kevaBlockData;
+    cryptonote::append_keva_block_to_extra(cn_block.miner_tx.extra, extra_keva_block);
 
     UniValue result(UniValue::VOBJ);
-    cryptonote::blobdata hashing_blob;
-    cryptonote::get_block_hashing_blob(cn_block, hashing_blob);
-
-    //res.prev_hash = epee::string_tools::pod_to_hex(cn_block.prev_id);
-    //res.blocktemplate_blob = epee::string_tools::buff_to_hex_nodelimer(block_blob);
-    //res.blockhashing_blob =  epee::string_tools::buff_to_hex_nodelimer(hashing_blob);
-
+    const double difficulty = ConvertNBitsToDiff(pblock->nBits);
     result.push_back(Pair("blocktemplate_blob", pblock->hashPrevBlock.GetHex()));
-    result.push_back(Pair("difficulty", pblock->hashPrevBlock.GetHex()));
+    result.push_back(Pair("difficulty", std::to_string(difficulty)));
     result.push_back(Pair("height", std::to_string(height)));
     result.push_back(Pair("reserved_offset", std::to_string(reserved_offset)));
+
+    // Kevacoin specific entries. Not used for now and may be useful in the future.
+    result.push_back(Pair("rules", aRules));
+    result.push_back(Pair("vbavailable", vbavailable));
 
     return result;
 }

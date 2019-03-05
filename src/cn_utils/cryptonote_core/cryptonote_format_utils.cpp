@@ -316,6 +316,26 @@ namespace cryptonote
     return true;
   }
   //---------------------------------------------------------------
+  bool append_keva_block_to_extra(std::vector<uint8_t>& tx_extra, const tx_extra_keva_block& keva_block)
+  {
+    blobdata blob;
+    if (!t_serializable_object_to_blob(keva_block, blob))
+      return false;
+
+    tx_extra.push_back(TX_EXTRA_KEVA_BLOCK_TAG);
+    std::copy(reinterpret_cast<const uint8_t*>(blob.data()), reinterpret_cast<const uint8_t*>(blob.data() + blob.size()), std::back_inserter(tx_extra));
+    return true;
+  }
+  //---------------------------------------------------------------
+  bool get_keva_block_from_extra(const std::vector<uint8_t>& tx_extra, tx_extra_keva_block& keva_block)
+  {
+    std::vector<tx_extra_field> tx_extra_fields;
+    if (!parse_tx_extra(tx_extra, tx_extra_fields))
+      return false;
+
+    return find_tx_extra_field_by_type(tx_extra_fields, keva_block);
+  }
+  //---------------------------------------------------------------
   bool construct_tx(const account_keys& sender_account_keys, const std::vector<tx_source_entry>& sources, const std::vector<tx_destination_entry>& destinations, std::vector<uint8_t> extra, transaction& tx, uint64_t unlock_time)
   {
     tx.vin.clear();
@@ -724,6 +744,7 @@ namespace cryptonote
     return get_object_hash(blob, res);
   }
   //---------------------------------------------------------------
+  #if 0
   bool generate_genesis_block(block& bl)
   {
     //genesis block
@@ -773,6 +794,7 @@ namespace cryptonote
     h = genesis_block_hash;
     return true;
   }
+  #endif
   //---------------------------------------------------------------
   bool get_block_longhash(const block& b, crypto::hash& res, uint64_t height)
   {
@@ -899,6 +921,7 @@ namespace cryptonote
     return check_hash(proof_of_work, current_diffic);
   }
   //---------------------------------------------------------------
+  #if 0
   bool check_proof_of_work_v2(const block& bl, difficulty_type current_diffic, crypto::hash& proof_of_work)
   {
 
@@ -937,4 +960,5 @@ namespace cryptonote
   {
   }
   //---------------------------------------------------------------
+#endif
 }

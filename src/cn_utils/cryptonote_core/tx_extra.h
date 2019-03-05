@@ -13,8 +13,7 @@
 #define TX_EXTRA_NONCE                      0x02
 #define TX_EXTRA_MERGE_MINING_TAG           0x03
 
-#define TX_EXTRA_KEVA_BLOCKHASH_TAG         0xc1
-#define TX_EXTRA_KEVA_TX_LIST_TAG           0xc2
+#define TX_EXTRA_KEVA_BLOCK_TAG             0xa1
 
 #define TX_EXTRA_NONCE_PAYMENT_ID           0x00
 
@@ -134,14 +133,25 @@ namespace cryptonote
     }
   };
 
+  struct tx_extra_keva_block
+  {
+    std::string keva_block;
+
+    BEGIN_SERIALIZE()
+      FIELD(keva_block)
+    END_SERIALIZE()
+  };
+
   // tx_extra_field format, except tx_extra_padding and tx_extra_pub_key:
   //   varint tag;
   //   varint size;
   //   varint data[];
-  typedef boost::variant<tx_extra_padding, tx_extra_pub_key, tx_extra_nonce, tx_extra_merge_mining_tag> tx_extra_field;
+  typedef boost::variant<tx_extra_padding, tx_extra_pub_key, tx_extra_nonce, tx_extra_merge_mining_tag, tx_extra_keva_block> tx_extra_field;
 }
 
 VARIANT_TAG(binary_archive, cryptonote::tx_extra_padding, TX_EXTRA_TAG_PADDING);
 VARIANT_TAG(binary_archive, cryptonote::tx_extra_pub_key, TX_EXTRA_TAG_PUBKEY);
 VARIANT_TAG(binary_archive, cryptonote::tx_extra_nonce, TX_EXTRA_NONCE);
 VARIANT_TAG(binary_archive, cryptonote::tx_extra_merge_mining_tag, TX_EXTRA_MERGE_MINING_TAG);
+VARIANT_TAG(binary_archive, cryptonote::tx_extra_keva_block, TX_EXTRA_KEVA_BLOCK_TAG);
+

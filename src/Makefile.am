@@ -374,7 +374,10 @@ libbitcoin_cnutils_a_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/cn_utils -I$(srcdir)/
 libbitcoin_cnutils_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 libbitcoin_cnutils_a_SOURCES = \
   cn_utils/cnutils.cpp \
+  cn_utils/cryptonote_core/cryptonote_basic_impl.cpp \
   cn_utils/cryptonote_core/cryptonote_format_utils.cpp \
+  cn_utils/cryptonote_core/difficulty.cpp \
+  cn_utils/crypto/random.c \
   cn_utils/crypto/tree-hash.c \
   cn_utils/crypto/crypto.cpp \
   cn_utils/crypto/crypto-ops.c \

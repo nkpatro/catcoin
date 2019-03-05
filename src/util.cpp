@@ -961,3 +961,25 @@ int64_t GetStartupTime()
 {
     return nStartupTime;
 }
+
+double ConvertNBitsToDiff(uint32_t nBits)
+{
+    int nShift = (nBits >> 24) & 0xff;
+
+    // Difficulty 1 is: 0x2100ffff
+    double dDiff =
+        (double)0x00ffff / (double)(nBits & 0x00ffffff);
+
+    while (nShift < 33)
+    {
+        dDiff *= 256.0;
+        nShift++;
+    }
+    while (nShift > 33)
+    {
+        dDiff /= 256.0;
+        nShift--;
+    }
+
+    return dDiff;
+}
