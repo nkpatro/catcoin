@@ -13,6 +13,9 @@
 #define TX_EXTRA_NONCE                      0x02
 #define TX_EXTRA_MERGE_MINING_TAG           0x03
 
+#define TX_EXTRA_KEVA_BLOCKHASH_TAG         0xc1
+#define TX_EXTRA_KEVA_TX_LIST_TAG           0xc2
+
 #define TX_EXTRA_NONCE_PAYMENT_ID           0x00
 
 namespace cryptonote

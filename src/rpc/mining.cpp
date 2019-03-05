@@ -10,6 +10,7 @@
 #include <consensus/consensus.h>
 #include <consensus/params.h>
 #include <consensus/validation.h>
+#include <consensus/merkle.h>
 #include <core_io.h>
 #include <init.h>
 #include <validation.h>
@@ -29,9 +30,11 @@
 #include <memory>
 #include <stdint.h>
 
-#include <cryptonote_core/cryptonote_basic.h>
-#include <cryptonote_core/cryptonote_format_utils.h>
 #include <cnutils.h>
+#include <string_tools.h>
+#define MAX_RESERVE_SIZE    16
+
+const std::string CN_DUMMY_ADDRESS = "44234234234";
 
 unsigned int ParseConfirmTarget(const UniValue& value)
 {
@@ -689,7 +692,19 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
 
 UniValue getblocktemplate(const JSONRPCRequest& request)
 {
-    if (request.fHelp || request.params.size() > 1)
+    // JSON-RPC2 request
+    // {reserve_size: 8, wallet_address: config.poolServer.poolAddress}
+    std::map<std::string, UniValue> kv;
+    request.params.getObjMap(kv);
+    int reserve_size = kv["reserve_size"].get_int();
+    bool fValidReserveSize = reserve_size > 0 && reserve_size <= MAX_RESERVE_SIZE;
+    std::vector<unsigned char> data;
+    std::string wallet_address = kv["wallet_address"].get_str();
+    CTxDestination walletDest = DecodeDestination(wallet_address);
+    bool fValidWalletAddress = walletDest.which() == 4; // Expect WitnessV0KeyHash
+    bool fInvalidInput = !fValidReserveSize || !fValidWalletAddress;
+
+    if (request.fHelp || fInvalidInput)
         throw std::runtime_error(
             "getblocktemplate ( TemplateRequest )\n"
             "\nIf the request parameters include a 'mode' key, that is used to explicitly select between the default 'template' request or a 'proposal'.\n"
@@ -795,8 +810,8 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
         nStart = GetTime();
 
         // Create new block
-        CScript scriptDummy = CScript() << OP_TRUE;
-        pblocktemplate = BlockAssembler(Params()).CreateNewBlock(scriptDummy, fSupportsSegwit);
+        CScript scriptPubKey = GetScriptForDestination(walletDest);
+        pblocktemplate = BlockAssembler(Params()).CreateNewBlock(scriptPubKey, fSupportsSegwit);
         if (!pblocktemplate)
             throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");
 
@@ -854,8 +869,6 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     aMutable.push_back("transactions");
     aMutable.push_back("prevblock");
 
-    UniValue result(UniValue::VOBJ);
-
     UniValue aRules(UniValue::VARR);
     UniValue vbavailable(UniValue::VOBJ);
     for (int j = 0; j < (int)Consensus::MAX_VERSION_BITS_DEPLOYMENTS; ++j) {
@@ -885,6 +898,13 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
             }
         }
     }
+
+    // Update witness commitment after adding the transactions.
+    pblocktemplate->vchCoinbaseCommitment = GenerateCoinbaseCommitment(*pblock, pindexPrev, consensusParams);
+    BlockMerkleRoot(*pblock);
+    uint256 blockHash = pblock->GetHash();
+
+#if 0
     result.push_back(Pair("version", pblock->nVersion));
     result.push_back(Pair("rules", aRules));
     result.push_back(Pair("vbavailable", vbavailable));
@@ -911,6 +931,93 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     if (!pblocktemplate->vchCoinbaseCommitment.empty() && fSupportsSegwit) {
         result.push_back(Pair("default_witness_commitment", HexStr(pblocktemplate->vchCoinbaseCommitment.begin(), pblocktemplate->vchCoinbaseCommitment.end())));
     }
+#endif
+
+    cryptonote::block cn_block;
+    // block_header
+    // const int cn_variant = b.major_version >= 7 ? b.major_version - 6 : 0;
+    cn_block.major_version = 8; // cn variant 2
+    cn_block.minor_version = 0;
+    cn_block.timestamp = pblock->GetBlockTime();
+    memcpy(&(cn_block.prev_id), pblock->hashPrevBlock.begin(), sizeof(pblock->hashPrevBlock));
+    cn_block.nonce = 0;
+
+    // block
+    // Coinbase transaction.
+    const uint32_t height = pindexPrev->nHeight+1;
+    const size_t    miner_height = 10000;
+    const size_t    median_size = 20000;
+    const uint64_t  already_generated_coins = 10000;
+    const size_t    current_block_size = 20000;
+    const uint64_t  fee = 0;
+    const size_t    max_outs = 1;
+    cryptonote::account_public_address miner_address;
+    cryptonote::transaction miner_tx;
+    cryptonote::blobdata extra_nonce;
+    // The reserve_offset is the offset for extra_nonce
+    extra_nonce.resize(reserve_size, 0);
+
+    if(!cryptonote::get_account_address_from_str(miner_address, CN_DUMMY_ADDRESS)) {
+      throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: failed to parse wallet address");
+    }
+
+    if (!construct_miner_tx(miner_height, median_size, already_generated_coins, current_block_size,
+            fee, miner_address, miner_tx, extra_nonce, max_outs)) {
+        throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: failed to construct miner tx");
+    }
+    cn_block.miner_tx = miner_tx;
+
+    cryptonote::blobdata block_blob = cryptonote::t_serializable_object_to_blob(cn_block);
+    crypto::public_key tx_pub_key = cryptonote::get_tx_pub_key_from_extra(cn_block.miner_tx);
+    if(tx_pub_key == cryptonote::null_pkey) {
+      throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: failed to tx pub key in coinbase extra");
+    }
+    uint32_t reserved_offset = slow_memmem((void*)block_blob.data(), block_blob.size(), &tx_pub_key, sizeof(tx_pub_key));
+    if(!reserved_offset) {
+      throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: Failed to find tx pub key in blockblob");
+    }
+    reserved_offset += sizeof(tx_pub_key) + 2; //2 bytes: tag for TX_EXTRA_NONCE(1 byte), counter in TX_EXTRA_NONCE(1 byte)
+    if(reserved_offset + reserve_size > block_blob.size())
+    {
+      throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: Failed to calculate offset");
+    }
+
+    // No transactions other than base one.
+    cn_block.tx_hashes.clear();
+
+    // Copy kevacoin block hash to the extra field, as a proof that the work has
+    // been done for the block.
+    // Copy all the txs to extra so that later we can use them to
+    // reconstruct the block.
+    const uint32_t blockHashSize = blockHash.size();
+    const uint32_t txTotalSize = 1 + blockHashSize + 1 + 4 + pblock->vtx.size() * sizeof(CTransaction);
+    cn_block.miner_tx.extra.resize(cn_block.miner_tx.extra.size() + txTotalSize, 0);
+    size_t lastOffset = cn_block.miner_tx.extra.size();
+    uint8_t miningTag = TX_EXTRA_KEVA_BLOCKHASH_TAG;
+    memcpy(cn_block.miner_tx.extra.data() + lastOffset, &miningTag, 1);
+    lastOffset ++;
+    memcpy(cn_block.miner_tx.extra.data() + lastOffset, blockHash.begin(), blockHashSize);
+    lastOffset += blockHashSize;
+    uint8_t kevaTxsTag = TX_EXTRA_KEVA_TX_LIST_TAG;
+    memcpy(cn_block.miner_tx.extra.data() + lastOffset, &kevaTxsTag, 1);
+    lastOffset ++;
+    uint32_t txsSize = ;
+    // This is not right! Need to serialize the transactions.
+    // Maybe using SerializationOp of CBlock to serialize the all block instead?
+    memcpy(cn_block.miner_tx.extra.data() + lastOffset, pblock->vtx.data(), pblock->vtx.size() * sizeof(CTransaction));
+
+    UniValue result(UniValue::VOBJ);
+    cryptonote::blobdata hashing_blob;
+    cryptonote::get_block_hashing_blob(cn_block, hashing_blob);
+
+    //res.prev_hash = epee::string_tools::pod_to_hex(cn_block.prev_id);
+    //res.blocktemplate_blob = epee::string_tools::buff_to_hex_nodelimer(block_blob);
+    //res.blockhashing_blob =  epee::string_tools::buff_to_hex_nodelimer(hashing_blob);
+
+    result.push_back(Pair("blocktemplate_blob", pblock->hashPrevBlock.GetHex()));
+    result.push_back(Pair("difficulty", pblock->hashPrevBlock.GetHex()));
+    result.push_back(Pair("height", std::to_string(height)));
+    result.push_back(Pair("reserved_offset", std::to_string(reserved_offset)));
 
     return result;
 }

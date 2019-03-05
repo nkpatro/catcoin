@@ -203,16 +203,25 @@ public:
         pchMessageStart[3] = 0xe4;
         nDefaultPort = 19335;
         nPruneAfterHeight = 1000;
-        genesis = CreateGenesisBlock(0x5c4fd388, 0x80003898, 0x1e0fffff, 1, 500 * COIN);
+#if 1
+        genesis = CreateGenesisBlock(1543789622, 1592, 0x1f0ffff0, 1, 500 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("7dc62041b90482eafe70fb1e1f6c8973a8c46b7f9f12b966e101c2bae126b5d4"));
+         assert(consensus.hashGenesisBlock == uint256S("860764b471430b96f15c145a44fd854f89d3be6f9ae054ef46e4c8473259bae3"));
         assert(genesis.hashMerkleRoot == uint256S("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"));
+#else
+        genesis = CreateGenesisBlock(1550900037, 3033, 0x1f0fffff, 1, 500 * COIN);
+        consensus.hashGenesisBlock = genesis.GetHash();
+        assert(consensus.hashGenesisBlock == uint256S("584a067cf7ea6daf30c351a46c6b7403d6fdc0e6e953cf7531d11eb7d834546c"));
+        assert(genesis.hashMerkleRoot == uint256S("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"));
+#endif
 
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
+#if 0
         vSeeds.emplace_back("testnet-seed.kevacoin.org");
         vSeeds.emplace_back("testnet-seed.honourchat.com");
+#endif
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,55); // P
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -223,8 +232,9 @@ public:
         base58Prefixes[KEVA_NAMESPACE] = std::vector<unsigned char>(1,53); // N
 
         bech32_hrp = "tkva";
-
+#if 0
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
+#endif
 
         fDefaultConsistencyChecks = false;
         fRequireStandard = false;
