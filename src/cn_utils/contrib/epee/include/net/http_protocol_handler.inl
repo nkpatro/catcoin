@@ -33,8 +33,12 @@
 #include "file_io_utils.h"
 #include "net_parse_helpers.h"
 
+#undef MONERO_DEFAULT_LOG_CATEGORY
+#define MONERO_DEFAULT_LOG_CATEGORY "net.http"
+
 #define HTTP_MAX_URI_LEN		 9000 
 #define HTTP_MAX_HEADER_LEN		 100000
+#define HTTP_MAX_STARTING_NEWLINES       8
 
 namespace epee
 {
@@ -133,7 +137,7 @@ namespace net_utils
 			std::string boundary;
 			if(!match_boundary(content_type, boundary))
 			{
-				LOG_PRINT("Failed to match boundary in content type: " << content_type, LOG_LEVEL_0);
+				MERROR("Failed to match boundary in content type: " << content_type);
 				return false;
 			}
 			
@@ -155,7 +159,7 @@ namespace net_utils
 					pos = body.find(boundary, std::distance(body.begin(), it_begin));
 					if(std::string::npos == pos)
 					{
-						LOG_PRINT("Error: Filed to match closing multipart tag", LOG_LEVEL_0);
+						MERROR("Error: Filed to match closing multipart tag");
 						it_end = body.end();
 					}else
 					{
@@ -177,7 +181,7 @@ namespace net_utils
 				out_values.push_back(multipart_entry());
 				if(!handle_part_of_multipart(it_begin, it_end, out_values.back()))
 				{
-					LOG_PRINT("Failed to handle_part_of_multipart", LOG_LEVEL_0);
+					MERROR("Failed to handle_part_of_multipart");
 					return false;
 				}
 
@@ -192,15 +196,17 @@ namespace net_utils
 
 		//--------------------------------------------------------------------------------------------
 		template<class t_connection_context>
-		simple_http_connection_handler<t_connection_context>::simple_http_connection_handler(i_service_endpoint* psnd_hndlr, config_type& config):
+		simple_http_connection_handler<t_connection_context>::simple_http_connection_handler(i_service_endpoint* psnd_hndlr, config_type& config, t_connection_context& conn_context):
 		m_state(http_state_retriving_comand_line),
 		m_body_transfer_type(http_body_transfer_undefined),
-        m_is_stop_handling(false),
+		m_is_stop_handling(false),
 		m_len_summary(0),
 		m_len_remain(0),
-		m_config(config), 
+		m_config(config),
 		m_want_close(false),
-        m_psnd_hndlr(psnd_hndlr)
+		m_newlines(0),
+		m_psnd_hndlr(psnd_hndlr),
+		m_conn_context(conn_context)
 	{
 
 	}
@@ -213,6 +219,7 @@ namespace net_utils
 		m_body_transfer_type = http_body_transfer_undefined;
 		m_query_info.clear();
 		m_len_summary = 0;
+		m_newlines = 0;
 		return true;
 	}
 	//--------------------------------------------------------------------------------------------
@@ -233,6 +240,8 @@ namespace net_utils
 	bool simple_http_connection_handler<t_connection_context>::handle_buff_in(std::string& buf)
 	{
 
+		size_t ndel;
+
 		if(m_cache.size())
 			m_cache += buf;
 		else
@@ -250,11 +259,19 @@ namespace net_utils
 					break;
 
 				//check_and_handle_fake_response();
-				if((m_cache[0] == '\r' || m_cache[0] == '\n'))
+				ndel = m_cache.find_first_not_of("\r\n");
+				if (ndel != 0)
 				{
           //some times it could be that before query line cold be few line breaks
           //so we have to be calm without panic with assers
-					m_cache.erase(0, 1);
+					m_newlines += std::string::npos == ndel ? m_cache.size() : ndel;
+					if (m_newlines > HTTP_MAX_STARTING_NEWLINES)
+					{
+						LOG_ERROR("simple_http_connection_handler::handle_buff_out: Too many starting newlines");
+						m_state = http_state_error;
+						return false;
+					}
+					m_cache.erase(0, ndel);
 					break;
 				}
 
@@ -265,7 +282,7 @@ namespace net_utils
 					m_is_stop_handling = true;
 					if(m_cache.size() > HTTP_MAX_URI_LEN)
 					{
-						LOG_ERROR("simple_http_connection_handler::handle_buff_out: Too long URI line");
+						LOG_ERROR_CC(m_conn_context, "simple_http_connection_handler::handle_buff_out: Too long URI line");
 						m_state = http_state_error;
 						return false;
 					}
@@ -279,13 +296,14 @@ namespace net_utils
 						m_is_stop_handling = true;
 						if(m_cache.size() > HTTP_MAX_HEADER_LEN)
 						{
-							LOG_ERROR("simple_http_connection_handler::handle_buff_in: Too long header area");
+							LOG_ERROR_CC(m_conn_context, "simple_http_connection_handler::handle_buff_in: Too long header area");
 							m_state = http_state_error;
 							return false;
 						}	
 						break;
 					}
-					analize_cached_request_header_and_invoke_state(pos);
+					if (!analize_cached_request_header_and_invoke_state(pos))
+						return false;
 					break;
 				}
 			case http_state_retriving_body:
@@ -293,10 +311,10 @@ namespace net_utils
 			case http_state_connection_close:
 				return false;
 			default:
-				LOG_ERROR("simple_http_connection_handler::handle_char_out: Wrong state: " << m_state);
+				LOG_ERROR_CC(m_conn_context, "simple_http_connection_handler::handle_char_out: Wrong state: " << m_state);
 				return false;
 			case http_state_error:
-				LOG_ERROR("simple_http_connection_handler::handle_char_out: Error state!!!");
+				LOG_ERROR_CC(m_conn_context, "simple_http_connection_handler::handle_char_out: Error state!!!");
 				return false;
 			}
 
@@ -310,9 +328,14 @@ namespace net_utils
 	inline bool analize_http_method(const boost::smatch& result, http::http_method& method, int& http_ver_major, int& http_ver_minor)
 	{
 		CHECK_AND_ASSERT_MES(result[0].matched, false, "simple_http_connection_handler::analize_http_method() assert failed...");
-		http_ver_major = boost::lexical_cast<int>(result[11]);
-		http_ver_minor = boost::lexical_cast<int>(result[12]);
-		if(result[4].matched)
+		if (!boost::conversion::try_lexical_convert<int>(result[11], http_ver_major))
+			return false;
+		if (!boost::conversion::try_lexical_convert<int>(result[12], http_ver_minor))
+			return false;
+
+		if(result[3].matched)
+			method = http::http_method_options;
+		else if(result[4].matched)
 			method = http::http_method_get;
 		else if(result[5].matched)
 			method = http::http_method_head;
@@ -330,17 +353,25 @@ namespace net_utils
   template<class t_connection_context>
 	bool simple_http_connection_handler<t_connection_context>::handle_invoke_query_line()
 	{ 
-		LOG_FRAME("simple_http_connection_handler<t_connection_context>::handle_recognize_protocol_out(*)", LOG_LEVEL_3);
-
-		STATIC_REGEXP_EXPR_1(rexp_match_command_line, "^(((OPTIONS)|(GET)|(HEAD)|(POST)|(PUT)|(DELETE)|(TRACE)) (\\S+) HTTP/(\\d+).(\\d+))\r?\n", boost::regex::icase | boost::regex::normal);
+		STATIC_REGEXP_EXPR_1(rexp_match_command_line, "^(((OPTIONS)|(GET)|(HEAD)|(POST)|(PUT)|(DELETE)|(TRACE)) (\\S+) HTTP/(\\d+)\\.(\\d+))\r?\n", boost::regex::icase | boost::regex::normal);
 		//											    123         4     5      6      7     8        9        10          11     12    
 		//size_t match_len = 0;
 		boost::smatch result;	
 		if(boost::regex_search(m_cache, result, rexp_match_command_line, boost::match_default) && result[0].matched)
 		{
-			analize_http_method(result, m_query_info.m_http_method, m_query_info.m_http_ver_hi, m_query_info.m_http_ver_hi);
+			if (!analize_http_method(result, m_query_info.m_http_method, m_query_info.m_http_ver_hi, m_query_info.m_http_ver_hi))
+			{
+				m_state = http_state_error;
+				MERROR("Failed to analyze method");
+				return false;
+			}
 			m_query_info.m_URI = result[10];
-      parse_uri(m_query_info.m_URI, m_query_info.m_uri_content);
+			if (!parse_uri(m_query_info.m_URI, m_query_info.m_uri_content))
+			{
+				m_state = http_state_error;
+				MERROR("Failed to parse URI: m_query_info.m_URI");
+				return false;
+			}
 			m_query_info.m_http_method_str = result[2];
 			m_query_info.m_full_request_str = result[0];
 
@@ -352,7 +383,7 @@ namespace net_utils
 		}else
 		{
 			m_state = http_state_error;
-			LOG_ERROR("simple_http_connection_handler<t_connection_context>::handle_invoke_query_line(): Failed to match first line: " << m_cache);
+			LOG_ERROR_CC(m_conn_context, "simple_http_connection_handler<t_connection_context>::handle_invoke_query_line(): Failed to match first line: " << m_cache);
 			return false;
 		}
 
@@ -376,17 +407,16 @@ namespace net_utils
   template<class t_connection_context>
 	bool simple_http_connection_handler<t_connection_context>::analize_cached_request_header_and_invoke_state(size_t pos)
 	{ 
-		//LOG_PRINT_L4("HTTP HEAD:\r\n" << m_cache.substr(0, pos));
-
-		LOG_FRAME("simple_http_connection_handler<t_connection_context>::analize_cached_request_header_and_invoke_state(*)", LOG_LEVEL_3);
+		LOG_PRINT_L3("HTTP HEAD:\r\n" << m_cache.substr(0, pos));
 
 		m_query_info.m_full_request_buf_size = pos;
     m_query_info.m_request_head.assign(m_cache.begin(), m_cache.begin()+pos); 
 
 		if(!parse_cached_header(m_query_info.m_header_info, m_cache, pos))
 		{
-			LOG_ERROR("simple_http_connection_handler<t_connection_context>::analize_cached_request_header_and_invoke_state(): failed to anilize request header: " << m_cache);
+			LOG_ERROR_CC(m_conn_context, "simple_http_connection_handler<t_connection_context>::analize_cached_request_header_and_invoke_state(): failed to anilize request header: " << m_cache);
 			m_state = http_state_error;
+			return false;
 		}
 
 		m_cache.erase(0, pos);
@@ -400,7 +430,7 @@ namespace net_utils
 			m_body_transfer_type = http_body_transfer_measure;
 			if(!get_len_from_content_lenght(m_query_info.m_header_info.m_content_length, m_len_summary))
 			{
-				LOG_ERROR("simple_http_connection_handler<t_connection_context>::analize_cached_request_header_and_invoke_state(): Failed to get_len_from_content_lenght();, m_query_info.m_content_length="<<m_query_info.m_header_info.m_content_length);
+				LOG_ERROR_CC(m_conn_context, "simple_http_connection_handler<t_connection_context>::analize_cached_request_header_and_invoke_state(): Failed to get_len_from_content_lenght();, m_query_info.m_content_length="<<m_query_info.m_header_info.m_content_length);
 				m_state = http_state_error;
 				return false;
 			}
@@ -433,7 +463,7 @@ namespace net_utils
 		case http_body_transfer_multipart:
 		case http_body_transfer_undefined:
 		default:
-			LOG_ERROR("simple_http_connection_handler<t_connection_context>::handle_retriving_query_body(): Unexpected m_body_query_type state:" << m_body_transfer_type);
+			LOG_ERROR_CC(m_conn_context, "simple_http_connection_handler<t_connection_context>::handle_retriving_query_body(): Unexpected m_body_query_type state:" << m_body_transfer_type);
 			m_state = http_state_error;
 			return false;
 		}
@@ -470,13 +500,11 @@ namespace net_utils
   template<class t_connection_context>
 	bool simple_http_connection_handler<t_connection_context>::parse_cached_header(http_header_info& body_info, const std::string& m_cache_to_process, size_t pos)
 	{ 
-		LOG_FRAME("http_stream_filter::parse_cached_header(*)", LOG_LEVEL_3);
-
 		STATIC_REGEXP_EXPR_1(rexp_mach_field, 
-			"\n?((Connection)|(Referer)|(Content-Length)|(Content-Type)|(Transfer-Encoding)|(Content-Encoding)|(Host)|(Cookie)"
-			//  12            3         4                5              6                   7                  8      9    
+			"\n?((Connection)|(Referer)|(Content-Length)|(Content-Type)|(Transfer-Encoding)|(Content-Encoding)|(Host)|(Cookie)|(User-Agent)|(Origin)"
+			//  12            3         4                5              6                   7                  8      9        10           11
 			"|([\\w-]+?)) ?: ?((.*?)(\r?\n))[^\t ]",	
-			//10             1112   13 
+			//11             1213   14 
 			boost::regex::icase | boost::regex::normal);
 
 		boost::smatch		result;
@@ -488,8 +516,8 @@ namespace net_utils
 		//lookup all fields and fill well-known fields
 		while( boost::regex_search( it_current_bound, it_end_bound, result, rexp_mach_field, boost::match_default) && result[0].matched) 
 		{
-			const size_t field_val = 12;
-			const size_t field_etc_name = 10;
+			const size_t field_val = 14;
+			const size_t field_etc_name = 12;
 
 			int i = 2; //start position = 2
 			if(result[i++].matched)//"Connection"
@@ -508,11 +536,15 @@ namespace net_utils
 				body_info.m_host = result[field_val];
 			else if(result[i++].matched)//"Cookie"
 				body_info.m_cookie = result[field_val];
+			else if(result[i++].matched)//"User-Agent"
+				body_info.m_user_agent = result[field_val];
+			else if(result[i++].matched)//"Origin"
+				body_info.m_origin = result[field_val];
 			else if(result[i++].matched)//e.t.c (HAVE TO BE MATCHED!)
 				body_info.m_etc_fields.push_back(std::pair<std::string, std::string>(result[field_etc_name], result[field_val]));
 			else
 			{
-				LOG_ERROR("simple_http_connection_handler<t_connection_context>::parse_cached_header() not matched last entry in:"<<m_cache_to_process);
+				LOG_ERROR_CC(m_conn_context, "simple_http_connection_handler<t_connection_context>::parse_cached_header() not matched last entry in:" << m_cache_to_process);
 			}
 
 			it_current_bound = result[(int)result.size()-1]. first;
@@ -529,25 +561,37 @@ namespace net_utils
 		if(!(boost::regex_search( str, result, rexp_mach_field, boost::match_default) && result[0].matched))
 			return false;
 
-		len = boost::lexical_cast<size_t>(result[0]);
+		try { len = boost::lexical_cast<size_t>(result[0]); }
+		catch(...) { return false; }
 		return true;
 	}
 	//-----------------------------------------------------------------------------------
   template<class t_connection_context>
 	bool simple_http_connection_handler<t_connection_context>::handle_request_and_send_response(const http::http_request_info& query_info)
 	{
-		http_response_info response;
-		bool res = handle_request(query_info, response);
+		http_response_info response{};
 		//CHECK_AND_ASSERT_MES(res, res, "handle_request(query_info, response) returned false" );
+		bool res = true;
+
+		if (query_info.m_http_method != http::http_method_options)
+		{
+			res = handle_request(query_info, response);
+		}
+		else
+		{
+			response.m_response_code = 200;
+			response.m_response_comment = "OK";
+		}
 
 		std::string response_data = get_response_header(response);
-		
 		//LOG_PRINT_L0("HTTP_SEND: << \r\n" << response_data + response.m_body);
+
     LOG_PRINT_L3("HTTP_RESPONSE_HEAD: << \r\n" << response_data);
 		
 		m_psnd_hndlr->do_send((void*)response_data.data(), response_data.size());
-		if(response.m_body.size())
+		if ((response.m_body.size() && (query_info.m_http_method != http::http_method_head)) || (query_info.m_http_method == http::http_method_options))
 			m_psnd_hndlr->do_send((void*)response.m_body.data(), response.m_body.size());
+		m_psnd_hndlr->send_done();
 		return res;
 	}
 	//-----------------------------------------------------------------------------------
@@ -565,7 +609,7 @@ namespace net_utils
 		m_config.m_lock.unlock();
 		if(!file_io_utils::load_file_to_string(destination_file_path.c_str(), response.m_body))
 		{
-			LOG_PRINT("URI \""<< query_info.m_full_request_str.substr(0, query_info.m_full_request_str.size()-2) << "\" [" << destination_file_path << "] Not Found (404 )" , LOG_LEVEL_1);
+			MWARNING("URI \""<< query_info.m_full_request_str.substr(0, query_info.m_full_request_str.size()-2) << "\" [" << destination_file_path << "] Not Found (404 )");
 			response.m_body = get_not_found_response_body(query_info.m_URI);
 			response.m_response_code = 404;
 			response.m_response_comment = "Not found";
@@ -573,11 +617,10 @@ namespace net_utils
 			return true;
 		}
 
-		LOG_PRINT(" -->> " << query_info.m_full_request_str << "\r\n<<--OK" , LOG_LEVEL_3);
+		MDEBUG(" -->> " << query_info.m_full_request_str << "\r\n<<--OK");
 		response.m_response_code = 200;
 		response.m_response_comment = "OK";
 		response.m_mime_tipe = get_file_mime_tipe(uri_to_path);
-
 
 		return true;
 	}
@@ -590,8 +633,12 @@ namespace net_utils
 			"Server: Epee-based\r\n"
 			"Content-Length: ";
 		buf += boost::lexical_cast<std::string>(response.m_body.size()) + "\r\n";
-		buf += "Content-Type: ";
-		buf += response.m_mime_tipe + "\r\n";
+
+		if(!response.m_mime_tipe.empty())
+		{
+			buf += "Content-Type: ";
+			buf += response.m_mime_tipe + "\r\n";
+		}
 
 		buf += "Last-Modified: ";
 		time_t tm;
@@ -611,6 +658,22 @@ namespace net_utils
 				m_want_close = true;
 			}
 		}
+
+		// Cross-origin resource sharing
+		if(m_query_info.m_header_info.m_origin.size())
+		{
+			if (std::binary_search(m_config.m_access_control_origins.begin(), m_config.m_access_control_origins.end(), m_query_info.m_header_info.m_origin))
+			{
+				buf += "Access-Control-Allow-Origin: ";
+				buf += m_query_info.m_header_info.m_origin;
+				buf += "\r\n";
+				buf += "Access-Control-Expose-Headers: www-authenticate\r\n";
+				if (m_query_info.m_http_method == http::http_method_options)
+					buf += "Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With\r\n";
+				buf += "Access-Control-Allow-Methods: POST, PUT, GET, OPTIONS\r\n";
+			}
+		}
+
 		//add additional fields, if it is
 		for(fields_list::const_iterator it = response.m_additional_fields.begin(); it!=response.m_additional_fields.end(); it++)
 			buf += it->first + ":" + it->second + "\r\n";

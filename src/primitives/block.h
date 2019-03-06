@@ -10,7 +10,7 @@
 #include <serialize.h>
 #include <uint256.h>
 
-#include <cryptonote_core/cryptonote_format_utils.h>
+#include <cryptonote_basic/cryptonote_format_utils.h>
 
 /**
  * This header is to store the proof-of-work of cryptonote mining.

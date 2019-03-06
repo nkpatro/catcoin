@@ -2,9 +2,9 @@
 #include <stdint.h>
 #include <string>
 #include <algorithm>
-#include "cryptonote_core/cryptonote_basic.h"
-#include "cryptonote_core/cryptonote_format_utils.h"
-#include "cryptonote_protocol/blobdatatype.h"
+#include "cryptonote_basic/cryptonote_basic.h"
+#include "cryptonote_basic/cryptonote_format_utils.h"
+#include "cryptonote_basic/blobdatatype.h"
 #include "crypto/crypto.h"
 #include "crypto/hash.h"
 #include "common/base58.h"
@@ -20,11 +20,7 @@ uint32_t convert_blob(const char *blob, size_t len, char *out) {
     if (!cryptonote::parse_and_validate_block_from_blob(input, b)) {
         return 0;
     }
-
-    if (!cryptonote::get_block_hashing_blob(b, output)) {
-        return 0;
-    }
-
+    output = cryptonote::get_block_hashing_blob(b);
     output.copy(out, output.length(), 0);
     return output.length();
 }

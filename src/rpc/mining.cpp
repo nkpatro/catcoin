@@ -32,6 +32,7 @@
 
 #include <cnutils.h>
 #include <string_tools.h>
+#include <cryptonote_core/cryptonote_tx_utils.h>
 #define MAX_RESERVE_SIZE    16
 
 const std::string CN_DUMMY_ADDRESS = "44234234234";
@@ -894,14 +895,17 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     const uint64_t  fee = 0;
     const size_t    max_outs = 1;
     cryptonote::account_public_address miner_address;
+    cryptonote::address_parse_info parserInfo;
     cryptonote::transaction miner_tx;
     cryptonote::blobdata extra_nonce;
     // The reserve_offset is the offset for extra_nonce
     extra_nonce.resize(reserve_size, 0);
 
-    if(!cryptonote::get_account_address_from_str(miner_address, CN_DUMMY_ADDRESS)) {
+    if(!cryptonote::get_account_address_from_str(parserInfo, cryptonote::MAINNET, CN_DUMMY_ADDRESS)) {
       throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: failed to parse wallet address");
     }
+
+    miner_address = parserInfo.address;
 
     if (!construct_miner_tx(miner_height, median_size, already_generated_coins, current_block_size,
             fee, miner_address, miner_tx, extra_nonce, max_outs)) {
@@ -911,7 +915,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
 
     cryptonote::blobdata block_blob = cryptonote::t_serializable_object_to_blob(cn_block);
     crypto::public_key tx_pub_key = cryptonote::get_tx_pub_key_from_extra(cn_block.miner_tx);
-    if(tx_pub_key == cryptonote::null_pkey) {
+    if(tx_pub_key == crypto::null_pkey) {
       throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: failed to tx pub key in coinbase extra");
     }
     uint32_t reserved_offset = slow_memmem((void*)block_blob.data(), block_blob.size(), &tx_pub_key, sizeof(tx_pub_key));
