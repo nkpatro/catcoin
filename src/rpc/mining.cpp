@@ -938,9 +938,9 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     UniValue result(UniValue::VOBJ);
     const double difficulty = ConvertNBitsToDiff(pblock->nBits);
     result.push_back(Pair("blocktemplate_blob", pblock->hashPrevBlock.GetHex()));
-    result.push_back(Pair("difficulty", std::to_string(difficulty)));
-    result.push_back(Pair("height", std::to_string(height)));
-    result.push_back(Pair("reserved_offset", std::to_string(reserved_offset)));
+    result.push_back(Pair("difficulty", (double)difficulty));
+    result.push_back(Pair("height", (uint64_t)height));
+    result.push_back(Pair("reserved_offset", (uint64_t)reserved_offset));
 
     // Kevacoin specific entries. Not used for now and may be useful in the future.
     result.push_back(Pair("rules", aRules));
