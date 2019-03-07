@@ -952,12 +952,12 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     std::string kevaBlockData = HexStr(stream.begin(), stream.end());
     cryptonote::tx_extra_keva_block extra_keva_block;
     extra_keva_block.keva_block = kevaBlockData;
-    if (cryptonote::append_keva_block_to_extra(cn_block.miner_tx.extra, extra_keva_block)) {
+    if (!cryptonote::append_keva_block_to_extra(cn_block.miner_tx.extra, extra_keva_block)) {
         throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: failed to add block");
     }
 
     UniValue result(UniValue::VOBJ);
-    const double difficulty = ConvertNBitsToDiff(pblock->nBits);
+    const uint64_t difficulty = ConvertNBitsToDiff(pblock->nBits);
     result.push_back(Pair("blocktemplate_blob", pblock->hashPrevBlock.GetHex()));
     result.push_back(Pair("difficulty", (double)difficulty));
     result.push_back(Pair("height", (uint64_t)height));
