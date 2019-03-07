@@ -3,7 +3,9 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include <arith_uint256.h>
 #include <primitives/block.h>
+#include <streams.h>
 
 #include <hash.h>
 #include <tinyformat.h>
@@ -20,7 +22,25 @@ uint256 CBlockHeader::GetHash() const
 uint256 CBlockHeader::GetPoWHash() const
 {
     uint256 thash;
-    cn_slow_hash(BEGIN(nVersion), 80, BEGIN(thash), 2, 0, 0);
+    if (hashPrevBlock.IsNull()) {
+        // Genesis block
+        cn_slow_hash(BEGIN(nVersion), 80, BEGIN(thash), 2, 0, 0);
+        return thash;
+    }
+    arith_uint256 blockHash = UintToArith256(GetHash());
+    arith_uint256 expectedHash = UintToArith256(cnHeader.prev_id);
+    // blockHash should be the same as expectedHash. If so, after the
+    // following XOR operatiosn, the value of expectedHash is not changed.
+    blockHash ^= expectedHash;
+    expectedHash ^= blockHash;
+    CryptoNoteHeader header = cnHeader;
+    // Cryptonote prev_id is used to store kevacoin block hash.
+    header.prev_id = ArithToUint256(expectedHash);
+
+    CDataStream stream(SER_NETWORK, PROTOCOL_VERSION);
+    stream << header;
+    std::string blob = stream.str();
+    cn_slow_hash(blob.data(), blob.size(), BEGIN(thash), 2, 0, 0);
     return thash;
 }
 

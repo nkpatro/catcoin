@@ -971,6 +971,7 @@ protected:
     }
 };
 
+#if 0
 UniValue submitblock(const JSONRPCRequest& request)
 {
     // We allow 2 arguments for compliance with BIP22. Argument 2 is ignored.
@@ -1001,6 +1002,115 @@ UniValue submitblock(const JSONRPCRequest& request)
     }
 
     uint256 hash = block.GetHash();
+    bool fBlockPresent = false;
+    {
+        LOCK(cs_main);
+        BlockMap::iterator mi = mapBlockIndex.find(hash);
+        if (mi != mapBlockIndex.end()) {
+            CBlockIndex *pindex = mi->second;
+            if (pindex->IsValid(BLOCK_VALID_SCRIPTS)) {
+                return "duplicate";
+            }
+            if (pindex->nStatus & BLOCK_FAILED_MASK) {
+                return "duplicate-invalid";
+            }
+            // Otherwise, we might only have the header - process the block before returning
+            fBlockPresent = true;
+        }
+    }
+
+    {
+        LOCK(cs_main);
+        BlockMap::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
+        if (mi != mapBlockIndex.end()) {
+            UpdateUncommittedBlockStructures(block, mi->second, Params().GetConsensus());
+        }
+    }
+
+    submitblock_StateCatcher sc(block.GetHash());
+    RegisterValidationInterface(&sc);
+    bool fAccepted = ProcessNewBlock(Params(), blockptr, true, nullptr);
+    UnregisterValidationInterface(&sc);
+    if (fBlockPresent) {
+        if (fAccepted && !sc.found) {
+            return "duplicate-inconclusive";
+        }
+        return "duplicate";
+    }
+    if (!sc.found) {
+        return "inconclusive";
+    }
+    return BIP22ValidationResult(sc.state);
+}
+#endif
+
+static uint256 CryptoHashToUint256(const crypto::hash& hash)
+{
+    std::vector<unsigned char> prev_id((unsigned char*)(&hash), (unsigned char*)&(hash) + sizeof(crypto::hash));
+    return uint256(prev_id);
+}
+
+// Cryptonote RPC call, only one parameter allowed.
+UniValue submitblock(const JSONRPCRequest& request)
+{
+    if (request.fHelp || request.params.size() != 1) {
+        throw std::runtime_error(
+            "submitblock \"hexdata\"\n"
+            "\nAttempts to submit new block to network.\n"
+            "See https://en.bitcoin.it/wiki/BIP_0022 for full specification.\n"
+
+            "\nArguments\n"
+            "1. \"hexdata\"        (string, required) the hex-encoded block data to submit\n"
+            "2. \"dummy\"          (optional) dummy value, for compatibility with BIP22. This value is ignored.\n"
+            "\nResult:\n"
+            "\nExamples:\n"
+            + HelpExampleCli("submitblock", "\"mydata\"")
+            + HelpExampleRpc("submitblock", "\"mydata\"")
+        );
+    }
+
+    cryptonote::blobdata blockblob;
+    if(!epee::string_tools::parse_hexstr_to_binbuff(request.params[0].get_str(), blockblob))
+    {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Wrong block blob");
+    }
+
+    cryptonote::block cnblock = AUTO_VAL_INIT(cnblock);
+    if(!cryptonote::parse_and_validate_block_from_blob(blockblob, cnblock))
+    {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Wrong block blob");
+    }
+
+    cryptonote::tx_extra_keva_block keva_block_blob;
+    if (!cryptonote::get_keva_block_from_extra(cnblock.miner_tx.extra, keva_block_blob)) {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Could not get Kevacoin block");
+    }
+
+    std::shared_ptr<CBlock> blockptr = std::make_shared<CBlock>();
+    CBlock& block = *blockptr;
+    if (!DecodeHexBlk(block, keva_block_blob.keva_block)) {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Block decode failed");
+    }
+
+    if (block.vtx.empty() || !block.vtx[0]->IsCoinBase()) {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Block does not start with a coinbase");
+    }
+
+    block.cnHeader.major_version = cnblock.major_version;
+    block.cnHeader.minor_version = cnblock.minor_version;
+    block.cnHeader.prev_id = CryptoHashToUint256(cnblock.prev_id);
+
+    block.cnHeader.nonce = cnblock.nonce;
+    crypto::hash tree_root_hash = get_tx_tree_hash(cnblock);
+    block.cnHeader.merkle_root = CryptoHashToUint256(tree_root_hash);
+    uint256 hash = block.GetHash();
+
+    // Cryptonote prev_id is used to store the block hash of kevacoin.
+    if (hash != block.cnHeader.prev_id) {
+        throw JSONRPCError(RPC_VERIFY_ERROR, "Kevacoin block hash does not match cryptnote hash");
+    }
+
+    // TODO: fix the return message.
     bool fBlockPresent = false;
     {
         LOCK(cs_main);
