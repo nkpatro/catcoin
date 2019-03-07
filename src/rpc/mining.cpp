@@ -35,7 +35,7 @@
 #include <cryptonote_core/cryptonote_tx_utils.h>
 #define MAX_RESERVE_SIZE    16
 
-const std::string CN_DUMMY_ADDRESS = "44234234234";
+const std::string CN_DUMMY_ADDRESS = "48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD";
 
 unsigned int ParseConfirmTarget(const UniValue& value)
 {
@@ -694,18 +694,8 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
 UniValue getblocktemplate(const JSONRPCRequest& request)
 {
     // JSON-RPC2 request
-    // {reserve_size: 8, wallet_address: config.poolServer.poolAddress}
-    std::map<std::string, UniValue> kv;
-    request.params.getObjMap(kv);
-    int reserve_size = kv["reserve_size"].get_int();
-    bool fValidReserveSize = reserve_size > 0 && reserve_size <= MAX_RESERVE_SIZE;
-    std::vector<unsigned char> data;
-    std::string wallet_address = kv["wallet_address"].get_str();
-    CTxDestination walletDest = DecodeDestination(wallet_address);
-    bool fValidWalletAddress = walletDest.which() == 4; // Expect WitnessV0KeyHash
-    bool fInvalidInput = !fValidReserveSize || !fValidWalletAddress;
-
-    if (request.fHelp || fInvalidInput)
+    // {reserve_size: 8, wallet_address: poolAddress}
+    if (request.fHelp || request.params.size() != 2)
         throw std::runtime_error(
             "getblocktemplate ( TemplateRequest )\n"
             "\nIf the request parameters include a 'mode' key, that is used to explicitly select between the default 'template' request or a 'proposal'.\n"
@@ -781,6 +771,31 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
             + HelpExampleCli("getblocktemplate", "")
             + HelpExampleRpc("getblocktemplate", "")
          );
+
+    int reserve_size;
+    std::string wallet_address;
+    CTxDestination walletDest;
+
+    // reserve_size
+    if (request.params[0].getType() != UniValue::VNUM) {
+        throw JSONRPCError(RPC_INVALID_PARAMS, "reserve_size must be an integer");
+    }
+
+    reserve_size = request.params[0].get_int();
+    if (reserve_size <= 0 || reserve_size > MAX_RESERVE_SIZE) {
+        throw JSONRPCError(RPC_INVALID_PARAMS, "Invalid reserve_size");
+    }
+
+    // wallet_address
+    if (request.params[1].getType() != UniValue::VSTR) {
+        throw JSONRPCError(RPC_INVALID_PARAMS, "Invalid wallet address, string expected");
+    }
+
+    wallet_address = request.params[1].get_str();
+    walletDest = DecodeDestination(wallet_address);
+    if (walletDest.which() == 0) {
+        throw JSONRPCError(RPC_INVALID_PARAMS, "Invalid wallet address");
+    }
 
     LOCK(cs_main);
 
@@ -893,7 +908,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     const uint64_t  already_generated_coins = 10000;
     const size_t    current_block_size = 20000;
     const uint64_t  fee = 0;
-    const size_t    max_outs = 1;
+    const size_t    max_outs = 10;
     cryptonote::account_public_address miner_address;
     cryptonote::address_parse_info parserInfo;
     cryptonote::transaction miner_tx;
@@ -937,7 +952,9 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     std::string kevaBlockData = HexStr(stream.begin(), stream.end());
     cryptonote::tx_extra_keva_block extra_keva_block;
     extra_keva_block.keva_block = kevaBlockData;
-    cryptonote::append_keva_block_to_extra(cn_block.miner_tx.extra, extra_keva_block);
+    if (cryptonote::append_keva_block_to_extra(cn_block.miner_tx.extra, extra_keva_block)) {
+        throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: failed to add block");
+    }
 
     UniValue result(UniValue::VOBJ);
     const double difficulty = ConvertNBitsToDiff(pblock->nBits);
@@ -1362,7 +1379,7 @@ static const CRPCCommand commands[] =
     { "mining",             "getnetworkhashps",       &getnetworkhashps,       {"nblocks","height"} },
     { "mining",             "getmininginfo",          &getmininginfo,          {} },
     { "mining",             "prioritisetransaction",  &prioritisetransaction,  {"txid","dummy","fee_delta"} },
-    { "mining",             "getblocktemplate",       &getblocktemplate,       {"template_request"} },
+    { "mining",             "getblocktemplate",       &getblocktemplate,       {"reserve_size", "wallet_address"} },
     { "mining",             "submitblock",            &submitblock,            {"hexdata","dummy"} },
 
 
