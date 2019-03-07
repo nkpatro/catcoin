@@ -19,6 +19,8 @@ BITCOIN_GUI_NAME=kevacoin-qt
 BITCOIN_CLI_NAME=kevacoin-cli
 BITCOIN_TX_NAME=kevacoin-tx
 
+AM_PROG_AS()
+
 dnl Unless the user specified ARFLAGS, force it to be cr
 AC_ARG_VAR(ARFLAGS, [Flags for the archiver, defaults to <cr> if not set])
 if test "x${ARFLAGS+set}" != "xset"; then

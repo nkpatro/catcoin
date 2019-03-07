@@ -10,6 +10,8 @@
 #include <utilstrencodings.h>
 #include <crypto/common.h>
 
+extern "C" void cn_slow_hash(const void *data, size_t length, char *hash, int variant, int prehashed, uint64_t height);
+
 uint256 CBlockHeader::GetHash() const
 {
     return SerializeHash(*this);

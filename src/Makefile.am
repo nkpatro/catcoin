@@ -364,14 +364,44 @@ libbitcoin_cnutils_a_SOURCES = \
   cn_utils/cryptonote_basic/cryptonote_basic_impl.cpp \
   cn_utils/cryptonote_basic/cryptonote_format_utils.cpp \
   cn_utils/cryptonote_basic/difficulty.cpp \
+  cn_utils/cryptonote_basic/account.cpp \
   cn_utils/crypto/random.c \
   cn_utils/crypto/tree-hash.c \
+  cn_utils/crypto/oaes_lib.c \
+  cn_utils/crypto/aesb.c \
+  cn_utils/crypto/hash-extra-groestl.c \
+  cn_utils/crypto/hash-extra-skein.c \
+  cn_utils/crypto/hash-extra-blake.c \
+  cn_utils/crypto/hash-extra-jh.c \
+  cn_utils/crypto/jh.c \
+  cn_utils/crypto/blake256.c \
+  cn_utils/crypto/groestl.c \
+  cn_utils/crypto/skein.c \
+  cn_utils/crypto/chacha.c \
+  cn_utils/crypto/crypto_ops_builder/verify.c \
   cn_utils/crypto/crypto.cpp \
   cn_utils/crypto/crypto-ops.c \
   cn_utils/crypto/crypto-ops-data.c \
+  cn_utils/crypto/slow-hash.c \
   cn_utils/crypto/hash.c \
   cn_utils/crypto/keccak.c \
-  cn_utils/common/base58.cpp
+  cn_utils/crypto/CryptonightR_JIT.c \
+  cn_utils/crypto/CryptonightR_template.S \
+  cn_utils/common/base58.cpp \
+  cn_utils/common/aligned.c \
+  cn_utils/common/perf_timer.cpp \
+  cn_utils/contrib/epee/src/memwipe.c \
+  cn_utils/contrib/epee/src/mlocker.cpp \
+  cn_utils/contrib/epee/src/hex.cpp \
+  cn_utils/contrib/epee/src/wipeable_string.cpp \
+  cn_utils/ringct/rctTypes.cpp \
+  cn_utils/ringct/rctOps.cpp \
+  cn_utils/ringct/bulletproofs.cc \
+  cn_utils/ringct/multiexp.cc \
+  cn_utils/ringct/rctCryptoOps.c \
+  cn_utils/device/device.cpp \
+  cn_utils/device/device_default.cpp \
+  cn_utils/external/easylogging++/easylogging++.cc
 
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
@@ -473,10 +503,10 @@ kevacoin_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
-  $(LIBBITCOIN_CNUTILS) \
   $(LIBBITCOIN_CONSENSUS) \
   $(LIBBITCOIN_CRYPTO) \
-  $(LIBSECP256K1)
+  $(LIBSECP256K1) \
+  $(LIBBITCOIN_CNUTILS)
 
 kevacoin_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
