@@ -16,7 +16,9 @@ extern "C" void cn_slow_hash(const void *data, size_t length, char *hash, int va
 
 uint256 CBlockHeader::GetHash() const
 {
-    return SerializeHash(*this);
+    CHashWriter hashWriter(SER_GETHASH, PROTOCOL_VERSION);
+    hashWriter.write(BEGIN(nVersion), 80);
+    return hashWriter.GetHash();
 }
 
 uint256 CBlockHeader::GetPoWHash() const
@@ -33,13 +35,10 @@ uint256 CBlockHeader::GetPoWHash() const
     // following XOR operatiosn, the value of expectedHash is not changed.
     blockHash ^= expectedHash;
     expectedHash ^= blockHash;
-    CryptoNoteHeader header = cnHeader;
+    CryptoNoteHeader cnHeaderCompute = cnHeader;
     // Cryptonote prev_id is used to store kevacoin block hash.
-    header.prev_id = ArithToUint256(expectedHash);
-
-    CDataStream stream(SER_NETWORK, PROTOCOL_VERSION);
-    stream << header;
-    std::string blob = stream.str();
+    cnHeaderCompute.prev_id = ArithToUint256(expectedHash);
+    cryptonote::blobdata blob = cryptonote::t_serializable_object_to_blob(cnHeaderCompute);
     cn_slow_hash(blob.data(), blob.size(), BEGIN(thash), 2, 0, 0);
     return thash;
 }

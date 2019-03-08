@@ -661,7 +661,7 @@ UniValue submitblock(const JSONRPCRequest& request)
     block.cnHeader.prev_id = CryptoHashToUint256(cnblock.prev_id);
 
     block.cnHeader.nonce = cnblock.nonce;
-    crypto::hash tree_root_hash = get_tx_tree_hash(cnblock);
+    crypto::hash tree_root_hash = cryptonote::get_tx_tree_hash(cnblock);
     block.cnHeader.merkle_root = CryptoHashToUint256(tree_root_hash);
     uint256 hash = block.GetHash();
 

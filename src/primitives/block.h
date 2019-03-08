@@ -49,7 +49,28 @@ public:
         return (timestamp == 0);
     }
 
-    BEGIN_SERIALIZE()
+    // load
+    template <template <bool> class Archive>
+    bool do_serialize(Archive<false>& ar)
+    {
+      VARINT_FIELD(major_version)
+      VARINT_FIELD(minor_version)
+      VARINT_FIELD(timestamp)
+      crypto::hash prev_hash;
+      FIELD(prev_hash)
+      memcpy(prev_id.begin(), &prev_hash, prev_id.size());
+      FIELD(nonce)
+      crypto::hash merkle_hash;
+      FIELD(merkle_hash)
+      memcpy(merkle_root.begin(), &merkle_hash, merkle_root.size());
+      VARINT_FIELD(nTxes)
+      return true;
+    }
+
+    // store
+    template <template <bool> class Archive>
+    bool do_serialize(Archive<true>& ar)
+    {
       VARINT_FIELD(major_version)
       VARINT_FIELD(minor_version)
       VARINT_FIELD(timestamp)
@@ -57,16 +78,33 @@ public:
       memcpy(&prev_hash, prev_id.begin(), prev_id.size());
       FIELD(prev_hash)
       FIELD(nonce)
-    END_SERIALIZE()
+      crypto::hash merkle_hash;
+      memcpy(&merkle_hash, merkle_root.begin(), merkle_root.size());
+      FIELD(merkle_hash)
+      VARINT_FIELD(nTxes)
+      return true;
+    }
 
     ADD_SERIALIZE_METHODS;
 
     template <typename Stream, typename Operation>
     inline void SerializationOp(Stream& s, Operation ser_action) {
-        std::string blob = cryptonote::t_serializable_object_to_blob(*this);
-        blob.append(reinterpret_cast<const char*>(merkle_root.begin()), merkle_root.size());
-        blob.append(tools::get_varint_data(nTxes + 1));
-        READWRITE(blob);
+        if (ser_action.ForRead()) {
+            std::string blob;
+            READWRITE(blob);
+            std::stringstream ss;
+            ss << blob;
+            // load
+            binary_archive<false> ba(ss);
+            ::serialization::serialize(ba, *this);
+        } else {
+            std::stringstream ss;
+            // store
+            binary_archive<true> ba(ss);
+            ::serialization::serialize(ba, *this);
+            std::string blob = ss.str();
+            READWRITE(blob);
+        }
     }
 };
 
