@@ -700,7 +700,7 @@ public:
 
     inline void addKevaUnchecked(const uint256& hash, const CKevaScript& kevaOp)
     {
-        AssertLockHeld(cs);
+        LOCK(cs);
         kevaMemPool.addUnchecked(hash, kevaOp);
     }
 
