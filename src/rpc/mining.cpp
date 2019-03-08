@@ -495,7 +495,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     }
 
     // Generate the merkle root as all the transactions (including coinbase) are known.
-    BlockMerkleRoot(*pblock);
+    pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
     uint256 blockHash = pblock->GetHash();
 
     cryptonote::block cn_block;
@@ -658,13 +658,15 @@ UniValue submitblock(const JSONRPCRequest& request)
 
     block.cnHeader.major_version = cnblock.major_version;
     block.cnHeader.minor_version = cnblock.minor_version;
+    block.cnHeader.timestamp = cnblock.timestamp;
     block.cnHeader.prev_id = CryptoHashToUint256(cnblock.prev_id);
 
     block.cnHeader.nonce = cnblock.nonce;
     crypto::hash tree_root_hash = cryptonote::get_tx_tree_hash(cnblock);
     block.cnHeader.merkle_root = CryptoHashToUint256(tree_root_hash);
-    uint256 hash = block.GetHash();
+    block.cnHeader.nTxes = 1; // The Cryptonote coinbase tx.
 
+    uint256 hash = block.GetHash();
     // Cryptonote prev_id is used to store the block hash of kevacoin.
     if (hash != block.cnHeader.prev_id) {
         throw JSONRPCError(RPC_VERIFY_ERROR, "Kevacoin block hash does not match cryptnote hash");
