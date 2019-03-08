@@ -955,12 +955,15 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     if (!cryptonote::append_keva_block_to_extra(cn_block.miner_tx.extra, extra_keva_block)) {
         throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: failed to add block");
     }
+    cryptonote::blobdata template_blob = cryptonote::block_to_blob(cn_block);
+    std::string hex_template_blob = HexStr(template_blob.begin(), template_blob.end());
 
     UniValue result(UniValue::VOBJ);
     const uint64_t difficulty = ConvertNBitsToDiff(pblock->nBits);
-    result.push_back(Pair("blocktemplate_blob", pblock->hashPrevBlock.GetHex()));
+    result.push_back(Pair("blocktemplate_blob", hex_template_blob));
     result.push_back(Pair("difficulty", (double)difficulty));
     result.push_back(Pair("height", (uint64_t)height));
+    result.push_back(Pair("prev_hash", pblock->hashPrevBlock.GetHex()));
     result.push_back(Pair("reserved_offset", (uint64_t)reserved_offset));
 
     // Kevacoin specific entries. Not used for now and may be useful in the future.
