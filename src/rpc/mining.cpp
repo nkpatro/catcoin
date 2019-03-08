@@ -35,7 +35,7 @@
 #include <cryptonote_core/cryptonote_tx_utils.h>
 #define MAX_RESERVE_SIZE    16
 
-const std::string CN_DUMMY_ADDRESS = "48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD";
+const std::string CN_DUMMY_ADDRESS = "45F1UWtrhB33uEQsiyt2DPPcV6BNeBmgH36QcPzNKcKbevZav3gxQzC2LELjQ7CvNMBGGjwHErmhpLWW7okYD4MU1ozsT2C";
 
 unsigned int ParseConfirmTarget(const UniValue& value)
 {
