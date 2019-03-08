@@ -29,16 +29,15 @@ uint256 CBlockHeader::GetPoWHash() const
         cn_slow_hash(BEGIN(nVersion), 80, BEGIN(thash), 2, 0, 0);
         return thash;
     }
-    arith_uint256 blockHash = UintToArith256(GetHash());
-    arith_uint256 expectedHash = UintToArith256(cnHeader.prev_id);
-    // blockHash should be the same as expectedHash. If so, after the
-    // following XOR operatiosn, the value of expectedHash is not changed.
-    blockHash ^= expectedHash;
-    expectedHash ^= blockHash;
-    CryptoNoteHeader cnHeaderCompute = cnHeader;
-    // Cryptonote prev_id is used to store kevacoin block hash.
-    cnHeaderCompute.prev_id = ArithToUint256(expectedHash);
-    cryptonote::blobdata blob = cryptonote::t_serializable_object_to_blob(cnHeaderCompute);
+
+    // prev_id of CN header is used to store the kevacoin block hash.
+    // The value of prev_id and block hash must be the same to prove
+    // that PoW has been properly done.
+    if (GetHash() != cnHeader.prev_id) {
+        memset(thash.begin(), 0xff, thash.size());
+        return thash;
+    }
+    cryptonote::blobdata blob = cryptonote::t_serializable_object_to_blob(cnHeader);
     cn_slow_hash(blob.data(), blob.size(), BEGIN(thash), 2, 0, 0);
     return thash;
 }
