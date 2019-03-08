@@ -594,12 +594,18 @@ namespace cryptonote
   //---------------------------------------------------------------
   bool append_keva_block_to_extra(std::vector<uint8_t>& tx_extra, const tx_extra_keva_block& keva_block)
   {
-    blobdata blob;
-    if (!t_serializable_object_to_blob(keva_block, blob))
-      return false;
-
-    tx_extra.push_back(TX_EXTRA_KEVA_BLOCK_TAG);
-    std::copy(reinterpret_cast<const uint8_t*>(blob.data()), reinterpret_cast<const uint8_t*>(blob.data() + blob.size()), std::back_inserter(tx_extra));
+    // convert to variant
+    tx_extra_field field = tx_extra_keva_block{ keva_block };
+    // serialize
+    std::ostringstream oss;
+    binary_archive<true> ar(oss);
+    bool r = ::do_serialize(ar, field);
+    CHECK_AND_NO_ASSERT_MES_L1(r, false, "failed to serialize tx extra keva block");
+    // append
+    std::string tx_extra_str = oss.str();
+    size_t pos = tx_extra.size();
+    tx_extra.resize(tx_extra.size() + tx_extra_str.size());
+    memcpy(&tx_extra[pos], tx_extra_str.data(), tx_extra_str.size());
     return true;
   }
   //---------------------------------------------------------------

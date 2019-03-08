@@ -928,6 +928,20 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     }
     cn_block.miner_tx = miner_tx;
 
+    // No transactions other than coinbase.
+    cn_block.tx_hashes.clear();
+
+    // Copy keva block to extra so that we can use it in submitblock.
+    CDataStream stream(SER_NETWORK, PROTOCOL_VERSION);
+    stream << *pblock;
+    std::string kevaBlockData = stream.str();
+    cryptonote::tx_extra_keva_block extra_keva_block;
+    extra_keva_block.keva_block = kevaBlockData;
+    if (!cryptonote::append_keva_block_to_extra(cn_block.miner_tx.extra, extra_keva_block)) {
+        throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: failed to add block");
+    }
+
+    // Now cn_block is finalized, we can calculate the reserved offset position.
     cryptonote::blobdata block_blob = cryptonote::t_serializable_object_to_blob(cn_block);
     crypto::public_key tx_pub_key = cryptonote::get_tx_pub_key_from_extra(cn_block.miner_tx);
     if(tx_pub_key == crypto::null_pkey) {
@@ -942,21 +956,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     {
       throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: Failed to calculate offset");
     }
-
-    // No transactions other than coinbase.
-    cn_block.tx_hashes.clear();
-
-    // Copy keva block to extra so that we can use it in submitblock.
-    CDataStream stream(SER_NETWORK, PROTOCOL_VERSION);
-    stream << *pblock;
-    std::string kevaBlockData = HexStr(stream.begin(), stream.end());
-    cryptonote::tx_extra_keva_block extra_keva_block;
-    extra_keva_block.keva_block = kevaBlockData;
-    if (!cryptonote::append_keva_block_to_extra(cn_block.miner_tx.extra, extra_keva_block)) {
-        throw JSONRPCError(RPC_INTERNAL_ERROR, "Internal error: failed to add block");
-    }
-    cryptonote::blobdata template_blob = cryptonote::block_to_blob(cn_block);
-    std::string hex_template_blob = HexStr(template_blob.begin(), template_blob.end());
+    std::string hex_template_blob = HexStr(block_blob.begin(), block_blob.end());
 
     UniValue result(UniValue::VOBJ);
     const uint64_t difficulty = ConvertNBitsToDiff(pblock->nBits);
