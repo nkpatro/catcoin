@@ -77,6 +77,12 @@ static void JSONErrorReply(HTTPRequest* req, const UniValue& objError, const Uni
     else if (code == RPC_METHOD_NOT_FOUND)
         nStatus = HTTP_NOT_FOUND;
 
+    // Cryptonote error message, the status code is OK.
+    UniValue cn_code = find_value(objError, "cn_code");
+    if (!cn_code.isNull()) {
+        nStatus = HTTP_OK;
+    }
+
     std::string strReply = JSONRPCReply(NullUniValue, objError, id);
 
     req->WriteHeader("Content-Type", "application/json");
@@ -86,7 +92,7 @@ static void JSONErrorReply(HTTPRequest* req, const UniValue& objError, const Uni
 //This function checks username and password against -rpcauth
 //entries from config file.
 static bool multiUserAuthorized(std::string strUserPass)
-{    
+{
     if (strUserPass.find(':') == std::string::npos) {
         return false;
     }

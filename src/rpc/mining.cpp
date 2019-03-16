@@ -270,6 +270,32 @@ UniValue prioritisetransaction(const JSONRPCRequest& request)
     return true;
 }
 
+//---------------------------------------------------------------
+// Cryptonote error codes
+
+#define CORE_RPC_ERROR_CODE_WRONG_PARAM           -1
+#define CORE_RPC_ERROR_CODE_TOO_BIG_HEIGHT        -2
+#define CORE_RPC_ERROR_CODE_TOO_BIG_RESERVE_SIZE  -3
+#define CORE_RPC_ERROR_CODE_WRONG_WALLET_ADDRESS  -4
+#define CORE_RPC_ERROR_CODE_INTERNAL_ERROR        -5
+#define CORE_RPC_ERROR_CODE_WRONG_BLOCKBLOB       -6
+#define CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED    -7
+#define CORE_RPC_ERROR_CODE_CORE_BUSY             -9
+#define CORE_RPC_ERROR_CODE_WRONG_BLOCKBLOB_SIZE  -10
+#define CORE_RPC_ERROR_CODE_UNSUPPORTED_RPC       -11
+#define CORE_RPC_ERROR_CODE_MINING_TO_SUBADDRESS  -12
+#define CORE_RPC_ERROR_CODE_REGTEST_REQUIRED      -13
+
+// Cryptonote error response
+UniValue CN_JSONRPCError(int code, const std::string& message)
+{
+    UniValue error(UniValue::VOBJ);
+    // Indicate that this is cryptonote error.
+    error.push_back(Pair("cn_code", code));
+    error.push_back(Pair("code", code));
+    error.push_back(Pair("message", message));
+    return error;
+}
 
 // NOTE: Assumes a conclusive result; if result is inconclusive, it must be handled by caller
 static UniValue BIP22ValidationResult(const CValidationState& state)
@@ -279,15 +305,15 @@ static UniValue BIP22ValidationResult(const CValidationState& state)
 
     std::string strRejectReason = state.GetRejectReason();
     if (state.IsError())
-        throw JSONRPCError(RPC_VERIFY_ERROR, strRejectReason);
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED, strRejectReason);
     if (state.IsInvalid())
     {
         if (strRejectReason.empty())
-            return "rejected";
-        return strRejectReason;
+            throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED, "rejected");
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED, strRejectReason);
     }
     // Should be impossible
-    return "valid?";
+    throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED, "valid?");
 }
 
 std::string gbt_vb_name(const Consensus::DeploymentPos pos) {
@@ -605,40 +631,35 @@ static uint256 CryptoHashToUint256(const crypto::hash& hash)
     return uint256(prev_id);
 }
 
-// Cryptonote RPC call, only one parameter allowed.
+// Cryptonote RPC call
 UniValue submitblock(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 1) {
         throw std::runtime_error(
             "submitblock \"hexdata\"\n"
             "\nAttempts to submit new block to network.\n"
-            "See https://en.bitcoin.it/wiki/BIP_0022 for full specification.\n"
 
             "\nArguments\n"
             "1. \"hexdata\"        (string, required) the hex-encoded block data to submit\n"
-            "2. \"dummy\"          (optional) dummy value, for compatibility with BIP22. This value is ignored.\n"
             "\nResult:\n"
             "\nExamples:\n"
             + HelpExampleCli("submitblock", "\"mydata\"")
-            + HelpExampleRpc("submitblock", "\"mydata\"")
         );
     }
 
     cryptonote::blobdata blockblob;
-    if(!epee::string_tools::parse_hexstr_to_binbuff(request.params[0].get_str(), blockblob))
-    {
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Wrong block blob");
+    if(!epee::string_tools::parse_hexstr_to_binbuff(request.params[0].get_str(), blockblob)) {
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_WRONG_BLOCKBLOB, "Wrong block blob");
     }
 
     cryptonote::block cnblock = AUTO_VAL_INIT(cnblock);
-    if(!cryptonote::parse_and_validate_block_from_blob(blockblob, cnblock))
-    {
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Wrong block blob");
+    if(!cryptonote::parse_and_validate_block_from_blob(blockblob, cnblock)) {
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_WRONG_BLOCKBLOB, "Wrong block blob");
     }
 
     cryptonote::tx_extra_keva_block keva_block_blob;
     if (!cryptonote::get_keva_block_from_extra(cnblock.miner_tx.extra, keva_block_blob)) {
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Could not get Kevacoin block");
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_WRONG_BLOCKBLOB, "Could not get Kevacoin block");
     }
 
     std::shared_ptr<CBlock> blockptr = std::make_shared<CBlock>();
@@ -649,11 +670,11 @@ UniValue submitblock(const JSONRPCRequest& request)
         ssBlock >> block;
     }
     catch (const std::exception&) {
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Failed to deserialize keva block");
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_WRONG_BLOCKBLOB, "Failed to deserialize keva block");
     }
 
     if (block.vtx.empty() || !block.vtx[0]->IsCoinBase()) {
-        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Block does not start with a coinbase");
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_WRONG_BLOCKBLOB, "Block does not start with a coinbase");
     }
 
     block.cnHeader.major_version = cnblock.major_version;
@@ -669,10 +690,9 @@ UniValue submitblock(const JSONRPCRequest& request)
     uint256 hash = block.GetHash();
     // Cryptonote prev_id is used to store the block hash of kevacoin.
     if (hash != block.cnHeader.prev_id) {
-        throw JSONRPCError(RPC_VERIFY_ERROR, "Kevacoin block hash does not match cryptnote hash");
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_WRONG_PARAM, "Kevacoin block hash does not match cryptnote hash");
     }
 
-    // TODO: fix the return message.
     bool fBlockPresent = false;
     {
         LOCK(cs_main);
@@ -680,10 +700,10 @@ UniValue submitblock(const JSONRPCRequest& request)
         if (mi != mapBlockIndex.end()) {
             CBlockIndex *pindex = mi->second;
             if (pindex->IsValid(BLOCK_VALID_SCRIPTS)) {
-                return "duplicate";
+                throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED, "duplicate");
             }
             if (pindex->nStatus & BLOCK_FAILED_MASK) {
-                return "duplicate-invalid";
+                throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED, "duplicate-invalid");
             }
             // Otherwise, we might only have the header - process the block before returning
             fBlockPresent = true;
@@ -704,12 +724,12 @@ UniValue submitblock(const JSONRPCRequest& request)
     UnregisterValidationInterface(&sc);
     if (fBlockPresent) {
         if (fAccepted && !sc.found) {
-            return "duplicate-inconclusive";
+            throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED, "duplicate-inconclusive");
         }
-        return "duplicate";
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED, "duplicate");
     }
     if (!sc.found) {
-        return "inconclusive";
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED, "inconclusive");
     }
     return BIP22ValidationResult(sc.state);
 }
