@@ -300,8 +300,11 @@ UniValue CN_JSONRPCError(int code, const std::string& message)
 // NOTE: Assumes a conclusive result; if result is inconclusive, it must be handled by caller
 static UniValue BIP22ValidationResult(const CValidationState& state)
 {
-    if (state.IsValid())
-        return NullUniValue;
+    if (state.IsValid()) {
+        UniValue result(UniValue::VOBJ);
+        result.push_back(Pair("status", "OK"));
+        return result;
+    }
 
     std::string strRejectReason = state.GetRejectReason();
     if (state.IsError())

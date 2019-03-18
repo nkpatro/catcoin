@@ -707,7 +707,7 @@ UniValue getblockheader(const JSONRPCRequest& request)
 // Cryptonote RPC API: getlastblockheader
 UniValue getlastblockheader(const JSONRPCRequest& request)
 {
-    if (request.fHelp || request.params.size() < 1 || request.params.size() > 2)
+    if (request.fHelp)
         throw std::runtime_error(
             "getlastblockheader\n"
             "\nResult (for verbose = true):\n"
@@ -747,29 +747,32 @@ UniValue getlastblockheader(const JSONRPCRequest& request)
     //TODO: easier way to do this?
     CAmount coinbaseValue = coinbaseTx->GetValueOut();
 
-    UniValue result(UniValue::VOBJ);
+    UniValue blockHeader(UniValue::VOBJ);
 
-    // TODO: read major/minor versions from cn header.
-    result.push_back(Pair("major_version", (uint64_t)0));
-    result.push_back(Pair("minor_version", (uint64_t)0));
+    blockHeader.push_back(Pair("major_version", (uint64_t)block.cnHeader.major_version));
+    blockHeader.push_back(Pair("minor_version", (uint64_t)block.cnHeader.minor_version));
 
-    result.push_back(Pair("timestamp", (uint64_t)pblockindex->nTime));
-    result.push_back(Pair("prev_hash", pblockindex->pprev->GetBlockHash().GetHex()));
-    result.push_back(Pair("nonce", (uint64_t)pblockindex->nNonce));
-    result.push_back(Pair("orphan_status", false));
-    result.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
+    blockHeader.push_back(Pair("timestamp", (uint64_t)pblockindex->nTime));
+    blockHeader.push_back(Pair("prev_hash", pblockindex->pprev->GetBlockHash().GetHex()));
+    blockHeader.push_back(Pair("nonce", (uint64_t)pblockindex->nNonce));
+    blockHeader.push_back(Pair("orphan_status", false));
+    blockHeader.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
     const uint64_t depth = chainActive.Height() - pblockindex->nHeight + 1; // Same as confirmations.
-    result.push_back(Pair("depth", (uint64_t)depth));
-    result.push_back(Pair("hash", pblockindex->GetBlockHash().GetHex()));
-    result.push_back(Pair("difficulty", GetDifficulty(pblockindex)));
+    blockHeader.push_back(Pair("depth", (uint64_t)depth));
+    blockHeader.push_back(Pair("hash", pblockindex->GetBlockHash().GetHex()));
+    blockHeader.push_back(Pair("difficulty", GetDifficulty(pblockindex)));
 
     // TODO: implement cumulative_difficulty
-    result.push_back(Pair("cumulative_difficulty", 0));
-    result.push_back(Pair("reward", (uint64_t)coinbaseValue));
-    result.push_back(Pair("block_size", (int)::GetBlockWeight(block)));
-    result.push_back(Pair("num_txes", (uint64_t)pblockindex->nTx));
-    result.push_back(Pair("pow_hash", pblockindex->GetBlockPoWHash().GetHex()));
-    result.push_back(Pair("long_term_weight", 0.0)); // Not implemented
+    blockHeader.push_back(Pair("cumulative_difficulty", 0));
+    blockHeader.push_back(Pair("reward", (uint64_t)coinbaseValue));
+    blockHeader.push_back(Pair("block_size", (int)::GetBlockWeight(block)));
+    blockHeader.push_back(Pair("num_txes", (uint64_t)pblockindex->nTx));
+    blockHeader.push_back(Pair("pow_hash", block.GetPoWHash().GetHex()));
+    blockHeader.push_back(Pair("long_term_weight", 0.0)); // Not implemented
+
+    UniValue result(UniValue::VOBJ);
+    result.push_back(Pair("block_header", blockHeader));
+    result.push_back(Pair("status", "OK"));
     return result;
 }
 
@@ -823,29 +826,33 @@ UniValue getblockheaderbyheight(const JSONRPCRequest& request)
     //TODO: easier way to do this?
     CAmount coinbaseValue = coinbaseTx->GetValueOut();
 
-    UniValue result(UniValue::VOBJ);
+    UniValue blockHeader(UniValue::VOBJ);
 
-    // TODO: read major/minor versions from cn header.
-    result.push_back(Pair("major_version", (uint64_t)0));
-    result.push_back(Pair("minor_version", (uint64_t)0));
+    blockHeader.push_back(Pair("major_version", (uint64_t)block.cnHeader.major_version));
+    blockHeader.push_back(Pair("minor_version", (uint64_t)block.cnHeader.minor_version));
 
-    result.push_back(Pair("timestamp", (uint64_t)pblockindex->nTime));
-    result.push_back(Pair("prev_hash", pblockindex->pprev->GetBlockHash().GetHex()));
-    result.push_back(Pair("nonce", (uint64_t)pblockindex->nNonce));
-    result.push_back(Pair("orphan_status", false));
-    result.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
+    blockHeader.push_back(Pair("timestamp", (uint64_t)pblockindex->nTime));
+    blockHeader.push_back(Pair("prev_hash", pblockindex->pprev->GetBlockHash().GetHex()));
+    blockHeader.push_back(Pair("nonce", (uint64_t)pblockindex->nNonce));
+    blockHeader.push_back(Pair("orphan_status", false));
+    blockHeader.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
     const uint64_t depth = chainActive.Height() - nHeight + 1; // Same as confirmations.
-    result.push_back(Pair("depth", (uint64_t)depth));
-    result.push_back(Pair("hash", pblockindex->GetBlockHash().GetHex()));
-    result.push_back(Pair("difficulty", GetDifficulty(pblockindex)));
+    blockHeader.push_back(Pair("depth", (uint64_t)depth));
+    blockHeader.push_back(Pair("hash", pblockindex->GetBlockHash().GetHex()));
+    blockHeader.push_back(Pair("difficulty", GetDifficulty(pblockindex)));
 
     // TODO: implement cumulative_difficulty
-    result.push_back(Pair("cumulative_difficulty", 0));
-    result.push_back(Pair("reward", (uint64_t)coinbaseValue));
-    result.push_back(Pair("block_size", (int)::GetBlockWeight(block)));
-    result.push_back(Pair("num_txes", (uint64_t)pblockindex->nTx));
-    result.push_back(Pair("pow_hash", pblockindex->GetBlockPoWHash().GetHex()));
-    result.push_back(Pair("long_term_weight", 0.0)); // Not implemented
+    blockHeader.push_back(Pair("cumulative_difficulty", 0));
+    blockHeader.push_back(Pair("reward", (uint64_t)coinbaseValue));
+    blockHeader.push_back(Pair("block_size", (int)::GetBlockWeight(block)));
+    blockHeader.push_back(Pair("num_txes", (uint64_t)pblockindex->nTx));
+    blockHeader.push_back(Pair("pow_hash", block.GetPoWHash().GetHex()));
+    blockHeader.push_back(Pair("long_term_weight", 0.0)); // Not implemented
+
+    UniValue result(UniValue::VOBJ);
+    result.push_back(Pair("status", "OK"));
+    result.push_back(Pair("block_header", blockHeader));
+
     return result;
 }
 
