@@ -1221,6 +1221,133 @@ UniValue sendmany(const JSONRPCRequest& request)
     return wtx.GetHash().GetHex();
 }
 
+
+static CAmount AmountFromIntegerValue(const UniValue& value)
+{
+    if (!value.isNum())
+        throw std::runtime_error("Amount is not a number or string");
+    CAmount amount = value.get_int64();
+    if (!MoneyRange(amount))
+        throw std::runtime_error("Amount out of range");
+    return amount;
+}
+
+// Cryptnote JSON RPC
+UniValue transfer(const JSONRPCRequest& request)
+{
+    CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
+    if (!EnsureWalletIsAvailable(pwallet, request.fHelp)) {
+        return NullUniValue;
+    }
+
+    if (request.fHelp || request.params.size() < 1 || request.params.size() > 12)
+        throw std::runtime_error(
+            "transfer [{\"address\":amount,...}, ...] \n"
+            "\nSend multiple times. Amounts are in atomic units."
+            + HelpRequiringPassphrase(pwallet) + "\n"
+            "\nArguments:\n"
+            "1. \"destinations\"             (string, required) A json object with addresses and amounts\n"
+            "    [{\n"
+            "      \"address\":address   (string) The kevacoin address\n"
+            "      \"amount\":amount     (numeric) The numeric amount in atomic unut\n"
+            "      ,...\n"
+            "    }, ...]\n"
+            "\nResult:\n"
+            "\"txid\"                   (string) The transaction id for the send. Only 1 transaction is created regardless of \n"
+            "                                    the number of addresses.\n"
+            "\nExamples:\n"
+            "\nSend two amounts to two different addresses:\n"
+            + HelpExampleCli("sendmany", "\"\" \"{\\\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\\\":0.01,\\\"LbhhnrHHVFP1eUjP1tdNIYeEVsNHfN9FCw\\\":0.02}\"") +
+            "\nSend two amounts to two different addresses setting the confirmation and comment:\n"
+            + HelpExampleCli("sendmany", "\"\" \"{\\\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\\\":0.01,\\\"LbhhnrHHVFP1eUjP1tdNIYeEVsNHfN9FCw\\\":0.02}\" 6 \"testing\"") +
+            "\nSend two amounts to two different addresses, subtract fee from amount:\n"
+            + HelpExampleCli("sendmany", "\"\" \"{\\\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\\\":0.01,\\\"LbhhnrHHVFP1eUjP1tdNIYeEVsNHfN9FCw\\\":0.02}\" 1 \"\" \"[\\\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\\\",\\\"LbhhnrHHVFP1eUjP1tdNIYeEVsNHfN9FCw\\\"]\"") +
+            "\nAs a json rpc call\n"
+            + HelpExampleRpc("sendmany", "\"\", {\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\":0.01,\"LbhhnrHHVFP1eUjP1tdNIYeEVsNHfN9FCw\":0.02}, 6, \"testing\"")
+        );
+
+    ObserveSafeMode();
+
+    // Make sure the results are valid at least up to the most recent block
+    // the user could have gotten from another RPC command prior to now
+    pwallet->BlockUntilSyncedToCurrentChain();
+
+    LOCK2(cs_main, pwallet->cs_wallet);
+
+    if (pwallet->GetBroadcastTransactions() && !g_connman) {
+        throw JSONRPCError(RPC_CLIENT_P2P_DISABLED, "Error: Peer-to-peer functionality missing or disabled");
+    }
+
+    UniValue sendToList = request.params[0].get_array();
+
+    CWalletTx wtx;
+    CCoinControl coin_control;
+    std::set<CTxDestination> destinations;
+    std::vector<CRecipient> vecSend;
+
+    CAmount totalAmount = 0;
+    for (unsigned int idx = 0; idx < sendToList.size(); idx++) {
+        const UniValue& sendTo = sendToList[idx].get_obj();
+        const UniValue& addr = find_value(sendTo, "address");
+        if (addr.isNull()) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, std::string("Invalid parameter, missing address: "));
+        }
+        std::string addrStr = addr.get_str();
+        CTxDestination dest = DecodeDestination(addrStr);
+        if (!IsValidDestination(dest)) {
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Kevacoin address: ") + addrStr);
+        }
+        if (destinations.count(dest)) {
+            throw JSONRPCError(RPC_INVALID_PARAMETER, std::string("Invalid parameter, duplicated address: ") + addrStr);
+        }
+        destinations.insert(dest);
+
+        CScript scriptPubKey = GetScriptForDestination(dest);
+        const UniValue& amount = find_value(sendTo, "amount");
+        CAmount nAmount = AmountFromIntegerValue(amount);
+        if (nAmount <= 0)
+            throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount for send");
+        totalAmount += nAmount;
+
+        CRecipient recipient = {scriptPubKey, nAmount, false};
+        vecSend.push_back(recipient);
+    }
+
+    EnsureWalletIsUnlocked(pwallet);
+
+    // Check funds
+    CAmount nBalance = pwallet->GetLegacyBalance(ISMINE_SPENDABLE, 1, nullptr);
+    if (totalAmount > nBalance)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Account has insufficient funds");
+
+    // Send
+    CReserveKey keyChange(pwallet);
+    CAmount nFeeRequired = 0;
+    int nChangePosRet = -1;
+    std::string strFailReason;
+    std::vector<unsigned char> empty;
+    bool fCreated = pwallet->CreateTransaction(vecSend, nullptr, empty, wtx, keyChange, nFeeRequired, nChangePosRet, strFailReason, coin_control);
+    if (!fCreated)
+        throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, strFailReason);
+    CValidationState state;
+    if (!pwallet->CommitTransaction(wtx, keyChange, g_connman.get(), state)) {
+        strFailReason = strprintf("Transaction commit failed:: %s", state.GetRejectReason());
+        throw JSONRPCError(RPC_WALLET_ERROR, strFailReason);
+    }
+
+    UniValue result(UniValue::VOBJ);
+    result.push_back(Pair("amount", (uint64_t)totalAmount));
+    result.push_back(Pair("fee", (uint64_t)nFeeRequired));
+    result.push_back(Pair("multisig_txset", ""));
+    result.push_back(Pair("tx_blob", ""));
+    result.push_back(Pair("tx_hash", wtx.GetHash().GetHex()));
+    result.push_back(Pair("tx_key", ""));
+    result.push_back(Pair("tx_metadata", ""));
+    result.push_back(Pair("unsigned_txset", ""));
+
+    return result;
+}
+
 UniValue addmultisigaddress(const JSONRPCRequest& request)
 {
     CWallet * const pwallet = GetWalletForJSONRPCRequest(request);
@@ -3658,6 +3785,7 @@ static const CRPCCommand commands[] =
     { "wallet",             "walletpassphrase",         &walletpassphrase,         {"passphrase","timeout"} },
     { "wallet",             "removeprunedfunds",        &removeprunedfunds,        {"txid"} },
     { "wallet",             "rescanblockchain",         &rescanblockchain,         {"start_height", "stop_height"} },
+    { "wallet",             "transfer",                 &transfer,                 {"destinations"} },
 
     { "generating",         "generate",                 &generate,                 {"nblocks","maxtries"} },
 
