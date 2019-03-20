@@ -13,12 +13,34 @@
 #include <crypto/common.h>
 
 extern "C" void cn_slow_hash(const void *data, size_t length, char *hash, int variant, int prehashed, uint64_t height);
+extern "C" void cn_fast_hash(const void *data, size_t length, char *hash);
 
 uint256 CBlockHeader::GetHash() const
 {
     CHashWriter hashWriter(SER_GETHASH, PROTOCOL_VERSION);
     hashWriter.write(BEGIN(nVersion), 80);
     return hashWriter.GetHash();
+}
+
+uint256 CBlockHeader::GetCryptonoteFastHash() const
+{
+    uint256 thash;
+    if (hashPrevBlock.IsNull()) {
+        // Genesis block has no CN fast hash.
+        memset(thash.begin(), 0xff, thash.size());
+        return thash;
+    }
+
+    // prev_id of CN header is used to store the kevacoin block hash.
+    // The value of prev_id and block hash must be the same to prove
+    // that PoW has been properly done.
+    if (GetHash() != cnHeader.prev_id) {
+        memset(thash.begin(), 0xff, thash.size());
+        return thash;
+    }
+    cryptonote::blobdata blob = cryptonote::t_serializable_object_to_blob(cnHeader);
+    cn_fast_hash(blob.data(), blob.size(), BEGIN(thash));
+    return thash;
 }
 
 uint256 CBlockHeader::GetPoWHash() const

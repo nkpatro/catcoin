@@ -753,13 +753,17 @@ UniValue getlastblockheader(const JSONRPCRequest& request)
     blockHeader.push_back(Pair("minor_version", (uint64_t)block.cnHeader.minor_version));
 
     blockHeader.push_back(Pair("timestamp", (uint64_t)pblockindex->nTime));
-    blockHeader.push_back(Pair("prev_hash", pblockindex->pprev->GetBlockHash().GetHex()));
+    if (pblockindex->pprev) {
+        blockHeader.push_back(Pair("prev_hash", pblockindex->pprev->GetBlockHash().GetHex()));
+    } else {
+        blockHeader.push_back(Pair("prev_hash", ""));
+    }
     blockHeader.push_back(Pair("nonce", (uint64_t)pblockindex->nNonce));
     blockHeader.push_back(Pair("orphan_status", false));
     blockHeader.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
     const uint64_t depth = chainActive.Height() - pblockindex->nHeight + 1; // Same as confirmations.
     blockHeader.push_back(Pair("depth", (uint64_t)depth));
-    blockHeader.push_back(Pair("hash", pblockindex->GetBlockHash().GetHex()));
+    blockHeader.push_back(Pair("hash", block.GetCryptonoteFastHash().GetHex()));
     blockHeader.push_back(Pair("difficulty", GetDifficulty(pblockindex)));
 
     // TODO: implement cumulative_difficulty
@@ -832,13 +836,17 @@ UniValue getblockheaderbyheight(const JSONRPCRequest& request)
     blockHeader.push_back(Pair("minor_version", (uint64_t)block.cnHeader.minor_version));
 
     blockHeader.push_back(Pair("timestamp", (uint64_t)pblockindex->nTime));
-    blockHeader.push_back(Pair("prev_hash", pblockindex->pprev->GetBlockHash().GetHex()));
+    if (pblockindex->pprev) {
+        blockHeader.push_back(Pair("prev_hash", pblockindex->pprev->GetBlockHash().GetHex()));
+    } else {
+        blockHeader.push_back(Pair("prev_hash", ""));
+    }
     blockHeader.push_back(Pair("nonce", (uint64_t)pblockindex->nNonce));
     blockHeader.push_back(Pair("orphan_status", false));
     blockHeader.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
     const uint64_t depth = chainActive.Height() - nHeight + 1; // Same as confirmations.
     blockHeader.push_back(Pair("depth", (uint64_t)depth));
-    blockHeader.push_back(Pair("hash", pblockindex->GetBlockHash().GetHex()));
+    blockHeader.push_back(Pair("hash", block.GetCryptonoteFastHash().GetHex()));
     blockHeader.push_back(Pair("difficulty", GetDifficulty(pblockindex)));
 
     // TODO: implement cumulative_difficulty

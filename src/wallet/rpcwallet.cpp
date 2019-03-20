@@ -3785,7 +3785,7 @@ static const CRPCCommand commands[] =
     { "wallet",             "walletpassphrase",         &walletpassphrase,         {"passphrase","timeout"} },
     { "wallet",             "removeprunedfunds",        &removeprunedfunds,        {"txid"} },
     { "wallet",             "rescanblockchain",         &rescanblockchain,         {"start_height", "stop_height"} },
-    { "wallet",             "transfer",                 &transfer,                 {"destinations"} },
+    { "wallet",             "transfer",                 &transfer,                 {"destinations", "account_index", "subaddr_indices", "priority", "mixin", "ring_size", "unlock_time", "payment_id", "get_tx_key", "do_not_relay", "get_tx_hex", "get_tx_metadata"} },
 
     { "generating",         "generate",                 &generate,                 {"nblocks","maxtries"} },
 
