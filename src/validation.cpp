@@ -1839,6 +1839,11 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
            (*pindex->phashBlock == block.GetHash()));
     int64_t nTimeStart = GetTimeMicros();
 
+    // Check the height of the block is the same as its height on the blockchain.
+    // Note: nNonce now holds the value of height. It is no longer used as nonce.
+    if (block.nNonce != pindex->nHeight)
+        return error("%s: block height mismatch", __func__);
+
     // Check it again in case a previous version let a bad block in
     // NOTE: We don't currently (re-)invoke ContextualCheckBlock() or
     // ContextualCheckBlockHeader() here. This means that if we add a new

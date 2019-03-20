@@ -124,6 +124,8 @@ public:
     uint256 hashMerkleRoot;
     uint32_t nTime;
     uint32_t nBits;
+    // nNonce is no longer used as nonce, as the nonce is now in cnHeader.
+    // Repurpose it for block height used in Cryptnight variant 4.
     uint32_t nNonce;
 
     // CryptoNote header for emulation or merged mining

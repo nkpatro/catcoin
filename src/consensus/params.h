@@ -75,6 +75,7 @@ struct Params {
     int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;
+    uint8_t GetCryptonoteMajorVersion() const { return 10; }
 };
 } // namespace Consensus
 

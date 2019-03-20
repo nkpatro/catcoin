@@ -48,7 +48,7 @@ uint256 CBlockHeader::GetPoWHash() const
     uint256 thash;
     if (hashPrevBlock.IsNull()) {
         // Genesis block
-        cn_slow_hash(BEGIN(nVersion), 80, BEGIN(thash), 2, 0, 0);
+        cn_slow_hash(BEGIN(nVersion), 80, BEGIN(thash), 4, 0, 0);
         return thash;
     }
 
@@ -60,7 +60,7 @@ uint256 CBlockHeader::GetPoWHash() const
         return thash;
     }
     cryptonote::blobdata blob = cryptonote::t_serializable_object_to_blob(cnHeader);
-    cn_slow_hash(blob.data(), blob.size(), BEGIN(thash), 2, 0, 0);
+    cn_slow_hash(blob.data(), blob.size(), BEGIN(thash), cnHeader.major_version - 6, 0, nNonce);
     return thash;
 }
 

@@ -477,7 +477,6 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
 
     // Update nTime
     UpdateTime(pblock, consensusParams, pindexPrev);
-    pblock->nNonce = 0;
 
     std::set<std::string> setClientRules;
     UniValue aRules(UniValue::VARR);
@@ -530,7 +529,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     cryptonote::block cn_block;
     // block_header
     // const int cn_variant = b.major_version >= 7 ? b.major_version - 6 : 0;
-    cn_block.major_version = 8; // cn variant 2
+    cn_block.major_version = consensusParams.GetCryptonoteMajorVersion();
     cn_block.minor_version = 0;
     cn_block.timestamp = pblock->GetBlockTime();
     // The prev_id is used to store kevacoin block hash, as a proof of work.
