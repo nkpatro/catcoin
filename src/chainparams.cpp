@@ -114,10 +114,9 @@ public:
 
         const uint32_t genesisBlockReward = 0.00001 * COIN; // A small reward for the core developers :-)
         //TODO: target: 0x1e0fffff, update timestampe and nonce.
-        genesis = CreateGenesisBlock(1543789622, 3302, 0x1f0ffff0, 1, genesisBlockReward);
-
+        genesis = CreateGenesisBlock(1553145843, 1706, 0x1f0ffff0, 1, genesisBlockReward);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x77c037d74bc51b535629537c8e9530340ea12272f43d261a0ee59e8f2ad0e6f6"));
+        assert(consensus.hashGenesisBlock == uint256S("0x413c6fb7d5a8484d027ce6654fdbe0567cab5684da807cd2bafb7808228710ad"));
         assert(genesis.hashMerkleRoot == uint256S("0xb21d4680875c0e472b7dbf3dbab2aaeb2dbbb5fa8b154f978b5ea0706d1fd5b9"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
@@ -156,7 +155,7 @@ public:
 };
 
 /**
- * Testnet (v3)
+ * Testnet (v7)
  */
 class CTestNetParams : public CChainParams {
 public:
@@ -203,25 +202,17 @@ public:
         pchMessageStart[3] = 0xe4;
         nDefaultPort = 19335;
         nPruneAfterHeight = 1000;
-#if 1
-        genesis = CreateGenesisBlock(1543789622, 1592, 0x1f0ffff0, 1, 500 * COIN);
+
+        genesis = CreateGenesisBlock(1553100443, 404, 0x1f0ffff0, 1, 500 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-         assert(consensus.hashGenesisBlock == uint256S("860764b471430b96f15c145a44fd854f89d3be6f9ae054ef46e4c8473259bae3"));
+        assert(consensus.hashGenesisBlock == uint256S("b2c61c05d5a1d34c6664784500715fc2959f828c32cddefc835ec037b138d0bc"));
         assert(genesis.hashMerkleRoot == uint256S("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"));
-#else
-        genesis = CreateGenesisBlock(1550900037, 3033, 0x1f0fffff, 1, 500 * COIN);
-        consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("584a067cf7ea6daf30c351a46c6b7403d6fdc0e6e953cf7531d11eb7d834546c"));
-        assert(genesis.hashMerkleRoot == uint256S("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"));
-#endif
 
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-#if 0
         vSeeds.emplace_back("testnet-seed.kevacoin.org");
         vSeeds.emplace_back("testnet-seed.honourchat.com");
-#endif
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,55); // P
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
@@ -232,9 +223,7 @@ public:
         base58Prefixes[KEVA_NAMESPACE] = std::vector<unsigned char>(1,53); // N
 
         bech32_hrp = "tkva";
-#if 0
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_test, pnSeed6_test + ARRAYLEN(pnSeed6_test));
-#endif
 
         fDefaultConsistencyChecks = false;
         fRequireStandard = false;
@@ -299,9 +288,9 @@ public:
         nDefaultPort = 19444;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1296688602, 1, 0x207fffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1553147907, 0, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x8353937c85572e556dbec10555b846ddd1a812ab328c9089527f88081e1b5a11"));
+        assert(consensus.hashGenesisBlock == uint256S("0x193385e60d04db90e30332508d97401ec3568ee2fe765b279fd9b3e4b0b78ca5"));
         assert(genesis.hashMerkleRoot == uint256S("0x13ec98c3307b8e6b67b91c605c7347916a99f9dfde7b5d88365aaef322192314"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
