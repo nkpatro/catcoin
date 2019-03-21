@@ -47,6 +47,7 @@ static CBlock BuildBlockTestCase() {
     bool mutated;
     block.hashMerkleRoot = BlockMerkleRoot(block, &mutated);
     assert(!mutated);
+    block.cnHeader.major_version = Params().GetConsensus().GetCryptonoteMajorVersion();
     block.cnHeader.prev_id = block.GetHash();
     while (!CheckProofOfWork(block.GetPoWHash(), block.nBits, Params().GetConsensus())) ++block.cnHeader.nonce;
     return block;
@@ -293,6 +294,7 @@ BOOST_AUTO_TEST_CASE(EmptyBlockRoundTripTest)
     bool mutated;
     block.hashMerkleRoot = BlockMerkleRoot(block, &mutated);
     assert(!mutated);
+    block.cnHeader.major_version = Params().GetConsensus().GetCryptonoteMajorVersion();
     block.cnHeader.prev_id = block.GetHash();
     while (!CheckProofOfWork(block.GetPoWHash(), block.nBits, Params().GetConsensus())) ++block.cnHeader.nonce;
 

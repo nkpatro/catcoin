@@ -71,6 +71,7 @@ std::shared_ptr<CBlock> FinalizeBlock(std::shared_ptr<CBlock> pblock)
 {
     pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
 
+    pblock->cnHeader.major_version = Params().GetConsensus().GetCryptonoteMajorVersion();
     pblock->cnHeader.prev_id = pblock->GetHash();
     while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus())) {
         ++(pblock->cnHeader.nonce);

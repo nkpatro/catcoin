@@ -241,6 +241,7 @@ public:
         block.nTime          = nTime;
         block.nBits          = nBits;
         block.nNonce         = nNonce;
+        block.cnHeader       = cnHeader;
         block.SetLegacy(legacyMode);
         return block;
     }
