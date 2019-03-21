@@ -1841,7 +1841,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
 
     // Check the height of the block is the same as its height on the blockchain.
     // Note: nNonce now holds the value of height. It is no longer used as nonce.
-    if (!block.hashPrevBlock.IsNull() && (int32_t)block.nNonce != pindex->nHeight)
+    if ((int32_t)block.nNonce != pindex->nHeight)
         return error("%s: block height mismatch", __func__);
 
     // Check it again in case a previous version let a bad block in

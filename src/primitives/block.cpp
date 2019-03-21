@@ -25,12 +25,6 @@ uint256 CBlockHeader::GetHash() const
 uint256 CBlockHeader::GetCryptonoteFastHash() const
 {
     uint256 thash;
-    if (hashPrevBlock.IsNull()) {
-        // Genesis block has no CN fast hash.
-        memset(thash.begin(), 0xff, thash.size());
-        return thash;
-    }
-
     // prev_id of CN header is used to store the kevacoin block hash.
     // The value of prev_id and block hash must be the same to prove
     // that PoW has been properly done.
@@ -46,12 +40,6 @@ uint256 CBlockHeader::GetCryptonoteFastHash() const
 uint256 CBlockHeader::GetPoWHash() const
 {
     uint256 thash;
-    if (hashPrevBlock.IsNull()) {
-        // Genesis block
-        cn_slow_hash(BEGIN(nVersion), 80, BEGIN(thash), 4, 0, 0);
-        return thash;
-    }
-
     // prev_id of CN header is used to store the kevacoin block hash.
     // The value of prev_id and block hash must be the same to prove
     // that PoW has been properly done.

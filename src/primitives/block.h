@@ -147,8 +147,7 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
-        // Genesis block does not have cnHeader.
-        if (!hashPrevBlock.IsNull() && !legacyMode) {
+        if (!legacyMode) {
             READWRITE(cnHeader);
         }
     }

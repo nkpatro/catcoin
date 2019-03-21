@@ -416,29 +416,29 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
 
     // reserve_size
     if (request.params[0].getType() != UniValue::VNUM) {
-        throw JSONRPCError(RPC_INVALID_PARAMS, "reserve_size must be an integer");
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_WRONG_PARAM, "reserve_size must be an integer");
     }
 
     reserve_size = request.params[0].get_int();
     if (reserve_size <= 0 || reserve_size > MAX_RESERVE_SIZE) {
-        throw JSONRPCError(RPC_INVALID_PARAMS, "Invalid reserve_size");
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_WRONG_PARAM, "Invalid reserve_size");
     }
 
     // wallet_address
     if (request.params[1].getType() != UniValue::VSTR) {
-        throw JSONRPCError(RPC_INVALID_PARAMS, "Invalid wallet address, string expected");
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_WRONG_PARAM, "Invalid wallet address, string expected");
     }
 
     wallet_address = request.params[1].get_str();
     walletDest = DecodeDestination(wallet_address);
     if (walletDest.which() == 0) {
-        throw JSONRPCError(RPC_INVALID_PARAMS, "Invalid wallet address");
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_WRONG_PARAM, "Invalid wallet address");
     }
 
     LOCK(cs_main);
 
     std::string strMode = "template";
-#if 1
+#if 0
     // TODO: IMPORTANT!!!! uncomment the following!!!
     if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0)
         throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Kevacoin is not connected!");
