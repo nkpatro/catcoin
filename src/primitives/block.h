@@ -134,6 +134,7 @@ public:
     CBlockHeader()
     {
         SetNull();
+        cnHeader.SetNull();
     }
 
     ADD_SERIALIZE_METHODS;

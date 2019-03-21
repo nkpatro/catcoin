@@ -134,8 +134,9 @@ UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGen
             LOCK(cs_main);
             IncrementExtraNonce(pblock, chainActive.Tip(), nExtraNonce);
         }
+        pblock->cnHeader.prev_id = pblock->GetHash();
         while (nMaxTries > 0 && pblock->nNonce < nInnerLoopCount && !CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus())) {
-            ++pblock->nNonce;
+            ++pblock->cnHeader.nonce;
             --nMaxTries;
         }
         if (nMaxTries == 0) {
@@ -437,7 +438,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     LOCK(cs_main);
 
     std::string strMode = "template";
-#if 0
+#if 1
     // TODO: IMPORTANT!!!! uncomment the following!!!
     if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0)
         throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Kevacoin is not connected!");
@@ -595,7 +596,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     std::string hex_template_blob = HexStr(block_blob.begin(), block_blob.end());
 
     UniValue result(UniValue::VOBJ);
-    const uint64_t difficulty = ConvertNBitsToDiff(pblock->nBits);
+    const uint64_t difficulty = ConvertNBitsToDiffU64(pblock->nBits);
     result.push_back(Pair("blocktemplate_blob", hex_template_blob));
     result.push_back(Pair("difficulty", (double)difficulty));
     result.push_back(Pair("height", (uint64_t)height));

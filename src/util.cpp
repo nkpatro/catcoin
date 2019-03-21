@@ -962,7 +962,7 @@ int64_t GetStartupTime()
     return nStartupTime;
 }
 
-uint64_t ConvertNBitsToDiff(uint32_t nBits)
+double ConvertNBitsToDiff(uint32_t nBits)
 {
     int nShift = (nBits >> 24) & 0xff;
 
@@ -981,5 +981,10 @@ uint64_t ConvertNBitsToDiff(uint32_t nBits)
         nShift--;
     }
 
-    return (uint64_t)round(dDiff);
+    return dDiff;
+}
+
+uint64_t ConvertNBitsToDiffU64(uint32_t nBits)
+{
+    return (uint64_t)round(ConvertNBitsToDiff(nBits));
 }
