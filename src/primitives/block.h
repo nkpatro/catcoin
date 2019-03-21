@@ -148,7 +148,7 @@ public:
         READWRITE(nBits);
         READWRITE(nNonce);
         // Genesis block does not have cnHeader.
-        if (!hashPrevBlock.IsNull()) {
+        if (!hashPrevBlock.IsNull() && !legacyMode) {
             READWRITE(cnHeader);
         }
     }
@@ -161,6 +161,7 @@ public:
         nTime = 0;
         nBits = 0;
         nNonce = 0;
+        legacyMode = false;
     }
 
     bool IsNull() const
@@ -178,6 +179,21 @@ public:
     {
         return (int64_t)nTime;
     }
+
+    void SetLegacy(bool legacy)
+    {
+        legacyMode = legacy;
+    }
+
+    bool isLegacy()
+    {
+        return legacyMode;
+    }
+
+protected:
+    // When legacyMode is true, cnHeader is not used.
+    // This is used for regtest.
+    bool legacyMode;
 };
 
 
@@ -225,6 +241,7 @@ public:
         block.nTime          = nTime;
         block.nBits          = nBits;
         block.nNonce         = nNonce;
+        block.SetLegacy(legacyMode);
         return block;
     }
 
