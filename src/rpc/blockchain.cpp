@@ -763,7 +763,7 @@ UniValue getlastblockheader(const JSONRPCRequest& request)
     blockHeader.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
     const uint64_t depth = chainActive.Height() - pblockindex->nHeight + 1; // Same as confirmations.
     blockHeader.push_back(Pair("depth", (uint64_t)depth));
-    blockHeader.push_back(Pair("hash", block.GetCryptonoteFastHash().GetHex()));
+    blockHeader.push_back(Pair("hash", block.GetHash().GetHex()));
     blockHeader.push_back(Pair("difficulty", GetDifficulty(pblockindex)));
 
     // TODO: implement cumulative_difficulty
@@ -846,7 +846,7 @@ UniValue getblockheaderbyheight(const JSONRPCRequest& request)
     blockHeader.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
     const uint64_t depth = chainActive.Height() - nHeight + 1; // Same as confirmations.
     blockHeader.push_back(Pair("depth", (uint64_t)depth));
-    blockHeader.push_back(Pair("hash", block.GetCryptonoteFastHash().GetHex()));
+    blockHeader.push_back(Pair("hash", block.GetHash().GetHex()));
     blockHeader.push_back(Pair("difficulty", GetDifficulty(pblockindex)));
 
     // TODO: implement cumulative_difficulty
