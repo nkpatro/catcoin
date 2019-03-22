@@ -155,7 +155,7 @@ TestChain100Setup::CreateAndProcessBlock(const std::vector<CMutableTransaction>&
     }
 
     block.cnHeader.major_version = Params().GetConsensus().GetCryptonoteMajorVersion();
-    block.cnHeader.prev_id = block.GetHash();
+    block.cnHeader.prev_id = block.GetOriginalBlockHash();
     while (!CheckProofOfWork(block.GetPoWHash(), block.nBits, chainparams.GetConsensus())) ++block.cnHeader.nonce;
 
     std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(block);

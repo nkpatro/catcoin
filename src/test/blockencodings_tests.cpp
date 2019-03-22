@@ -48,7 +48,7 @@ static CBlock BuildBlockTestCase() {
     block.hashMerkleRoot = BlockMerkleRoot(block, &mutated);
     assert(!mutated);
     block.cnHeader.major_version = Params().GetConsensus().GetCryptonoteMajorVersion();
-    block.cnHeader.prev_id = block.GetHash();
+    block.cnHeader.prev_id = block.GetOriginalBlockHash();
     while (!CheckProofOfWork(block.GetPoWHash(), block.nBits, Params().GetConsensus())) ++block.cnHeader.nonce;
     return block;
 }
@@ -295,7 +295,7 @@ BOOST_AUTO_TEST_CASE(EmptyBlockRoundTripTest)
     block.hashMerkleRoot = BlockMerkleRoot(block, &mutated);
     assert(!mutated);
     block.cnHeader.major_version = Params().GetConsensus().GetCryptonoteMajorVersion();
-    block.cnHeader.prev_id = block.GetHash();
+    block.cnHeader.prev_id = block.GetOriginalHash();
     while (!CheckProofOfWork(block.GetPoWHash(), block.nBits, Params().GetConsensus())) ++block.cnHeader.nonce;
 
     // Test simple header round-trip with only coinbase
