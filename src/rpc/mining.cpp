@@ -438,14 +438,12 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     LOCK(cs_main);
 
     std::string strMode = "template";
-#if 0
-    // TODO: IMPORTANT!!!! uncomment the following!!!
     if (g_connman->GetNodeCount(CConnman::CONNECTIONS_ALL) == 0)
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "Kevacoin is not connected!");
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_CORE_BUSY, "Kevacoin is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Kevacoin is downloading blocks...");
-#endif
+        throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_CORE_BUSY, "Kevacoin is downloading blocks...");
+
     static unsigned int nTransactionsUpdatedLast;
     bool fSupportsSegwit = true;
 
