@@ -213,6 +213,9 @@ public:
     uint32_t nBits;
     uint32_t nNonce;
 
+    //! Cryptonote header
+    CryptoNoteHeader cnHeader;
+
     //! (memory only) Sequential id assigned to distinguish order in which blocks are received.
     int32_t nSequenceId;
 
@@ -240,6 +243,7 @@ public:
         nTime          = 0;
         nBits          = 0;
         nNonce         = 0;
+        cnHeader.SetNull();
     }
 
     CBlockIndex()
@@ -256,6 +260,7 @@ public:
         nTime          = block.nTime;
         nBits          = block.nBits;
         nNonce         = block.nNonce;
+        cnHeader       = block.cnHeader;
     }
 
     CDiskBlockPos GetBlockPos() const {
@@ -286,6 +291,7 @@ public:
         block.nTime          = nTime;
         block.nBits          = nBits;
         block.nNonce         = nNonce;
+        block.cnHeader       = cnHeader;
         return block;
     }
 
@@ -410,6 +416,7 @@ public:
         READWRITE(nTime);
         READWRITE(nBits);
         READWRITE(nNonce);
+        READWRITE(cnHeader);
     }
 
     uint256 GetBlockHash() const
@@ -421,6 +428,7 @@ public:
         block.nTime           = nTime;
         block.nBits           = nBits;
         block.nNonce          = nNonce;
+        block.cnHeader        = cnHeader;
         return block.GetHash();
     }
 

@@ -2040,6 +2040,7 @@ CAmount CWallet::GetBalance() const
     CAmount nTotal = 0;
     {
         LOCK2(cs_main, cs_wallet);
+
         for (const auto& entry : mapWallet)
         {
             const CWalletTx* pcoin = &entry.second;
@@ -3170,7 +3171,8 @@ bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, CCon
                 auto rejectReason = state.GetRejectReason();
                 LogPrintf("CommitTransaction(): Transaction cannot be broadcast immediately, %s\n", rejectReason);
                 // TODO: if we expect the failure to be long term or permanent, instead delete wtx from the wallet and return failure.
-                if (rejectReason == "too-long-mempool-chain") {
+                bool isRegTest = Params().NetworkIDString() == CBaseChainParams::REGTEST;
+                if (!isRegTest && rejectReason == "too-long-mempool-chain") {
                     LogPrintf("Abandon the too-long-mempool-chain Tx: %s \n", wtx.GetHash().ToString().c_str());
                     AbandonTransaction(wtx.GetHash());
                     return false;
@@ -4271,6 +4273,7 @@ int CMerkleTx::GetBlocksToMaturity() const
 {
     if (!IsCoinBase())
         return 0;
+
     return std::max(0, (COINBASE_MATURITY+1) - GetDepthInMainChain());
 }
 
