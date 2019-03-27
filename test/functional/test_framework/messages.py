@@ -570,7 +570,8 @@ class CBlockHeader():
         self.nNonce = struct.unpack("<I", f.read(4))[0]
 
         # Cryptonote header
-        cnHeader = deser_string(f)
+        # Skip the length value
+        deser_compact_size(f)
         self.major_version = struct.unpack("<B", f.read(1))[0]
         self.minor_version = struct.unpack("<B", f.read(1))[0]
         self.timestamp = deser_varint(f)
@@ -637,7 +638,7 @@ class CBlockHeader():
             # self.sha256 stores the cn_fast hash.
             self.sha256 = uint256_from_str(pycryptonight.cn_fast_hash(c))
             self.hash = encode(pycryptonight.cn_fast_hash(c)[::-1], 'hex_codec').decode('ascii')
-            # 4 is variant 4. nNonce is used to store block height.
+            # nNonce is used to store block height.
             self.scrypt256 = uint256_from_str(pycryptonight.cn_slow_hash(c, self.major_version - 6, 0, self.nNonce))
 
     def rehash(self):
