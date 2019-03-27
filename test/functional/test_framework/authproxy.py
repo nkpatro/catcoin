@@ -136,6 +136,7 @@ class AuthServiceProxy():
         # Kevacoin: submitblock expects a cryptonote wrapper around the block,
         # while submitblock_original is the original implementation.
         postdata = postdata.replace('submitblock', 'submitblock_original')
+        postdata = postdata.replace('getblocktemplate', 'getblocktemplate_original')
         response = self._request('POST', self.__url.path, postdata.encode('utf-8'))
         if response['error'] is not None:
             raise JSONRPCException(response['error'])
