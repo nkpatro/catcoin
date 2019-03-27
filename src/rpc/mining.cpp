@@ -632,6 +632,78 @@ static uint256 CryptoHashToUint256(const crypto::hash& hash)
     return uint256(prev_id);
 }
 
+UniValue submitblock_original(const JSONRPCRequest& request)
+{
+    // We allow 2 arguments for compliance with BIP22. Argument 2 is ignored.
+    if (request.fHelp || request.params.size() < 1 || request.params.size() > 2) {
+        throw std::runtime_error(
+            "submitblock \"hexdata\"  ( \"dummy\" )\n"
+            "\nAttempts to submit new block to network.\n"
+            "See https://en.bitcoin.it/wiki/BIP_0022 for full specification.\n"
+
+            "\nArguments\n"
+            "1. \"hexdata\"        (string, required) the hex-encoded block data to submit\n"
+            "2. \"dummy\"          (optional) dummy value, for compatibility with BIP22. This value is ignored.\n"
+            "\nResult:\n"
+            "\nExamples:\n"
+            + HelpExampleCli("submitblock", "\"mydata\"")
+            + HelpExampleRpc("submitblock", "\"mydata\"")
+        );
+    }
+
+    std::shared_ptr<CBlock> blockptr = std::make_shared<CBlock>();
+    CBlock& block = *blockptr;
+    if (!DecodeHexBlk(block, request.params[0].get_str())) {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Block decode failed");
+    }
+
+    if (block.vtx.empty() || !block.vtx[0]->IsCoinBase()) {
+        throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Block does not start with a coinbase");
+    }
+
+    uint256 hash = block.GetHash();
+    bool fBlockPresent = false;
+    {
+        LOCK(cs_main);
+        BlockMap::iterator mi = mapBlockIndex.find(hash);
+        if (mi != mapBlockIndex.end()) {
+            CBlockIndex *pindex = mi->second;
+            if (pindex->IsValid(BLOCK_VALID_SCRIPTS)) {
+                return "duplicate";
+            }
+            if (pindex->nStatus & BLOCK_FAILED_MASK) {
+                return "duplicate-invalid";
+            }
+            // Otherwise, we might only have the header - process the block before returning
+            fBlockPresent = true;
+        }
+    }
+
+    {
+        LOCK(cs_main);
+        BlockMap::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
+        if (mi != mapBlockIndex.end()) {
+            UpdateUncommittedBlockStructures(block, mi->second, Params().GetConsensus());
+        }
+    }
+
+    submitblock_StateCatcher sc(block.GetHash());
+    RegisterValidationInterface(&sc);
+    bool fAccepted = ProcessNewBlock(Params(), blockptr, true, nullptr);
+    UnregisterValidationInterface(&sc);
+    if (fBlockPresent) {
+        if (fAccepted && !sc.found) {
+            return "duplicate-inconclusive";
+        }
+        return "duplicate";
+    }
+    if (!sc.found) {
+        return "inconclusive";
+    }
+    return BIP22ValidationResult(sc.state);
+}
+
+
 // Cryptonote RPC call
 UniValue submitblock(const JSONRPCRequest& request)
 {
@@ -947,6 +1019,7 @@ static const CRPCCommand commands[] =
     { "mining",             "prioritisetransaction",  &prioritisetransaction,  {"txid","dummy","fee_delta"} },
     { "mining",             "getblocktemplate",       &getblocktemplate,       {"reserve_size", "wallet_address"} },
     { "mining",             "submitblock",            &submitblock,            {"hexdata","dummy"} },
+    { "mining",             "submitblock_original",   &submitblock_original,   {"hexdata","dummy"} },
 
 
     { "generating",         "generatetoaddress",      &generatetoaddress,      {"nblocks","address","maxtries"} },

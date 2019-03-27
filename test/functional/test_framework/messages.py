@@ -100,6 +100,32 @@ def ser_uint256(u):
     return rs
 
 
+def deser_varint(f):
+    shift = 0
+    result = 0
+    while True:
+        i = ord(f.read(1))
+        result |= (i & 0x7f) << shift
+        shift += 7
+        if not (i & 0x80):
+            break
+
+    return result
+
+
+def ser_varint(u):
+    buf = b''
+    while True:
+        towrite = u & 0x7f
+        u >>= 7
+        if u:
+            buf += bytes((towrite | 0x80, ))
+        else:
+            buf += bytes((towrite, ))
+            break
+    return buf
+
+
 def uint256_from_str(s):
     r = 0
     t = struct.unpack("<IIIIIIII", s[:32])
@@ -499,6 +525,17 @@ class CBlockHeader():
             self.nBits = header.nBits
             self.nNonce = header.nNonce
             self.sha256 = header.sha256
+
+            # Cryptonote header
+            self.major_version = header.major_version
+            self.minor_version = header.minor_version
+            self.timestamp = header.timestamp
+            self.prev_id = header.prev_id
+            self.nonce = header.nonce
+            self.merkle_root = header.merkle_root
+            self.nTxes = header.nTxes
+            # End of cryptonote header
+
             self.hash = header.hash
             self.scrypt256 = header.scrypt256
             self.calc_sha256()
@@ -514,6 +551,16 @@ class CBlockHeader():
         self.hash = None
         self.scrypt256 = None
 
+        # Cryptonote header
+        self.major_version = 0
+        self.minor_version = 0
+        self.timestamp = 0
+        self.prev_id = None
+        self.nonce = 0
+        self.merkle_root = None
+        self.nTxes = 0
+        # End of cryptonote header
+
     def deserialize(self, f):
         self.nVersion = struct.unpack("<i", f.read(4))[0]
         self.hashPrevBlock = deser_uint256(f)
@@ -521,6 +568,17 @@ class CBlockHeader():
         self.nTime = struct.unpack("<I", f.read(4))[0]
         self.nBits = struct.unpack("<I", f.read(4))[0]
         self.nNonce = struct.unpack("<I", f.read(4))[0]
+
+        # Cryptonote header
+        cnHeader = deser_string(f)
+        self.major_version = struct.unpack("<B", f.read(1))[0]
+        self.minor_version = struct.unpack("<B", f.read(1))[0]
+        self.timestamp = deser_varint(f)
+        self.prev_id = deser_uint256(f)
+        self.nonce = struct.unpack("<I", f.read(4))[0]
+        self.merkle_root = deser_uint256(f)
+        self.nTxes = struct.unpack("<B", f.read(1))[0]
+
         self.sha256 = None
         self.hash = None
         self.scrypt256 = None
@@ -533,7 +591,19 @@ class CBlockHeader():
         r += struct.pack("<I", self.nTime)
         r += struct.pack("<I", self.nBits)
         r += struct.pack("<I", self.nNonce)
-        return r
+
+        # Cryptonote header
+        c = b""
+        c += struct.pack("<B", self.major_version)
+        c += struct.pack("<B", self.minor_version)
+        c += ser_varint(self.timestamp)
+        c += ser_uint256(self.prev_id)
+        c += struct.pack("<I", self.nonce)
+        c += ser_uint256(self.merkle_root)
+        c += struct.pack("<B", self.nTxes)
+        c = ser_string(c)
+
+        return r + c
 
     def calc_sha256(self):
         if self.sha256 is None:
@@ -544,9 +614,31 @@ class CBlockHeader():
             r += struct.pack("<I", self.nTime)
             r += struct.pack("<I", self.nBits)
             r += struct.pack("<I", self.nNonce)
-            self.sha256 = uint256_from_str(hash256(r))
-            self.hash = encode(hash256(r)[::-1], 'hex_codec').decode('ascii')
-            self.scrypt256 = uint256_from_str(pycryptonight.cn_slow_hash(r, 2))
+            # For kevacoin, self.sha256 doesn't actually store the sha256 value.
+            # It stores the cn_fast hash instead.
+            self.sha256_actual = uint256_from_str(hash256(r))
+            #self.hash = encode(hash256(r)[::-1], 'hex_codec').decode('ascii')
+
+            # Cryptonote cn hash
+            c = b""
+            c += struct.pack("<B", self.major_version)
+            c += struct.pack("<B", self.minor_version)
+            c += ser_varint(self.timestamp)
+            # prev_id is used to store sha256 value of the blockhash for Proof-of-Work
+            self.prev_id = self.sha256_actual
+
+            c += ser_uint256(self.prev_id)
+            c += struct.pack("<I", self.nonce)
+
+            # hardcoded merkle root.
+            self.merkle_root = uint256_from_str(bytes.fromhex("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"))
+            c += ser_uint256(self.merkle_root)
+            c += struct.pack("<B", self.nTxes)
+            # self.sha256 stores the cn_fast hash.
+            self.sha256 = uint256_from_str(pycryptonight.cn_fast_hash(c))
+            self.hash = encode(pycryptonight.cn_fast_hash(c)[::-1], 'hex_codec').decode('ascii')
+            # 4 is variant 4. nNonce is used to store block height.
+            self.scrypt256 = uint256_from_str(pycryptonight.cn_slow_hash(c, self.major_version - 6, 0, self.nNonce))
 
     def rehash(self):
         self.sha256 = None
@@ -623,7 +715,7 @@ class CBlock(CBlockHeader):
         self.rehash()
         target = uint256_from_compact(self.nBits)
         while self.scrypt256 > target:
-            self.nNonce += 1
+            self.nonce += 1
             self.rehash()
 
     def __repr__(self):

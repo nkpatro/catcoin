@@ -35,6 +35,14 @@ def create_block(hashprev, coinbase, nTime=None):
     block.nBits = 0x207fffff # Will break after a difficulty adjustment...
     block.vtx.append(coinbase)
     block.hashMerkleRoot = block.calc_merkle_root()
+
+    # In kevacoin, nNonce is used to store the height of the block, which will
+    # be used in cn_slow_hash computation.
+    block.nNonce = coinbase.height
+    assert block.nNonce > 0
+    block.major_version = 10 # CN variant 4
+    block.timestamp = block.nTime
+
     block.calc_sha256()
     return block
 
@@ -98,6 +106,11 @@ def create_coinbase(height, pubkey = None):
         coinbaseoutput.scriptPubKey = CScript([OP_TRUE])
     coinbase.vout = [ coinbaseoutput ]
     coinbase.calc_sha256()
+
+    # Kevacoin needs to know the height, because it is used as a parameter of
+    # cn_slow_hash.
+    coinbase.height = height
+
     return coinbase
 
 # Create a transaction.
