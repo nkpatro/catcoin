@@ -633,8 +633,9 @@ class CBlockHeader():
             c += ser_uint256(self.merkle_root)
             c += struct.pack("<B", self.nTxes)
             # self.sha256 stores the cn_fast hash.
-            self.sha256 = uint256_from_str(pycryptonight.cn_fast_hash(c))
-            self.hash = encode(pycryptonight.cn_fast_hash(c)[::-1], 'hex_codec').decode('ascii')
+            cn_hash = pycryptonight.cn_fast_hash(c)
+            self.sha256 = uint256_from_str(cn_hash)
+            self.hash = encode(cn_hash[::-1], 'hex_codec').decode('ascii')
             # nNonce is used to store block height.
             self.scrypt256 = uint256_from_str(pycryptonight.cn_slow_hash(c, self.major_version - 6, 0, self.nNonce))
 

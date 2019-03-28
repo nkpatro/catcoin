@@ -9,6 +9,7 @@
 - submitblock"""
 
 import copy
+import struct
 from binascii import b2a_hex
 from decimal import Decimal
 
@@ -16,6 +17,13 @@ from test_framework.blocktools import create_coinbase
 from test_framework.mininode import CBlock
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error
+
+def uint256_from_str(s):
+    r = 0
+    t = struct.unpack("<IIIIIIII", s[:32])
+    for i in range(8):
+        r += t[i] << (i * 32)
+    return r
 
 def b2x(b):
     return b2a_hex(b).decode('ascii')
@@ -40,7 +48,7 @@ class MiningTest(BitcoinTestFramework):
         assert_equal(mining_info['chain'], 'regtest')
         assert_equal(mining_info['currentblocktx'], 0)
         assert_equal(mining_info['currentblockweight'], 0)
-        assert_equal(mining_info['difficulty'], Decimal('0.0004882738576261828'))
+        assert_equal(mining_info['difficulty'], Decimal('1.999969720836845'))
         assert_equal(mining_info['networkhashps'], Decimal('0.003333333333333334'))
         assert_equal(mining_info['pooledtx'], 0)
 
@@ -63,6 +71,10 @@ class MiningTest(BitcoinTestFramework):
         block.nBits = int(tmpl["bits"], 16)
         block.nNonce = 0
         block.vtx = [coinbase_tx]
+
+        block.major_version = 10
+        block.merkle_root = uint256_from_str(bytes.fromhex("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"))
+        block.calc_sha256()
 
         self.log.info("getblocktemplate: Test valid block")
         assert_template(node, block, None)
@@ -103,7 +115,7 @@ class MiningTest(BitcoinTestFramework):
 
         self.log.info("getblocktemplate: Test bad tx count")
         # The tx count is immediately after the block header
-        TX_COUNT_OFFSET = 80
+        TX_COUNT_OFFSET = 80 + 78   # Kevacoin: 78 is the size of the cnHeader.
         bad_block_sn = bytearray(block.serialize())
         assert_equal(bad_block_sn[TX_COUNT_OFFSET], 1)
         bad_block_sn[TX_COUNT_OFFSET] += 1

@@ -202,7 +202,7 @@ class BlockchainTest(BitcoinTestFramework):
         # 1 hash in 2 should be valid, so difficulty should be 1/2**31
         # binary => decimal => binary math is why we do this check
         # assert abs(difficulty * 2**31 - 1) < 0.0001
-        assert abs(difficulty) < 0.0005  # Kevacoin change
+        assert abs(difficulty) < 2.0  # Kevacoin change
 
     def _test_getnetworkhashps(self):
         hashes_per_second = self.nodes[0].getnetworkhashps()
