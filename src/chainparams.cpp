@@ -284,8 +284,8 @@ public:
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 20; // 20 second
-        consensus.nPowTargetSpacing = 20; // 20 second
+        consensus.nPowTargetTimespan = 2.0 * 60; // Two minutes
+        consensus.nPowTargetSpacing = 2.0 * 60; // Two minutes
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 108; // 75% for testchains

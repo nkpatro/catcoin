@@ -301,6 +301,24 @@ UniValue CN_JSONRPCError(int code, const std::string& message)
 // NOTE: Assumes a conclusive result; if result is inconclusive, it must be handled by caller
 static UniValue BIP22ValidationResult(const CValidationState& state)
 {
+    if (state.IsValid())
+        return NullUniValue;
+
+    std::string strRejectReason = state.GetRejectReason();
+    if (state.IsError())
+        throw JSONRPCError(RPC_VERIFY_ERROR, strRejectReason);
+    if (state.IsInvalid())
+    {
+        if (strRejectReason.empty())
+            return "rejected";
+        return strRejectReason;
+    }
+    // Should be impossible
+    return "valid?";
+}
+
+static UniValue BIP22ValidationResult_CN(const CValidationState& state)
+{
     if (state.IsValid()) {
         UniValue result(UniValue::VOBJ);
         result.push_back(Pair("status", "OK"));
@@ -1194,7 +1212,7 @@ UniValue submitblock(const JSONRPCRequest& request)
     if (!sc.found) {
         throw CN_JSONRPCError(CORE_RPC_ERROR_CODE_BLOCK_NOT_ACCEPTED, "inconclusive");
     }
-    return BIP22ValidationResult(sc.state);
+    return BIP22ValidationResult_CN(sc.state);
 }
 
 UniValue estimatefee(const JSONRPCRequest& request)
