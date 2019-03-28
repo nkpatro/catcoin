@@ -630,9 +630,6 @@ class CBlockHeader():
 
             c += ser_uint256(self.prev_id)
             c += struct.pack("<I", self.nonce)
-
-            # hardcoded merkle root.
-            self.merkle_root = uint256_from_str(bytes.fromhex("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"))
             c += ser_uint256(self.merkle_root)
             c += struct.pack("<B", self.nTxes)
             # self.sha256 stores the cn_fast hash.

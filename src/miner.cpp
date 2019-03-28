@@ -176,6 +176,8 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(const CScript& sc
     UpdateTime(pblock, chainparams.GetConsensus(), pindexPrev);
     pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock, chainparams.GetConsensus());
     pblock->nNonce         = nHeight; // nNonce now holds the height for Cryptonight variant 4
+    pblock->cnHeader.major_version  = Params().GetConsensus().GetCryptonoteMajorVersion();
+    pblock->cnHeader.prev_id        = pblock->GetOriginalBlockHash();
     pblocktemplate->vTxSigOpsCost[0] = WITNESS_SCALE_FACTOR * GetLegacySigOpCount(*pblock->vtx[0]);
 
     CValidationState state;

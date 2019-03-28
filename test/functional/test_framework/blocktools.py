@@ -42,7 +42,8 @@ def create_block(hashprev, coinbase, nTime=None):
     assert block.nNonce > 0
     block.major_version = 10 # CN variant 4
     block.timestamp = block.nTime
-
+    # Give merkle root a random value.
+    block.merkle_root = uint256_from_str(bytes.fromhex("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"))
     block.calc_sha256()
     return block
 
