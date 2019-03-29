@@ -297,8 +297,8 @@ def run_tests(test_list, src_dir, build_dir, exeext, tmpdir, jobs=1, enable_cove
         print("%sWARNING!%s There is a cache directory here: %s. If tests fail unexpectedly, try deleting the cache directory." % (BOLD[1], BOLD[0], cache_dir))
 
     #Set env vars
-    if "LITECOIND" not in os.environ:
-        os.environ["LITECOIND"] = build_dir + '/src/kevacoind' + exeext
+    if "KEVACOIND" not in os.environ:
+        os.environ["KEVACOIND"] = build_dir + '/src/kevacoind' + exeext
         os.environ["LITECOINCLI"] = build_dir + '/src/kevacoin-cli' + exeext
 
     tests_dir = src_dir + '/test/functional/'
