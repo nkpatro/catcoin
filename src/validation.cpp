@@ -2294,12 +2294,6 @@ bool CChainState::DisconnectTip(CValidationState& state, const CChainParams& cha
     if (!FlushStateToDisk(chainparams, state, FLUSH_STATE_IF_NEEDED))
         return false;
 
-#if 0
-    // We don't need this because names never expire.
-    AssertLockHeld(cs_main);
-    CNameConflictTracker nameConflicts(mempool);
-#endif
-
     if (disconnectpool) {
         // Save transactions to re-add to mempool at end of reorg
         for (auto it = block.vtx.rbegin(); it != block.vtx.rend(); ++it) {
