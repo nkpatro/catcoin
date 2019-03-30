@@ -168,8 +168,9 @@ class KevaTest(BitcoinTestFramework):
                 key = secondPrefix + '|' + str(i)
                 value = '-value-' * 320 + '|' + str(i)
                 self.nodes[0].keva_put(namespaceId, key, value)
-        except JSONRPCException:
-            throwException = True
+        except JSONRPCException as e:
+            if str(e).find("too-long-mempool-chain") >= 0:
+                throwException = True
 
         assert(throwException)
 

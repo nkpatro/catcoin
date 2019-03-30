@@ -3171,8 +3171,7 @@ bool CWallet::CommitTransaction(CWalletTx& wtxNew, CReserveKey& reservekey, CCon
                 auto rejectReason = state.GetRejectReason();
                 LogPrintf("CommitTransaction(): Transaction cannot be broadcast immediately, %s\n", rejectReason);
                 // TODO: if we expect the failure to be long term or permanent, instead delete wtx from the wallet and return failure.
-                bool isRegTest = Params().NetworkIDString() == CBaseChainParams::REGTEST;
-                if (!isRegTest && rejectReason == "too-long-mempool-chain") {
+                if (wtx.tx->IsKevacoin() && rejectReason == "too-long-mempool-chain") {
                     LogPrintf("Abandon the too-long-mempool-chain Tx: %s \n", wtx.GetHash().ToString().c_str());
                     AbandonTransaction(wtx.GetHash());
                     return false;
