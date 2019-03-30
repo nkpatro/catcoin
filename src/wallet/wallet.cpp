@@ -1562,12 +1562,12 @@ void CWalletTx::GetAmounts(std::list<COutputEntry>& listReceived,
         COutputEntry output = {address, "", txout.nValue, (int)i};
 
         // If we have a keva script, set the "keva" parameter.
-        if (kevaOp.isKevaOp())
-        {
-            if (kevaOp.isAnyUpdate())
-                output.kevaOp = "update: " + ValtypeToString(kevaOp.getOpNamespace());
-            else
-                output.kevaOp = "new: " + ValtypeToString(kevaOp.getOpNamespace());
+        if (kevaOp.isKevaOp()) {
+            if (kevaOp.isAnyUpdate()) {
+                output.kevaOp = "update: " + EncodeBase58Check(kevaOp.getOpNamespace());
+            } else {
+                output.kevaOp = "new: " + EncodeBase58Check(kevaOp.getOpNamespace());
+            }
             output.amount = 0;
         }
 
