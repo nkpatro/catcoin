@@ -15,12 +15,12 @@ import re
 
 class KevaTest(BitcoinTestFramework):
     def set_test_params(self):
-        self.setup_clean_chain = True
         self.num_nodes = 2
 
     def setup_network(self):
         super().setup_network()
-        connect_nodes_bi(self.nodes, 0, 1)
+        connect_nodes(self.nodes[0], 1)
+        connect_nodes(self.nodes[1], 0)
         self.sync_all()
 
     def run_unconfirmed_namespaces(self):
@@ -57,15 +57,17 @@ class KevaTest(BitcoinTestFramework):
         assert(response['value'] == value2)
         # Disconnect the block
         self.sync_all()
-        self.nodes[0].invalidateblock(self.nodes[0].getbestblockhash())
-        self.nodes[1].invalidateblock(self.nodes[1].getbestblockhash())
+        tip = self.nodes[0].getbestblockhash()
+        self.nodes[0].invalidateblock(tip)
+        self.nodes[1].invalidateblock(tip)
         self.sync_all()
         response = self.nodes[0].keva_get(namespaceId, key)
         assert(response['value'] == value1)
         # Disconnect the block again
         self.sync_all()
-        self.nodes[0].invalidateblock(self.nodes[0].getbestblockhash())
-        self.nodes[1].invalidateblock(self.nodes[1].getbestblockhash())
+        tip = self.nodes[0].getbestblockhash()
+        self.nodes[0].invalidateblock(tip)
+        self.nodes[1].invalidateblock(tip)
         self.sync_all()
         response = self.nodes[0].keva_get(namespaceId, key)
         assert(response['value'] == '')
@@ -87,8 +89,9 @@ class KevaTest(BitcoinTestFramework):
         assert(response['value'] == '')
         # Disconnect the block
         self.sync_all()
-        self.nodes[0].invalidateblock(self.nodes[0].getbestblockhash())
-        self.nodes[1].invalidateblock(self.nodes[1].getbestblockhash())
+        tip = self.nodes[0].getbestblockhash()
+        self.nodes[0].invalidateblock(tip)
+        self.nodes[1].invalidateblock(tip)
         self.sync_all()
         response = self.nodes[0].keva_get(namespaceId, keyToDelete)
         # The value should be undeleted.
@@ -123,8 +126,13 @@ class KevaTest(BitcoinTestFramework):
 
 
     def run_test(self):
-        self.nodes[0].generate(105)
-        self.nodes[1].generate(105)
+        # Start with a 200 block chain
+        assert_equal(self.nodes[0].getblockcount(), 200)
+        assert_equal(self.nodes[1].getblockcount(), 200)
+
+        new_blocks = self.nodes[0].generate(1)
+        self.sync_all()
+
         response = self.nodes[0].keva_namespace('first_namespace')
         namespaceId = response['namespaceId']
 
