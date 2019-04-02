@@ -63,16 +63,6 @@ class KevaTest(BitcoinTestFramework):
         self.sync_all()
         response = self.nodes[0].keva_get(namespaceId, key)
         assert(response['value'] == value1)
-        # Disconnect the block again
-        self.sync_all()
-        tip = self.nodes[0].getbestblockhash()
-        self.nodes[0].invalidateblock(tip)
-        self.nodes[1].invalidateblock(tip)
-        self.sync_all()
-        response = self.nodes[0].keva_get(namespaceId, key)
-        assert(response['value'] == '')
-        response = self.nodes[0].keva_get(namespaceId, '_KEVA_NS_')
-        assert(response['value'] == displayName)
 
         self.log.info("Test undeleting after disconnecting blocks")
         self.nodes[0].generate(1)
