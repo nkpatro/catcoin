@@ -18,7 +18,7 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the
-installer (on Windows) or just copy over `/Applications/Litecoin-Qt` (on Mac)
+installer (on Windows) or just copy over `/Applications/Bluecoin-Qt` (on Mac)
 or `bluecoind`/`bluecoin-qt` (on Linux).
 
 The first time you run version 0.15.0 or newer, your chainstate database will be converted to a
@@ -600,7 +600,7 @@ Testing changes
 - #11952 `9ab9963` univalue: Bump subtree (MarcoFalke)
 - #12367 `09fc859` Fix two fast-shutdown bugs (TheBlueMatt)
 - #12422 `4d54e7a` util: Make LockDirectory thread-safe, consistent, and fix OpenBSD 6.2 build (laanwj)
-- #482 `5c8e26d` Litecoin: Basic changes for v0.16 release (thrasher-)
+- #482 `5c8e26d` Bluecoin: Basic changes for v0.16 release (thrasher-)
 
 Credits
 =======

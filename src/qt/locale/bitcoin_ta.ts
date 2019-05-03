@@ -90,8 +90,8 @@
         <translation>&amp;செய்தியை சரிசெய்...</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Bluecoin</source>
+        <translation>Bluecoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -225,8 +225,8 @@
         <translation>நல்வரவு</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Bluecoin</source>
+        <translation>Bluecoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -713,7 +713,7 @@
     <name>bitcoin-core</name>
     <message>
         <source>Bluecoin Core</source>
-        <translation>Litecoin மையம்</translation>
+        <translation>Bluecoin மையம்</translation>
     </message>
     <message>
         <source>Information</source>

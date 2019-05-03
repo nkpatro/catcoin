@@ -41,7 +41,7 @@ Notable changes
 Signature validation using libsecp256k1
 ---------------------------------------
 
-ECDSA signatures inside Litecoin transactions now use validation using
+ECDSA signatures inside Bluecoin transactions now use validation using
 [libsecp256k1](https://github.com/bitcoin-core/secp256k1) instead of OpenSSL.
 
 Depending on the platform, this means a significant speedup for raw signature
@@ -201,7 +201,7 @@ information, pass `-debug=tor`.
 Notifications through ZMQ
 -------------------------
 
-Litecoind can now (optionally) asynchronously notify clients through a
+Bluecoind can now (optionally) asynchronously notify clients through a
 ZMQ-based PUB socket of the arrival of new transactions and blocks.
 This feature requires installation of the ZMQ C API library 4.x and
 configuring its use through the command line or configuration file.
@@ -214,7 +214,7 @@ Various improvements have been made to how the wallet calculates
 transaction fees.
 
 Users can decide to pay a predefined fee rate by setting `-paytxfee=<n>`
-(or `settxfee <n>` rpc during runtime). A value of `n=0` signals Litecoin
+(or `settxfee <n>` rpc during runtime). A value of `n=0` signals Bluecoin
 Core to use floating fees. By default, Bluecoin Core will use floating
 fees.
 
@@ -489,7 +489,7 @@ BIP112 soft fork to enforce OP_CHECKSEQUENCEVERIFY
 --------------------------------------------------
 
 [BIP112][] redefines the existing OP_NOP3 as OP_CHECKSEQUENCEVERIFY (CSV)
-for a new opcode in the Litecoin scripting system that in combination with
+for a new opcode in the Bluecoin scripting system that in combination with
 [BIP68][] allows execution pathways of a script to be restricted based
 on the age of the output being spent.
 
@@ -502,7 +502,7 @@ BIP113 locktime enforcement soft fork
 This release seeks to make mempool-only locktime enforcement using GetMedianTimePast() 
 a consensus rule.
 
-Litecoin transactions currently may specify a locktime indicating when
+Bluecoin transactions currently may specify a locktime indicating when
 they may be added to a valid block.  Current consensus rules require
 that blocks have a block header time greater than the locktime specified
 in any transaction in that block.
@@ -645,7 +645,7 @@ files on disk. These two have now been split up, so that all blocks are known
 before validation starts. This was necessary to make certain optimizations that
 are available during normal synchronizations also available during reindexing.
 
-The two phases are distinct in the Litecoin-Qt GUI. During the first one,
+The two phases are distinct in the Bluecoin-Qt GUI. During the first one,
 "Reindexing blocks on disk" is shown. During the second (slower) one,
 "Processing blocks on disk" is shown.
 
@@ -786,9 +786,9 @@ covered by the txid. This provides several immediate benefits:
   identifier (txid) of transactions without referencing the witness, which can
   sometimes be changed by third-parties (such as miners) or by co-signers in a
   multisig spend. This solves all known cases of unwanted transaction
-  malleability, which is a problem that makes programming Litecoin wallet
+  malleability, which is a problem that makes programming Bluecoin wallet
   software more difficult and which seriously complicates the design of smart
-  contracts for Litecoin.
+  contracts for Bluecoin.
 
 - **Capacity increase:** Segwit transactions contain new fields that are not
   part of the data currently used to calculate the size of a block, which
@@ -802,7 +802,7 @@ covered by the txid. This provides several immediate benefits:
   following section for details).
 
 - **Weighting data based on how it affects node performance:** Some parts of
-  each Litecoin block need to be stored by nodes in order to validate future
+  each Bluecoin block need to be stored by nodes in order to validate future
   blocks; other parts of a block can be immediately forgotten (pruned) or used
   only for helping other nodes sync their copy of the block chain.  One large
   part of the immediately prunable data are transaction signatures (witnesses),
@@ -835,7 +835,7 @@ covered by the txid. This provides several immediate benefits:
   different signature method that doesn't suffer from this problem and doesn't
   have any unwanted side-effects.
 
-- **Increased security for multisig:** Litecoin addresses (both P2PKH addresses
+- **Increased security for multisig:** Bluecoin addresses (both P2PKH addresses
   that start with a '1' and P2SH addresses that start with a '3' or 'M') use a hash
   function known as RIPEMD-160.  For P2PKH addresses, this provides about 160
   bits of security---which is beyond what cryptographers believe can be broken
@@ -845,7 +845,7 @@ covered by the txid. This provides several immediate benefits:
   Segwit allows advanced transactions to use the SHA256 hash function instead,
   which provides about 128 bits of security  (that is 281 trillion times as
   much security as 80 bits and is equivalent to the maximum bits of security
-  believed to be provided by Litecoin's choice of parameters for its Elliptic
+  believed to be provided by Bluecoin's choice of parameters for its Elliptic
   Curve Digital Security Algorithm [ECDSA].)
 
 - **More efficient almost-full-node security** Satoshi Nakamoto's original
@@ -853,7 +853,7 @@ covered by the txid. This provides several immediate benefits:
   skip downloading and validating some data from historic blocks that are
   protected by large amounts of proof of work.  Unfortunately, Nakamoto's
   method can't guarantee that a newly-started node using this method will
-  produce an accurate copy of Litecoin's current ledger (called the UTXO set),
+  produce an accurate copy of Bluecoin's current ledger (called the UTXO set),
   making the node vulnerable to falling out of consensus with other nodes.
   Although the problems with Nakamoto's method can't be fixed in a soft fork,
   Segwit accomplishes something similar to his original proposal: it makes it
@@ -865,7 +865,7 @@ covered by the txid. This provides several immediate benefits:
   of this 0.13.2 release.
 
 - **Script versioning:** Segwit makes it easy for future soft forks to allow
-  Litecoin users to individually opt-in to almost any change in the Litecoin
+  Bluecoin users to individually opt-in to almost any change in the Bluecoin
   Script language when those users receive new transactions.  Features
   currently being researched by Bitcoin and Bluecoin Core contributors that may
   use this capability include support for Schnorr signatures, which can improve
@@ -877,7 +877,7 @@ covered by the txid. This provides several immediate benefits:
 
 Activation for the segwit soft fork is being managed using
 BIP9. At the beginning of the first retarget period after
-segwit's start date of 1 January 2017 miners can update the Litecoin
+segwit's start date of 1 January 2017 miners can update the Bluecoin
 client to Bluecoin Core 0.13.2 to signal for segwit support. When a
 super-majority of 75% is reached segwit is activated by optional, and
 if 75% of blocks within a 8,064-block retarget period (about 3.5 days)

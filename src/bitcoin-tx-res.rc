@@ -16,8 +16,8 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Litecoin"
-            VALUE "FileDescription",    "bluecoin-tx (CLI Litecoin transaction editor utility)"
+            VALUE "CompanyName",        "Bluecoin"
+            VALUE "FileDescription",    "bluecoin-tx (CLI Bluecoin transaction editor utility)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "bluecoin-tx"
             VALUE "LegalCopyright",     COPYRIGHT_STR

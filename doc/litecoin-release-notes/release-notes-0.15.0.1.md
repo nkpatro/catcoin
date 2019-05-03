@@ -18,7 +18,7 @@ How to Upgrade
 
 If you are running an older version, shut it down. Wait until it has completely
 shut down (which might take a few minutes for older versions), then run the 
-installer (on Windows) or just copy over `/Applications/Litecoin-Qt` (on Mac)
+installer (on Windows) or just copy over `/Applications/Bluecoin-Qt` (on Mac)
 or `bluecoind`/`bluecoin-qt` (on Linux).
 
 The first time you run version 0.15.0, your chainstate database will be converted to a
@@ -137,9 +137,9 @@ Multi-wallet support
 
 Bluecoin Core now supports loading multiple, separate wallets (See [PR 8694](https://github.com/bitcoin/bitcoin/pull/8694), [PR 10849](https://github.com/bitcoin/bitcoin/pull/10849)). The wallets are completely separated, with individual balances, keys and received transactions.
 
-Multi-wallet is enabled by using more than one `-wallet` argument when starting Litecoin, either on the command line or in the Litecoin config file.
+Multi-wallet is enabled by using more than one `-wallet` argument when starting Bluecoin, either on the command line or in the Bluecoin config file.
 
-**In Litecoin-Qt, only the first wallet will be displayed and accessible for creating and signing transactions.** GUI selectable multiple wallets will be supported in a future version. However, even in 0.15 other loaded wallets will remain synchronized to the node's current tip in the background. This can be useful if running a pruned node, since loading a wallet where the most recent sync is beyond the pruned height results in having to download and revalidate the whole blockchain. Continuing to synchronize all wallets in the background avoids this problem.
+**In Bluecoin-Qt, only the first wallet will be displayed and accessible for creating and signing transactions.** GUI selectable multiple wallets will be supported in a future version. However, even in 0.15 other loaded wallets will remain synchronized to the node's current tip in the background. This can be useful if running a pruned node, since loading a wallet where the most recent sync is beyond the pruned height results in having to download and revalidate the whole blockchain. Continuing to synchronize all wallets in the background avoids this problem.
 
 Bluecoin Core 0.15.0 contains the following changes to the RPC interface and `bluecoin-cli` for multi-wallet:
 
