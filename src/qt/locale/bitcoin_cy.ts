@@ -1038,7 +1038,7 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
+        <source>Bluecoin Core</source>
         <translation>Craidd Litecoin</translation>
     </message>
     <message>

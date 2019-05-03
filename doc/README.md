@@ -1,15 +1,15 @@
-Litecoin Core
+Bluecoin Core
 =============
 
 Setup
 ---------------------
-Litecoin Core is the original Litecoin client and it builds the backbone of the network. It downloads and, by default, stores the entire history of Litecoin transactions (which is currently more than 7 GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
+Bluecoin Core is the original Litecoin client and it builds the backbone of the network. It downloads and, by default, stores the entire history of Litecoin transactions (which is currently more than 7 GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
-To download Litecoin Core, visit [bluecoin.org](https://bluecoin.org).
+To download Bluecoin Core, visit [bluecoin.org](https://bluecoin.org).
 
 Running
 ---------------------
-The following are some helpful notes on how to run Litecoin Core on your native platform.
+The following are some helpful notes on how to run Bluecoin Core on your native platform.
 
 ### Unix
 
@@ -24,7 +24,7 @@ Unpack the files into a directory, and then run bluecoin-qt.exe.
 
 ### macOS
 
-Drag Litecoin Core to your applications folder, and then run Litecoin Core.
+Drag Bluecoin Core to your applications folder, and then run Bluecoin Core.
 
 ### Need Help?
 
@@ -35,7 +35,7 @@ for help and more information.
 
 Building
 ---------------------
-The following are developer notes on how to build Litecoin Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
+The following are developer notes on how to build Bluecoin Core on your native platform. They are not complete guides, but include notes on the necessary libraries, compile flags, etc.
 
 - [Dependencies](dependencies.md)
 - [macOS Build Notes](build-osx.md)

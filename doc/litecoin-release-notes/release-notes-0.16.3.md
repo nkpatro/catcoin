@@ -1,4 +1,4 @@
-Litecoin Core version 0.16.3 is now available from:
+Bluecoin Core version 0.16.3 is now available from:
 
   <https://download.bluecoin.org/bluecoin-0.16.3/>
 
@@ -40,10 +40,10 @@ wallets that were created with older versions are not affected by this.
 Compatibility
 ==============
 
-Litecoin Core is extensively tested on multiple operating systems using
+Bluecoin Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
 
-Litecoin Core should also work on most other Unix-like systems but is not
+Bluecoin Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 Notable changes
@@ -53,7 +53,7 @@ Denial-of-Service vulnerability
 -------------------------------
 
 A denial-of-service vulnerability exploitable by miners has been discovered in
-Litecoin Core versions 0.14.0 up to 0.16.2. It is recommended to upgrade any of
+Bluecoin Core versions 0.14.0 up to 0.16.2. It is recommended to upgrade any of
 the vulnerable versions to 0.16.3 as soon as possible.
 
 0.16.3 change log

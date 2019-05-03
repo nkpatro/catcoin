@@ -3176,8 +3176,8 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Kann HTTP Server nicht starten. Siehe debug log für Details.</translation>
     </message>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Core</translation>
+        <source>Bluecoin Core</source>
+        <translation>Bluecoin Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

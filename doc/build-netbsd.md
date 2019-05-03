@@ -30,7 +30,7 @@ git clone https://github.com/bluecoiner/bluecoin
 
 See [dependencies.md](dependencies.md) for a complete overview.
 
-### Building Litecoin Core
+### Building Bluecoin Core
 
 **Important**: Use `gmake` (the non-GNU `make` will exit with an error).
 

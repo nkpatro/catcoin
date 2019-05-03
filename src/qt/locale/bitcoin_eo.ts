@@ -1842,7 +1842,7 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
+        <source>Bluecoin Core</source>
         <translation>Kerno de Litecoino</translation>
     </message>
     <message>

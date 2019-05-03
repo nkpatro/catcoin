@@ -656,7 +656,7 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
+        <source>Bluecoin Core</source>
         <translation>nucleo Litecoin</translation>
     </message>
     <message>

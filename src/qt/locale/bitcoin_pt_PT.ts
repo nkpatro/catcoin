@@ -3110,8 +3110,8 @@
         <translation>Não é possível iniciar o servidor HTTP. Verifique o debug.log para detalhes.</translation>
     </message>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Core</translation>
+        <source>Bluecoin Core</source>
+        <translation>Bluecoin Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

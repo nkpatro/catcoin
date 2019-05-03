@@ -27,7 +27,7 @@ Download the source code:
 git clone https://github.com/bluecoiner/bluecoin
 ```
 
-## Building Litecoin Core
+## Building Bluecoin Core
 
 **Important**: Use `gmake` (the non-GNU `make` will exit with an error).
 

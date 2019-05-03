@@ -1,4 +1,4 @@
-Litecoin Core version *0.15.1* is now available from:
+Bluecoin Core version *0.15.1* is now available from:
 
   <https://download.bluecoin.org/bluecoin-0.15.1/>
 
@@ -48,10 +48,10 @@ processing the entire blockchain.
 Compatibility
 ==============
 
-Litecoin Core is extensively tested on multiple operating systems using
+Bluecoin Core is extensively tested on multiple operating systems using
 the Linux kernel, macOS 10.8+, and Windows Vista and later. Windows XP is not supported.
 
-Litecoin Core should also work on most other Unix-like systems but is not
+Bluecoin Core should also work on most other Unix-like systems but is not
 frequently tested on them.
 
 
@@ -61,7 +61,7 @@ Notable changes
 Network fork safety enhancements
 --------------------------------
 
-A number of changes to the way Litecoin Core deals with peer connections and invalid blocks
+A number of changes to the way Bluecoin Core deals with peer connections and invalid blocks
 have been made, as a safety precaution against blockchain forks and misbehaving peers.
 
 - Unrequested blocks with less work than the minimum-chain-work are now no longer processed even

@@ -1858,8 +1858,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Core</translation>
+        <source>Bluecoin Core</source>
+        <translation>Bluecoin Core</translation>
     </message>
     <message>
         <source>Corrupted block database detected</source>

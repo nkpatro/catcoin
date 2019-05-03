@@ -111,7 +111,7 @@ NOTE: Offline builds must use the --url flag to ensure Gitian fetches only from 
 
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-### Build and sign Litecoin Core for Linux, Windows, and macOS:
+### Build and sign Bluecoin Core for Linux, Windows, and macOS:
 
     pushd ./gitian-builder
     ./bin/gbuild --num-make 2 --memory 3000 --commit bluecoin=v${VERSION} ../bluecoin/contrib/gitian-descriptors/gitian-linux.yml

@@ -3129,8 +3129,8 @@
         <translation>Nepodarilo sa spustiť HTTP server. Pre viac detailov zobrazte debug log.</translation>
     </message>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Core</translation>
+        <source>Bluecoin Core</source>
+        <translation>Bluecoin Core</translation>
     </message>
     <message>
         <source>The %s developers</source>

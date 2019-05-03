@@ -792,7 +792,7 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
+        <source>Bluecoin Core</source>
         <translation>Berthama Litecoin</translation>
     </message>
     <message>

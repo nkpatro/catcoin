@@ -38,17 +38,17 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see the section *Disable-Wallet mode* below).
 
-Build Litecoin Core
+Build Bluecoin Core
 ------------------------
 
-1. Clone the Litecoin Core source code and cd into `bluecoin`
+1. Clone the Bluecoin Core source code and cd into `bluecoin`
 
         git clone https://github.com/bluecoiner/bluecoin
         cd bluecoin
 
-2.  Build Litecoin Core:
+2.  Build Bluecoin Core:
 
-    Configure and build the headless Litecoin Core binaries as well as the GUI (if Qt is found).
+    Configure and build the headless Bluecoin Core binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 
@@ -77,7 +77,7 @@ Build Litecoin Core
 Running
 -------
 
-Litecoin Core is now available at `./src/bluecoind`
+Bluecoin Core is now available at `./src/bluecoind`
 
 Before running, it's recommended that you create an RPC configuration file.
 

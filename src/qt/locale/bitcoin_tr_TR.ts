@@ -1387,7 +1387,7 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
+        <source>Bluecoin Core</source>
         <translation>Litecoin Çekirdeği</translation>
     </message>
     <message>
