@@ -102,7 +102,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000005176879401806");
+        consensus.nMinimumChainWork = uint256S("0000000000000000000000000000000000000000000000000000000000200020");
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x5421e6a694622dd7044d5e8d8f7e284594acf8fd3e145999c9c34b1df07dddfc"); //1503191
@@ -172,7 +172,7 @@ public:
     CTestNetParams() {
         strNetworkID = "test";
         consensus.nSubsidyHalvingInterval = INT_MAX;
-        consensus.BIP16Height = 0; // always enforce P2SH BIP16 on testnet
+        //consensus.BIP16Height = 0; // always enforce P2SH BIP16 on testnet
         consensus.BIP34Height = 30;
         consensus.BIP34Hash = uint256S("0x00c6d265047680c11d5e0b2ccc2eccd9a744fde31b5f887ffb8f6d92216465c7");
         consensus.BIP65Height = 30; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
