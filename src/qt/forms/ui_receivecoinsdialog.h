@@ -273,7 +273,7 @@ public:
 #endif // QT_NO_TOOLTIP
         label->setText(QApplication::translate("ReceiveCoinsDialog", "&Amount:", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        label_3->setToolTip(QApplication::translate("ReceiveCoinsDialog", "An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Litecoin network.", Q_NULLPTR));
+        label_3->setToolTip(QApplication::translate("ReceiveCoinsDialog", "An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bluecoin network.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         label_3->setText(QApplication::translate("ReceiveCoinsDialog", "&Message:", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
@@ -285,7 +285,7 @@ public:
 #endif // QT_NO_TOOLTIP
         label_2->setText(QApplication::translate("ReceiveCoinsDialog", "&Label:", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        reqMessage->setToolTip(QApplication::translate("ReceiveCoinsDialog", "An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Litecoin network.", Q_NULLPTR));
+        reqMessage->setToolTip(QApplication::translate("ReceiveCoinsDialog", "An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bluecoin network.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         receiveButton->setText(QApplication::translate("ReceiveCoinsDialog", "&Request payment", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP

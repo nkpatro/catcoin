@@ -456,7 +456,7 @@ public:
 #endif // QT_NO_TOOLTIP
         payToLabel->setText(QApplication::translate("SendCoinsEntry", "Pay &To:", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        payTo->setToolTip(QApplication::translate("SendCoinsEntry", "The Litecoin address to send the payment to", Q_NULLPTR));
+        payTo->setToolTip(QApplication::translate("SendCoinsEntry", "The Bluecoin address to send the payment to", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         addressBookButton->setToolTip(QApplication::translate("SendCoinsEntry", "Choose previously used address", Q_NULLPTR));
@@ -488,7 +488,7 @@ public:
         useAvailableBalanceButton->setText(QApplication::translate("SendCoinsEntry", "Use available balance", Q_NULLPTR));
         messageLabel->setText(QApplication::translate("SendCoinsEntry", "Message:", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        messageTextLabel->setToolTip(QApplication::translate("SendCoinsEntry", "A message that was attached to the litecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Litecoin network.", Q_NULLPTR));
+        messageTextLabel->setToolTip(QApplication::translate("SendCoinsEntry", "A message that was attached to the Bluecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bluecoin network.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         SendCoins_UnauthenticatedPaymentRequest->setToolTip(QApplication::translate("SendCoinsEntry", "This is an unauthenticated payment request.", Q_NULLPTR));

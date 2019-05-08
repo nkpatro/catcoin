@@ -642,7 +642,7 @@ public:
         spendZeroConfChange->setText(QApplication::translate("OptionsDialog", "&Spend unconfirmed change", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tabWallet), QApplication::translate("OptionsDialog", "W&allet", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        mapPortUpnp->setToolTip(QApplication::translate("OptionsDialog", "Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.", Q_NULLPTR));
+        mapPortUpnp->setToolTip(QApplication::translate("OptionsDialog", "Automatically open the Bluecoin client port on the router. This only works when your router supports UPnP and it is enabled.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         mapPortUpnp->setText(QApplication::translate("OptionsDialog", "Map port using &UPnP", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
@@ -650,7 +650,7 @@ public:
 #endif // QT_NO_TOOLTIP
         allowIncoming->setText(QApplication::translate("OptionsDialog", "Allow incomin&g connections", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        connectSocks->setToolTip(QApplication::translate("OptionsDialog", "Connect to the Litecoin network through a SOCKS5 proxy.", Q_NULLPTR));
+        connectSocks->setToolTip(QApplication::translate("OptionsDialog", "Connect to the Bluecoin network through a SOCKS5 proxy.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         connectSocks->setText(QApplication::translate("OptionsDialog", "&Connect through SOCKS5 proxy (default proxy):", Q_NULLPTR));
         proxyIpLabel->setText(QApplication::translate("OptionsDialog", "Proxy &IP:", Q_NULLPTR));
@@ -678,7 +678,7 @@ public:
         proxyReachTor->setText(QString());
         proxyReachTorLabel->setText(QApplication::translate("OptionsDialog", "Tor", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        connectSocksTor->setToolTip(QApplication::translate("OptionsDialog", "Connect to the Litecoin network through a separate SOCKS5 proxy for Tor hidden services.", Q_NULLPTR));
+        connectSocksTor->setToolTip(QApplication::translate("OptionsDialog", "Connect to the Bluecoin network through a separate SOCKS5 proxy for Tor hidden services.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         connectSocksTor->setText(QApplication::translate("OptionsDialog", "Use separate SOCKS&5 proxy to reach peers via Tor hidden services:", Q_NULLPTR));
         proxyIpTorLabel->setText(QApplication::translate("OptionsDialog", "Proxy &IP:", Q_NULLPTR));

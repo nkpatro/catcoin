@@ -287,7 +287,7 @@ public:
         SignVerifyMessageDialog->setWindowTitle(QApplication::translate("SignVerifyMessageDialog", "Signatures - Sign / Verify a Message", Q_NULLPTR));
         infoLabel_SM->setText(QApplication::translate("SignVerifyMessageDialog", "You can sign messages/agreements with your addresses to prove you can receive bluecoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        addressIn_SM->setToolTip(QApplication::translate("SignVerifyMessageDialog", "The Litecoin address to sign the message with", Q_NULLPTR));
+        addressIn_SM->setToolTip(QApplication::translate("SignVerifyMessageDialog", "The Bluecoin address to sign the message with", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         addressBookButton_SM->setToolTip(QApplication::translate("SignVerifyMessageDialog", "Choose previously used address", Q_NULLPTR));
@@ -312,7 +312,7 @@ public:
 #endif // QT_NO_TOOLTIP
         copySignatureButton_SM->setText(QString());
 #ifndef QT_NO_TOOLTIP
-        signMessageButton_SM->setToolTip(QApplication::translate("SignVerifyMessageDialog", "Sign the message to prove you own this Litecoin address", Q_NULLPTR));
+        signMessageButton_SM->setToolTip(QApplication::translate("SignVerifyMessageDialog", "Sign the message to prove you own this Bluecoin address", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         signMessageButton_SM->setText(QApplication::translate("SignVerifyMessageDialog", "Sign &Message", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
@@ -323,7 +323,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tabSignMessage), QApplication::translate("SignVerifyMessageDialog", "&Sign Message", Q_NULLPTR));
         infoLabel_VM->setText(QApplication::translate("SignVerifyMessageDialog", "Enter the receiver's address, message (ensure you copy line breaks, spaces, tabs, etc. exactly) and signature below to verify the message. Be careful not to read more into the signature than what is in the signed message itself, to avoid being tricked by a man-in-the-middle attack. Note that this only proves the signing party receives with the address, it cannot prove sendership of any transaction!", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        addressIn_VM->setToolTip(QApplication::translate("SignVerifyMessageDialog", "The Litecoin address the message was signed with", Q_NULLPTR));
+        addressIn_VM->setToolTip(QApplication::translate("SignVerifyMessageDialog", "The Bluecoin address the message was signed with", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
 #ifndef QT_NO_TOOLTIP
         addressBookButton_VM->setToolTip(QApplication::translate("SignVerifyMessageDialog", "Choose previously used address", Q_NULLPTR));
@@ -333,7 +333,7 @@ public:
         addressBookButton_VM->setShortcut(QApplication::translate("SignVerifyMessageDialog", "Alt+A", Q_NULLPTR));
 #endif // QT_NO_SHORTCUT
 #ifndef QT_NO_TOOLTIP
-        verifyMessageButton_VM->setToolTip(QApplication::translate("SignVerifyMessageDialog", "Verify the message to ensure it was signed with the specified Litecoin address", Q_NULLPTR));
+        verifyMessageButton_VM->setToolTip(QApplication::translate("SignVerifyMessageDialog", "Verify the message to ensure it was signed with the specified Bluecoin address", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         verifyMessageButton_VM->setText(QApplication::translate("SignVerifyMessageDialog", "Verify &Message", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP

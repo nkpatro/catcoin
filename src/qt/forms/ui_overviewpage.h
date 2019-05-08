@@ -347,7 +347,7 @@ public:
         OverviewPage->setWindowTitle(QApplication::translate("OverviewPage", "Form", Q_NULLPTR));
         label_5->setText(QApplication::translate("OverviewPage", "Balances", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        labelWalletStatus->setToolTip(QApplication::translate("OverviewPage", "The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.", Q_NULLPTR));
+        labelWalletStatus->setToolTip(QApplication::translate("OverviewPage", "The displayed information may be out of date. Your wallet automatically synchronizes with the Bluecoin network after a connection is established, but this process has not completed yet.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         labelWalletStatus->setText(QString());
 #ifndef QT_NO_TOOLTIP
@@ -382,7 +382,7 @@ public:
         labelSpendable->setText(QApplication::translate("OverviewPage", "Spendable:", Q_NULLPTR));
         label_4->setText(QApplication::translate("OverviewPage", "Recent transactions", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        labelTransactionsStatus->setToolTip(QApplication::translate("OverviewPage", "The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.", Q_NULLPTR));
+        labelTransactionsStatus->setToolTip(QApplication::translate("OverviewPage", "The displayed information may be out of date. Your wallet automatically synchronizes with the Bluecoin network after a connection is established, but this process has not completed yet.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         labelTransactionsStatus->setText(QString());
     } // retranslateUi

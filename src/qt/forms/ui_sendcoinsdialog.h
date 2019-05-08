@@ -829,11 +829,11 @@ public:
 #endif // QT_NO_TOOLTIP
         labelCustomPerKilobyte->setText(QApplication::translate("SendCoinsDialog", "per kilobyte", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
-        checkBoxMinimumFee->setToolTip(QApplication::translate("SendCoinsDialog", "Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for litecoin transactions than the network can process.", Q_NULLPTR));
+        checkBoxMinimumFee->setToolTip(QApplication::translate("SendCoinsDialog", "Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for Bluecoin transactions than the network can process.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         checkBoxMinimumFee->setText(QString());
 #ifndef QT_NO_TOOLTIP
-        labelMinFeeWarning->setToolTip(QApplication::translate("SendCoinsDialog", "Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for litecoin transactions than the network can process.", Q_NULLPTR));
+        labelMinFeeWarning->setToolTip(QApplication::translate("SendCoinsDialog", "Paying only the minimum fee is just fine as long as there is less transaction volume than space in the blocks. But be aware that this can end up in a never confirming transaction once there is more demand for Bluecoin transactions than the network can process.", Q_NULLPTR));
 #endif // QT_NO_TOOLTIP
         labelMinFeeWarning->setText(QApplication::translate("SendCoinsDialog", "(read the tooltip)", Q_NULLPTR));
         radioSmartFee->setText(QApplication::translate("SendCoinsDialog", "Recommended:", Q_NULLPTR));

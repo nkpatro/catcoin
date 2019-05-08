@@ -264,7 +264,7 @@ public:
     {
         ModalOverlay->setWindowTitle(QApplication::translate("ModalOverlay", "Form", Q_NULLPTR));
         warningIcon->setText(QString());
-        infoText->setText(QApplication::translate("ModalOverlay", "Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the litecoin network, as detailed below.", Q_NULLPTR));
+        infoText->setText(QApplication::translate("ModalOverlay", "Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bluecoin network, as detailed below.", Q_NULLPTR));
         infoTextStrong->setText(QApplication::translate("ModalOverlay", "Attempting to spend bluecoins that are affected by not-yet-displayed transactions will not be accepted by the network.", Q_NULLPTR));
         labelNumberOfBlocksLeft->setText(QApplication::translate("ModalOverlay", "Number of blocks left", Q_NULLPTR));
         numberOfBlocksLeft->setText(QApplication::translate("ModalOverlay", "Unknown...", Q_NULLPTR));
