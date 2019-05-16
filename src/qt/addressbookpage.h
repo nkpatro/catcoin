@@ -1,22 +1,22 @@
-// Copyright (c) 2011-2018 The Bitcoin Core developers
-// Distributed under the MIT software license, see the accompanying
+// Copyright (c) 2011-2013 The Bitcoin developers
+// Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_ADDRESSBOOKPAGE_H
-#define BITCOIN_QT_ADDRESSBOOKPAGE_H
+#ifndef ADDRESSBOOKPAGE_H
+#define ADDRESSBOOKPAGE_H
 
 #include <QDialog>
-
-class AddressBookSortFilterProxyModel;
-class AddressTableModel;
-class PlatformStyle;
 
 namespace Ui {
     class AddressBookPage;
 }
+class AddressTableModel;
+class OptionsModel;
 
 QT_BEGIN_NAMESPACE
+class QTableView;
 class QItemSelection;
+class QSortFilterProxyModel;
 class QMenu;
 class QModelIndex;
 QT_END_NAMESPACE
@@ -34,37 +34,47 @@ public:
     };
 
     enum Mode {
-        ForSelection, /**< Open address book to pick address */
+        ForSending, /**< Open address book to pick address for sending */
         ForEditing  /**< Open address book for editing */
     };
 
-    explicit AddressBookPage(const PlatformStyle *platformStyle, Mode mode, Tabs tab, QWidget *parent = 0);
+    explicit AddressBookPage(Mode mode, Tabs tab, QWidget *parent = 0);
     ~AddressBookPage();
 
     void setModel(AddressTableModel *model);
+    void setOptionsModel(OptionsModel *optionsModel);
     const QString &getReturnValue() const { return returnValue; }
 
-public Q_SLOTS:
+public slots:
     void done(int retval);
 
 private:
     Ui::AddressBookPage *ui;
     AddressTableModel *model;
+    OptionsModel *optionsModel;
     Mode mode;
     Tabs tab;
     QString returnValue;
-    AddressBookSortFilterProxyModel *proxyModel;
+    QSortFilterProxyModel *proxyModel;
     QMenu *contextMenu;
     QAction *deleteAction; // to be able to explicitly disable it
     QString newAddressToSelect;
 
-private Q_SLOTS:
+private slots:
     /** Delete currently selected address entry */
     void on_deleteAddress_clicked();
     /** Create a new address for receiving coins and / or add a new address book entry */
     void on_newAddress_clicked();
     /** Copy address of currently selected address entry to clipboard */
     void on_copyAddress_clicked();
+    /** Open the sign message tab in the Sign/Verify Message dialog with currently selected address */
+    void on_signMessage_clicked();
+    /** Open the verify message tab in the Sign/Verify Message dialog with currently selected address */
+    void on_verifyMessage_clicked();
+    /** Open send coins dialog for currently selected address (no button) */
+    void onSendCoinsAction();
+    /** Generate a QR Code from the currently selected address */
+    void on_showQRCode_clicked();
     /** Copy label of currently selected address entry to clipboard (no button) */
     void onCopyLabelAction();
     /** Edit currently selected address entry (no button) */
@@ -79,8 +89,10 @@ private Q_SLOTS:
     /** New entry/entries were added to address table */
     void selectNewAddress(const QModelIndex &parent, int begin, int /*end*/);
 
-Q_SIGNALS:
+signals:
+    void signMessage(QString addr);
+    void verifyMessage(QString addr);
     void sendCoins(QString addr);
 };
 
-#endif // BITCOIN_QT_ADDRESSBOOKPAGE_H
+#endif // ADDRESSBOOKPAGE_H
