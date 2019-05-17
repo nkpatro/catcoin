@@ -94,7 +94,7 @@ enum WalletFeature
 
     FEATURE_PRE_SPLIT_KEYPOOL = 169900, // Upgraded to HD SPLIT and can have a pre-split keypool
 
-    FEATURE_LATEST = FEATURE_COMPRPUBKEY
+    FEATURE_LATEST = FEATURE_PRE_SPLIT_KEYPOOL
 };
 
 //! Default for -addresstype
