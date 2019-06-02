@@ -26,6 +26,10 @@ Trusted Nodes
 
 95.216.250.34	
 
+Block Explorer
+-------------
+
+http://blockex.ccx.counos.org
 
 
 License
