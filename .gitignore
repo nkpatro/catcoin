@@ -115,3 +115,12 @@ test/cache/*
 
 libbitcoinconsensus.pc
 contrib/devtools/split-debug.sh
+altcoin_generator.sh
+*.1
+src/counosxd
+src/counosx-tx
+src/counosx-cli
+src/qt/test/test_counosx-qt
+src/test/test_counosx
+src/test/test_counosx_fuzzy
+src/qt/counosx-qt
