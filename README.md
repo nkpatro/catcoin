@@ -15,7 +15,15 @@ out collectively by the network. CounosX Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the CounosX Core software, see [https://counosx.org](https://counosx.org).
+the CounosX Core software, see [https://counosx.io](https://counosx.io).
+
+Trusted Nodes
+-------------
+
+95.216.237.187
+95.216.122.130
+95.216.250.34	
+
 
 License
 -------
