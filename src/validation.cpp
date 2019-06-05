@@ -1168,7 +1168,7 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 		const CBlockIndex* pindex = chainActive.Tip(); 
 	    int64_t timeDiff =pindex->GetBlockTime() - pindex->pprev->GetBlockTime();
 		if( timeDiff >= 2*60 )
-			return 0.35 * COIN;
+			return 0.035 * COIN;
 		else
 		   return 0;
 	}
