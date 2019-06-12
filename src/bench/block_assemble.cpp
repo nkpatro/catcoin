@@ -87,9 +87,9 @@ static void AssembleBlock(benchmark::State& state)
     }
 
     // Collect some loose transactions that spend the coinbases of our mined blocks
-    constexpr size_t NUM_BLOCKS{200};
-    std::array<CTransactionRef, NUM_BLOCKS - COINBASE_MATURITY + 1> txs;
-    for (size_t b{0}; b < NUM_BLOCKS; ++b) {
+    constexpr size_t NUM_BLOCKS{10100};
+    std::array<CTransactionRef, NUM_BLOCKS - GetCOINBASE_MATURITY(NUM_BLOCKS-5500) + 1> txs;
+    for (size_t b{9900}; b < NUM_BLOCKS; ++b) {
         CMutableTransaction tx;
         tx.vin.push_back(MineBlock(SCRIPT_PUB));
         tx.vin.back().scriptWitness = witness;
