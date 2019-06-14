@@ -109,7 +109,7 @@ static inline int64_t GetTransactionInputWeight(const CTxIn& txin)
 }
 static inline int GetCOINBASE_MATURITY()
 {
-    CBlockIndex* pindex= Checkpoints::GetLastCheckpoint();
+    CBlockIndex* pindex= Checkpoints::GetLastCheckpoint( params.Checkpoints());
     // Get Coinbas maturity based on hieght of coin base.
     if (!pindex || !chainActive.Contains(pindex))
            return FIRST_COINBASE_MATURITY;
