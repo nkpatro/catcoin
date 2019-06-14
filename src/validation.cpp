@@ -187,6 +187,7 @@ public:
     void PruneBlockIndexCandidates();
 
     void UnloadBlockIndex();
+    int GetCOINBASE_MATURITY() const;
 
 private:
     bool ActivateBestChainStep(CValidationState& state, const CChainParams& chainparams, CBlockIndex* pindexMostWork, const std::shared_ptr<const CBlock>& pblock, bool& fInvalidFound, ConnectTrace& connectTrace);
@@ -2550,7 +2551,16 @@ void CChainState::PruneBlockIndexCandidates() {
     // Either the current tip or a successor of it we're working towards is left in setBlockIndexCandidates.
     assert(!setBlockIndexCandidates.empty());
 }
+int CChainState::GetCOINBASE_MATURITY() const 
+{
+    const CChainParams& chainparams = Params();
+    CBlockIndex* pindex= Checkpoints::GetLastCheckpoint( chainparams.Checkpoints());
+    // Get Coinbas maturity based on hieght of coin base.
+    if (!pindex || !chainActive.Contains(pindex))
+           return FIRST_COINBASE_MATURITY;
 
+    return COINBASE_MATURITY;
+}
 /**
  * Try to make some progress towards making pindexMostWork the active block.
  * pblock is either nullptr or a pointer to a CBlock corresponding to pindexMostWork.
