@@ -11,7 +11,7 @@
 #include <consensus/consensus.h>
 #include <primitives/transaction.h>
 #include <primitives/block.h>
-#include <checkpoints.h>
+
 
 /** "reject" message codes */
 static const unsigned char REJECT_MALFORMED = 0x01;
@@ -88,6 +88,7 @@ public:
     unsigned int GetRejectCode() const { return chRejectCode; }
     std::string GetRejectReason() const { return strRejectReason; }
     std::string GetDebugMessage() const { return strDebugMessage; }
+    
 };
 
 // These implement the weight = (stripped_size * 4) + witness_size formula,
@@ -107,13 +108,5 @@ static inline int64_t GetTransactionInputWeight(const CTxIn& txin)
     // scriptWitness size is added here because witnesses and txins are split up in segwit serialization.
     return ::GetSerializeSize(txin, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS) * (WITNESS_SCALE_FACTOR - 1) + ::GetSerializeSize(txin, SER_NETWORK, PROTOCOL_VERSION) + ::GetSerializeSize(txin.scriptWitness.stack, SER_NETWORK, PROTOCOL_VERSION);
 }
-static inline int GetCOINBASE_MATURITY()
-{
-    CBlockIndex* pindex= Checkpoints::GetLastCheckpoint( params.Checkpoints());
-    // Get Coinbas maturity based on hieght of coin base.
-    if (!pindex || !chainActive.Contains(pindex))
-           return FIRST_COINBASE_MATURITY;
 
-    return COINBASE_MATURITY;
-}
 #endif // BITCOIN_CONSENSUS_VALIDATION_H

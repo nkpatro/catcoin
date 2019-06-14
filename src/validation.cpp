@@ -274,6 +274,7 @@ namespace {
     std::set<int> setDirtyFileInfo;
 } // anon namespace
 
+  
 CBlockIndex* FindForkInGlobalIndex(const CChain& chain, const CBlockLocator& locator)
 {
     AssertLockHeld(cs_main);
