@@ -15,6 +15,7 @@ class CCoinsViewCache;
 class CTransaction;
 class CValidationState;
 
+
 /** Transaction validation functions */
 
 /** Context-independent validity checks */
