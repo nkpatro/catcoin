@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <wallet/wallet.h>
-#include <chainparams.h>
+
 #include <checkpoints.h>
 #include <chain.h>
 #include <wallet/coincontrol.h>
@@ -4404,7 +4404,6 @@ int CMerkleTx::GetDepthInMainChain() const
     return ((nIndex == -1) ? (-1) : 1) * (chainActive.Height() - pindex->nHeight + 1);
 }
 
-}
  
 int CMerkleTx::GetBlocksToMaturity() const
 {
