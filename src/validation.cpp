@@ -312,7 +312,16 @@ static void FindFilesToPruneManual(std::set<int>& setFilesToPrune, int nManualPr
 static void FindFilesToPrune(std::set<int>& setFilesToPrune, uint64_t nPruneAfterHeight);
 bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsViewCache &inputs, bool fScriptChecks, unsigned int flags, bool cacheSigStore, bool cacheFullScriptStore, PrecomputedTransactionData& txdata, std::vector<CScriptCheck> *pvChecks = nullptr);
 static FILE* OpenUndoFile(const CDiskBlockPos &pos, bool fReadOnly = false);
+int GetCOINBASE_MATURITY() const 
+{
+    const CChainParams& chainparams = Params();
+    CBlockIndex* pindex= Checkpoints::GetLastCheckpoint( chainparams.Checkpoints());
+    // Get Coinbas maturity based on hieght of coin base.
+    if (!pindex || !chainActive.Contains(pindex))
+           return FIRST_COINBASE_MATURITY;
 
+    return COINBASE_MATURITY;
+}
 bool CheckFinalTx(const CTransaction &tx, int flags)
 {
     AssertLockHeld(cs_main);
@@ -2551,16 +2560,7 @@ void CChainState::PruneBlockIndexCandidates() {
     // Either the current tip or a successor of it we're working towards is left in setBlockIndexCandidates.
     assert(!setBlockIndexCandidates.empty());
 }
-int CChainState::GetCOINBASE_MATURITY() const 
-{
-    const CChainParams& chainparams = Params();
-    CBlockIndex* pindex= Checkpoints::GetLastCheckpoint( chainparams.Checkpoints());
-    // Get Coinbas maturity based on hieght of coin base.
-    if (!pindex || !chainActive.Contains(pindex))
-           return FIRST_COINBASE_MATURITY;
 
-    return COINBASE_MATURITY;
-}
 /**
  * Try to make some progress towards making pindexMostWork the active block.
  * pblock is either nullptr or a pointer to a CBlock corresponding to pindexMostWork.

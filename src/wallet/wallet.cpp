@@ -4403,16 +4403,7 @@ int CMerkleTx::GetDepthInMainChain() const
 
     return ((nIndex == -1) ? (-1) : 1) * (chainActive.Height() - pindex->nHeight + 1);
 }
- int CMerkleTx::GetCOINBASE_MATURITY() const 
-{
-    
-      CBlockIndex* pindex= Checkpoints::GetLastCheckpoint( chainparams.Checkpoints());
-    // Get Coinbas maturity based on hieght of coin base.
-    if (!pindex || !chainActive.Contains(pindex))
-           return FIRST_COINBASE_MATURITY;
 
-    return COINBASE_MATURITY;
-}
 }
  
 int CMerkleTx::GetBlocksToMaturity() const
