@@ -312,7 +312,7 @@ static void FindFilesToPruneManual(std::set<int>& setFilesToPrune, int nManualPr
 static void FindFilesToPrune(std::set<int>& setFilesToPrune, uint64_t nPruneAfterHeight);
 bool CheckInputs(const CTransaction& tx, CValidationState &state, const CCoinsViewCache &inputs, bool fScriptChecks, unsigned int flags, bool cacheSigStore, bool cacheFullScriptStore, PrecomputedTransactionData& txdata, std::vector<CScriptCheck> *pvChecks = nullptr);
 static FILE* OpenUndoFile(const CDiskBlockPos &pos, bool fReadOnly = false);
-int GetCOINBASE_MATURITY() const 
+int GetCOINBASE_MATURITY()  
 {
     const CChainParams& chainparams = Params();
     CBlockIndex* pindex= Checkpoints::GetLastCheckpoint( chainparams.Checkpoints());
