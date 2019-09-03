@@ -105,7 +105,9 @@ class MiningTest(BitcoinTestFramework):
         bad_tx.vin[0].prevout.hash = 255
         bad_tx.rehash()
         bad_block.vtx.append(bad_tx)
-        assert_template(node, bad_block, 'bad-txns-inputs-missingorspent')
+        # Kevacoin does not have proposal mode. The bad-txns-inputs-missingorspent
+        # error will only be thrown in proposal mode.
+        # assert_template(node, bad_block, 'bad-txns-inputs-missingorspent')
 
         self.log.info("getblocktemplate: Test nonfinal transaction")
         bad_block = copy.deepcopy(block)
