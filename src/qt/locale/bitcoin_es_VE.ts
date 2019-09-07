@@ -114,8 +114,8 @@
         <translation>Reindexando bloques en el disco...</translation>
     </message>
     <message>
-        <source>Send coins to a Litecoin address</source>
-        <translation>Enviar monedas a una dirección Litecoin</translation>
+        <source>Send coins to a Kipcoin address</source>
+        <translation>Enviar monedas a una dirección Kipcoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -130,8 +130,8 @@
         <translation>Abre la consola de depuración y diágnostico</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>Kipcoin</source>
+        <translation>Kipcoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -158,12 +158,12 @@
         <translation>Encriptar las llaves privadas que pertenecen a tu billetera</translation>
     </message>
     <message>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
-        <translation>Firma mensajes con tus direcciones Litecoin para probar que eres dueño de ellas</translation>
+        <source>Sign messages with your Kipcoin addresses to prove you own them</source>
+        <translation>Firma mensajes con tus direcciones Kipcoin para probar que eres dueño de ellas</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
-        <translation>Verificar mensajes para asegurar que estaban firmados con direcciones Litecoin especificas</translation>
+        <source>Verify messages to ensure they were signed with specified Kipcoin addresses</source>
+        <translation>Verificar mensajes para asegurar que estaban firmados con direcciones Kipcoin especificas</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -608,8 +608,8 @@
         <translation>Correr en segundo plano como daemon y aceptar comandos</translation>
     </message>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Core</translation>
+        <source>Kipcoin Core</source>
+        <translation>Kipcoin Core</translation>
     </message>
     <message>
         <source>Bind to given address and always listen on it. Use [host]:port notation for IPv6</source>
