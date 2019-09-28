@@ -46,7 +46,7 @@ class KevaTest(BitcoinTestFramework):
 
         key = 'This is the test key'
         value1 = 'This is the test value 1'
-        value2 = 'This is the test value 1'
+        value2 = 'This is the test value 2'
         self.nodes[0].keva_put(namespaceId, key, value1)
         self.nodes[0].generate(1)
         response = self.nodes[0].keva_get(namespaceId, key)
