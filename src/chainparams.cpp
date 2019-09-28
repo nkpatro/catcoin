@@ -44,7 +44,7 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
     // RELEASE TODO: change timestamp
-    const char* pszTimestamp = "The Economist 05/Dec/2018 The US-China trade war is on hold";
+    const char* pszTimestamp = "The Economist 27/Sept/2019 Repo-market ructions were a reminder of the financial crisis";
     const CScript genesisOutputScript = CScript() << ParseHex("a914676a24ba4bfadd458e5245b26fa57f9a62ca185087");
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -207,16 +207,15 @@ public:
         nDefaultPort = 19335;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1554183064, 2513, 0x1f0ffff0, 1, 500 * COIN);
+        genesis = CreateGenesisBlock(1569646269, 299, 0x1f0ffff0, 1, 500 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("bf7757238413571d9686ffc4899469affeb7675d4fb23693b88646d482fe12f6"));
-        assert(genesis.hashMerkleRoot == uint256S("3cf6c3b6da3f4058853ee70369ee43d473aca91ae8fc8f44a645beb21c392d80"));
+        assert(consensus.hashGenesisBlock == uint256S("27f57faa57e2091ab9bcef87fa3f70cb5efe0c825f27419c63d381b4ca40b22b"));
+        assert(genesis.hashMerkleRoot == uint256S("d85a90623fbff6a5ea4b80df1dbc81b32de7f1011f484e186cfb7cf2d4292c95"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
         vSeeds.emplace_back("testnet-seed.kevacoin.org");
-        vSeeds.emplace_back("testnet-seed.honourchat.com");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,55); // P
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
