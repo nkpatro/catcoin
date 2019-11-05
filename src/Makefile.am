@@ -359,6 +359,7 @@ libbitcoin_common_a_SOURCES = \
 # cnutils: shared between bitcoind, and bitcoin-qt and non-server tools
 libbitcoin_cnutils_a_CPPFLAGS = $(AM_CPPFLAGS) -I$(srcdir)/cn_utils -I$(srcdir)/cn_utils/contrib -I$(srcdir)/cn_utils/external/easylogging++ -I$(srcdir)/cn_utils/contrib/epee/include
 libbitcoin_cnutils_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitcoin_cnutils_a_CFLAGS = $(PIC_FLAGS)
 libbitcoin_cnutils_a_SOURCES = \
   cn_utils/cnutils.cpp \
   cn_utils/cryptonote_basic/cryptonote_basic_impl.cpp \
