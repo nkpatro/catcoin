@@ -20,8 +20,7 @@
 #include "txmempool.h"
 #include "util.h"
 #include "validation.h"
-#include "wallet/coincontrol.h"
-#include "wallet/wallet.h"
+#include "utilstrencodings.h"
 
 #include <univalue.h>
 #include <boost/xpressive/xpressive_dynamic.hpp>
