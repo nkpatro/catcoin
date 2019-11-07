@@ -114,7 +114,7 @@ UniValue keva_list_namespaces(const JSONRPCRequest& request)
 
   if (request.fHelp)
     throw std::runtime_error (
-        "keva_list_namespace\n"
+        "keva_list_namespaces\n"
         "\nList all namespaces.\n"
         + HelpRequiringPassphrase(pwallet) +
         "\nArguments:\n"
@@ -124,7 +124,7 @@ UniValue keva_list_namespaces(const JSONRPCRequest& request)
         "  ...\n"
         "]\n"
         "\nExamples:\n"
-        + HelpExampleCli("keva_list_namespace", "")
+        + HelpExampleCli("keva_list_namespaces", "")
       );
 
   RPCTypeCheck (request.params, {UniValue::VSTR});
