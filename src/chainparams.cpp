@@ -118,10 +118,10 @@ public:
 
         const uint32_t genesisBlockReward = 0.00001 * COIN; // A small reward for the core developers :-)
         //TODO: target: 0x1e0fffff, update timestampe and nonce.
-        genesis = CreateGenesisBlock(1553145843, 6146, 0x1f0ffff0, 1, genesisBlockReward);
+        genesis = CreateGenesisBlock(1553145843, 1621, 0x1f0ffff0, 1, genesisBlockReward);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0xbad6e50683aa6032b9ea9bbbc67a6b4621612221176b963fc9ce9ae10a77effd"));
-        assert(genesis.hashMerkleRoot == uint256S("0xb21d4680875c0e472b7dbf3dbab2aaeb2dbbb5fa8b154f978b5ea0706d1fd5b9"));
+        assert(consensus.hashGenesisBlock == uint256S("0x2f6d82a919bfc055f9e66e82bd613050cb835f969563f217737c9ef631668f6c"));
+        assert(genesis.hashMerkleRoot == uint256S("0x285139132ff0b33d399aae61053d19b34fe8e483053142d530d62d90881183c9"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.emplace_back("dnsseed.kevacoin.org");
