@@ -184,6 +184,8 @@ public:
         legacyMode = legacy;
     }
 
+    bool isCNConsistent() const;
+
     bool isLegacy()
     {
         return legacyMode;

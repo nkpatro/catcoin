@@ -22,9 +22,21 @@ uint256 CBlockHeader::GetOriginalBlockHash() const
     return hashWriter.GetHash();
 }
 
+// prev_id of CN header is used to store the kevacoin block hash.
+// The value of prev_id and block hash must be the same to prove
+// that PoW has been properly done.
+bool CBlockHeader::isCNConsistent() const
+{
+    return (GetOriginalBlockHash() == cnHeader.prev_id);
+}
+
 uint256 CBlockHeader::GetHash() const
 {
     uint256 thash;
+    if (!isCNConsistent()) {
+        memset(thash.begin(), 0xff, thash.size());
+        return thash;
+    }
     cryptonote::blobdata blob = cryptonote::t_serializable_object_to_blob(cnHeader);
     cn_fast_hash(blob.data(), blob.size(), BEGIN(thash));
     return thash;
@@ -33,10 +45,7 @@ uint256 CBlockHeader::GetHash() const
 uint256 CBlockHeader::GetPoWHash() const
 {
     uint256 thash;
-    // prev_id of CN header is used to store the kevacoin block hash.
-    // The value of prev_id and block hash must be the same to prove
-    // that PoW has been properly done.
-    if (GetOriginalBlockHash() != cnHeader.prev_id) {
+    if (!isCNConsistent()) {
         memset(thash.begin(), 0xff, thash.size());
         return thash;
     }

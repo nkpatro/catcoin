@@ -99,10 +99,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000100000");
+        consensus.nMinimumChainWork  = uint256S("0x0000000000000000000000000000000000000000000000000000000001000000");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x66f49ad85624c33e4fd61aa45c54012509ed4a53308908dd07f56346c7939273");
+        consensus.defaultAssumeValid = uint256S("0x00");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -118,7 +118,7 @@ public:
 
         const uint32_t genesisBlockReward = 0.00001 * COIN; // A small reward for the core developers :-)
         //TODO: target: 0x1e0fffff, update timestampe and nonce.
-        genesis = CreateGenesisBlock(1553145843, 1621, 0x1f0ffff0, 1, genesisBlockReward);
+        genesis = CreateGenesisBlock(1553145843, 1621, 0x1e0fffff, 1, genesisBlockReward);
         consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S("0x2f6d82a919bfc055f9e66e82bd613050cb835f969563f217737c9ef631668f6c"));
         assert(genesis.hashMerkleRoot == uint256S("0x285139132ff0b33d399aae61053d19b34fe8e483053142d530d62d90881183c9"));
@@ -194,10 +194,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000000001000");
+        consensus.nMinimumChainWork  = uint256S("0x0000000000000000000000000000000000000000000000000000000000001000");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x1efb29c8187d5a496a33377941d1df415169c3ce5d8c05d055f25b683ec3f9a3");
+        consensus.defaultAssumeValid = uint256S("0x00");
 
         pchMessageStart[0] = 0xfe;
         pchMessageStart[1] = 0xec;
