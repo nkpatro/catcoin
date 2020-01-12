@@ -1461,12 +1461,6 @@ bool AppInitMain()
                     break;
                 }
 
-#if 1
-                if (ChainNameFromCommandLine() == CBaseChainParams::MAIN) {
-                    return InitError(_("Mainnet is not live yet, use \"-testnet\" option to connect to the testnet."));
-                }
-#endif
-
                 // If the loaded chain has a wrong genesis, bail out immediately
                 // (we're likely using a testnet datadir, or the other way around).
                 if (!mapBlockIndex.empty() && mapBlockIndex.count(chainparams.GetConsensus().hashGenesisBlock) == 0)

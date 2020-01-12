@@ -113,13 +113,6 @@ static int AppInitRPC(int argc, char* argv[])
         return EXIT_FAILURE;
     }
 
-#if 1
-    if (ChainNameFromCommandLine() == CBaseChainParams::MAIN) {
-        printf("\nMainnet is not live yet, use \"-testnet\" option to connect to the testnet.\n\n");
-        exit(1);
-    }
-#endif
-
     // Check for -testnet or -regtest parameter (BaseParams() calls are only valid after this clause)
     try {
         SelectBaseParams(ChainNameFromCommandLine());
