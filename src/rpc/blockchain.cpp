@@ -1461,8 +1461,8 @@ UniValue get_info(const JSONRPCRequest& request)
     obj.push_back(Pair("mainnet",               Params().NetworkIDString() == "main"));
     obj.push_back(Pair("testnet",               Params().NetworkIDString() == "test"));
     obj.push_back(Pair("height",                (int)chainActive.Height()));
-    obj.push_back(Pair("incoming_connections_count",         g_connman->GetNodeCount(CConnman::CONNECTIONS_IN)));
-    obj.push_back(Pair("outgoing_connections_count",         g_connman->GetNodeCount(CConnman::CONNECTIONS_OUT)));
+    obj.push_back(Pair("incoming_connections_count",         (int)g_connman->GetNodeCount(CConnman::CONNECTIONS_IN)));
+    obj.push_back(Pair("outgoing_connections_count",         (int)g_connman->GetNodeCount(CConnman::CONNECTIONS_OUT)));
     obj.push_back(Pair("difficulty",            (uint64_t)round(GetDifficulty())));
     obj.push_back(Pair("tx_pool_size",          (int64_t) mempool.size()));
     obj.push_back(Pair("status",                "OK"));
