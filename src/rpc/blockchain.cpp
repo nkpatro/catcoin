@@ -758,7 +758,7 @@ UniValue getlastblockheader(const JSONRPCRequest& request)
     } else {
         blockHeader.push_back(Pair("prev_hash", ""));
     }
-    blockHeader.push_back(Pair("nonce", (uint64_t)pblockindex->nNonce));
+    blockHeader.push_back(Pair("nonce", (uint64_t)pblockindex->cnHeader.nonce));
     blockHeader.push_back(Pair("orphan_status", false));
     blockHeader.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
     const uint64_t depth = chainActive.Height() - pblockindex->nHeight + 1; // Same as confirmations.
@@ -841,10 +841,98 @@ UniValue getblockheaderbyheight(const JSONRPCRequest& request)
     } else {
         blockHeader.push_back(Pair("prev_hash", ""));
     }
-    blockHeader.push_back(Pair("nonce", (uint64_t)pblockindex->nNonce));
+    blockHeader.push_back(Pair("nonce", (uint64_t)pblockindex->cnHeader.nonce));
     blockHeader.push_back(Pair("orphan_status", false));
     blockHeader.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
     const uint64_t depth = chainActive.Height() - nHeight + 1; // Same as confirmations.
+    blockHeader.push_back(Pair("depth", (uint64_t)depth));
+    blockHeader.push_back(Pair("hash", block.GetHash().GetHex()));
+    blockHeader.push_back(Pair("difficulty", GetDifficulty(pblockindex)));
+
+    // TODO: implement cumulative_difficulty
+    blockHeader.push_back(Pair("cumulative_difficulty", 0));
+    blockHeader.push_back(Pair("reward", (uint64_t)coinbaseValue));
+    blockHeader.push_back(Pair("block_size", (int)::GetBlockWeight(block)));
+    blockHeader.push_back(Pair("num_txes", (uint64_t)pblockindex->nTx));
+    blockHeader.push_back(Pair("pow_hash", block.GetPoWHash().GetHex()));
+    blockHeader.push_back(Pair("long_term_weight", 0.0)); // Not implemented
+
+    UniValue result(UniValue::VOBJ);
+    result.push_back(Pair("status", "OK"));
+    result.push_back(Pair("block_header", blockHeader));
+
+    return result;
+}
+
+// Cryptonote RPC API: getblockheaderbyhhash
+UniValue getblockheaderbyhash(const JSONRPCRequest& request)
+{
+    if (request.fHelp || request.params.size() < 1 || request.params.size() > 2)
+        throw std::runtime_error(
+                "getblockheaderbyhash \"height\" \n"
+                "\nArguments:\n"
+                "1. \"height\"          (numeric, required) The block height\n"
+                "\nResult (for verbose = true):\n"
+                "{\n"
+                "  \"hash\" : \"hash\",     (string) the block hash (same as provided)\n"
+                "  \"confirmations\" : n,   (numeric) The number of confirmations, or -1 if the block is not on the main chain\n"
+                "  \"height\" : n,          (numeric) The block height or index\n"
+                "  \"version\" : n,         (numeric) The block version\n"
+                "  \"versionHex\" : \"00000000\", (string) The block version formatted in hexadecimal\n"
+                "  \"merkleroot\" : \"xxxx\", (string) The merkle root\n"
+                "  \"time\" : ttt,          (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)\n"
+                "  \"mediantime\" : ttt,    (numeric) The median block time in seconds since epoch (Jan 1 1970 GMT)\n"
+                "  \"nonce\" : n,           (numeric) The nonce\n"
+                "  \"bits\" : \"1d00ffff\", (string) The bits\n"
+                "  \"difficulty\" : x.xxx,  (numeric) The difficulty\n"
+                "  \"chainwork\" : \"0000...1f3\"     (string) Expected number of hashes required to produce the current chain (in hex)\n"
+                "  \"nTx\" : n,             (numeric) The number of transactions in the block.\n"
+                "  \"previousblockhash\" : \"hash\",  (string) The hash of the previous block\n"
+                "  \"nextblockhash\" : \"hash\",      (string) The hash of the next block\n"
+                "}\n"
+                "\nExamples:\n"
+                + HelpExampleCli("getblockheaderbyheight", "100")
+        );
+
+    LOCK(cs_main);
+
+//    int nHeight = request.params[0].get_int();
+
+    std::string strHash = request.params[0].get_str();
+    uint256 hash(uint256S(strHash));
+
+    if (mapBlockIndex.count(hash) == 0)
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Block not found");
+
+    CBlockIndex* pblockindex = mapBlockIndex[hash];
+
+    CBlock block;
+    if (!ReadBlockFromDisk(block, pblockindex, Params().GetConsensus())) {
+        throw JSONRPCError(RPC_MISC_ERROR, "Block not found on disk");
+    }
+
+    CTransactionRef coinbaseTx = block.vtx[0];
+    if (!coinbaseTx->IsCoinBase()) {
+        throw JSONRPCError(RPC_MISC_ERROR, "Could not find coinbase");
+    }
+    //TODO: easier way to do this?
+    CAmount coinbaseValue = coinbaseTx->GetValueOut();
+
+    UniValue blockHeader(UniValue::VOBJ);
+
+    blockHeader.push_back(Pair("major_version", (uint64_t)block.cnHeader.major_version));
+    blockHeader.push_back(Pair("minor_version", (uint64_t)block.cnHeader.minor_version));
+
+    blockHeader.push_back(Pair("timestamp", (uint64_t)pblockindex->nTime));
+    if (pblockindex->pprev) {
+        blockHeader.push_back(Pair("prev_hash", pblockindex->pprev->GetBlockHash().GetHex()));
+    } else {
+        blockHeader.push_back(Pair("prev_hash", ""));
+    }
+    blockHeader.push_back(Pair("nonce", (uint64_t)pblockindex->cnHeader.nonce));
+    blockHeader.push_back(Pair("orphan_status", false));
+    blockHeader.push_back(Pair("height", (uint64_t)pblockindex->nHeight));
+    const uint64_t depth = chainActive.Height() - pblockindex->nHeight + 1; // Same as confirmations.
     blockHeader.push_back(Pair("depth", (uint64_t)depth));
     blockHeader.push_back(Pair("hash", block.GetHash().GetHex()));
     blockHeader.push_back(Pair("difficulty", GetDifficulty(pblockindex)));
@@ -1863,6 +1951,7 @@ static const CRPCCommand commands[] =
     // Cryptonote RPC APIs, used for mining pool.
     { "blockchain",         "getlastblockheader",     &getlastblockheader,     {} },
     { "blockchain",         "getblockheaderbyheight", &getblockheaderbyheight, {"height"} },
+    { "blockchain",         "getblockheaderbyhash",   &getblockheaderbyhash,   {"hash"} },
     { "blockchain",         "get_info",               &get_info,               {} },
 
     /* Not shown in help */
