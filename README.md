@@ -1,14 +1,12 @@
 Kevacoin Core integration/staging tree
 =====================================
 
-[![Gitter][gitter-image]][gitter-url]
-
 https://kevacoin.org
 
 What is Kevacoin?
 ----------------
 
-Kevacoin is a decentralized open source key-value data store based on the Kevacoin (which is in turn based on Bitcoin) cryptocurrency. Kevacoin is largely influenced by Namecoin [https://namecoin.org](https://namecoin.org), even though it serves very different purposes and works very differently.
+Kevacoin is a decentralized open source key-value data store based on Litecoin (which is in turn based on Bitcoin) cryptocurrency. Kevacoin is largely influenced by Namecoin [https://namecoin.org](https://namecoin.org), even though it serves very different purposes and works very differently.
 
 What does it do?
 ----------------
