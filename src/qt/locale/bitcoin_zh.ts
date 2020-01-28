@@ -136,7 +136,7 @@
     </message>
     <message>
         <source>Warning: Invalid Kevacoin address</source>
-        <translation>警告：莱特币地址无效</translation>
+        <translation>警告：凯华币地址无效</translation>
     </message>
     </context>
 <context>
