@@ -716,6 +716,7 @@ BOOST_AUTO_TEST_CASE(keva_updates_undo)
   CCoinsViewCache view(&dummyView);
   CBlockUndo undo;
   CKevaData data;
+  CKevaNotifier kevaNotifier(NULL);
 
   const CScript scrNew = CKevaScript::buildKevaNamespace(addr, nameSpace, displayName);
   const CScript scr1_1 = CKevaScript::buildKevaPut(addr, nameSpace, key1, value1_old);
@@ -730,14 +731,14 @@ BOOST_AUTO_TEST_CASE(keva_updates_undo)
   CMutableTransaction mtx;
   mtx.SetKevacoin();
   mtx.vout.push_back(CTxOut(COIN, scrNew));
-  ApplyKevaTransaction(mtx, 100, view, undo);
+  ApplyKevaTransaction(mtx, 100, view, undo, kevaNotifier);
   BOOST_CHECK(!view.GetName(nameSpace, key1, data));
   BOOST_CHECK(view.GetNamespace(nameSpace, data));
   BOOST_CHECK(undo.vkevaundo.size() == 1);
 
   mtx.vout.clear();
   mtx.vout.push_back(CTxOut(COIN, scr1_1));
-  ApplyKevaTransaction(mtx, 200, view, undo);
+  ApplyKevaTransaction(mtx, 200, view, undo, kevaNotifier);
   BOOST_CHECK(view.GetName(nameSpace, key1, data));
   BOOST_CHECK(data.getHeight() == 200);
   BOOST_CHECK(data.getValue() == value1_old);
@@ -747,7 +748,7 @@ BOOST_AUTO_TEST_CASE(keva_updates_undo)
 
   mtx.vout.clear();
   mtx.vout.push_back(CTxOut(COIN, scr1_2));
-  ApplyKevaTransaction(mtx, 300, view, undo);
+  ApplyKevaTransaction(mtx, 300, view, undo, kevaNotifier);
   BOOST_CHECK(view.GetName(nameSpace, key1, data));
   BOOST_CHECK(data.getHeight() == 300);
   BOOST_CHECK(data.getValue() == value1_new);

@@ -32,6 +32,13 @@ protected:
     void BlockDisconnected(const std::shared_ptr<const CBlock>& pblock) override;
     void UpdatedBlockTip(const CBlockIndex *pindexNew, const CBlockIndex *pindexFork, bool fInitialDownload) override;
 
+    /**
+     * Keva related interface.
+     */
+    void KevaNamespaceCreated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace) override;
+    void KevaUpdated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key, const std::string& value) override;
+    void KevaDeleted(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key) override;
+
 private:
     CZMQNotificationInterface();
 
