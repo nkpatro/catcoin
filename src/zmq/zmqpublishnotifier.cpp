@@ -216,7 +216,7 @@ bool CZMQPublishKevaNotifier::NotifyKeva(const CTransactionRef &ptx, unsigned in
     }
 
     if (value.size() > 0) {
-        entry.pushKV("value", key);
+        entry.pushKV("value", value);
     }
 
     std::string data = entry.write(0, 0);
