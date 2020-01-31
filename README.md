@@ -24,6 +24,11 @@ Our major observation for decentralized apps is that data is significantly more 
 For more information, as well as an immediately useable, binary version of
 the Kevacoin Core software, see [https://kevacoin.org](https://kevacoin.org).
 
+Documentation
+--------------
+[Command line and RPC documentation](https://kevacoin.org/documentation.html)
+
+
 Build
 -------------------
 
