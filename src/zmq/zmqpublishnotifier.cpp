@@ -202,8 +202,6 @@ bool CZMQPublishKevaNotifier::NotifyKeva(const CTransactionRef &ptx, unsigned in
 {
     uint256 hash = ptx->GetHash();
     LogPrint(BCLog::ZMQ, "zmq: Publish keva height: %d, tx: %s\n", height, ptx->GetHash().ToString().c_str());
-    CDataStream ss(SER_NETWORK, PROTOCOL_VERSION | RPCSerializationFlags());
-    ss << height << *ptx << nameSpace;
 
     UniValue entry(UniValue::VOBJ);
     entry.pushKV("tx", hash.ToString());
