@@ -30,6 +30,11 @@ struct MainSignalsInstance {
     boost::signals2::signal<void (const CBlock&, const CValidationState&)> BlockChecked;
     boost::signals2::signal<void (const CBlockIndex *, const std::shared_ptr<const CBlock>&)> NewPoWValidBlock;
 
+    /** Keva related */
+    boost::signals2::signal<void (const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace)> KevaNamespaceCreated;
+    boost::signals2::signal<void (const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key, const std::string& value)> KevaUpdated;
+    boost::signals2::signal<void (const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key)> KevaDeleted;
+
     // We are not allowed to assume the scheduler only runs in one thread,
     // but must ensure all callbacks happen in-order, so we end up creating
     // our own queue here :(
@@ -83,6 +88,11 @@ void RegisterValidationInterface(CValidationInterface* pwalletIn) {
     g_signals.m_internals->Broadcast.connect(boost::bind(&CValidationInterface::ResendWalletTransactions, pwalletIn, _1, _2));
     g_signals.m_internals->BlockChecked.connect(boost::bind(&CValidationInterface::BlockChecked, pwalletIn, _1, _2));
     g_signals.m_internals->NewPoWValidBlock.connect(boost::bind(&CValidationInterface::NewPoWValidBlock, pwalletIn, _1, _2));
+
+    /** Keva related */
+    g_signals.m_internals->KevaNamespaceCreated.connect(boost::bind(&CValidationInterface::KevaNamespaceCreated, pwalletIn, _1, _2, _3));
+    g_signals.m_internals->KevaUpdated.connect(boost::bind(&CValidationInterface::KevaUpdated, pwalletIn, _1, _2, _3, _4, _5));
+    g_signals.m_internals->KevaDeleted.connect(boost::bind(&CValidationInterface::KevaDeleted, pwalletIn, _1, _2, _3, _4));
 }
 
 void UnregisterValidationInterface(CValidationInterface* pwalletIn) {
@@ -95,6 +105,11 @@ void UnregisterValidationInterface(CValidationInterface* pwalletIn) {
     g_signals.m_internals->TransactionRemovedFromMempool.disconnect(boost::bind(&CValidationInterface::TransactionRemovedFromMempool, pwalletIn, _1));
     g_signals.m_internals->UpdatedBlockTip.disconnect(boost::bind(&CValidationInterface::UpdatedBlockTip, pwalletIn, _1, _2, _3));
     g_signals.m_internals->NewPoWValidBlock.disconnect(boost::bind(&CValidationInterface::NewPoWValidBlock, pwalletIn, _1, _2));
+
+    /** Keva related */
+    g_signals.m_internals->KevaNamespaceCreated.disconnect(boost::bind(&CValidationInterface::KevaNamespaceCreated, pwalletIn, _1, _2, _3));
+    g_signals.m_internals->KevaUpdated.disconnect(boost::bind(&CValidationInterface::KevaUpdated, pwalletIn, _1, _2, _3, _4, _5));
+    g_signals.m_internals->KevaDeleted.disconnect(boost::bind(&CValidationInterface::KevaDeleted, pwalletIn, _1, _2, _3, _4));
 }
 
 void UnregisterAllValidationInterfaces() {
@@ -110,6 +125,11 @@ void UnregisterAllValidationInterfaces() {
     g_signals.m_internals->TransactionRemovedFromMempool.disconnect_all_slots();
     g_signals.m_internals->UpdatedBlockTip.disconnect_all_slots();
     g_signals.m_internals->NewPoWValidBlock.disconnect_all_slots();
+
+    /** Keva related */
+    g_signals.m_internals->KevaNamespaceCreated.disconnect_all_slots();
+    g_signals.m_internals->KevaUpdated.disconnect_all_slots();
+    g_signals.m_internals->KevaDeleted.disconnect_all_slots();
 }
 
 void CallFunctionInValidationInterfaceQueue(std::function<void ()> func) {
@@ -178,4 +198,16 @@ void CMainSignals::BlockChecked(const CBlock& block, const CValidationState& sta
 
 void CMainSignals::NewPoWValidBlock(const CBlockIndex *pindex, const std::shared_ptr<const CBlock> &block) {
     m_internals->NewPoWValidBlock(pindex, block);
+}
+
+void CMainSignals::KevaNamespaceCreated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace) {
+    m_internals->KevaNamespaceCreated(ptx, height, nameSpace);
+}
+
+void CMainSignals::KevaUpdated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key, const std::string& value) {
+    m_internals->KevaUpdated(ptx, height, nameSpace, key, value);
+}
+
+void CMainSignals::KevaDeleted(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key) {
+    m_internals->KevaDeleted(ptx, height, nameSpace, key);
 }

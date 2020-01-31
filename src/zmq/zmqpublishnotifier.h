@@ -52,4 +52,13 @@ public:
     bool NotifyTransaction(const CTransaction &transaction) override;
 };
 
+class CZMQPublishKevaNotifier : public CZMQAbstractPublishNotifier
+{
+public:
+    bool NotifyKeva(const CTransactionRef &ptx, unsigned int height, unsigned int type,
+                    const std::string& nameSpace,
+                    const std::string& key = std::string(),
+                    const std::string& value = std::string()) override;
+};
+
 #endif // BITCOIN_ZMQ_ZMQPUBLISHNOTIFIER_H

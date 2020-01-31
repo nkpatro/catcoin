@@ -110,6 +110,25 @@ protected:
      * callback was generated (not necessarily now)
      */
     virtual void BlockChecked(const CBlock&, const CValidationState&) {}
+
+    /**
+     * Keva related interface.
+     * Notifies listeners of a new namespace.
+     */
+    virtual void KevaNamespaceCreated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace) {}
+
+    /**
+     * Keva related interface.
+     * Notifies listeners of a key creation or update.
+     */
+    virtual void KevaUpdated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key, const std::string& value) {}
+
+    /**
+     * Keva related interface.
+     * Notifies listeners of a key creation or update.
+     */
+    virtual void KevaDeleted(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key) {}
+
     /**
      * Notifies listeners that a block which builds directly on our current tip
      * has been received and connected to the headers tree, though not validated yet */
@@ -154,6 +173,11 @@ public:
     void Broadcast(int64_t nBestBlockTime, CConnman* connman);
     void BlockChecked(const CBlock&, const CValidationState&);
     void NewPoWValidBlock(const CBlockIndex *, const std::shared_ptr<const CBlock>&);
+
+    /** Keva related */
+    void KevaNamespaceCreated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace);
+    void KevaUpdated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key, const std::string& value);
+    void KevaDeleted(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key);
 };
 
 CMainSignals& GetMainSignals();

@@ -28,6 +28,8 @@ class CCoinsViewCache;
 class CTxMemPool;
 class CTxMemPoolEntry;
 class CValidationState;
+class CMainSignals;
+class CKevaNotifier;
 
 typedef std::vector<unsigned char> valtype;
 
@@ -217,6 +219,21 @@ public:
 
 };
 
+/**
+ * Notify Keva transactions. This is for ZMQ notification.
+ */
+class CKevaNotifier
+{
+private:
+  CMainSignals* signals;
+
+public:
+  CKevaNotifier(CMainSignals*);
+  void KevaNamespaceCreated(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace);
+  void KevaUpdated(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace, const std::string& key, const std::string& value);
+  void KevaDeleted(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace, const std::string& key);
+};
+
 /* ************************************************************************** */
 
 /**
@@ -242,7 +259,7 @@ bool CheckKevaTransaction (const CTransaction& tx, unsigned nHeight,
  * @param undo Record undo information here.
  */
 void ApplyKevaTransaction (const CTransaction& tx, unsigned nHeight,
-                           CCoinsViewCache& view, CBlockUndo& undo);
+                           CCoinsViewCache& view, CBlockUndo& undo, CKevaNotifier& notifier);
 
 /**
  * Expire all names at the given height.  This removes their coins

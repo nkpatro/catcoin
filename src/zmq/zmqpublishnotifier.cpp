@@ -2,6 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include <univalue.h>
 #include <chain.h>
 #include <chainparams.h>
 #include <streams.h>
@@ -16,6 +17,7 @@ static const char *MSG_HASHBLOCK = "hashblock";
 static const char *MSG_HASHTX    = "hashtx";
 static const char *MSG_RAWBLOCK  = "rawblock";
 static const char *MSG_RAWTX     = "rawtx";
+static const char *MSG_KEVA      = "keva";
 
 // Internal function to send multipart message
 static int zmq_send_multipart(void *sock, const void* data, size_t size, ...)
@@ -194,4 +196,29 @@ bool CZMQPublishRawTransactionNotifier::NotifyTransaction(const CTransaction &tr
     CDataStream ss(SER_NETWORK, PROTOCOL_VERSION | RPCSerializationFlags());
     ss << transaction;
     return SendMessage(MSG_RAWTX, &(*ss.begin()), ss.size());
+}
+
+bool CZMQPublishKevaNotifier::NotifyKeva(const CTransactionRef &ptx, unsigned int height, unsigned int type, const std::string& nameSpace, const std::string& key, const std::string& value)
+{
+    uint256 hash = ptx->GetHash();
+    LogPrint(BCLog::ZMQ, "zmq: Publish keva height: %d, tx: %s\n", height, ptx->GetHash().ToString().c_str());
+    CDataStream ss(SER_NETWORK, PROTOCOL_VERSION | RPCSerializationFlags());
+    ss << height << *ptx << nameSpace;
+
+    UniValue entry(UniValue::VOBJ);
+    entry.pushKV("tx", hash.ToString());
+    entry.pushKV("height", (int)height);
+    entry.pushKV("type", (int)type);
+    entry.pushKV("namespace", nameSpace);
+
+    if (key.size() > 0) {
+        entry.pushKV("key", key);
+    }
+
+    if (value.size() > 0) {
+        entry.pushKV("value", key);
+    }
+
+    std::string data = entry.write(0, 0);
+    return SendMessage(MSG_KEVA, &(*data.begin()), data.size());
 }

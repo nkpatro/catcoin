@@ -7,6 +7,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include <keva/main.h>
+#include "base58.h"
 
 #include <chainparams.h>
 #include <coins.h>
@@ -20,6 +21,7 @@
 #include <util.h>
 #include <utilstrencodings.h>
 #include <validation.h>
+#include <validationinterface.h>
 
 
 /* ************************************************************************** */
@@ -228,6 +230,33 @@ CNameConflictTracker::AddConflictedEntry (CTransactionRef txRemoved)
 
 /* ************************************************************************** */
 
+CKevaNotifier::CKevaNotifier(CMainSignals* signals) {
+  this->signals = signals;
+}
+
+void CKevaNotifier::KevaNamespaceCreated(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace) {
+  if (signals) {
+    CTransactionRef ptx = MakeTransactionRef(tx);
+    signals->KevaNamespaceCreated(ptx, nHeight, nameSpace);
+  }
+}
+
+void CKevaNotifier::KevaUpdated(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace, const std::string& key, const std::string& value) {
+  if (signals) {
+    CTransactionRef ptx = MakeTransactionRef(tx);
+    signals->KevaUpdated(ptx, nHeight, nameSpace, key, value);
+  }
+}
+
+void CKevaNotifier::KevaDeleted(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace, const std::string& key) {
+  if (signals) {
+    CTransactionRef ptx = MakeTransactionRef(tx);
+    signals->KevaDeleted(ptx, nHeight, nameSpace, key);
+  }
+}
+
+/* ************************************************************************** */
+
 bool
 CheckKevaTransaction (const CTransaction& tx, unsigned nHeight,
                       const CCoinsView& view,
@@ -345,7 +374,7 @@ CheckKevaTransaction (const CTransaction& tx, unsigned nHeight,
 }
 
 void ApplyKevaTransaction(const CTransaction& tx, unsigned nHeight,
-                        CCoinsViewCache& view, CBlockUndo& undo)
+                        CCoinsViewCache& view, CBlockUndo& undo, CKevaNotifier& notifier)
 {
   assert (nHeight != MEMPOOL_HEIGHT);
   if (!tx.IsKevacoin())
@@ -374,6 +403,7 @@ void ApplyKevaTransaction(const CTransaction& tx, unsigned nHeight,
       CKevaData data;
       data.fromScript(nHeight, COutPoint(tx.GetHash(), i), op);
       view.SetName(nameSpace, key, data, false);
+      notifier.KevaNamespaceCreated(tx, nHeight, EncodeBase58Check(nameSpace));
     } else if (op.isAnyUpdate()) {
       const valtype& nameSpace = op.getOpNamespace();
       const valtype& key = op.getOpKey();
@@ -389,10 +419,12 @@ void ApplyKevaTransaction(const CTransaction& tx, unsigned nHeight,
         CKevaData oldData;
         if (view.GetName(nameSpace, key, oldData)) {
           view.DeleteName(nameSpace, key);
+          notifier.KevaDeleted(tx, nHeight, EncodeBase58Check(nameSpace), ValtypeToString(key));
         }
       } else {
         data.fromScript(nHeight, COutPoint(tx.GetHash(), i), op);
         view.SetName(nameSpace, key, data, false);
+        notifier.KevaUpdated(tx, nHeight, EncodeBase58Check(nameSpace), ValtypeToString(key), ValtypeToString(data.getValue()));
       }
     }
   }
