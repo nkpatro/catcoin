@@ -76,7 +76,15 @@ notification `-zmqpubhashtx` the topic is `hashtx` (no null
 terminator) and the body is the transaction hash (32
 bytes).
 
-These options can also be provided in kevacoin.conf.
+These options can also be provided in kevacoin.conf. The following is an sample
+kevacoin.conf file that support notification to Keva events:
+
+```
+rpcport=9332
+rpcuser=user
+rpcpassword=userpassword
+zmqpubkeva=tcp://127.0.0.1:29000
+```
 
 ZeroMQ endpoint specifiers for TCP (and others) are documented in the
 [ZeroMQ API](http://api.zeromq.org/4-0:_start).
@@ -85,6 +93,80 @@ Client side, then, the ZeroMQ subscriber socket must have the
 ZMQ_SUBSCRIBE option set to one or either of these prefixes (for
 instance, just `hash`); without doing so will result in no messages
 arriving. Please see `contrib/zmq/zmq_sub.py` for a working example.
+
+## Kevacoin Specific Events
+
+Once ZMQ notification is enabled for Keva events, it is easy to subscribe
+to the events. The following is a NodeJS example:
+
+```js
+var zmq = require('zeromq');
+
+async function run() {
+    // Create a subscriber socket.
+    var sock = new zmq.Subscriber;
+    var addr = 'tcp://127.0.0.1:29000';
+
+    // Initiate connection to TCP socket.
+    sock.connect(addr);
+
+    // Subscribe to receive messages for a specific topic.
+    // This can be "rawblock", "hashblock", "rawtx", or "hashtx".
+    sock.subscribe('keva');
+
+    for await (const [topic, message] of sock) {
+        if (topic.toString() === 'keva') {
+            let json = JSON.parse(message);
+            console.log('received keva:');
+            console.log(json);
+        }
+    }
+}
+
+run();
+```
+
+Keva messages are in JSON format. This is an example of the `keva_update` messsage:
+
+```json
+{
+  tx: '690652bbee2bce22fdc9c5619ac77f3b7645423e2790860afa0fa2d14ff0c1be',
+  height: 10673,
+  timestamp: 1580520584,
+  type: 'keva_update',
+  namespace: 'Nd25va1gcEFjWgJtzU7Vuu3dG7gWE7G77y',
+  key: 'This is key',
+  value: 'This is value'
+}
+```
+
+This is an example of the `keva_namespace` (creation of namespace) messsage:
+
+```json
+{
+  tx: 'a6b4792a2150e1f15a45ff658dbfc64f34a0b0b27270321f557acfa0f70027d6',
+  height: 10677,
+  timestamp: 1580520947,
+  type: 'keva_namespace',
+  namespace: 'NRT9nLFy433BWeBakmyV1TFugai6dZt7BH'
+}
+```
+
+When developing applications on Kevacoin, it is convenient to be able to subscribe to certain Keva events. For example, a Twitter-like application on Keva blockchain can listen to the event that a user follows the other user. Assume that the follower adds a key to her own namespace (`N_follower`) to indicate that she is following the other user whose namespace is `N_celeb`:
+
+```
+keva_put  <N_follower>  <N_celeb>  true
+```
+
+The application listening to this kind of event will be notified, and then when `N_celeb` publishes a new update, the application will notify the follower.
+
+Similarly, if the follower stops following, she can set the value to `false`:
+```
+keva_put  <N_follower>  <N_celeb>  true
+```
+The application will also receive this event and stop send her the updates.
+
+Note that the data is completely on the blockchain and the application can be written by anyone. The developer of the application has no monopoly on the data. The pub/sub APIs make it easier to develop applications, though technically the data on the blockchain provides sufficient information and is the single source of truth.
 
 ## Remarks
 
