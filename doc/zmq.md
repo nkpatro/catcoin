@@ -77,7 +77,7 @@ terminator) and the body is the transaction hash (32
 bytes).
 
 These options can also be provided in kevacoin.conf. The following is an sample
-kevacoin.conf file that support notification to Keva events:
+kevacoin.conf file that supports ZeroMQ notification of Keva events:
 
 ```
 rpcport=9332
@@ -97,9 +97,9 @@ arriving. Please see `contrib/zmq/zmq_sub.py` for a working example.
 ## Kevacoin Specific Events
 
 Once ZMQ notification is enabled for Keva events, it is easy to subscribe
-to the events. The following is a NodeJS example:
+to the events. The following is an Node.js example:
 
-```js
+```javascript
 var zmq = require('zeromq');
 
 async function run() {
