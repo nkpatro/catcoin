@@ -76,6 +76,19 @@ notification `-zmqpubhashtx` the topic is `hashtx` (no null
 terminator) and the body is the transaction hash (32
 bytes).
 
+The command `getzmqnotifications` can be used to check what ZeroMQ notifications are enabled:
+
+```
+kevacoin-cli getzmqnotifications
+
+[
+  {
+    "type": "pubkeva",
+    "address": "tcp://127.0.0.1:29000"
+  }
+]
+```
+
 These options can also be provided in kevacoin.conf. The following is an sample
 kevacoin.conf file that supports ZeroMQ notification of Keva events:
 
