@@ -1,4 +1,4 @@
-# Block and Transaction Broadcasting with ZeroMQ
+# Kevacoin Event Broadcasting with ZeroMQ
 
 [ZeroMQ](http://zeromq.org/) is a lightweight wrapper around TCP
 connections, inter-process communication, and shared-memory,
