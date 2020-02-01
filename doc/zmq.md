@@ -128,7 +128,7 @@ run();
 
 Keva messages are in JSON format. This is an example of the `keva_update` messsage:
 
-```json
+```javascript
 {
   tx: '690652bbee2bce22fdc9c5619ac77f3b7645423e2790860afa0fa2d14ff0c1be',
   height: 10673,
@@ -142,7 +142,7 @@ Keva messages are in JSON format. This is an example of the `keva_update` messsa
 
 This is an example of the `keva_namespace` (creation of namespace) messsage:
 
-```json
+```javascript
 {
   tx: 'a6b4792a2150e1f15a45ff658dbfc64f34a0b0b27270321f557acfa0f70027d6',
   height: 10677,
