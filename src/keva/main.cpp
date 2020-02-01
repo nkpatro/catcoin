@@ -234,24 +234,24 @@ CKevaNotifier::CKevaNotifier(CMainSignals* signals) {
   this->signals = signals;
 }
 
-void CKevaNotifier::KevaNamespaceCreated(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace) {
+void CKevaNotifier::KevaNamespaceCreated(const CTransaction& tx, const CBlockIndex &pindex, const std::string& nameSpace) {
   if (signals) {
     CTransactionRef ptx = MakeTransactionRef(tx);
-    signals->KevaNamespaceCreated(ptx, nHeight, nameSpace);
+    signals->KevaNamespaceCreated(ptx, pindex, nameSpace);
   }
 }
 
-void CKevaNotifier::KevaUpdated(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace, const std::string& key, const std::string& value) {
+void CKevaNotifier::KevaUpdated(const CTransaction& tx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key, const std::string& value) {
   if (signals) {
     CTransactionRef ptx = MakeTransactionRef(tx);
-    signals->KevaUpdated(ptx, nHeight, nameSpace, key, value);
+    signals->KevaUpdated(ptx, pindex, nameSpace, key, value);
   }
 }
 
-void CKevaNotifier::KevaDeleted(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace, const std::string& key) {
+void CKevaNotifier::KevaDeleted(const CTransaction& tx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key) {
   if (signals) {
     CTransactionRef ptx = MakeTransactionRef(tx);
-    signals->KevaDeleted(ptx, nHeight, nameSpace, key);
+    signals->KevaDeleted(ptx, pindex, nameSpace, key);
   }
 }
 
@@ -373,9 +373,10 @@ CheckKevaTransaction (const CTransaction& tx, unsigned nHeight,
   return true;
 }
 
-void ApplyKevaTransaction(const CTransaction& tx, unsigned nHeight,
+void ApplyKevaTransaction(const CTransaction& tx, const CBlockIndex& pindex,
                         CCoinsViewCache& view, CBlockUndo& undo, CKevaNotifier& notifier)
 {
+  unsigned int nHeight = pindex.nHeight;
   assert (nHeight != MEMPOOL_HEIGHT);
   if (!tx.IsKevacoin())
     return;
@@ -403,7 +404,7 @@ void ApplyKevaTransaction(const CTransaction& tx, unsigned nHeight,
       CKevaData data;
       data.fromScript(nHeight, COutPoint(tx.GetHash(), i), op);
       view.SetName(nameSpace, key, data, false);
-      notifier.KevaNamespaceCreated(tx, nHeight, EncodeBase58Check(nameSpace));
+      notifier.KevaNamespaceCreated(tx, pindex, EncodeBase58Check(nameSpace));
     } else if (op.isAnyUpdate()) {
       const valtype& nameSpace = op.getOpNamespace();
       const valtype& key = op.getOpKey();
@@ -419,12 +420,12 @@ void ApplyKevaTransaction(const CTransaction& tx, unsigned nHeight,
         CKevaData oldData;
         if (view.GetName(nameSpace, key, oldData)) {
           view.DeleteName(nameSpace, key);
-          notifier.KevaDeleted(tx, nHeight, EncodeBase58Check(nameSpace), ValtypeToString(key));
+          notifier.KevaDeleted(tx, pindex, EncodeBase58Check(nameSpace), ValtypeToString(key));
         }
       } else {
         data.fromScript(nHeight, COutPoint(tx.GetHash(), i), op);
         view.SetName(nameSpace, key, data, false);
-        notifier.KevaUpdated(tx, nHeight, EncodeBase58Check(nameSpace), ValtypeToString(key), ValtypeToString(data.getValue()));
+        notifier.KevaUpdated(tx, pindex, EncodeBase58Check(nameSpace), ValtypeToString(key), ValtypeToString(data.getValue()));
       }
     }
   }

@@ -21,7 +21,7 @@ bool CZMQAbstractNotifier::NotifyTransaction(const CTransaction &/*transaction*/
     return true;
 }
 
-bool CZMQAbstractNotifier::NotifyKeva(const CTransactionRef &ptx, unsigned int height,  unsigned int type, const std::string& nameSpace, const std::string& key, const std::string& value)
+bool CZMQAbstractNotifier::NotifyKeva(const CTransactionRef &ptx, const CBlockIndex &pindex, unsigned int type, const std::string& nameSpace, const std::string& key, const std::string& value)
 {
     return true;
 }

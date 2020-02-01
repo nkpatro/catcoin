@@ -35,9 +35,9 @@ protected:
     /**
      * Keva related interface.
      */
-    void KevaNamespaceCreated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace) override;
-    void KevaUpdated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key, const std::string& value) override;
-    void KevaDeleted(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key) override;
+    void KevaNamespaceCreated(const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace) override;
+    void KevaUpdated(const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key, const std::string& value) override;
+    void KevaDeleted(const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key) override;
 
 private:
     CZMQNotificationInterface();

@@ -7,6 +7,10 @@
 
 #include <zmq/zmqabstractnotifier.h>
 
+const static unsigned int KEVA_TYPE_CREATE_NAMESPACE = 0;
+const static unsigned int KEVA_TYPE_UPDATE_KEY       = 1;
+const static unsigned int KEVA_TYPE_DELETE_KEY       = 2;
+
 class CBlockIndex;
 
 class CZMQAbstractPublishNotifier : public CZMQAbstractNotifier
@@ -55,7 +59,7 @@ public:
 class CZMQPublishKevaNotifier : public CZMQAbstractPublishNotifier
 {
 public:
-    bool NotifyKeva(const CTransactionRef &ptx, unsigned int height, unsigned int type,
+    bool NotifyKeva(const CTransactionRef &ptx, const CBlockIndex &pindex, unsigned int type,
                     const std::string& nameSpace,
                     const std::string& key = std::string(),
                     const std::string& value = std::string()) override;

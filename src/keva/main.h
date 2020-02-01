@@ -10,6 +10,7 @@
 #define H_BITCOIN_KEVA_MAIN
 
 #include <amount.h>
+#include <chain.h>
 #include <script/script.h>
 #include <keva/common.h>
 #include <primitives/transaction.h>
@@ -229,9 +230,9 @@ private:
 
 public:
   CKevaNotifier(CMainSignals*);
-  void KevaNamespaceCreated(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace);
-  void KevaUpdated(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace, const std::string& key, const std::string& value);
-  void KevaDeleted(const CTransaction& tx, unsigned nHeight, const std::string& nameSpace, const std::string& key);
+  void KevaNamespaceCreated(const CTransaction& tx, const CBlockIndex &pindex, const std::string& nameSpace);
+  void KevaUpdated(const CTransaction& tx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key, const std::string& value);
+  void KevaDeleted(const CTransaction& tx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key);
 };
 
 /* ************************************************************************** */
@@ -252,13 +253,13 @@ bool CheckKevaTransaction (const CTransaction& tx, unsigned nHeight,
                            CValidationState& state, unsigned flags);
 
 /**
- * Apply the changes of a name transaction to the name database.
+ * Apply the changes of a keva transaction to the database.
  * @param tx The transaction to apply.
- * @param nHeight Height at which the tx is.  Used for CNameData.
+ * @param pindex Pointer to the block.
  * @param view The chain state to update.
  * @param undo Record undo information here.
  */
-void ApplyKevaTransaction (const CTransaction& tx, unsigned nHeight,
+void ApplyKevaTransaction (const CTransaction& tx, const CBlockIndex& pindex,
                            CCoinsViewCache& view, CBlockUndo& undo, CKevaNotifier& notifier);
 
 /**

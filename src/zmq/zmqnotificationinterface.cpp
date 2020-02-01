@@ -10,10 +10,6 @@
 #include <streams.h>
 #include <util.h>
 
-const static unsigned int KEVA_TYPE_CREATE_NAMESPACE = 0;
-const static unsigned int KEVA_TYPE_UPDATE_KEY       = 1;
-const static unsigned int KEVA_TYPE_DELETE_KEY       = 2;
-
 void zmqError(const char *str)
 {
     LogPrint(BCLog::ZMQ, "zmq: Error: %s, errno=%s\n", str, zmq_strerror(errno));
@@ -195,12 +191,12 @@ void CZMQNotificationInterface::BlockDisconnected(const std::shared_ptr<const CB
     }
 }
 
-void CZMQNotificationInterface::KevaNamespaceCreated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace)
+void CZMQNotificationInterface::KevaNamespaceCreated(const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace)
 {
     for (std::list<CZMQAbstractNotifier*>::iterator i = notifiers.begin(); i!=notifiers.end(); )
     {
         CZMQAbstractNotifier *notifier = *i;
-        if (notifier->NotifyKeva(ptx, height, KEVA_TYPE_CREATE_NAMESPACE, nameSpace)) {
+        if (notifier->NotifyKeva(ptx, pindex, KEVA_TYPE_CREATE_NAMESPACE, nameSpace)) {
             i++;
         } else {
             notifier->Shutdown();
@@ -209,12 +205,12 @@ void CZMQNotificationInterface::KevaNamespaceCreated(const CTransactionRef &ptx,
     }
 }
 
-void CZMQNotificationInterface::KevaUpdated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key, const std::string& value)
+void CZMQNotificationInterface::KevaUpdated(const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key, const std::string& value)
 {
     for (std::list<CZMQAbstractNotifier*>::iterator i = notifiers.begin(); i!=notifiers.end(); )
     {
         CZMQAbstractNotifier *notifier = *i;
-        if (notifier->NotifyKeva(ptx, height, KEVA_TYPE_UPDATE_KEY, nameSpace, key, value)) {
+        if (notifier->NotifyKeva(ptx, pindex, KEVA_TYPE_UPDATE_KEY, nameSpace, key, value)) {
             i++;
         } else {
             notifier->Shutdown();
@@ -223,12 +219,12 @@ void CZMQNotificationInterface::KevaUpdated(const CTransactionRef &ptx, unsigned
     }
 }
 
-void CZMQNotificationInterface::KevaDeleted(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key)
+void CZMQNotificationInterface::KevaDeleted(const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key)
 {
     for (std::list<CZMQAbstractNotifier*>::iterator i = notifiers.begin(); i!=notifiers.end(); )
     {
         CZMQAbstractNotifier *notifier = *i;
-        if (notifier->NotifyKeva(ptx, height, KEVA_TYPE_DELETE_KEY, nameSpace, key)) {
+        if (notifier->NotifyKeva(ptx, pindex, KEVA_TYPE_DELETE_KEY, nameSpace, key)) {
             i++;
         } else {
             notifier->Shutdown();

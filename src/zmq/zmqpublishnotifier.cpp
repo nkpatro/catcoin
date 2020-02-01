@@ -198,15 +198,28 @@ bool CZMQPublishRawTransactionNotifier::NotifyTransaction(const CTransaction &tr
     return SendMessage(MSG_RAWTX, &(*ss.begin()), ss.size());
 }
 
-bool CZMQPublishKevaNotifier::NotifyKeva(const CTransactionRef &ptx, unsigned int height, unsigned int type, const std::string& nameSpace, const std::string& key, const std::string& value)
+bool CZMQPublishKevaNotifier::NotifyKeva(const CTransactionRef &ptx, const CBlockIndex &pindex, unsigned int type, const std::string& nameSpace, const std::string& key, const std::string& value)
 {
     uint256 hash = ptx->GetHash();
+    int height = pindex.nHeight;
+    int64_t timestamp = pindex.GetBlockTime();
     LogPrint(BCLog::ZMQ, "zmq: Publish keva height: %d, tx: %s\n", height, ptx->GetHash().ToString().c_str());
 
     UniValue entry(UniValue::VOBJ);
     entry.pushKV("tx", hash.ToString());
     entry.pushKV("height", (int)height);
-    entry.pushKV("type", (int)type);
+    entry.pushKV("timestamp", timestamp);
+
+    if (type == KEVA_TYPE_CREATE_NAMESPACE) {
+        entry.pushKV("type", "keva_namespace");
+    } else if (type == KEVA_TYPE_UPDATE_KEY) {
+        entry.pushKV("type", "keva_update");
+    } else if (type == KEVA_TYPE_DELETE_KEY) {
+        entry.pushKV("type", "keva_delete");
+    } else {
+        entry.pushKV("type", "unknown");
+    }
+
     entry.pushKV("namespace", nameSpace);
 
     if (key.size() > 0) {

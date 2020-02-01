@@ -35,7 +35,7 @@ public:
     virtual bool NotifyBlock(const CBlockIndex *pindex);
     virtual bool NotifyTransaction(const CTransaction &transaction);
 
-    virtual bool NotifyKeva(const CTransactionRef &ptx, unsigned int height, unsigned int type,
+    virtual bool NotifyKeva(const CTransactionRef &ptx, const CBlockIndex &pindex, unsigned int type,
                             const std::string& nameSpace,
                             const std::string& key = std::string(),
                             const std::string& value = std::string());

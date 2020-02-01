@@ -8,6 +8,7 @@
 
 #include <base58.h>
 #include <coins.h>
+#include <chain.h>
 #include <consensus/validation.h>
 #include <keva/main.h>
 #include <policy/policy.h>
@@ -728,17 +729,20 @@ BOOST_AUTO_TEST_CASE(keva_updates_undo)
   /* The constructed tx needs not be valid.  We only test
      ApplyKevaTransaction and not validation.  */
 
+  CBlockIndex pindex = CBlockIndex();
   CMutableTransaction mtx;
   mtx.SetKevacoin();
   mtx.vout.push_back(CTxOut(COIN, scrNew));
-  ApplyKevaTransaction(mtx, 100, view, undo, kevaNotifier);
+  pindex.nHeight = 100;
+  ApplyKevaTransaction(mtx, pindex, view, undo, kevaNotifier);
   BOOST_CHECK(!view.GetName(nameSpace, key1, data));
   BOOST_CHECK(view.GetNamespace(nameSpace, data));
   BOOST_CHECK(undo.vkevaundo.size() == 1);
 
   mtx.vout.clear();
   mtx.vout.push_back(CTxOut(COIN, scr1_1));
-  ApplyKevaTransaction(mtx, 200, view, undo, kevaNotifier);
+  pindex.nHeight = 200;
+  ApplyKevaTransaction(mtx, pindex, view, undo, kevaNotifier);
   BOOST_CHECK(view.GetName(nameSpace, key1, data));
   BOOST_CHECK(data.getHeight() == 200);
   BOOST_CHECK(data.getValue() == value1_old);
@@ -748,7 +752,8 @@ BOOST_AUTO_TEST_CASE(keva_updates_undo)
 
   mtx.vout.clear();
   mtx.vout.push_back(CTxOut(COIN, scr1_2));
-  ApplyKevaTransaction(mtx, 300, view, undo, kevaNotifier);
+  pindex.nHeight = 300;
+  ApplyKevaTransaction(mtx, pindex, view, undo, kevaNotifier);
   BOOST_CHECK(view.GetName(nameSpace, key1, data));
   BOOST_CHECK(data.getHeight() == 300);
   BOOST_CHECK(data.getValue() == value1_new);

@@ -31,9 +31,9 @@ struct MainSignalsInstance {
     boost::signals2::signal<void (const CBlockIndex *, const std::shared_ptr<const CBlock>&)> NewPoWValidBlock;
 
     /** Keva related */
-    boost::signals2::signal<void (const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace)> KevaNamespaceCreated;
-    boost::signals2::signal<void (const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key, const std::string& value)> KevaUpdated;
-    boost::signals2::signal<void (const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key)> KevaDeleted;
+    boost::signals2::signal<void (const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace)> KevaNamespaceCreated;
+    boost::signals2::signal<void (const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key, const std::string& value)> KevaUpdated;
+    boost::signals2::signal<void (const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key)> KevaDeleted;
 
     // We are not allowed to assume the scheduler only runs in one thread,
     // but must ensure all callbacks happen in-order, so we end up creating
@@ -200,14 +200,14 @@ void CMainSignals::NewPoWValidBlock(const CBlockIndex *pindex, const std::shared
     m_internals->NewPoWValidBlock(pindex, block);
 }
 
-void CMainSignals::KevaNamespaceCreated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace) {
-    m_internals->KevaNamespaceCreated(ptx, height, nameSpace);
+void CMainSignals::KevaNamespaceCreated(const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace) {
+    m_internals->KevaNamespaceCreated(ptx, pindex, nameSpace);
 }
 
-void CMainSignals::KevaUpdated(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key, const std::string& value) {
-    m_internals->KevaUpdated(ptx, height, nameSpace, key, value);
+void CMainSignals::KevaUpdated(const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key, const std::string& value) {
+    m_internals->KevaUpdated(ptx, pindex, nameSpace, key, value);
 }
 
-void CMainSignals::KevaDeleted(const CTransactionRef &ptx, unsigned int height, const std::string& nameSpace, const std::string& key) {
-    m_internals->KevaDeleted(ptx, height, nameSpace, key);
+void CMainSignals::KevaDeleted(const CTransactionRef &ptx, const CBlockIndex &pindex, const std::string& nameSpace, const std::string& key) {
+    m_internals->KevaDeleted(ptx, pindex, nameSpace, key);
 }
