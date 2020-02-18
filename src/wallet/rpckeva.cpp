@@ -194,7 +194,8 @@ UniValue keva_list_namespaces(const JSONRPCRequest& request)
     mempool.getUnconfirmedNamespaceList(unconfirmedNamespaces);
     for (auto entry : unconfirmedNamespaces) {
       UniValue obj(UniValue::VOBJ);
-      obj.pushKV(EncodeBase58Check(std::get<0>(entry)), ValtypeToString(std::get<1>(entry)));
+      obj.pushKV("namespaceId", EncodeBase58Check(std::get<0>(entry)));
+      obj.pushKV("displayName", ValtypeToString(std::get<1>(entry)));
       res.push_back(obj);
     }
   }
