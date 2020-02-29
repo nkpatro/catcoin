@@ -266,11 +266,11 @@ void rx_slow_hash(const uint64_t mainheight, const uint64_t seedheight, const ch
     if (cache == NULL) {
       cache = randomx_alloc_cache(flags | RANDOMX_FLAG_LARGE_PAGES);
       if (cache == NULL) {
-        printf("Couldn't use largePages for RandomX cache");
+        printf("Couldn't use largePages for RandomX cache\n");
         cache = randomx_alloc_cache(flags);
       }
       if (cache == NULL)
-        local_abort("Couldn't allocate RandomX cache");
+        local_abort("Couldn't allocate RandomX cache\n");
     }
   }
   if (rx_sp->rs_height != seedheight || rx_sp->rs_cache == NULL || memcmp(seedhash, rx_sp->rs_hash, sizeof(rx_sp->rs_hash))) {
