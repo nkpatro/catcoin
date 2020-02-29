@@ -116,6 +116,7 @@ public:
         consensus.BIP34Height = 1;
         consensus.BIP65Height = 1;
         consensus.BIP66Height = 1;
+        consensus.RandomXHeight = 35700;
         consensus.powLimit = uint256S("000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 2.0 * 60; // Two minutes
         consensus.nPowTargetSpacing = 2.0 * 60; // Two minutes
@@ -210,6 +211,7 @@ public:
         consensus.BIP34Hash = uint256S("0xa8dbaa66a9266348f6527fe528efea73227d51938befb81d5a1521cebd319c4a"); // Genesis
         consensus.BIP65Height = 1;
         consensus.BIP66Height = 1;
+        consensus.RandomXHeight = 10;
         consensus.powLimit = uint256S("000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 2.0 * 60; // Two minutes
         consensus.nPowTargetSpacing = 2.0 * 60; // Two minutes
@@ -301,6 +303,7 @@ public:
         consensus.BIP34Hash = uint256();
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
+        consensus.RandomXHeight = 1200000; // RandomxX acticated on regtest.
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 2.0 * 60; // Two minutes
         consensus.nPowTargetSpacing = 2.0 * 60; // Two minutes
@@ -333,8 +336,8 @@ public:
 
         genesis = CreateGenesisBlockTest(1296688602, 0, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x5b2e996d458adbf5c81b381f90ca167732bc9f4e9c1c4ec8485fa74efe793ed8"));
-        assert(genesis.hashMerkleRoot == uint256S("0x13ec98c3307b8e6b67b91c605c7347916a99f9dfde7b5d88365aaef322192314"));
+        assert(consensus.hashGenesisBlock == uint256S("0x5d5ac209e9ebebf459c7258347cc5cfa65f85414d6615669ce5b9b20448a89cc"));
+        assert(genesis.hashMerkleRoot == uint256S("0xb4db37fbc5c9ce5396b7d14dba94460cbcb4cf16e932b3cb6aece2244babf5b9"));
 
         vFixedSeeds.clear(); //!< Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();      //!< Regtest mode doesn't have any DNS seeds.
