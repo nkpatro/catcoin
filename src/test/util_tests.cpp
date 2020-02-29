@@ -500,6 +500,9 @@ BOOST_AUTO_TEST_CASE(test_ParseDouble)
     std::string teststr(test_bytes, sizeof(test_bytes));
     BOOST_CHECK(!ParseDouble(teststr, &n)); // no embedded NULs
     // Overflow and underflow
+    // Kevacoin: TODO the following two test cases may fail when huge page
+    // is not enable. To enable it:
+    // sudo sysctl -w vm.nr_hugepages=1280
     BOOST_CHECK(!ParseDouble("-1e10000", nullptr));
     BOOST_CHECK(!ParseDouble("1e10000", nullptr));
 }
