@@ -370,6 +370,7 @@ libbitcoin_cnutils_a_SOURCES = \
   cn_utils/cryptonote_basic/account.cpp \
   cn_utils/crypto/random.c \
   cn_utils/crypto/tree-hash.c \
+  cn_utils/crypto/rx-slow-hash.c \
   cn_utils/crypto/oaes_lib.c \
   cn_utils/crypto/aesb.c \
   cn_utils/crypto/hash-extra-groestl.c \

@@ -11,6 +11,7 @@
 #include <tinyformat.h>
 #include <utilstrencodings.h>
 #include <crypto/common.h>
+#include <validation.h>
 
 extern "C" void cn_slow_hash(const void *data, size_t length, char *hash, int variant, int prehashed, uint64_t height);
 extern "C" void cn_fast_hash(const void *data, size_t length, char *hash);
@@ -50,7 +51,15 @@ uint256 CBlockHeader::GetPoWHash() const
         return thash;
     }
     cryptonote::blobdata blob = cryptonote::t_serializable_object_to_blob(cnHeader);
-    cn_slow_hash(blob.data(), blob.size(), BEGIN(thash), cnHeader.major_version - 6, 0, nNonce);
+    uint32_t height = nNonce;
+    if (cnHeader.major_version >= RX_BLOCK_VERSION) {
+        uint64_t seed_height;
+        seed_height = rx_seedheight(height);
+        CBlockIndex* pblockindex = chainActive[seed_height];
+        rx_slow_hash(height, seed_height, (const char*)(pblockindex->GetBlockHash().begin()), blob.data(), blob.size(), BEGIN(thash), 0, 0);
+    } else {
+        cn_slow_hash(blob.data(), blob.size(), BEGIN(thash), cnHeader.major_version - 6, 0, height);
+    }    
     return thash;
 }
 

@@ -3039,7 +3039,8 @@ static bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, 
 
 static bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW = true)
 {
-    if (block.cnHeader.major_version != consensusParams.GetCryptonoteMajorVersion()) {
+    uint32_t height = block.nNonce;
+    if (block.cnHeader.major_version != consensusParams.GetCryptonoteMajorVersion(height)) {
         return state.Invalid(false, 0, "incorrect-major-version", "Cryptonote major version incorrect");
     }
 

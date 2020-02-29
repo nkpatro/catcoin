@@ -11,6 +11,7 @@
 #include <uint256.h>
 
 #include <cryptonote_basic/cryptonote_format_utils.h>
+#include <crypto/hash-ops.h>
 
 /**
  * This header is to store the proof-of-work of cryptonote mining.
