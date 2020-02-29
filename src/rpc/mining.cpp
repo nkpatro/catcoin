@@ -958,7 +958,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
 
     if (cn_block.major_version >= RX_BLOCK_VERSION) {
         uint64_t seed_height, next_height;
-        rx_seedheights(height, &seed_height, &next_height);
+        crypto::rx_seedheights(height, &seed_height, &next_height);
         result.push_back(Pair("seed_hash", chainActive[seed_height]->GetBlockHash().GetHex()));
         result.push_back(Pair("next_seed_hash", chainActive[next_height]->GetBlockHash().GetHex()));
     }

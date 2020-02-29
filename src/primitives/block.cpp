@@ -12,9 +12,33 @@
 #include <utilstrencodings.h>
 #include <crypto/common.h>
 #include <validation.h>
+#include <crypto/hash-ops.h>
 
 extern "C" void cn_slow_hash(const void *data, size_t length, char *hash, int variant, int prehashed, uint64_t height);
 extern "C" void cn_fast_hash(const void *data, size_t length, char *hash);
+
+namespace
+{
+    boost::mutex max_concurrency_lock;
+    unsigned max_concurrency = boost::thread::hardware_concurrency();
+}
+
+void set_max_concurrency(unsigned n)
+{
+    if (n < 1)
+        n = boost::thread::hardware_concurrency();
+    unsigned hwc = boost::thread::hardware_concurrency();
+    if (n > hwc)
+        n = hwc;
+    boost::lock_guard<boost::mutex> lock(max_concurrency_lock);
+    max_concurrency = n;
+}
+
+unsigned get_max_concurrency()
+{
+    boost::lock_guard<boost::mutex> lock(max_concurrency_lock);
+    return max_concurrency;
+}
 
 uint256 CBlockHeader::GetOriginalBlockHash() const
 {
@@ -54,9 +78,10 @@ uint256 CBlockHeader::GetPoWHash() const
     uint32_t height = nNonce;
     if (cnHeader.major_version >= RX_BLOCK_VERSION) {
         uint64_t seed_height;
-        seed_height = rx_seedheight(height);
+        seed_height = crypto::rx_seedheight(height);
         CBlockIndex* pblockindex = chainActive[seed_height];
-        rx_slow_hash(height, seed_height, (const char*)(pblockindex->GetBlockHash().begin()), blob.data(), blob.size(), BEGIN(thash), 0, 0);
+        crypto::rx_slow_hash(height, seed_height, (const char*)(pblockindex->GetBlockHash().begin()),
+            blob.data(), blob.size(), BEGIN(thash), get_max_concurrency(), 0);
     } else {
         cn_slow_hash(blob.data(), blob.size(), BEGIN(thash), cnHeader.major_version - 6, 0, height);
     }    

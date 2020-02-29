@@ -359,8 +359,8 @@ libbitcoin_common_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 # cnutils: shared between bitcoind, and bitcoin-qt and non-server tools
-libbitcoin_cnutils_a_CPPFLAGS = $(AM_CPPFLAGS) $(SSL_CFLAGS) -I$(srcdir)/cn_utils -I$(srcdir)/cn_utils/contrib -I$(srcdir)/cn_utils/external/easylogging++ -I$(srcdir)/cn_utils/contrib/epee/include
-libbitcoin_cnutils_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitcoin_cnutils_a_CPPFLAGS = $(AM_CPPFLAGS) $(SSL_CFLAGS) -I$(srcdir)/cn_utils -I$(srcdir)/cn_utils/randomx -I$(srcdir)/cn_utils/contrib -I$(srcdir)/cn_utils/external/easylogging++ -I$(srcdir)/cn_utils/contrib/epee/include
+libbitcoin_cnutils_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) $(PIC_FLAGS)
 libbitcoin_cnutils_a_CFLAGS = $(PIC_FLAGS)
 libbitcoin_cnutils_a_SOURCES = \
   cn_utils/cnutils.cpp \
@@ -405,7 +405,33 @@ libbitcoin_cnutils_a_SOURCES = \
   cn_utils/ringct/rctCryptoOps.c \
   cn_utils/device/device.cpp \
   cn_utils/device/device_default.cpp \
-  cn_utils/external/easylogging++/easylogging++.cc
+  cn_utils/external/easylogging++/easylogging++.cc \
+  cn_utils/randomx/argon2_avx2.c \
+  cn_utils/randomx/argon2_core.c \
+  cn_utils/randomx/argon2_ref.c \
+  cn_utils/randomx/argon2_ssse3.c \
+  cn_utils/randomx/reciprocal.c \
+  cn_utils/randomx/blake2/blake2b.c \
+  cn_utils/randomx/aes_hash.cpp \
+  cn_utils/randomx/allocator.cpp \
+  cn_utils/randomx/assembly_generator_x86.cpp \
+  cn_utils/randomx/blake2_generator.cpp \
+  cn_utils/randomx/bytecode_machine.cpp \
+  cn_utils/randomx/cpu.cpp \
+  cn_utils/randomx/dataset.cpp \
+  cn_utils/randomx/instruction.cpp \
+  cn_utils/randomx/instructions_portable.cpp \
+  cn_utils/randomx/jit_compiler_x86.cpp \
+  cn_utils/randomx/jit_compiler_x86_static.S \
+  cn_utils/randomx/randomx.cpp \
+  cn_utils/randomx/soft_aes.cpp \
+  cn_utils/randomx/superscalar.cpp \
+  cn_utils/randomx/virtual_machine.cpp \
+  cn_utils/randomx/virtual_memory.cpp \
+  cn_utils/randomx/vm_compiled.cpp \
+  cn_utils/randomx/vm_compiled_light.cpp \
+  cn_utils/randomx/vm_interpreted.cpp \
+  cn_utils/randomx/vm_interpreted_light.cpp  
 
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
