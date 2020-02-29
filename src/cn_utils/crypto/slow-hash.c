@@ -65,7 +65,7 @@ static void local_abort(const char *msg)
 #endif
 }
 
-volatile int use_v4_jit_flag = -1;
+volatile int use_v4_jit_flag = 1;
 
 static inline int use_v4_jit(void)
 {
