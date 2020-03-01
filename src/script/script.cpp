@@ -140,6 +140,11 @@ const char* GetOpName(opcodetype opcode)
     case OP_NOP9                   : return "OP_NOP9";
     case OP_NOP10                  : return "OP_NOP10";
 
+     // Keva
+    case OP_KEVA_NAMESPACE         : return "OP_KEVA_NAMESPACE";
+    case OP_KEVA_PUT               : return "OP_KEVA_PUT";
+    case OP_KEVA_DELETE            : return "OP_KEVA_DELETE";
+
     case OP_INVALIDOPCODE          : return "OP_INVALIDOPCODE";
 
     // Note:
