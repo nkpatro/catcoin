@@ -102,7 +102,6 @@ typedef __m128d rx_vec_f128;
 #define rx_aligned_alloc(a, b) _mm_malloc(a,b)
 #define rx_aligned_free(a) _mm_free(a)
 #define rx_prefetch_nta(x) _mm_prefetch((const char *)(x), _MM_HINT_NTA)
-#define rx_prefetch_t0(x) _mm_prefetch((const char *)(x), _MM_HINT_T0)
 
 #define rx_load_vec_f128 _mm_load_pd
 #define rx_store_vec_f128 _mm_store_pd
@@ -202,7 +201,6 @@ typedef union{
 #define rx_aligned_alloc(a, b) malloc(a)
 #define rx_aligned_free(a) free(a)
 #define rx_prefetch_nta(x)
-#define rx_prefetch_t0(x)
 
 /* Splat 64-bit long long to 2 64-bit long longs */
 FORCE_INLINE __m128i vec_splat2sd (int64_t scalar)
@@ -401,10 +399,6 @@ inline void rx_prefetch_nta(void* ptr) {
 	asm volatile ("prfm pldl1strm, [%0]\n" : : "r" (ptr));
 }
 
-inline void rx_prefetch_t0(const void* ptr) {
-	asm volatile ("prfm pldl1strm, [%0]\n" : : "r" (ptr));
-}
-
 FORCE_INLINE rx_vec_f128 rx_load_vec_f128(const double* pd) {
 	return vld1q_f64((const float64_t*)pd);
 }
@@ -538,7 +532,6 @@ typedef union {
 #define rx_aligned_alloc(a, b) malloc(a)
 #define rx_aligned_free(a) free(a)
 #define rx_prefetch_nta(x)
-#define rx_prefetch_t0(x)
 
 FORCE_INLINE rx_vec_f128 rx_load_vec_f128(const double* pd) {
 	rx_vec_f128 x;

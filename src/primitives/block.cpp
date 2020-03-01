@@ -40,6 +40,16 @@ unsigned get_max_concurrency()
     return max_concurrency;
 }
 
+static uint256 cn_get_block_hash_by_height(uint64_t seed_height, char cnHash[32])
+{
+    CBlockIndex* pblockindex = chainActive[seed_height];
+    uint256 blockHash = pblockindex->GetBlockHash();
+    const unsigned char* pHash = blockHash.begin();
+    for (int j = 31; j >= 0; j--) {
+        cnHash[31 - j] = pHash[j];
+    }
+}
+
 uint256 CBlockHeader::GetOriginalBlockHash() const
 {
     CHashWriter hashWriter(SER_GETHASH, PROTOCOL_VERSION);
@@ -78,13 +88,13 @@ uint256 CBlockHeader::GetPoWHash() const
     uint32_t height = nNonce;
     if (cnHeader.major_version >= RX_BLOCK_VERSION) {
         uint64_t seed_height;
+        char cnHash[32];
         seed_height = crypto::rx_seedheight(height);
-        CBlockIndex* pblockindex = chainActive[seed_height];
-        crypto::rx_slow_hash(height, seed_height, (const char*)(pblockindex->GetBlockHash().begin()),
-            blob.data(), blob.size(), BEGIN(thash), get_max_concurrency(), 0);
+        cn_get_block_hash_by_height(seed_height, cnHash);
+        crypto::rx_slow_hash(height, seed_height, cnHash, blob.data(), blob.size(), BEGIN(thash), get_max_concurrency(), 0);
     } else {
         cn_slow_hash(blob.data(), blob.size(), BEGIN(thash), cnHeader.major_version - 6, 0, height);
-    }    
+    }
     return thash;
 }
 
