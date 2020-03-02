@@ -75,7 +75,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 //Scratchpad L2 size in bytes. Must be a power of two and less than or equal to RANDOMX_SCRATCHPAD_L3.
+#ifdef _KEVACOIN
+#define RANDOMX_SCRATCHPAD_L2      131072
+#else
 #define RANDOMX_SCRATCHPAD_L2      262144
+#endif
 
 //Scratchpad L1 size in bytes. Must be a power of two (minimum 64) and less than or equal to RANDOMX_SCRATCHPAD_L2.
 #define RANDOMX_SCRATCHPAD_L1      16384
