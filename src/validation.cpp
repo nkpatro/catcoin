@@ -3245,7 +3245,7 @@ static bool ContextualCheckBlock(const CBlock& block, CValidationState& state, c
     }
 
     int64_t nLockTimeCutoff = (nLockTimeFlags & LOCKTIME_MEDIAN_TIME_PAST)
-                              ? pindexPrev->GetMedianTimePast()
+                              ? (pindexPrev ? pindexPrev->GetMedianTimePast() : block.GetBlockTime())
                               : block.GetBlockTime();
 
     // Check that all transactions are finalized
