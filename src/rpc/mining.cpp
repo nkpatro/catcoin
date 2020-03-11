@@ -883,8 +883,7 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
 
     cryptonote::block cn_block;
     // block_header
-    // const int cn_variant = b.major_version >= 7 ? b.major_version - 6 : 0;
-    cn_block.major_version = consensusParams.GetCryptonoteMajorVersion();
+    cn_block.major_version = consensusParams.GetCryptonoteMajorVersion(pblock->nNonce);
     cn_block.minor_version = 0;
     cn_block.timestamp = pblock->GetBlockTime();
     // The prev_id is used to store kevacoin block hash, as a proof of work.
@@ -954,8 +953,15 @@ UniValue getblocktemplate(const JSONRPCRequest& request)
     result.push_back(Pair("blocktemplate_blob", hex_template_blob));
     result.push_back(Pair("difficulty", (double)difficulty));
     result.push_back(Pair("height", (uint64_t)height));
-    result.push_back(Pair("prev_hash", pblock->hashPrevBlock.GetHex()));
+    result.push_back(Pair("prev_hash", pblock->hashPrevBlock.GetHex()));    
     result.push_back(Pair("reserved_offset", (uint64_t)reserved_offset));
+
+    if (cn_block.major_version >= RX_BLOCK_VERSION) {
+        uint64_t seed_height, next_height;
+        crypto::rx_seedheights(height, &seed_height, &next_height);
+        result.push_back(Pair("seed_hash", chainActive[seed_height]->GetBlockHash().GetHex()));
+        result.push_back(Pair("next_seed_hash", chainActive[next_height]->GetBlockHash().GetHex()));
+    }
 
     // Kevacoin specific entries. Not used for now and may be useful in the future.
     result.push_back(Pair("rules", aRules));

@@ -116,6 +116,7 @@ public:
         consensus.BIP34Height = 1;
         consensus.BIP65Height = 1;
         consensus.BIP66Height = 1;
+        consensus.RandomXHeight = 35700;
         consensus.powLimit = uint256S("000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 2.0 * 60; // Two minutes
         consensus.nPowTargetSpacing = 2.0 * 60; // Two minutes
@@ -210,6 +211,7 @@ public:
         consensus.BIP34Hash = uint256S("0xa8dbaa66a9266348f6527fe528efea73227d51938befb81d5a1521cebd319c4a"); // Genesis
         consensus.BIP65Height = 1;
         consensus.BIP66Height = 1;
+        consensus.RandomXHeight = 10;
         consensus.powLimit = uint256S("000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 2.0 * 60; // Two minutes
         consensus.nPowTargetSpacing = 2.0 * 60; // Two minutes
@@ -246,9 +248,9 @@ public:
         nDefaultPort = 19335;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlockTest(1573082080, 11061, 0x1f0ffff0, 1, 500 * COIN);
+        genesis = CreateGenesisBlockTest(1582997614, 3536, 0x1f0ffff0, 1, 500 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("a540f9f5826989d09baef56b4f43ea8ef7638f99e870327c1cc552626cbf8e4e"));
+        assert(consensus.hashGenesisBlock == uint256S("21ebe179e22753b30e605f0381f6a313cdd16d09b2310db8d5bc87ada743269f"));
         assert(genesis.hashMerkleRoot == uint256S("d85a90623fbff6a5ea4b80df1dbc81b32de7f1011f484e186cfb7cf2d4292c95"));
 
         vFixedSeeds.clear();
@@ -301,6 +303,7 @@ public:
         consensus.BIP34Hash = uint256();
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
+        consensus.RandomXHeight = 20; // RandomxX acticated on regtest.
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 2.0 * 60; // Two minutes
         consensus.nPowTargetSpacing = 2.0 * 60; // Two minutes
