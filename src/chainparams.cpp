@@ -116,7 +116,7 @@ public:
         consensus.BIP34Height = 1;
         consensus.BIP65Height = 1;
         consensus.BIP66Height = 1;
-        consensus.RandomXHeight = 35700;
+        consensus.RandomXHeight = 46130;
         consensus.powLimit = uint256S("000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 2.0 * 60; // Two minutes
         consensus.nPowTargetSpacing = 2.0 * 60; // Two minutes
@@ -141,7 +141,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork  = uint256S("0x00000000000000000000000000000000000000000000000000000044cb53ac55");
+        consensus.nMinimumChainWork  = uint256S("0x00000000000000000000000000000000000000000000000000000999a6a433f7");
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
@@ -211,7 +211,7 @@ public:
         consensus.BIP34Hash = uint256S("0xa8dbaa66a9266348f6527fe528efea73227d51938befb81d5a1521cebd319c4a"); // Genesis
         consensus.BIP65Height = 1;
         consensus.BIP66Height = 1;
-        consensus.RandomXHeight = 10;
+        consensus.RandomXHeight = 6030;
         consensus.powLimit = uint256S("000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 2.0 * 60; // Two minutes
         consensus.nPowTargetSpacing = 2.0 * 60; // Two minutes
