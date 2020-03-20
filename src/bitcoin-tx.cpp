@@ -33,6 +33,8 @@ static const int CONTINUE_EXECUTION=-1;
 
 // To fix the chainActive not defined error.
 CChain chainActive;
+typedef std::map<uint64_t, CBlockIndex*> BlockSeedHeightMap;
+BlockSeedHeightMap mapBlockSeedHeight;
 
 //
 // This function returns either one of EXIT_ codes when it's expected to stop the process or
