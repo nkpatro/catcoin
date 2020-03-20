@@ -33,12 +33,8 @@ static const int CONTINUE_EXECUTION=-1;
 
 // To fix the chainActive not defined error.
 CChain chainActive;
-struct BlockHasher
-{
-    size_t operator()(const uint256& hash) const { return hash.GetCheapHash(); }
-};
-typedef std::unordered_map<uint256, CBlockIndex*, BlockHasher> BlockMap;
-BlockMap mapBlockIndex;
+typedef std::map<uint64_t, CBlockIndex*> BlockSeedHeightMap;
+BlockSeedHeightMap mapBlockSeedHeight;
 
 //
 // This function returns either one of EXIT_ codes when it's expected to stop the process or

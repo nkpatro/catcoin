@@ -154,6 +154,7 @@ public:
     CChain chainActive;
     BlockMap mapBlockIndex;
     std::multimap<CBlockIndex*, CBlockIndex*> mapBlocksUnlinked;
+    BlockSeedHeightMap mapBlockSeedHeight;
     CBlockIndex *pindexBestInvalid = nullptr;
 
     bool LoadBlockIndex(const Consensus::Params& consensus_params, CBlockTreeDB& blocktree);
@@ -206,6 +207,7 @@ private:
 CCriticalSection cs_main;
 
 BlockMap& mapBlockIndex = g_chainstate.mapBlockIndex;
+BlockSeedHeightMap& mapBlockSeedHeight = g_chainstate.mapBlockSeedHeight;
 CChain& chainActive = g_chainstate.chainActive;
 CBlockIndex *pindexBestHeader = nullptr;
 CWaitableCriticalSection csBestBlock;
@@ -2880,6 +2882,10 @@ CBlockIndex* CChainState::AddToBlockIndex(const CBlockHeader& block)
     // to avoid miners withholding blocks but broadcasting headers, to get a
     // competitive advantage.
     pindexNew->nSequenceId = 0;
+    uint64_t height = block.nNonce;
+    if (crypto::is_a_seed_height(height)) {
+        mapBlockSeedHeight.insert(std::make_pair(height, pindexNew));
+    }
     BlockMap::iterator mi = mapBlockIndex.insert(std::make_pair(hash, pindexNew)).first;
     pindexNew->phashBlock = &((*mi).first);
     BlockMap::iterator miPrev = mapBlockIndex.find(block.hashPrevBlock);

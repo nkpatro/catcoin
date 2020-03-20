@@ -17,50 +17,14 @@
 extern "C" void cn_slow_hash(const void *data, size_t length, char *hash, int variant, int prehashed, uint64_t height);
 extern "C" void cn_fast_hash(const void *data, size_t length, char *hash);
 
-namespace
-{
-    boost::mutex max_concurrency_lock;
-    unsigned max_concurrency = boost::thread::hardware_concurrency();
-}
-
-void set_max_concurrency(unsigned n)
-{
-    if (n < 1)
-        n = boost::thread::hardware_concurrency();
-    unsigned hwc = boost::thread::hardware_concurrency();
-    if (n > hwc)
-        n = hwc;
-    boost::lock_guard<boost::mutex> lock(max_concurrency_lock);
-    max_concurrency = n;
-}
-
-unsigned get_max_concurrency()
-{
-    boost::lock_guard<boost::mutex> lock(max_concurrency_lock);
-    return max_concurrency;
-}
-
 static uint256 cn_get_block_hash_by_height(uint64_t seed_height, char cnHash[32])
 {
     CBlockIndex* pblockindex = chainActive[seed_height];
     if (pblockindex == NULL) {
         // This will only happens during initial block download.
-        static std::map<uint64_t, CBlockIndex*> mapBlockHeight;
-        std::map<uint64_t, CBlockIndex*>::iterator iter = mapBlockHeight.find(seed_height);
-        if (iter != mapBlockHeight.end()) {
-            pblockindex = iter->second;
-        } else {
-            for (const std::pair<uint256, CBlockIndex*>& item : mapBlockIndex)
-            {
-                CBlockIndex* pindex = item.second;
-                if (pindex->nNonce == seed_height) {
-                    pblockindex = pindex;
-                    mapBlockHeight.insert(std::make_pair(seed_height, pindex));
-                    break;
-                }
-            }
-        }
+        pblockindex = mapBlockSeedHeight.find(seed_height)->second;
     }
+    assert(pblockindex != NULL);
     uint256 blockHash = pblockindex->GetBlockHash();
     const unsigned char* pHash = blockHash.begin();
     for (int j = 31; j >= 0; j--) {
@@ -109,7 +73,7 @@ uint256 CBlockHeader::GetPoWHash() const
         char cnHash[32];
         seed_height = crypto::rx_seedheight(height);
         cn_get_block_hash_by_height(seed_height, cnHash);
-        crypto::rx_slow_hash(height, seed_height, cnHash, blob.data(), blob.size(), BEGIN(thash), get_max_concurrency(), 0);
+        crypto::rx_slow_hash(height, seed_height, cnHash, blob.data(), blob.size(), BEGIN(thash), 0, 0);
     } else {
         cn_slow_hash(blob.data(), blob.size(), BEGIN(thash), cnHeader.major_version - 6, 0, height);
     }

@@ -139,6 +139,11 @@ void rx_seedheights(const uint64_t height, uint64_t *seedheight, uint64_t *nexth
   *nextheight = rx_seedheight(height + SEEDHASH_EPOCH_LAG);
 }
 
+int is_a_seed_height(const uint64_t height) {
+    uint64_t next_seed_hegith = rx_seedheight(height + SEEDHASH_EPOCH_LAG + 1);
+    return (height == next_seed_hegith);
+}
+
 typedef struct seedinfo {
   randomx_cache *si_cache;
   unsigned long si_start;
