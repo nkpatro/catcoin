@@ -191,7 +191,7 @@ private:
 
     CBlockIndex* AddToBlockIndex(const CBlockHeader& block);
     /** Create a new block index entry for a given block hash */
-    CBlockIndex * InsertBlockIndex(const uint256& hash);
+    CBlockIndex * InsertBlockIndex(const uint256& hash, int nHeight);
     void CheckBlockIndex(const Consensus::Params& consensusParams);
 
     void InvalidBlockFound(CBlockIndex *pindex, const CValidationState &state);
@@ -3759,7 +3759,7 @@ fs::path GetBlockPosFilename(const CDiskBlockPos &pos, const char *prefix)
     return GetDataDir() / "blocks" / strprintf("%s%05u.dat", prefix, pos.nFile);
 }
 
-CBlockIndex * CChainState::InsertBlockIndex(const uint256& hash)
+CBlockIndex * CChainState::InsertBlockIndex(const uint256& hash, int nHeight)
 {
     if (hash.IsNull())
         return nullptr;
@@ -3771,6 +3771,13 @@ CBlockIndex * CChainState::InsertBlockIndex(const uint256& hash)
 
     // Create new
     CBlockIndex* pindexNew = new CBlockIndex();
+    if (nHeight < 0) {
+        nHeight = 0;
+    }
+    pindexNew->nNonce = nHeight;
+    if (crypto::is_a_seed_height(nHeight)) {
+        mapBlockSeedHeight.insert(std::make_pair(nHeight, pindexNew));
+    }
     mi = mapBlockIndex.insert(std::make_pair(hash, pindexNew)).first;
     pindexNew->phashBlock = &((*mi).first);
 
@@ -3779,7 +3786,7 @@ CBlockIndex * CChainState::InsertBlockIndex(const uint256& hash)
 
 bool CChainState::LoadBlockIndex(const Consensus::Params& consensus_params, CBlockTreeDB& blocktree)
 {
-    if (!blocktree.LoadBlockIndexGuts(consensus_params, [this](const uint256& hash){ return this->InsertBlockIndex(hash); }))
+    if (!blocktree.LoadBlockIndexGuts(consensus_params, [this](const uint256& hash, int nHeight){ return this->InsertBlockIndex(hash, nHeight); }))
         return false;
 
     boost::this_thread::interruption_point();
@@ -4243,6 +4250,7 @@ void UnloadBlockIndex()
         delete entry.second;
     }
     mapBlockIndex.clear();
+    mapBlockSeedHeight.clear();
     fHavePruned = false;
 
     g_chainstate.UnloadBlockIndex();
@@ -4791,5 +4799,6 @@ public:
         for (; it1 != mapBlockIndex.end(); it1++)
             delete (*it1).second;
         mapBlockIndex.clear();
+        mapBlockSeedHeight.clear();
     }
 } instance_of_cmaincleanup;
