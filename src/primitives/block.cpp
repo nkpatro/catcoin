@@ -43,6 +43,24 @@ unsigned get_max_concurrency()
 static uint256 cn_get_block_hash_by_height(uint64_t seed_height, char cnHash[32])
 {
     CBlockIndex* pblockindex = chainActive[seed_height];
+    if (pblockindex == NULL) {
+        // This will only happens during initial block download.
+        static std::map<uint64_t, CBlockIndex*> mapBlockHeight;
+        std::map<uint64_t, CBlockIndex*>::iterator iter = mapBlockHeight.find(seed_height);
+        if (iter != mapBlockHeight.end()) {
+            pblockindex = iter->second;
+        } else {
+            for (const std::pair<uint256, CBlockIndex*>& item : mapBlockIndex)
+            {
+                CBlockIndex* pindex = item.second;
+                if (pindex->nNonce == seed_height) {
+                    pblockindex = pindex;
+                    mapBlockHeight.insert(std::make_pair(seed_height, pindex));
+                    break;
+                }
+            }
+        }
+    }
     uint256 blockHash = pblockindex->GetBlockHash();
     const unsigned char* pHash = blockHash.begin();
     for (int j = 31; j >= 0; j--) {
