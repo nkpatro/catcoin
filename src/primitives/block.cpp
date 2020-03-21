@@ -17,14 +17,16 @@
 extern "C" void cn_slow_hash(const void *data, size_t length, char *hash, int variant, int prehashed, uint64_t height);
 extern "C" void cn_fast_hash(const void *data, size_t length, char *hash);
 
-static uint256 cn_get_block_hash_by_height(uint64_t seed_height, char cnHash[32])
+static void cn_get_block_hash_by_height(uint64_t seed_height, char cnHash[32])
 {
     CBlockIndex* pblockindex = chainActive[seed_height];
     if (pblockindex == NULL) {
         // This will only happens during initial block download.
         pblockindex = mapBlockSeedHeight.find(seed_height)->second;
     }
-    assert(pblockindex != NULL);
+    if (pblockindex == NULL) {
+        return;
+    }
     uint256 blockHash = pblockindex->GetBlockHash();
     const unsigned char* pHash = blockHash.begin();
     for (int j = 31; j >= 0; j--) {
