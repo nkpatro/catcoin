@@ -164,7 +164,7 @@ UniValue keva_filter(const JSONRPCRequest& request)
         "\nArguments:\n"
         "1. \"namespace\"   (string) namespace Id\n"
         "2. \"regexp\"      (string, optional) filter keys with this regexp\n"
-        "3. \"maxage\"      (numeric, optional, default=36000) only consider names updated in the last \"maxage\" blocks; 0 means all names\n"
+        "3. \"maxage\"      (numeric, optional, default=96000) only consider names updated in the last \"maxage\" blocks; 0 means all names\n"
         "4. \"from\"        (numeric, optional, default=0) return from this position onward; index starts at 0\n"
         "5. \"nb\"          (numeric, optional, default=0) return only \"nb\" entries; 0 means all\n"
         "6. \"stat\"        (string, optional) if set to the string \"stat\", print statistics instead of returning the names\n"
@@ -175,7 +175,7 @@ UniValue keva_filter(const JSONRPCRequest& request)
         "]\n"
         "\nExamples:\n"
         + HelpExampleCli ("keva_filter", "\"^id/\"")
-        + HelpExampleCli ("keva_filter", "\"^id/\" 36000 0 0 \"stat\"")
+        + HelpExampleCli ("keva_filter", "\"^id/\" 96000 0 0 \"stat\"")
         + HelpExampleRpc ("keva_filter", "\"^d/\"")
       );
 
@@ -198,7 +198,7 @@ UniValue keva_filter(const JSONRPCRequest& request)
   boost::xpressive::sregex regexp;
 
   valtype nameSpace;
-  int maxage(36000), from(0), nb(0);
+  int maxage(96000), from(0), nb(0);
   bool stats(false);
 
   if (request.params.size() >= 1) {
