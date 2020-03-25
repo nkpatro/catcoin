@@ -144,6 +144,11 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "rescanblockchain", 0, "start_height"},
     { "rescanblockchain", 1, "stop_height"},
     { "getblockheaderbyheight", 0, "height"},
+
+    // Keva related APIs
+    { "keva_filter", 2, "maxage"},
+    { "keva_filter", 3, "from"},
+    { "keva_filter", 4, "nb"},
 };
 
 class CRPCConvertTable
