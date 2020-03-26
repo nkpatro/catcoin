@@ -34,6 +34,7 @@ static const int CONTINUE_EXECUTION=-1;
 // To fix the chainActive not defined error.
 CChain chainActive;
 typedef std::map<uint64_t, CBlockIndex*> BlockSeedHeightMap;
+CCriticalSection cs_main;
 BlockSeedHeightMap mapBlockSeedHeight;
 
 //

@@ -21,6 +21,7 @@ static void cn_get_block_hash_by_height(uint64_t seed_height, char cnHash[32])
 {
     CBlockIndex* pblockindex = chainActive[seed_height];
     if (pblockindex == NULL) {
+        AssertLockHeld(cs_main);
         // This will only happens during initial block download.
         pblockindex = mapBlockSeedHeight.find(seed_height)->second;
     }
