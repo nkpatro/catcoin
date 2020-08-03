@@ -52,7 +52,7 @@ The Litecoin repo's [root README](/README.md) contains relevant information on t
 
 - [Developer Notes](developer-notes.md)
 - [Productivity Notes](productivity.md)
-- [Release Notes](release-notes.md)
+- [Release Notes](release-notes-litecoin.md)
 - [Release Process](release-process.md)
 - [Translation Process](translation_process.md)
 - [Translation Strings Policy](translation_strings_policy.md)
@@ -69,7 +69,7 @@ The Litecoin repo's [root README](/README.md) contains relevant information on t
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)
-- [bitcoin.conf Configuration File](bitcoin-conf.md)
+- [litecoin.conf Configuration File](litecoin-conf.md)
 - [Files](files.md)
 - [Fuzz-testing](fuzzing.md)
 - [Reduce Traffic](reduce-traffic.md)
