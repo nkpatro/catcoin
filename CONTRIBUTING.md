@@ -1,5 +1,5 @@
 Contributing to Litecoin Core
-============================
+=============================
 
 The Litecoin Core project operates an open contributor model where anyone is
 welcome to contribute towards development in the form of peer review, testing
@@ -23,11 +23,6 @@ with the web client, [webchat.freenode.net](https://webchat.freenode.net/).
 
 Discussion about code base improvements happens in GitHub issues and on pull
 requests.
-
-The developer
-[mailing list](https://groups.google.com/forum/#!forum/litecoin-dev)
-should be used to discuss complicated or controversial changes before working on
-a patch set.
 
 
 Contributor Workflow
