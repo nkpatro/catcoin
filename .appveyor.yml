@@ -52,7 +52,7 @@ before_test:
 test_script:
 - cmd: src\test_litecoin.exe -k stdout -e stdout 2> NUL
 - cmd: src\bench_litecoin.exe -evals=1 -scaling=0 > NUL
-- ps:  python test\util\bitcoin-util-test.py
+- ps:  python test\util\litecoin-util-test.py
 - cmd: python test\util\rpcauth-test.py
 - cmd: python test\functional\test_runner.py --ci --quiet --combinedlogslen=4000 --failfast
 deploy: off
