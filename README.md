@@ -3,7 +3,7 @@ SCPFoundation Core integration/staging tree
 
 [![Build Status](https://travis-ci.org/scpfoundation-project/scpfoundation.svg?branch=master)](https://travis-ci.org/scpfoundation-project/scpfoundation)
 
-https://scpfoundation.org
+http://scp-jp-sandbox3.wikidot.com/draft:6861450-3-a538
 
 What is SCPFoundation?
 ----------------
@@ -15,7 +15,7 @@ out collectively by the network. SCPFoundation Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the SCPFoundation Core software, see [https://scpfoundation.org](https://scpfoundation.org).
+the SCPFoundation Core software, see .http://scp-jp-sandbox3.wikidot.com/draft:6861450-3-a538
 
 License
 -------
@@ -32,7 +32,7 @@ regularly to indicate new official, stable release versions of SCPFoundation Cor
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-The developer [mailing list](https://groups.google.com/forum/#!forum/scpfoundation-dev)
+The developer [mailing list]
 should be used to discuss complicated or controversial changes before working
 on a patch set.
 
