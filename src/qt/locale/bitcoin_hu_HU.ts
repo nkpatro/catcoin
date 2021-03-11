@@ -62,12 +62,12 @@
         <translation>Fogadó címek</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ezek az Ön kifizetéseinek küldésekor használandó Litecoin-címek. Fizetés indítása előtt mindig ellenőrizze az összeget és a fogadó címet!</translation>
+        <source>These are your SCPFoundation addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Ezek az Ön kifizetéseinek küldésekor használandó SCPFoundation-címek. Fizetés indítása előtt mindig ellenőrizze az összeget és a fogadó címet!</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Ezek az Ön fizetéseinek fogadásakor használandó Litecoin-címek. Célszerű minden tranzakcióhoz új fogadó címet használni.</translation>
+        <source>These are your SCPFoundation addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Ezek az Ön fizetéseinek fogadásakor használandó SCPFoundation-címek. Célszerű minden tranzakcióhoz új fogadó címet használni.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -172,8 +172,8 @@
         <translation>Tárca titkosításának jóváhagyása</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
-        <translation>Figyelem: Ha titkosítja a pénztárcáját, és elveszíti a jelszóhalmazt, akkor &lt;b&gt;NEM TUD TÖBBET HOZZÁFÉRNI A LITECOINJAIHOZ&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR SCPFOUNDATIONS&lt;/b&gt;!</source>
+        <translation>Figyelem: Ha titkosítja a pénztárcáját, és elveszíti a jelszóhalmazt, akkor &lt;b&gt;NEM TUD TÖBBET HOZZÁFÉRNI A SCPFOUNDATIONJAIHOZ&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -182,6 +182,10 @@
     <message>
         <source>Wallet encrypted</source>
         <translation>Tárca titkosítva</translation>
+    </message>
+    <message>
+        <source>%1 will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your scpfoundations from being stolen by malware infecting your computer.</source>
+        <translation>%1 Most az ablak bezáródik, amíg befejeződik a titkosítási folyamat. Kérem vegye figyelembe, hogy a pénztárca titkosítása nem jelenti a scpfoundationjai teljes körű védelmét, a számítógépét esetlegesen megfertőző kártékony programoktól.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -246,6 +250,10 @@
         <translation>Á&amp;ttekintés</translation>
     </message>
     <message>
+        <source>Node</source>
+        <translation>Csomópont</translation>
+    </message>
+    <message>
         <source>Show general overview of wallet</source>
         <translation>A pénztárca általános áttekintése</translation>
     </message>
@@ -302,6 +310,14 @@
         <translation>&amp;Jelszóhalmaz megváltoztatása</translation>
     </message>
     <message>
+        <source>&amp;Sending addresses...</source>
+        <translation>&amp;Címek küldése</translation>
+    </message>
+    <message>
+        <source>&amp;Receiving addresses...</source>
+        <translation>Címek &amp;fogadása</translation>
+    </message>
+    <message>
         <source>Open &amp;URI...</source>
         <translation>&amp;URI... Megnyitása</translation>
     </message>
@@ -326,8 +342,8 @@
         <translation>A blokkok újraindexelése folyik a merevlemezen...</translation>
     </message>
     <message>
-        <source>Send coins to a Litecoin address</source>
-        <translation>Érmék küldése egy Litecoin címre</translation>
+        <source>Send coins to a SCPFoundation address</source>
+        <translation>Érmék küldése egy SCPFoundation címre</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -350,8 +366,12 @@
         <translation>Üzenet &amp;ellenőrzése</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>SCPFoundation</source>
+        <translation>SCPFoundation</translation>
+    </message>
+    <message>
+        <source>Wallet</source>
+        <translation>Tárca</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -374,12 +394,12 @@
         <translation>Tárcájához tartozó privát kulcsok titkosítása</translation>
     </message>
     <message>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
-        <translation>Írja alá az üzeneteit a Litecoin címével, hogy bizonyítsa Öntől származnak</translation>
+        <source>Sign messages with your SCPFoundation addresses to prove you own them</source>
+        <translation>Írja alá az üzeneteit a SCPFoundation címével, hogy bizonyítsa Öntől származnak</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
-        <translation>Ellenőrizze az üzeneteket, hogy a megadott Litecoin címekkel lettek-e aláírva</translation>
+        <source>Verify messages to ensure they were signed with specified SCPFoundation addresses</source>
+        <translation>Ellenőrizze az üzeneteket, hogy a megadott SCPFoundation címekkel lettek-e aláírva</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -398,8 +418,8 @@
         <translation>Ablak fülek eszköztára</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and litecoin: URIs)</source>
-        <translation>Kérjen fizetéseket (QR kódokat generál és litecoin: URLeket)</translation>
+        <source>Request payments (generates QR codes and scpfoundation: URIs)</source>
+        <translation>Kérjen fizetéseket (QR kódokat generál és scpfoundation: URLeket)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -410,16 +430,16 @@
         <translation>Mutassa a használt fogadó címek és cimkék listáját</translation>
     </message>
     <message>
-        <source>Open a litecoin: URI or payment request</source>
-        <translation>Nyisson meg egy litecoin: URI-t vagy fizetési kérelmet</translation>
+        <source>Open a scpfoundation: URI or payment request</source>
+        <translation>Nyisson meg egy scpfoundation: URI-t vagy fizetési kérelmet</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Parancssor beállításai</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Litecoin network</source>
-        <translation><numerusform>%n aktív kapcsolat a Litecoin-hálózaton</numerusform><numerusform>%n aktív kapcsolat a Litecoin-hálózaton</numerusform></translation>
+        <source>%n active connection(s) to SCPFoundation network</source>
+        <translation><numerusform>%n aktív kapcsolat a SCPFoundation-hálózaton</numerusform><numerusform>%n aktív kapcsolat a SCPFoundation-hálózaton</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -462,12 +482,8 @@
         <translation>Naprakész</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Litecoin command-line options</source>
-        <translation>Mutassa a %1 súgó üzenetet a lehetséges Litecoin parancssori beállítások listájáért</translation>
-    </message>
-    <message>
-        <source>&amp;Window</source>
-        <translation>&amp;Ablak</translation>
+        <source>Show the %1 help message to get a list with possible SCPFoundation command-line options</source>
+        <translation>Mutassa a %1 súgó üzenetet a lehetséges SCPFoundation parancssori beállítások listájáért</translation>
     </message>
     <message>
         <source>%1 client</source>
@@ -536,8 +552,8 @@
         <translation>Tárca &lt;b&gt;titkosítva&lt;/b&gt; és jelenleg &lt;b&gt;zárolva&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
-        <translation>Fatális hiba történt. A Litecoin program nem tud tovább biztonságosan működni és be fog záródni.</translation>
+        <source>A fatal error occurred. SCPFoundation can no longer continue safely and will quit.</source>
+        <translation>Fatális hiba történt. A SCPFoundation program nem tud tovább biztonságosan működni és be fog záródni.</translation>
     </message>
 </context>
 <context>
@@ -714,6 +730,10 @@
         <translation>&amp;Cím</translation>
     </message>
     <message>
+        <source>New receiving address</source>
+        <translation>Új fogadási cím</translation>
+    </message>
+    <message>
         <source>New sending address</source>
         <translation>Új küldési cím</translation>
     </message>
@@ -726,8 +746,12 @@
         <translation>Küldési cím szerkesztése</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Litecoin address.</source>
-        <translation>A megadott cím"%1" nem egy érvényes Litecoin cím.</translation>
+        <source>The entered address "%1" is not a valid SCPFoundation address.</source>
+        <translation>A megadott cím"%1" nem egy érvényes SCPFoundation cím.</translation>
+    </message>
+    <message>
+        <source>The entered address "%1" is already in the address book.</source>
+        <translation>A megadott cím "%1" már szerepel a címlistában.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -779,6 +803,42 @@
         <source>Command-line options</source>
         <translation>Parancssor beállításai</translation>
     </message>
+    <message>
+        <source>Usage:</source>
+        <translation>Használat:</translation>
+    </message>
+    <message>
+        <source>command-line options</source>
+        <translation>parancssor beállításai</translation>
+    </message>
+    <message>
+        <source>UI Options:</source>
+        <translation>Felhasználói felület beállításai</translation>
+    </message>
+    <message>
+        <source>Choose data directory on startup (default: %u)</source>
+        <translation>Adja meg az indításkor használt adat könyvtárat (alapbeállítás: %u)</translation>
+    </message>
+    <message>
+        <source>Set language, for example "de_DE" (default: system locale)</source>
+        <translation>Nyelv beállítása, például "de_DE" (alaphelyzetben: a helyi rendszer nyelve)</translation>
+    </message>
+    <message>
+        <source>Start minimized</source>
+        <translation>Indítás rejtett ablakkal</translation>
+    </message>
+    <message>
+        <source>Set SSL root certificates for payment request (default: -system-)</source>
+        <translation>A fizetési kérelmek SSL tanúsítványainak beállítása (alaphelyzetben: -a rendszer beállításai szerint-)</translation>
+    </message>
+    <message>
+        <source>Show splash screen on startup (default: %u)</source>
+        <translation>Mutassa a kezdő képet indításkor (alaphelyzetben: %u)</translation>
+    </message>
+    <message>
+        <source>Reset all settings changed in the GUI</source>
+        <translation>A grafikus felület összes megváltoztatott beállításának a visszaállítása</translation>
+    </message>
 </context>
 <context>
     <name>Intro</name>
@@ -815,8 +875,8 @@
         <translation>Egyéni adatmappa használata:</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>Litecoin</translation>
+        <source>SCPFoundation</source>
+        <translation>SCPFoundation</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
@@ -827,8 +887,8 @@
         <translation>Hozzávetőlegesen %1 GB adatot fogunk ebben a könyvtárban tárolni.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Litecoin block chain.</source>
-        <translation>%1 le fog töltődni és a Litecoin blokk lánc egy másolatát fogja tárolni.</translation>
+        <source>%1 will download and store a copy of the SCPFoundation block chain.</source>
+        <translation>%1 le fog töltődni és a SCPFoundation blokk lánc egy másolatát fogja tárolni.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -854,12 +914,12 @@
         <translation>Űrlap</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the litecoin network, as detailed below.</source>
-        <translation>A legutóbbi tranzakciók még lehet, hogy nem látszanak, ezért előfordulhat, hogy a pénztárca egyenlege nem a valós állapotot mutatja. Ha a pénztárca befejezte a szinkronizációt a litecoin hálózattal, utána már az aktuális egyenleget fogja mutatni, amint alant részletesen látszik.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the scpfoundation network, as detailed below.</source>
+        <translation>A legutóbbi tranzakciók még lehet, hogy nem látszanak, ezért előfordulhat, hogy a pénztárca egyenlege nem a valós állapotot mutatja. Ha a pénztárca befejezte a szinkronizációt a scpfoundation hálózattal, utána már az aktuális egyenleget fogja mutatni, amint alant részletesen látszik.</translation>
     </message>
     <message>
-        <source>Attempting to spend litecoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>A hálózat nem fogadja el azoknak a litecoinoknak az elköltését, amelyek érintettek a még nem látszódó tranzakciókban.</translation>
+        <source>Attempting to spend scpfoundations that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>A hálózat nem fogadja el azoknak a scpfoundationoknak az elköltését, amelyek érintettek a még nem látszódó tranzakciókban.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -893,7 +953,11 @@
         <source>Hide</source>
         <translation>Elrejtés</translation>
     </message>
-    </context>
+    <message>
+        <source>Unknown. Syncing Headers (%1)...</source>
+        <translation>Ismeretlen. Fejlécek szinkronizálása (%1)...</translation>
+    </message>
+</context>
 <context>
     <name>OpenURIDialog</name>
     <message>
@@ -940,6 +1004,10 @@
         <translation>Az &amp;adatbázis cache mérete</translation>
     </message>
     <message>
+        <source>MB</source>
+        <translation>MB</translation>
+    </message>
+    <message>
         <source>Number of script &amp;verification threads</source>
         <translation>A szkript &amp;igazolási szálak száma</translation>
     </message>
@@ -966,6 +1034,10 @@
     <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
         <translation>Harmadik féltől származó URL-ek (pl. egy blokk felfedező) amelyek a tranzakciós fülön jelennek meg mint a környezetérzékeny menü tételei. %s az URL-ben helyettesítve a tranzakciós hash-el. Több URL esetén, függőleges vonal választja el őket.</translation>
+    </message>
+    <message>
+        <source>Active command-line options that override above options:</source>
+        <translation>Aktív parancssori beállítások, melyek felülírják a fenti beállításokat:</translation>
     </message>
     <message>
         <source>Open the %1 configuration file from the working directory.</source>
@@ -1012,8 +1084,8 @@
         <translation>&amp;Költése a a jóváhagyatlan visszajárónak</translation>
     </message>
     <message>
-        <source>Automatically open the Litecoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatikusan nyissa meg a Litecoin kliens által használt portot a routeren. Ez csak akkor működik, ha a router támogatja a UPnP-t, és engedélyezett ez a beállítás.</translation>
+        <source>Automatically open the SCPFoundation client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatikusan nyissa meg a SCPFoundation kliens által használt portot a routeren. Ez csak akkor működik, ha a router támogatja a UPnP-t, és engedélyezett ez a beállítás.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1028,8 +1100,8 @@
         <translation>&amp;Bejövő kapcsolatok engedélyezése</translation>
     </message>
     <message>
-        <source>Connect to the Litecoin network through a SOCKS5 proxy.</source>
-        <translation>Csatlakozás a Litecoin hálózathoz SOCKS5 proxy használatával.</translation>
+        <source>Connect to the SCPFoundation network through a SOCKS5 proxy.</source>
+        <translation>Csatlakozás a SCPFoundation hálózathoz SOCKS5 proxy használatával.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1064,8 +1136,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Litecoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Csatlakozás a Litecoin hálózathoz külön SOCKS5 proxy használatával a Tor rejtett szolgáltatásainak eléréséhez.</translation>
+        <source>Connect to the SCPFoundation network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Csatlakozás a SCPFoundation hálózathoz külön SOCKS5 proxy használatával a Tor rejtett szolgáltatásainak eléréséhez.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1171,7 +1243,7 @@
         <translation>Űrlap</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</source>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the SCPFoundation network after a connection is established, but this process has not completed yet.</source>
         <translation>Lehet, hogy a megjelenített információ elavult. A tárcája automatikusan szinkronizál a hálózattal kapcsolódás után, de a folyamat még nem ért véget.</translation>
     </message>
     <message>
@@ -1246,8 +1318,8 @@
         <translation>Hiba történt a fizetési kérelem során</translation>
     </message>
     <message>
-        <source>Cannot start litecoin: click-to-pay handler</source>
-        <translation>A litecoin nem tud elindulni: click-to-pay kezelő</translation>
+        <source>Cannot start scpfoundation: click-to-pay handler</source>
+        <translation>A scpfoundation nem tud elindulni: click-to-pay kezelő</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -1258,8 +1330,8 @@
         <translation>Érvénytelen fizetési cím %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Litecoin address or malformed URI parameters.</source>
-        <translation>Az URI nem dolgozható fel! Ennek oka lehet egy érvénytelen Litecoin-cím, vagy hibás URI-paraméterek.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid SCPFoundation address or malformed URI parameters.</source>
+        <translation>Az URI nem dolgozható fel! Ennek oka lehet egy érvénytelen SCPFoundation-cím, vagy hibás URI-paraméterek.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1356,8 +1428,8 @@
         <translation>Összeg</translation>
     </message>
     <message>
-        <source>Enter a Litecoin address (e.g. %1)</source>
-        <translation>Adjon meg egy Litecoin-címet (pl. %1)</translation>
+        <source>Enter a SCPFoundation address (e.g. %1)</source>
+        <translation>Adjon meg egy SCPFoundation-címet (pl. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1768,8 +1840,8 @@
         <translation>&amp;Üzenet:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Litecoin network.</source>
-        <translation>Opciónális üzenet csatolása a fizetési kérelemhez, ami a kérelem megnyitásakor megjelenik. Megjegyzés: Az üzenet nem lesz elküldve a fizetéssel a Litecoin hálózaton.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the SCPFoundation network.</source>
+        <translation>Opciónális üzenet csatolása a fizetési kérelemhez, ami a kérelem megnyitásakor megjelenik. Megjegyzés: Az üzenet nem lesz elküldve a fizetéssel a SCPFoundation hálózaton.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -1877,10 +1949,6 @@
     <message>
         <source>Message</source>
         <translation>Üzenet</translation>
-    </message>
-    <message>
-        <source>Wallet</source>
-        <translation>Tárca</translation>
     </message>
     <message>
         <source>Resulting URI too long, try to reduce the text for label / message.</source>
@@ -2069,10 +2137,6 @@
         <translation>vagy</translation>
     </message>
     <message>
-        <source>Transaction fee</source>
-        <translation>Tranzakciós díj</translation>
-    </message>
-    <message>
         <source>The amount to pay must be larger than 0.</source>
         <translation>Az összegnek nagyobbnak kell lennie, mint 0.</translation>
     </message>
@@ -2089,8 +2153,8 @@
         <translation>Fizetési kérelem lejárt</translation>
     </message>
     <message>
-        <source>Warning: Invalid Litecoin address</source>
-        <translation>Figyelem: érvénytelen Litecoin cím</translation>
+        <source>Warning: Invalid SCPFoundation address</source>
+        <translation>Figyelem: érvénytelen SCPFoundation cím</translation>
     </message>
     <message>
         <source>Confirm custom change address</source>
@@ -2360,6 +2424,10 @@
         <translation>Címke</translation>
     </message>
     <message>
+        <source>Offline</source>
+        <translation>Offline</translation>
+    </message>
+    <message>
         <source>Unconfirmed</source>
         <translation>Nem megerősített</translation>
     </message>
@@ -2503,9 +2571,6 @@
     <name>UnitDisplayStatusBarControl</name>
     </context>
 <context>
-    <name>WalletController</name>
-    </context>
-<context>
     <name>WalletFrame</name>
     </context>
 <context>
@@ -2553,8 +2618,20 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
-        <translation>Litecoin Mag</translation>
+        <source>Options:</source>
+        <translation>Beállítások:</translation>
+    </message>
+    <message>
+        <source>Accept command line and JSON-RPC commands</source>
+        <translation>Parancssoros és JSON-RPC parancsok elfogadása</translation>
+    </message>
+    <message>
+        <source>SCPFoundation Core</source>
+        <translation>SCPFoundation Mag</translation>
+    </message>
+    <message>
+        <source>Debugging/Testing options:</source>
+        <translation>Hibakeresési/Tesztelési beállítások:</translation>
     </message>
     <message>
         <source>Do you want to rebuild the block database now?</source>
@@ -2585,8 +2662,20 @@
         <translation>Blokkok megerősítése...</translation>
     </message>
     <message>
+        <source>Wallet debugging/testing options:</source>
+        <translation>Tárca hibakeresési/tesztelési beállítások:</translation>
+    </message>
+    <message>
+        <source>Wallet options:</source>
+        <translation>Tárca beállítások:</translation>
+    </message>
+    <message>
         <source>Information</source>
         <translation>Információ</translation>
+    </message>
+    <message>
+        <source>Show all debugging options (usage: --help -help-debug)</source>
+        <translation>Összes hibakeresési beállítás mutatása (használat: --help -help-debug)</translation>
     </message>
     <message>
         <source>Signing transaction failed</source>
@@ -2605,6 +2694,14 @@
         <translation>A tranzakció túl nagy</translation>
     </message>
     <message>
+        <source>Upgrade wallet to latest format on startup</source>
+        <translation>Tárca fejlesztése a legfrissebb formátumra az indításnál</translation>
+    </message>
+    <message>
+        <source>Username for JSON-RPC connections</source>
+        <translation>Felhasználónév a JSON-RPC kapcsolódásokhoz</translation>
+    </message>
+    <message>
         <source>Verifying wallet(s)...</source>
         <translation>Tárca/Tárcák megerősítése</translation>
     </message>
@@ -2613,8 +2710,20 @@
         <translation>Figyelmeztetés</translation>
     </message>
     <message>
+        <source>Password for JSON-RPC connections</source>
+        <translation>Jelszó a JSON-RPC kapcsolódásokhoz</translation>
+    </message>
+    <message>
         <source>%s is set very high!</source>
         <translation>%s túl magasra van állítva!</translation>
+    </message>
+    <message>
+        <source>Error loading wallet %s. Invalid characters in -wallet filename.</source>
+        <translation>Hiba a tárca betöltésekor %s. Érvénytelen karakterek a tárca fájlnévben.</translation>
+    </message>
+    <message>
+        <source>Listen for JSON-RPC connections on &lt;port&gt; (default: %u or testnet: %u)</source>
+        <translation>Figyelés a JSON-RPC kapcsolatokra itt: &lt;port&gt; (alapértelmezett:  %u vagy tesztnet: %u)</translation>
     </message>
     <message>
         <source>Starting network threads...</source>
