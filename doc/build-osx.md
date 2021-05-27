@@ -38,17 +38,17 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](/doc/build-osx.md#disable-wallet-mode)).
 
-Build Litecoin Core
+Build Xcoin Core
 ------------------------
 
-1. Clone the Litecoin Core source code:
+1. Clone the Xcoin Core source code:
 
-        git clone https://github.com/litecoin-project/litecoin
-        cd litecoin
+        git clone https://github.com/xcoin-project/xcoin
+        cd xcoin
 
-2.  Build Litecoin Core:
+2.  Build Xcoin Core:
 
-    Configure and build the headless Litecoin Core binaries as well as the GUI (if Qt is found).
+    Configure and build the headless Xcoin Core binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 
@@ -70,13 +70,13 @@ Build Litecoin Core
 
     or
 
-        cd ~/litecoin/src
-        cp litecoind /usr/local/bin/
-        cp litecoin-cli /usr/local/bin/
+        cd ~/xcoin/src
+        cp xcoind /usr/local/bin/
+        cp xcoin-cli /usr/local/bin/
 
 Disable-wallet mode
 --------------------
-When the intention is to run only a P2P node without a wallet, Litecoin Core may be compiled in
+When the intention is to run only a P2P node without a wallet, Xcoin Core may be compiled in
 disable-wallet mode with:
 
     ./configure --disable-wallet
@@ -88,28 +88,28 @@ Mining is also possible in disable-wallet mode using the `getblocktemplate` RPC 
 Running
 -------
 
-Litecoin Core is now available at `./src/litecoind`
+Xcoin Core is now available at `./src/xcoind`
 
 Before running, you may create an empty configuration file:
 
-    mkdir -p "/Users/${USER}/Library/Application Support/Litecoin"
+    mkdir -p "/Users/${USER}/Library/Application Support/Xcoin"
 
-    touch "/Users/${USER}/Library/Application Support/Litecoin/litecoin.conf"
+    touch "/Users/${USER}/Library/Application Support/Xcoin/xcoin.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/Litecoin/litecoin.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/Xcoin/xcoin.conf"
 
-The first time you run litecoind, it will start downloading the blockchain. This process could take many hours, or even days on slower than average systems.
+The first time you run xcoind, it will start downloading the blockchain. This process could take many hours, or even days on slower than average systems.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/Litecoin/debug.log
+    tail -f $HOME/Library/Application\ Support/Xcoin/debug.log
 
 Other commands:
 -------
 
-    ./src/litecoind -daemon # Starts the litecoin daemon.
-    ./src/litecoin-cli --help # Outputs a list of command-line options.
-    ./src/litecoin-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/xcoind -daemon # Starts the xcoin daemon.
+    ./src/xcoin-cli --help # Outputs a list of command-line options.
+    ./src/xcoin-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Notes
 -----
