@@ -29,9 +29,9 @@ bool BitcoinUnits::valid(int unit)
     switch(unit)
     {
     case BTC:
-    case mBTC:
-    case uBTC:
-    case SAT:
+    //case mBTC:
+    //case uBTC:
+    //case SAT:
         return true;
     default:
         return false;
@@ -42,10 +42,10 @@ QString BitcoinUnits::longName(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("LTC");
-    case mBTC: return QString("lites");
-    case uBTC: return QString("photons");
-    case SAT: return QString("litoshi");
+    case BTC: return QString("GHR");
+    //case mBTC: return QString("lites");
+    //case uBTC: return QString("photons");
+    //case SAT: return QString("litoshi");
     default: return QString("???");
     }
 }
@@ -64,10 +64,10 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Litecoins");
-    case mBTC: return QString("Lites (1 / 1" THIN_SP_UTF8 "000)");
-    case uBTC: return QString("Photons (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
-    case SAT: return QString("Litoshis (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case BTC: return QString("Gherans");
+    //case mBTC: return QString("Lites (1 / 1" THIN_SP_UTF8 "000)");
+    //case uBTC: return QString("Photons (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    //case SAT: return QString("Litoshis (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }
 }
@@ -77,9 +77,9 @@ qint64 BitcoinUnits::factor(int unit)
     switch(unit)
     {
     case BTC: return 100000000;
-    case mBTC: return 100000;
-    case uBTC: return 100;
-    case SAT: return 1;
+    //case mBTC: return 100000;
+    //case uBTC: return 100;
+    //case SAT: return 1;
     default: return 100000000;
     }
 }
@@ -89,9 +89,9 @@ int BitcoinUnits::decimals(int unit)
     switch(unit)
     {
     case BTC: return 8;
-    case mBTC: return 5;
-    case uBTC: return 2;
-    case SAT: return 0;
+    //case mBTC: return 5;
+    //case uBTC: return 2;
+    //case SAT: return 0;
     default: return 0;
     }
 }
