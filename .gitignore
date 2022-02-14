@@ -80,9 +80,17 @@ src/qt/bitcoin-qt.includes
 *.lo
 *.la
 
+# Only ignore unexpected patches
+*.patch
+!depends/patches/**/*.patch
+
+
+
+
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
+!depends/Makefile
 litecoin-qt
 litecoin-Qt.app
 background.tiff*
