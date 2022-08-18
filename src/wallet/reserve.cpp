@@ -13,11 +13,9 @@ bool ReserveDestination::GetReservedDestination(CTxDestination& dest, bool inter
         m_spk_man->TopUp();
 
         CKeyPool keypool;
-        int64_t reserved_index;
-        if (!m_spk_man->GetReservedDestination(type, internal, address, reserved_index, keypool)) {
+        if (!m_spk_man->GetReservedDestination(type, internal, address, nIndex, keypool)) {
             return false;
         }
-        nIndex = reserved_index;
         fInternal = keypool.fInternal;
     }
     dest = address;
