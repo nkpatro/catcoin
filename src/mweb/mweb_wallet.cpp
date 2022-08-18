@@ -8,7 +8,7 @@ using namespace MWEB;
 bool Wallet::UpgradeCoins()
 {
     mw::Keychain::Ptr keychain = GetKeychain();
-    if (!keychain || !keychain->HasSpendSecret()) {
+    if (!keychain || keychain->GetSpendSecret().IsNull()) {
         return false;
     }
 
@@ -19,17 +19,14 @@ bool Wallet::UpgradeCoins()
 
         if (wtx->mweb_wtx_info && wtx->mweb_wtx_info->received_coin) {
             mw::Coin& coin = *wtx->mweb_wtx_info->received_coin;
-            if (!coin.HasSpendKey()) {
-                coin.spend_key = keychain->CalculateOutputKey(coin);
+            if (!coin.HasSpendKey() && coin.HasSharedSecret()) {
+                coin.spend_key = keychain->CalculateOutputKey(coin.address_index, *coin.shared_secret);
 
-                // If spend key was populated, update the database and m_coins map.
-                if (coin.HasSpendKey()) {
-                    m_coins[coin.output_id] = coin;
+                m_coins[coin.output_id] = coin;
 
-                    WalletBatch batch(m_pWallet->GetDatabase());
-                    batch.WriteMWEBCoin(coin);
-                    batch.WriteTx(*wtx);
-                }
+                WalletBatch batch(m_pWallet->GetDatabase());
+                batch.WriteMWEBCoin(coin);
+                batch.WriteTx(*wtx);
             }
         }
     }
@@ -60,7 +57,7 @@ bool Wallet::RewindOutput(const Output& output, mw::Coin& coin)
     if (GetCoin(output.GetOutputID(), coin) && coin.IsMine()) {
         // If the coin has the spend key, it's fully rewound.
         // If not, try rewinding further if we have the master spend key (i.e. wallet is unlocked).
-        if (coin.HasSpendKey() || !keychain || !keychain->HasSpendSecret()) {
+        if (coin.HasSpendKey() || !keychain || keychain->GetSpendSecret().IsNull()) {
             return true;
         }
     }
@@ -93,7 +90,7 @@ bool Wallet::GetStealthAddress(const mw::Coin& coin, StealthAddress& address) co
 bool Wallet::GetStealthAddress(const uint32_t index, StealthAddress& address) const
 {
     mw::Keychain::Ptr keychain = GetKeychain();
-    if (!keychain || index == mw::UNKNOWN_INDEX || index == mw::CUSTOM_KEY) {
+    if (!keychain || index == mw::UNKNOWN_INDEX) {
         return false;
     }
 
