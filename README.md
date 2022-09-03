@@ -8,7 +8,9 @@ https://litecoin.org
 What is Litecoin Core?
 ----------------
 
-Litecoin Core connects to the Litecoin peer-to-peer network to download and fully validate blocks and transactions. It also includes a wallet and graphical user interface, which can be optionally built.
+Litecoin Core connects to the Litecoin peer-to-peer network to download and fully 
+validate blocks and transactions. It also includes a wallet and graphical user 
+interface, which can be optionally built.
 
 Further information about Litecoin Core is available in the [doc folder](https://litecoin.org).
 
