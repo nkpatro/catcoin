@@ -12,7 +12,7 @@ Litecoin Core connects to the Litecoin peer-to-peer network to download and full
 validate blocks and transactions. It also includes a wallet and graphical user 
 interface, which can be optionally built.
 
-Further information about Litecoin Core is available in the [doc folder](https://litecoin.org).
+Further information about the Litecoin Core software, see [https://litecoin.org](https://litecoin.org)
 
 License
 -------
