@@ -10,7 +10,7 @@ import tempfile
 BINARIES = [
 'src/bitcoind',
 'src/litecoin-cli',
-'src/bitcoin-tx',
+'src/litecoin-tx',
 'src/bitcoin-wallet',
 'src/bitcoin-util',
 'src/qt/bitcoin-qt',
