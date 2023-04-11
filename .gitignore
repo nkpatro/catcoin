@@ -8,7 +8,7 @@ src/litecoin-cli
 src/bitcoin-gui
 src/bitcoin-node
 src/litecoin-tx
-src/bitcoin-util
+src/litecoin-util
 src/bitcoin-chainstate
 src/bitcoin-wallet
 src/test/fuzz/fuzz
