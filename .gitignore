@@ -9,7 +9,7 @@ src/litecoin-gui
 src/litecoin-node
 src/litecoin-tx
 src/litecoin-util
-src/bitcoin-chainstate
+src/litecoin-chainstate
 src/litecoin-wallet
 src/test/fuzz/fuzz
 src/test/test_bitcoin

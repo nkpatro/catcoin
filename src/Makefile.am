@@ -110,7 +110,7 @@ if BUILD_BITCOIN_UTIL
 endif
 
 if BUILD_BITCOIN_CHAINSTATE
-  bin_PROGRAMS += bitcoin-chainstate
+  bin_PROGRAMS += litecoin-chainstate
 endif
 
 .PHONY: FORCE check-symbols check-security
@@ -837,16 +837,16 @@ litecoin_util_LDADD = \
   $(CRYPTO_LIBS)
 #
 
-# bitcoin-chainstate binary #
-bitcoin_chainstate_SOURCES = bitcoin-chainstate.cpp
-bitcoin_chainstate_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BOOST_CPPFLAGS)
-bitcoin_chainstate_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+# litecoin-chainstate binary #
+litecoin_chainstate_SOURCES = bitcoin-chainstate.cpp
+litecoin_chainstate_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BOOST_CPPFLAGS)
+litecoin_chainstate_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 # $(LIBTOOL_APP_LDFLAGS) deliberately omitted here so that we can test linking
-# bitcoin-chainstate against libbitcoinkernel as a shared or static library by
+# litecoin-chainstate against libbitcoinkernel as a shared or static library by
 # setting --{en,dis}able-shared.
-bitcoin_chainstate_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(PTHREAD_FLAGS)
-bitcoin_chainstate_LDADD = $(LIBBITCOINKERNEL)
+litecoin_chainstate_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(PTHREAD_FLAGS)
+litecoin_chainstate_LDADD = $(LIBBITCOINKERNEL) $(CRYPTO_LIBS)
 #
 
 # bitcoinkernel library #

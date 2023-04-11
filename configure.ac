@@ -35,7 +35,7 @@ BITCOIN_TEST_NAME=test_bitcoin
 BITCOIN_CLI_NAME=litecoin-cli
 BITCOIN_TX_NAME=litecoin-tx
 BITCOIN_UTIL_NAME=litecoin-util
-BITCOIN_CHAINSTATE_NAME=bitcoin-chainstate
+BITCOIN_CHAINSTATE_NAME=litecoin-chainstate
 BITCOIN_WALLET_TOOL_NAME=litecoin-wallet
 dnl Multi Process
 BITCOIN_MP_NODE_NAME=litecoin-node
@@ -670,9 +670,9 @@ AC_ARG_ENABLE([util-util],
 
 AC_ARG_ENABLE([experimental-util-chainstate],
   [AS_HELP_STRING([--enable-experimental-util-chainstate],
-  [build experimental bitcoin-chainstate executable (default=no)])],
-  [build_bitcoin_chainstate=$enableval],
-  [build_bitcoin_chainstate=no])
+  [build experimental litecoin-chainstate executable (default=no)])],
+  [build_litecoin_chainstate=$enableval],
+  [build_litecoin_chainstate=no])
 
 AC_ARG_WITH([libs],
   [AS_HELP_STRING([--with-libs],
@@ -1326,7 +1326,7 @@ if test "$enable_fuzz" = "yes"; then
   build_litecoin_cli=no
   build_litecoin_tx=no
   build_litecoin_util=no
-  build_bitcoin_chainstate=no
+  build_litecoin_chainstate=no
   build_litecoin_wallet=no
   build_litecoind=no
   build_bitcoin_libs=no
@@ -1726,14 +1726,14 @@ AC_MSG_CHECKING([whether to build litecoin-util])
 AM_CONDITIONAL([BUILD_BITCOIN_UTIL], [test $build_litecoin_util = "yes"])
 AC_MSG_RESULT($build_litecoin_util)
 
-AC_MSG_CHECKING([whether to build experimental bitcoin-chainstate])
-if test "$build_bitcoin_chainstate" = "yes"; then
+AC_MSG_CHECKING([whether to build experimental litecoin-chainstate])
+if test "$build_litecoin_chainstate" = "yes"; then
   if test "$build_experimental_kernel_lib" = "no"; then
-    AC_MSG_ERROR([experimental bitcoin-chainstate cannot be built without the experimental bitcoinkernel library. Use --with-experimental-kernel-lib]);
+    AC_MSG_ERROR([experimental litecoin-chainstate cannot be built without the experimental bitcoinkernel library. Use --with-experimental-kernel-lib]);
   fi
 fi
-AM_CONDITIONAL([BUILD_BITCOIN_CHAINSTATE], [test $build_bitcoin_chainstate = "yes"])
-AC_MSG_RESULT($build_bitcoin_chainstate)
+AM_CONDITIONAL([BUILD_BITCOIN_CHAINSTATE], [test $build_litecoin_chainstate = "yes"])
+AC_MSG_RESULT($build_litecoin_chainstate)
 
 AC_MSG_CHECKING([whether to build libraries])
 AM_CONDITIONAL([BUILD_BITCOIN_LIBS], [test $build_bitcoin_libs = "yes"])
@@ -1743,7 +1743,7 @@ if test "$build_bitcoin_libs" = "yes"; then
   AC_CONFIG_FILES([libbitcoinconsensus.pc:libbitcoinconsensus.pc.in])
 fi
 
-AM_CONDITIONAL([BUILD_BITCOIN_KERNEL_LIB], [test "$build_experimental_kernel_lib" != "no" && ( test "$build_experimental_kernel_lib" = "yes" || test "$build_bitcoin_chainstate" = "yes" )])
+AM_CONDITIONAL([BUILD_BITCOIN_KERNEL_LIB], [test "$build_experimental_kernel_lib" != "no" && ( test "$build_experimental_kernel_lib" = "yes" || test "$build_litecoin_chainstate" = "yes" )])
 
 AC_MSG_RESULT($build_bitcoin_libs)
 
