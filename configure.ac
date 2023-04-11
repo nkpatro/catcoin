@@ -36,7 +36,7 @@ BITCOIN_CLI_NAME=litecoin-cli
 BITCOIN_TX_NAME=litecoin-tx
 BITCOIN_UTIL_NAME=litecoin-util
 BITCOIN_CHAINSTATE_NAME=bitcoin-chainstate
-BITCOIN_WALLET_TOOL_NAME=bitcoin-wallet
+BITCOIN_WALLET_TOOL_NAME=litecoin-wallet
 dnl Multi Process
 BITCOIN_MP_NODE_NAME=litecoin-node
 BITCOIN_MP_GUI_NAME=bitcoin-gui
@@ -295,7 +295,7 @@ AC_ARG_WITH([mpgen],
 
 AC_ARG_ENABLE([multiprocess],
   [AS_HELP_STRING([--enable-multiprocess],
-  [build multiprocess litecoin-node, bitcoin-wallet, and bitcoin-gui executables in addition to monolithic litecoind and bitcoin-qt executables. Requires libmultiprocess library. Experimental (default is no)])],
+  [build multiprocess litecoin-node, litecoin-wallet, and bitcoin-gui executables in addition to monolithic litecoind and bitcoin-qt executables. Requires libmultiprocess library. Experimental (default is no)])],
   [enable_multiprocess=$enableval],
   [enable_multiprocess=no])
 
@@ -640,7 +640,7 @@ CORE_CPPFLAGS="$CORE_CPPFLAGS -DHAVE_BUILD_INFO"
 
 AC_ARG_WITH([utils],
   [AS_HELP_STRING([--with-utils],
-  [build litecoin-cli litecoin-tx litecoin-util bitcoin-wallet (default=yes)])],
+  [build litecoin-cli litecoin-tx litecoin-util litecoin-wallet (default=yes)])],
   [build_litecoin_utils=$withval],
   [build_litecoin_utils=yes])
 
@@ -658,9 +658,9 @@ AC_ARG_ENABLE([util-tx],
 
 AC_ARG_ENABLE([util-wallet],
   [AS_HELP_STRING([--enable-util-wallet],
-  [build bitcoin-wallet])],
-  [build_bitcoin_wallet=$enableval],
-  [build_bitcoin_wallet=$build_litecoin_utils])
+  [build litecoin-wallet])],
+  [build_litecoin_wallet=$enableval],
+  [build_litecoin_wallet=$build_litecoin_utils])
 
 AC_ARG_ENABLE([util-util],
   [AS_HELP_STRING([--enable-util-util],
@@ -1327,7 +1327,7 @@ if test "$enable_fuzz" = "yes"; then
   build_litecoin_tx=no
   build_litecoin_util=no
   build_bitcoin_chainstate=no
-  build_bitcoin_wallet=no
+  build_litecoin_wallet=no
   build_litecoind=no
   build_bitcoin_libs=no
   bitcoin_enable_qt=no
@@ -1475,7 +1475,7 @@ if test "$use_natpmp" != "no"; then
   CPPFLAGS="$TEMP_CPPFLAGS"
 fi
 
-if test "$build_bitcoin_wallet$build_litecoin_cli$build_litecoin_tx$build_litecoind$bitcoin_enable_qt$use_tests$use_bench" = "nonononononono"; then
+if test "$build_litecoin_wallet$build_litecoin_cli$build_litecoin_tx$build_litecoind$bitcoin_enable_qt$use_tests$use_bench" = "nonononononono"; then
   use_boost=no
 else
   use_boost=yes
@@ -1718,9 +1718,9 @@ AC_MSG_CHECKING([whether to build litecoin-tx])
 AM_CONDITIONAL([BUILD_BITCOIN_TX], [test $build_litecoin_tx = "yes"])
 AC_MSG_RESULT($build_litecoin_tx)
 
-AC_MSG_CHECKING([whether to build bitcoin-wallet])
-AM_CONDITIONAL([BUILD_BITCOIN_WALLET], [test $build_bitcoin_wallet = "yes"])
-AC_MSG_RESULT($build_bitcoin_wallet)
+AC_MSG_CHECKING([whether to build litecoin-wallet])
+AM_CONDITIONAL([BUILD_BITCOIN_WALLET], [test $build_litecoin_wallet = "yes"])
+AC_MSG_RESULT($build_litecoin_wallet)
 
 AC_MSG_CHECKING([whether to build litecoin-util])
 AM_CONDITIONAL([BUILD_BITCOIN_UTIL], [test $build_litecoin_util = "yes"])
@@ -1906,7 +1906,7 @@ else
   AC_MSG_RESULT([no])
 fi
 
-if test "$build_bitcoin_wallet$build_litecoin_cli$build_litecoin_tx$build_bitcoin_libs$build_litecoind$bitcoin_enable_qt$enable_fuzz_binary$use_bench$use_tests" = "nonononononononono"; then
+if test "$build_litecoin_wallet$build_litecoin_cli$build_litecoin_tx$build_bitcoin_libs$build_litecoind$bitcoin_enable_qt$enable_fuzz_binary$use_bench$use_tests" = "nonononononononono"; then
   AC_MSG_ERROR([No targets! Please specify at least one of: --with-utils --with-libs --with-daemon --with-gui --enable-fuzz(-binary) --enable-bench or --enable-tests])
 fi
 

@@ -11,7 +11,7 @@ BINARIES = [
 'src/litecoind',
 'src/litecoin-cli',
 'src/litecoin-tx',
-'src/bitcoin-wallet',
+'src/litecoin-wallet',
 'src/litecoin-util',
 'src/qt/bitcoin-qt',
 ]

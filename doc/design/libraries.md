@@ -8,11 +8,11 @@
 | *libbitcoinconsensus*    | Shared library build of static *libbitcoin_consensus* library |
 | *libbitcoin_kernel*      | Consensus engine and support library used for validation by *libbitcoin_node* and also exposed as a [shared library](../shared-libraries.md). |
 | *libbitcoinqt*           | GUI functionality used by *bitcoin-qt* and *bitcoin-gui* executables |
-| *libbitcoin_ipc*         | IPC functionality used by *litecoin-node*, *bitcoin-wallet*, *bitcoin-gui* executables to communicate when [`--enable-multiprocess`](multiprocess.md) is used. |
+| *libbitcoin_ipc*         | IPC functionality used by *litecoin-node*, *litecoin-wallet*, *bitcoin-gui* executables to communicate when [`--enable-multiprocess`](multiprocess.md) is used. |
 | *libbitcoin_node*        | P2P and RPC server functionality used by *litecoind* and *bitcoin-qt* executables. |
 | *libbitcoin_util*        | Home for common functionality shared by different executables and libraries. Similar to *libbitcoin_common*, but lower-level (see [Dependencies](#dependencies)). |
-| *libbitcoin_wallet*      | Wallet functionality used by *litecoind* and *bitcoin-wallet* executables. |
-| *libbitcoin_wallet_tool* | Lower-level wallet functionality used by *bitcoin-wallet* executable. |
+| *libbitcoin_wallet*      | Wallet functionality used by *litecoind* and *litecoin-wallet* executables. |
+| *libbitcoin_wallet_tool* | Lower-level wallet functionality used by *litecoin-wallet* executable. |
 | *libbitcoin_zmq*         | [ZeroMQ](../zmq.md) functionality used by *litecoind* and *bitcoin-qt* executables. |
 
 ## Conventions
@@ -48,8 +48,8 @@ bitcoin-qt[bitcoin-qt]-->libbitcoin_node;
 bitcoin-qt[bitcoin-qt]-->libbitcoinqt;
 bitcoin-qt[bitcoin-qt]-->libbitcoin_wallet;
 
-bitcoin-wallet[bitcoin-wallet]-->libbitcoin_wallet;
-bitcoin-wallet[bitcoin-wallet]-->libbitcoin_wallet_tool;
+litecoin-wallet[litecoin-wallet]-->libbitcoin_wallet;
+litecoin-wallet[litecoin-wallet]-->libbitcoin_wallet_tool;
 
 libbitcoin_cli-->libbitcoin_common;
 libbitcoin_cli-->libbitcoin_util;
@@ -75,7 +75,7 @@ libbitcoin_wallet_tool-->libbitcoin_util;
 libbitcoin_wallet_tool-->libbitcoin_wallet;
 
 classDef bold stroke-width:2px, font-weight:bold, font-size: smaller;
-class bitcoin-qt,litecoind,litecoin-cli,bitcoin-wallet bold
+class bitcoin-qt,litecoind,litecoin-cli,litecoin-wallet bold
 ```
 </td></tr><tr><td>
 
