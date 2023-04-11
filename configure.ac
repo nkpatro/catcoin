@@ -31,7 +31,7 @@ fi
 
 BITCOIN_DAEMON_NAME=litecoind
 BITCOIN_GUI_NAME=bitcoin-qt
-BITCOIN_TEST_NAME=test_bitcoin
+BITCOIN_TEST_NAME=test_litecoin
 BITCOIN_CLI_NAME=litecoin-cli
 BITCOIN_TX_NAME=litecoin-tx
 BITCOIN_UTIL_NAME=litecoin-util
@@ -1876,7 +1876,7 @@ fi
 
 AM_CONDITIONAL([ENABLE_ZMQ], [test "$use_zmq" = "yes"])
 
-AC_MSG_CHECKING([whether to build test_bitcoin])
+AC_MSG_CHECKING([whether to build test_litecoin])
 if test "$use_tests" = "yes"; then
   if test "$enable_fuzz" = "yes"; then
     AC_MSG_RESULT([no, because fuzzing is enabled])
@@ -2088,7 +2088,7 @@ echo "  with zmq        = $use_zmq"
 if test $enable_fuzz = "no"; then
     echo "  with test       = $use_tests"
 else
-    echo "  with test       = not building test_bitcoin because fuzzing is enabled"
+    echo "  with test       = not building test_litecoin because fuzzing is enabled"
 fi
 echo "  with fuzz binary = $enable_fuzz_binary"
 echo "  with bench      = $use_bench"
