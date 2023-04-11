@@ -88,7 +88,7 @@ if BUILD_BITCOIND
 endif
 
 if BUILD_BITCOIN_NODE
-  bin_PROGRAMS += bitcoin-node
+  bin_PROGRAMS += litecoin-node
 endif
 
 if BUILD_BITCOIN_CLI
@@ -718,7 +718,7 @@ libbitcoin_cli_a_SOURCES = \
 nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# litecoind & bitcoin-node binaries #
+# litecoind & litecoin-node binaries #
 bitcoin_daemon_sources = bitcoind.cpp
 bitcoin_bin_cppflags = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 bitcoin_bin_cxxflags = $(AM_CXXFLAGS) $(PIE_FLAGS)
@@ -748,11 +748,11 @@ litecoind_CXXFLAGS = $(bitcoin_bin_cxxflags)
 litecoind_LDFLAGS = $(bitcoin_bin_ldflags)
 litecoind_LDADD = $(LIBBITCOIN_NODE) $(bitcoin_bin_ldadd)
 
-bitcoin_node_SOURCES = $(bitcoin_daemon_sources) init/bitcoin-node.cpp
-bitcoin_node_CPPFLAGS = $(bitcoin_bin_cppflags)
-bitcoin_node_CXXFLAGS = $(bitcoin_bin_cxxflags)
-bitcoin_node_LDFLAGS = $(bitcoin_bin_ldflags)
-bitcoin_node_LDADD = $(LIBBITCOIN_NODE) $(bitcoin_bin_ldadd) $(LIBBITCOIN_IPC) $(LIBMULTIPROCESS_LIBS)
+litecoin_node_SOURCES = $(bitcoin_daemon_sources) init/bitcoin-node.cpp
+litecoin_node_CPPFLAGS = $(bitcoin_bin_cppflags)
+litecoin_node_CXXFLAGS = $(bitcoin_bin_cxxflags)
+litecoin_node_LDFLAGS = $(bitcoin_bin_ldflags)
+litecoin_node_LDADD = $(LIBBITCOIN_NODE) $(bitcoin_bin_ldadd) $(LIBBITCOIN_IPC) $(LIBMULTIPROCESS_LIBS)
 
 # litecoin-cli binary #
 litecoin_cli_SOURCES = bitcoin-cli.cpp

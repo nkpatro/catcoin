@@ -6,7 +6,7 @@ src/bitcoin
 src/litecoind
 src/litecoin-cli
 src/bitcoin-gui
-src/bitcoin-node
+src/litecoin-node
 src/litecoin-tx
 src/litecoin-util
 src/bitcoin-chainstate
