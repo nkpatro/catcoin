@@ -8,7 +8,7 @@ This directory contains the following sets of tests:
 - [fuzz](/test/fuzz) A runner to execute all fuzz targets from
   [/src/test/fuzz](/src/test/fuzz).
 - [functional](/test/functional) which test the functionality of
-litecoind and bitcoin-qt by interacting with them through the RPC and P2P
+litecoind and litecoin-qt by interacting with them through the RPC and P2P
 interfaces.
 - [util](/test/util) which tests the utilities (litecoin-util, litecoin-tx, ...).
 - [lint](/test/lint/) which perform various static analysis checks.

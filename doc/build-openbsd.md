@@ -27,7 +27,7 @@ git clone https://github.com/bitcoin/bitcoin.git
 
 #### Wallet Dependencies
 
-It is not necessary to build wallet functionality to run either `litecoind` or `bitcoin-qt`.
+It is not necessary to build wallet functionality to run either `litecoind` or `litecoin-qt`.
 
 ###### Descriptor Wallet Support
 

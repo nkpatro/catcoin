@@ -65,7 +65,7 @@ git clone https://github.com/litecoind-project/litecoin.git
 
 #### Wallet Dependencies
 
-It is not necessary to build wallet functionality to run `litecoind` or  `bitcoin-qt`.
+It is not necessary to build wallet functionality to run `litecoind` or  `litecoin-qt`.
 
 ###### Descriptor Wallet Support
 
@@ -239,9 +239,9 @@ make deploy
 ## Running Litecoin Core
 
 Litecoin Core should now be available at `./src/litecoind`.
-If you compiled support for the GUI, it should be available at `./src/qt/bitcoin-qt`.
+If you compiled support for the GUI, it should be available at `./src/qt/litecoin-qt`.
 
-The first time you run `litecoind` or `bitcoin-qt`, it will start downloading the blockchain.
+The first time you run `litecoind` or `litecoin-qt`, it will start downloading the blockchain.
 This process could take many hours, or even days on slower than average systems.
 
 By default, blockchain and wallet data files will be stored in:
@@ -272,5 +272,5 @@ tail -f $HOME/Library/Application\ Support/Litecoin/debug.log
 ./src/litecoind -daemon      # Starts the litecoin daemon.
 ./src/litecoin-cli --help    # Outputs a list of command-line options.
 ./src/litecoin-cli help      # Outputs a list of RPC commands when the daemon is running.
-./src/qt/bitcoin-qt -server # Starts the bitcoin-qt server mode, allows litecoin-cli control
+./src/qt/litecoin-qt -server # Starts the litecoin-qt server mode, allows litecoin-cli control
 ```

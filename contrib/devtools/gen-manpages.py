@@ -13,7 +13,7 @@ BINARIES = [
 'src/litecoin-tx',
 'src/litecoin-wallet',
 'src/litecoin-util',
-'src/qt/bitcoin-qt',
+'src/qt/litecoin-qt',
 ]
 
 # Paths to external utilities.

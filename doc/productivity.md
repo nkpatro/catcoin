@@ -76,7 +76,7 @@ Obviously, it is important to build and run the tests at appropriate times -- bu
 
 ```sh
 make src/litecoind src/litecoin-cli
-make src/qt/bitcoin-qt
+make src/qt/litecoin-qt
 make -C src bitcoin_bench
 ```
 

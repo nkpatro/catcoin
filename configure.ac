@@ -30,7 +30,7 @@ if test -n "$PKG_CONFIG_LIBDIR"; then
 fi
 
 BITCOIN_DAEMON_NAME=litecoind
-BITCOIN_GUI_NAME=bitcoin-qt
+BITCOIN_GUI_NAME=litecoin-qt
 BITCOIN_TEST_NAME=test_litecoin
 BITCOIN_CLI_NAME=litecoin-cli
 BITCOIN_TX_NAME=litecoin-tx
@@ -295,7 +295,7 @@ AC_ARG_WITH([mpgen],
 
 AC_ARG_ENABLE([multiprocess],
   [AS_HELP_STRING([--enable-multiprocess],
-  [build multiprocess litecoin-node, litecoin-wallet, and litecoin-gui executables in addition to monolithic litecoind and bitcoin-qt executables. Requires libmultiprocess library. Experimental (default is no)])],
+  [build multiprocess litecoin-node, litecoin-wallet, and litecoin-gui executables in addition to monolithic litecoind and litecoin-qt executables. Requires libmultiprocess library. Experimental (default is no)])],
   [enable_multiprocess=$enableval],
   [enable_multiprocess=no])
 
@@ -1865,8 +1865,8 @@ if test "$bitcoin_enable_qt" != "no"; then
     AC_MSG_WARN([xgettext is required to update qt translations])
   fi
 
-  AC_MSG_CHECKING([whether to build test_bitcoin-qt])
-  if test "$use_gui_tests$bitcoin_enable_qt_test" = "yesyes"; then
+  AC_MSG_CHECKING([whether to build test_litecoin-qt])
+  if test "$use_gui_tests$litecoin_enable_qt_test" = "yesyes"; then
     AC_MSG_RESULT([yes])
     BUILD_TEST_QT="yes"
   else
