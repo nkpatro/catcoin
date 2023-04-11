@@ -39,7 +39,7 @@ BITCOIN_CHAINSTATE_NAME=bitcoin-chainstate
 BITCOIN_WALLET_TOOL_NAME=litecoin-wallet
 dnl Multi Process
 BITCOIN_MP_NODE_NAME=litecoin-node
-BITCOIN_MP_GUI_NAME=bitcoin-gui
+BITCOIN_MP_GUI_NAME=litecoin-gui
 
 dnl Unless the user specified ARFLAGS, force it to be cr
 dnl This is also the default as-of libtool 2.4.7
@@ -295,7 +295,7 @@ AC_ARG_WITH([mpgen],
 
 AC_ARG_ENABLE([multiprocess],
   [AS_HELP_STRING([--enable-multiprocess],
-  [build multiprocess litecoin-node, litecoin-wallet, and bitcoin-gui executables in addition to monolithic litecoind and bitcoin-qt executables. Requires libmultiprocess library. Experimental (default is no)])],
+  [build multiprocess litecoin-node, litecoin-wallet, and litecoin-gui executables in addition to monolithic litecoind and bitcoin-qt executables. Requires libmultiprocess library. Experimental (default is no)])],
   [enable_multiprocess=$enableval],
   [enable_multiprocess=no])
 

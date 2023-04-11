@@ -2,10 +2,10 @@
 
 *.exe
 *.pdb
-src/bitcoin
+src/litecoin
 src/litecoind
 src/litecoin-cli
-src/bitcoin-gui
+src/litecoin-gui
 src/litecoin-node
 src/litecoin-tx
 src/litecoin-util
