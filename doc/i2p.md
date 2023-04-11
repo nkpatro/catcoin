@@ -44,7 +44,7 @@ Core configuration options:
 In a typical situation, this suffices:
 
 ```
-bitcoind -i2psam=127.0.0.1:7656
+litecoind -i2psam=127.0.0.1:7656
 ```
 
 The first time Bitcoin Core connects to the I2P router, if

@@ -8,7 +8,7 @@ import sys
 import tempfile
 
 BINARIES = [
-'src/bitcoind',
+'src/litecoind',
 'src/litecoin-cli',
 'src/litecoin-tx',
 'src/bitcoin-wallet',

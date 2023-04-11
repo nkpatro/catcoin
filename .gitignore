@@ -3,7 +3,7 @@
 *.exe
 *.pdb
 src/bitcoin
-src/bitcoind
+src/litecoind
 src/litecoin-cli
 src/bitcoin-gui
 src/bitcoin-node

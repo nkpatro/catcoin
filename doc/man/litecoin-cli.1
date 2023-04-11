@@ -4,10 +4,10 @@
 litecoin-cli \- manual page for litecoin-cli v24.0.1
 .SH SYNOPSIS
 .B litecoin-cli
-[\fI\,options\/\fR] \fI\,<command> \/\fR[\fI\,params\/\fR]  \fI\,Send command to Bitcoin Core\/\fR
+[\fI\,options\/\fR] \fI\,<command> \/\fR[\fI\,params\/\fR]  \fI\,Send command to Litecoin Core\/\fR
 .br
 .B litecoin-cli
-[\fI\,options\/\fR] \fI\,-named <command> \/\fR[\fI\,name=value\/\fR]...  \fI\,Send command to Bitcoin Core (with named arguments)\/\fR
+[\fI\,options\/\fR] \fI\,-named <command> \/\fR[\fI\,name=value\/\fR]...  \fI\,Send command to Litecoin Core (with named arguments)\/\fR
 .br
 .B litecoin-cli
 [\fI\,options\/\fR] \fI\,help                List commands\/\fR
@@ -15,7 +15,7 @@ litecoin-cli \- manual page for litecoin-cli v24.0.1
 .B litecoin-cli
 [\fI\,options\/\fR] \fI\,help <command>      Get help for a command\/\fR
 .SH DESCRIPTION
-Bitcoin Core RPC client version v24.0.1
+Litecoin Core RPC client version v24.0.1
 .SH OPTIONS
 .HP
 \-?
@@ -37,7 +37,7 @@ and OS is not WIN32), never.
 \fB\-conf=\fR<file>
 .IP
 Specify configuration file. Relative paths will be prefixed by datadir
-location. (default: bitcoin.conf)
+location. (default: litecoin.conf)
 .HP
 \fB\-datadir=\fR<dir>
 .IP
@@ -49,7 +49,7 @@ Generate blocks, equivalent to RPC getnewaddress followed by RPC
 generatetoaddress. Optional positional integer arguments are
 number of blocks to generate (default: 1) and maximum iterations
 to try (default: 1000000), equivalent to RPC generatetoaddress
-nblocks and maxtries arguments. Example: bitcoin\-cli \fB\-generate\fR 4
+nblocks and maxtries arguments. Example: litecoin\-cli \fB\-generate\fR 4
 1000
 .HP
 \fB\-getinfo\fR
@@ -110,7 +110,7 @@ timeout. (default: 0)
 \fB\-rpcwallet=\fR<walletname>
 .IP
 Send RPC for non\-default wallet on RPC server (needs to exactly match
-corresponding \fB\-wallet\fR option passed to bitcoind). This changes
+corresponding \fB\-wallet\fR option passed to litecoind). This changes
 the RPC endpoint used, e.g.
 http://127.0.0.1:8332/wallet/<walletname>
 .HP
