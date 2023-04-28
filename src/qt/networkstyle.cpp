@@ -19,7 +19,6 @@ static const struct {
 } network_styles[] = {
     {"main", QAPP_APP_NAME_DEFAULT, 0, 0},
     {"test", QAPP_APP_NAME_TESTNET, 0, 0},
-    {"signet", QAPP_APP_NAME_SIGNET, 35, 15},
     {"regtest", QAPP_APP_NAME_REGTEST, 60, 1},
 };
 
