@@ -38,7 +38,6 @@
 #include <script/script.h>
 #include <script/sigcache.h>
 #include <shutdown.h>
-#include <signet.h>
 #include <tinyformat.h>
 #include <txdb.h>
 #include <txmempool.h>
@@ -3337,11 +3336,6 @@ bool CheckBlock(const CBlock& block, BlockValidationState& state, const Consensu
     // redundant with the call in AcceptBlockHeader.
     if (!CheckBlockHeader(block, state, consensusParams, fCheckPOW))
         return false;
-
-    // Signet only: check block solution
-    if (consensusParams.signet_blocks && fCheckPOW && !CheckSignetBlockSolution(block, consensusParams)) {
-        return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-signet-blksig", "signet block signature validation failure");
-    }
 
     // Check the merkle root.
     if (fCheckMerkleRoot) {
