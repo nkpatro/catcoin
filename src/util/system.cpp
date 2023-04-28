@@ -280,7 +280,6 @@ const std::list<SectionInfo> ArgsManager::GetUnrecognizedSections() const
     // Section names to be recognized in the config file.
     static const std::set<std::string> available_sections{
         CBaseChainParams::REGTEST,
-        CBaseChainParams::SIGNET,
         CBaseChainParams::TESTNET,
         CBaseChainParams::MAIN
     };
