@@ -271,6 +271,7 @@ BASE_SCRIPTS = [
     'p2p_leak.py',
     'wallet_encryption.py --legacy-wallet',
     'wallet_encryption.py --descriptors',
+    'wallet_scriptaddress2.py',
     'feature_dersig.py',
     'feature_cltv.py',
     'rpc_uptime.py',
@@ -400,7 +401,7 @@ def main():
     logging.basicConfig(format='%(message)s', level=logging_level)
 
     # Create base test directory
-    tmpdir = "%s/test_runner_₿_🏃_%s" % (args.tmpdirprefix, datetime.datetime.now().strftime("%Y%m%d_%H%M%S"))
+    tmpdir = "%s/test_runner_Ł_🏃_%s" % (args.tmpdirprefix, datetime.datetime.now().strftime("%Y%m%d_%H%M%S"))
 
     os.makedirs(tmpdir)
 
