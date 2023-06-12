@@ -55,7 +55,7 @@ macos_native_task_template: &MACOS_NATIVE_TASK_TEMPLATE
   check_clang_script:
     - clang --version
   brew_install_script:
-    - brew install boost libevent qt@5 miniupnpc libnatpmp ccache zeromq qrencode libtool automake gnu-getopt
+    - brew install boost libevent qt@5 miniupnpc libnatpmp ccache openssl zeromq qrencode libtool automake gnu-getopt
   << : *MAIN_TEMPLATE
 
 compute_credits_template: &CREDITS_TEMPLATE
@@ -174,7 +174,7 @@ task:
     - msbuild build_msvc\bitcoin.sln -property:CLToolExe=%WRAPPED_CL% -property:Configuration=Release -maxCpuCount -verbosity:minimal -noLogo
     - ccache --show-stats
   unit_tests_script:
-    - src\test_bitcoin.exe -l test_suite
+    - src\test_litecoin.exe -l test_suite
     - src\bench_bitcoin.exe > NUL
     - python test\util\test_runner.py
     - python test\util\rpcauth-test.py
@@ -252,7 +252,7 @@ task:
   name: '[ASan + LSan + UBSan + integer, no depends, USDT] [jammy]'
   << : *GLOBAL_TASK_TEMPLATE
   # We can't use a 'container' for the USDT interface tests as the CirrusCI
-  # containers don't have privileges to hook into bitcoind. CirrusCI uses
+  # containers don't have privileges to hook into litecoind. CirrusCI uses
   # Google Compute Engine instances: https://cirrus-ci.org/guide/custom-vms/
   # Images can be found here: https://cloud.google.com/compute/docs/images/os-details
   compute_engine_instance:

@@ -11,7 +11,7 @@
 class ArgsManager;
 
 /**
- * CBaseChainParams defines the base parameters (shared between bitcoin-cli and bitcoind)
+ * CBaseChainParams defines the base parameters (shared between litecoin-cli and litecoind)
  * of a given instance of the Bitcoin system.
  */
 class CBaseChainParams
@@ -21,7 +21,6 @@ public:
     /** Chain name strings */
     static const std::string MAIN;
     static const std::string TESTNET;
-    static const std::string SIGNET;
     static const std::string REGTEST;
     ///@}
 

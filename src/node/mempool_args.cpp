@@ -91,7 +91,8 @@ std::optional<bilingual_str> ApplyArgsManOptions(const ArgsManager& argsman, con
     if (!chainparams.IsTestChain() && !mempool_opts.require_standard) {
         return strprintf(Untranslated("acceptnonstdtxn is not currently supported for %s chain"), chainparams.NetworkIDString());
     }
-
+    
+    mempool_opts.enable_rbf = argsman.GetBoolArg("-mempoolreplacement", mempool_opts.enable_rbf);
     mempool_opts.full_rbf = argsman.GetBoolArg("-mempoolfullrbf", mempool_opts.full_rbf);
 
     ApplyArgsManOptions(argsman, mempool_opts.limits);
