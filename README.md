@@ -5,17 +5,17 @@ Elethcoin Core integration/staging tree
 
 https://elethcoin.com
 
-What is Litecoin?
+What is Elethcoin?
 ----------------
 
-Litecoin is an experimental digital currency that enables instant payments to
-anyone, anywhere in the world. Litecoin uses peer-to-peer technology to operate
+Elethcoin is an experimental digital currency that enables instant payments to
+anyone, anywhere in the world. Elethcoin uses peer-to-peer technology to operate
 with no central authority: managing transactions and issuing money are carried
-out collectively by the network. Litecoin Core is the name of open source
+out collectively by the network. Elethcoin Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Litecoin Core software, see [https://elethcoin.com](https://elethcoin.com).
+the Elethcoin Core software, see [https://elethcoin.com](https://elethcoin.com).
 
 License
 -------
@@ -27,7 +27,7 @@ Development Process
 -------------------
 
 The `master` branch is regularly built (see `doc/build-*.md` for instructions) and tested, but it is not guaranteed to be
-completely stable. [Tags](https://github.com/litecoin-project/litecoin/tags) are created
+completely stable. [Tags](https://github.dev/Elethcoin/elethcoin//tags) are created
 regularly from release branches to indicate new official, stable release versions of Litecoin Core.
 
 The https://github.com/litecoin-project/gui repository is used exclusively for the
