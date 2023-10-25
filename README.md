@@ -15,7 +15,7 @@ out collectively by the network. Litecoin Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Litecoin Core software, see [https://litecoin.org](https://litecoin.org).
+the Litecoin Core software, see [https://elethcoin.com](https://elethcoin.com).
 
 License
 -------
