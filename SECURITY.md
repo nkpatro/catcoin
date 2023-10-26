@@ -13,3 +13,4 @@ The following keys may be used to communicate sensitive information to developer
 | Adrian Gallagher | 59CAF0E96F23F53747945FD4FE3348877809386C |
 
 You can import a key by running the following command with that individual’s fingerprint: `gpg --recv-keys "<fingerprint>"` Ensure that you put quotes around fingerprints containing spaces.
+ARHIPOV VLADIMIR IVANOVICH DESANTYRA
