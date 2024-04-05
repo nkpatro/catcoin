@@ -1,33 +1,15 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2019 The Bitcoin Core developers
+// Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <merkleblock.h>
+#include "merkleblock.h"
 
-#include <hash.h>
-#include <consensus/consensus.h>
+#include "hash.h"
+#include "consensus/consensus.h"
+#include "utilstrencodings.h"
 
-
-std::vector<unsigned char> BitsToBytes(const std::vector<bool>& bits)
-{
-    std::vector<unsigned char> ret((bits.size() + 7) / 8);
-    for (unsigned int p = 0; p < bits.size(); p++) {
-        ret[p / 8] |= bits[p] << (p % 8);
-    }
-    return ret;
-}
-
-std::vector<bool> BytesToBits(const std::vector<unsigned char>& bytes)
-{
-    std::vector<bool> ret(bytes.size() * 8);
-    for (unsigned int p = 0; p < ret.size(); p++) {
-        ret[p] = (bytes[p / 8] & (1 << (p % 8))) != 0;
-    }
-    return ret;
-}
-
-CMerkleBlock::CMerkleBlock(const CBlock& block, CBloomFilter* filter, const std::set<uint256>* txids)
+CMerkleBlock::CMerkleBlock(const CBlock& block, CBloomFilter& filter)
 {
     header = block.GetBlockHeader();
 
@@ -40,14 +22,36 @@ CMerkleBlock::CMerkleBlock(const CBlock& block, CBloomFilter* filter, const std:
     for (unsigned int i = 0; i < block.vtx.size(); i++)
     {
         const uint256& hash = block.vtx[i]->GetHash();
-        if (txids && txids->count(hash)) {
+        if (filter.IsRelevantAndUpdate(*block.vtx[i]))
+        {
             vMatch.push_back(true);
-        } else if (filter && filter->IsRelevantAndUpdate(*block.vtx[i])) {
-            vMatch.push_back(true);
-            vMatchedTxn.emplace_back(i, hash);
-        } else {
-            vMatch.push_back(false);
+            vMatchedTxn.push_back(std::make_pair(i, hash));
         }
+        else
+            vMatch.push_back(false);
+        vHashes.push_back(hash);
+    }
+
+    txn = CPartialMerkleTree(vHashes, vMatch);
+}
+
+CMerkleBlock::CMerkleBlock(const CBlock& block, const std::set<uint256>& txids)
+{
+    header = block.GetBlockHeader();
+
+    std::vector<bool> vMatch;
+    std::vector<uint256> vHashes;
+
+    vMatch.reserve(block.vtx.size());
+    vHashes.reserve(block.vtx.size());
+
+    for (unsigned int i = 0; i < block.vtx.size(); i++)
+    {
+        const uint256& hash = block.vtx[i]->GetHash();
+        if (txids.count(hash))
+            vMatch.push_back(true);
+        else
+            vMatch.push_back(false);
         vHashes.push_back(hash);
     }
 
@@ -70,7 +74,7 @@ uint256 CPartialMerkleTree::CalcHash(int height, unsigned int pos, const std::ve
         else
             right = left;
         // combine subhashes
-        return Hash(left, right);
+        return Hash(BEGIN(left), END(left), BEGIN(right), END(right));
     }
 }
 
@@ -126,7 +130,7 @@ uint256 CPartialMerkleTree::TraverseAndExtract(int height, unsigned int pos, uns
             right = left;
         }
         // and combine them before returning
-        return Hash(left, right);
+        return Hash(BEGIN(left), END(left), BEGIN(right), END(right));
     }
 }
 
@@ -177,15 +181,4 @@ uint256 CPartialMerkleTree::ExtractMatches(std::vector<uint256> &vMatch, std::ve
     if (nHashUsed != vHash.size())
         return uint256();
     return hashMerkleRoot;
-}
-
-CMerkleBlockWithMWEB::CMerkleBlockWithMWEB(const CBlock& block)
-{
-    hogex = block.GetHogEx();
-    assert(hogex != nullptr);
-
-    mweb_header = block.mweb_block.GetMWEBHeader();
-    assert(mweb_header != nullptr);
-
-    merkle = CMerkleBlock(block, std::set<uint256>{hogex->GetHash()});
 }
