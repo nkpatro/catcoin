@@ -1,21 +1,17 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2009-2016 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifndef BITCOIN_MERKLEBLOCK_H
 #define BITCOIN_MERKLEBLOCK_H
 
-#include <serialize.h>
-#include <uint256.h>
-#include <primitives/block.h>
-#include <bloom.h>
+#include "serialize.h"
+#include "uint256.h"
+#include "primitives/block.h"
+#include "bloom.h"
 
 #include <vector>
-
-// Helper functions for serialization.
-std::vector<unsigned char> BitsToBytes(const std::vector<bool>& bits);
-std::vector<bool> BytesToBits(const std::vector<unsigned char>& bytes);
 
 /** Data structure that represents a partial merkle tree.
  *
@@ -67,7 +63,7 @@ protected:
     bool fBad;
 
     /** helper function to efficiently calculate the number of nodes at given height in the merkle tree */
-    unsigned int CalcTreeWidth(int height) const {
+    unsigned int CalcTreeWidth(int height) {
         return (nTransactions+(1 << height)-1) >> height;
     }
 
@@ -85,14 +81,27 @@ protected:
 
 public:
 
-    SERIALIZE_METHODS(CPartialMerkleTree, obj)
-    {
-        READWRITE(obj.nTransactions, obj.vHash);
-        std::vector<unsigned char> bytes;
-        SER_WRITE(obj, bytes = BitsToBytes(obj.vBits));
-        READWRITE(bytes);
-        SER_READ(obj, obj.vBits = BytesToBits(bytes));
-        SER_READ(obj, obj.fBad = false);
+    /** serialization implementation */
+    ADD_SERIALIZE_METHODS;
+
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action) {
+        READWRITE(nTransactions);
+        READWRITE(vHash);
+        std::vector<unsigned char> vBytes;
+        if (ser_action.ForRead()) {
+            READWRITE(vBytes);
+            CPartialMerkleTree &us = *(const_cast<CPartialMerkleTree*>(this));
+            us.vBits.resize(vBytes.size() * 8);
+            for (unsigned int p = 0; p < us.vBits.size(); p++)
+                us.vBits[p] = (vBytes[p / 8] & (1 << (p % 8))) != 0;
+            us.fBad = false;
+        } else {
+            vBytes.resize((vBits.size()+7)/8);
+            for (unsigned int p = 0; p < vBits.size(); p++)
+                vBytes[p / 8] |= vBits[p] << (p % 8);
+            READWRITE(vBytes);
+        }
     }
 
     /** Construct a partial merkle tree from a list of transaction ids, and a mask that selects a subset of them */
@@ -106,12 +115,6 @@ public:
      * returns the merkle root, or 0 in case of failure
      */
     uint256 ExtractMatches(std::vector<uint256> &vMatch, std::vector<unsigned int> &vnIndex);
-
-    /** Get number of transactions the merkle proof is indicating for cross-reference with
-     * local blockchain knowledge.
-     */
-    unsigned int GetNumTransactions() const { return nTransactions; };
-
 };
 
 
@@ -128,12 +131,8 @@ public:
     CBlockHeader header;
     CPartialMerkleTree txn;
 
-    /**
-     * Public only for unit testing and relay testing (not relayed).
-     *
-     * Used only when a bloom filter is specified to allow
-     * testing the transactions which matched the bloom filter.
-     */
+public:
+    /** Public only for unit testing and relay testing (not relayed) */
     std::vector<std::pair<unsigned int, uint256> > vMatchedTxn;
 
     /**
@@ -141,67 +140,20 @@ public:
      * Note that this will call IsRelevantAndUpdate on the filter for each transaction,
      * thus the filter will likely be modified.
      */
-    CMerkleBlock(const CBlock& block, CBloomFilter& filter) : CMerkleBlock(block, &filter, nullptr) { }
+    CMerkleBlock(const CBlock& block, CBloomFilter& filter);
 
     // Create from a CBlock, matching the txids in the set
-    CMerkleBlock(const CBlock& block, const std::set<uint256>& txids) : CMerkleBlock(block, nullptr, &txids) { }
+    CMerkleBlock(const CBlock& block, const std::set<uint256>& txids);
 
     CMerkleBlock() {}
 
-    SERIALIZE_METHODS(CMerkleBlock, obj) { READWRITE(obj.header, obj.txn); }
+    ADD_SERIALIZE_METHODS;
 
-private:
-    // Combined constructor to consolidate code
-    CMerkleBlock(const CBlock& block, CBloomFilter* filter, const std::set<uint256>* txids);
-};
-
-
-/**
- * Can be requested by MWEB light clients to retrieve and verify MWEB headers.
- * 
- * Serializes as merkleblock + tx (HogEx) + MWEB header:
- * 
- * Merkle Block
- *  - uint32         version (4 bytes)
- *  - uint256        prev_block (32 bytes)
- *  - uint256        merkle_root (32 bytes)
- *  - uint32         timestamp (4 bytes)
- *  - uint32         bits (4 bytes)
- *  - uint32         nonce (4 bytes)
- *  - uint32         total_transactions (4 bytes)
- *  - varint         number of hashes   (1-3 bytes)
- *  - uint256[]      hashes in depth-first order (<= 32*N bytes)
- *  - varint         number of bytes of flag bits (1-3 bytes)
- *  - byte[]         flag bits, packed per 8 in a byte, least significant bit first (<= 2*N-1 bits)
- * 
- * HogEx Transaction
- *  - CTransaction   hogex transaction (? bytes)
- * 
- * MWEB Header
- *  - int32          height (4 bytes)
- *  - uint256        output_root (32 bytes)
- *  - uint256        kernel_root (32 bytes)
- *  - uint256        leafset_root (32 bytes)
- *  - uint256        kernel_offset (32 bytes)
- *  - uint256        stealth_offset (32 bytes)
- *  - uint64         output_mmr_size (8 bytes)
- *  - uint64         kernel_mmr_size (8 bytes)
- * 
- * NOTE: The class assumes that the given CBlock contains a hogex transaction and MWEB block data.
- * If it does not, an assertion will be hit.
- */
-class CMerkleBlockWithMWEB
-{
-private:
-    CMerkleBlock merkle;
-    CTransactionRef hogex;
-    mw::Header::CPtr mweb_header;
-
-public:
-    CMerkleBlockWithMWEB() { }
-    CMerkleBlockWithMWEB(const CBlock& block);
-
-    SERIALIZE_METHODS(CMerkleBlockWithMWEB, obj) { READWRITE(obj.merkle, obj.hogex, obj.mweb_header); }
+    template <typename Stream, typename Operation>
+    inline void SerializationOp(Stream& s, Operation ser_action) {
+        READWRITE(header);
+        READWRITE(txn);
+    }
 };
 
 #endif // BITCOIN_MERKLEBLOCK_H

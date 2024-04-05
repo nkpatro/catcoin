@@ -4,11 +4,9 @@
     "version": 1,
     "size": 85,
     "vsize": 85,
-    "weight": 340,
     "locktime": 0,
     "vin": [
         {
-            "ismweb": false,
             "txid": "6c2789243608b46f750f49ff24f6f79a78c3010f7e56951e045e5b7ea5d07bf7",
             "vout": 0,
             "scriptSig": {
@@ -20,7 +18,6 @@
     ],
     "vout": [
         {
-            "ismweb": false,
             "value": 0.00100000,
             "n": 0,
             "scriptPubKey": {

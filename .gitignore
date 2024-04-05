@@ -1,18 +1,13 @@
 *.tar.gz
 
 *.exe
-*.pdb
-src/litecoin
-src/litecoind
-src/litecoin-cli
-src/litecoin-gui
-src/litecoin-node
-src/litecoin-tx
-src/litecoin-wallet
-src/test/fuzz/*
-!src/test/fuzz/*.*
-src/test/test_litecoin
-src/qt/test/test_litecoin-qt
+src/vertexcoin
+src/vertexcoind
+src/vertexcoin-cli
+src/vertexcoin-tx
+src/test/test_vertexcoin
+src/test/test_vertexcoin_fuzzy
+src/qt/test/test_vertexcoin-qt
 
 # autoreconf
 Makefile.in
@@ -31,7 +26,6 @@ build-aux/m4/ltversion.m4
 build-aux/missing
 build-aux/compile
 build-aux/test-driver
-config.cache
 config.log
 config.status
 configure
@@ -39,7 +33,6 @@ libtool
 src/config/bitcoin-config.h
 src/config/bitcoin-config.h.in
 src/config/stamp-h1
-src/obj
 share/setup.nsi
 share/qt/Info.plist
 
@@ -51,16 +44,9 @@ src/qt/forms/ui_*.h
 
 src/qt/test/moc*.cpp
 
-src/qt/bitcoin-qt.config
-src/qt/bitcoin-qt.creator
-src/qt/bitcoin-qt.creator.user
-src/qt/bitcoin-qt.files
-src/qt/bitcoin-qt.includes
-
 .deps
 .dirstamp
 .libs
-.vscode
 .*.swp
 *.*~*
 *.bak
@@ -69,22 +55,17 @@ src/qt/bitcoin-qt.includes
 *.pyc
 *.o
 *.o-*
+*.patch
 *.a
 *.pb.cc
 *.pb.h
-*.dat
 
 *.log
 *.trs
 *.dmg
-*.iso
 
 *.json.h
 *.raw.h
-
-# Only ignore unexpected patches
-*.patch
-!depends/patches/**/*.patch
 
 #libtool object files
 *.lo
@@ -93,37 +74,27 @@ src/qt/bitcoin-qt.includes
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-!depends/Makefile
-src/qt/litecoin-qt
-Litecoin-Qt.app
-background.tiff*
-
-# Qt Creator
-Makefile.am.user
+vertexcoin-qt
+Vertexcoin-Qt.app
 
 # Unit-tests
 Makefile.test
-litecoin-qt_test
+vertexcoin-qt_test
 
 # Resources cpp
 qrc_*.cpp
+
 # Mac specific
 .DS_Store
 build
-
-# Previous releases
-releases
 
 #lcov
 *.gcno
 *.gcda
 /*.info
-test_litecoin.coverage/
+test_vertexcoin.coverage/
 total.coverage/
-fuzz.coverage/
 coverage_percent.txt
-/cov_tool_wrapper.sh
-qa-assets/
 
 #build tests
 linux-coverage-build
@@ -131,7 +102,6 @@ linux-build
 win32-build
 test/config.ini
 test/cache/*
-test/.mypy_cache/
 
 !src/leveldb*/Makefile
 
@@ -139,13 +109,3 @@ test/.mypy_cache/
 
 libbitcoinconsensus.pc
 contrib/devtools/split-debug.sh
-
-# Output from running db4 installation
-db4/
-
-# clang-check
-*.plist
-
-osx_volname
-dist/
-*.background.tiff
