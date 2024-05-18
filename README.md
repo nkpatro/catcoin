@@ -3,7 +3,7 @@ Jocoin Core integration/staging tree
 
 [![Build Status](https://travis-ci.org/jocoin-project/jocoin.svg?branch=master)](https://travis-ci.org/jocoin-project/jocoin)
 
-https://jocoin.org
+https://jocoin.io
 
 What is Jocoin?
 ----------------
@@ -15,7 +15,7 @@ out collectively by the network. Jocoin Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Jocoin Core software, see [https://jocoin.org](https://jocoin.org).
+the Jocoin Core software, see [https://jocoin.io](https://jocoin.io).
 
 License
 -------
@@ -38,7 +38,7 @@ that repository unless it is for development reasons.
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md)
 and useful hints for developers can be found in [doc/developer-notes.md](doc/developer-notes.md).
 
-The developer [mailing list](https://groups.google.com/forum/#!forum/jocoin-dev)
+The developer [mailing list](https://groups.google.com/g/jocodev)
 should be used to discuss complicated or controversial changes before working
 on a patch set.
 
