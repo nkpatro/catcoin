@@ -55,11 +55,11 @@ config file): *Needed for Tor version 0.2.7.0 and older versions of Tor only. Fo
 versions of Tor see [Section 3](#3-automatically-listen-on-tor).*
 
 	HiddenServiceDir /var/lib/tor/jocoin-service/
-	HiddenServicePort 9333 127.0.0.1:9333
-	HiddenServicePort 19335 127.0.0.1:19335
+	HiddenServicePort 9567 127.0.0.1:9567
+	HiddenServicePort 19569 127.0.0.1:19569
 
 The directory can be different of course, but virtual port numbers should be equal to
-your jocoind's P2P listen port (9333 by default), and target addresses and ports
+your jocoind's P2P listen port (9567 by default), and target addresses and ports
 should be equal to binding address and port for inbound Tor connections (127.0.0.1:9334 by default).
 
 	-externalip=X   You can tell jocoin about its publicly reachable addresses using
@@ -100,7 +100,7 @@ as well, use `discover` instead:
 
 	./jocoind ... -discover
 
-and open port 9333 on your firewall (or use -upnp).
+and open port 9567 on your firewall (or use -upnp).
 
 If you only want to use Tor to reach .onion addresses, but not use it as a proxy
 for normal IPv4/IPv6 communication, use:
