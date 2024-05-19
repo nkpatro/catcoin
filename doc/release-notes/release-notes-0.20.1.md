@@ -128,7 +128,7 @@ existence to determine whether an input was segwit.
 - #19536 qt, build: Fix QFileDialog for static builds (hebasto)
 
 ### Tests and QA
-- #19444 Remove cached directories and associated script blocks from appveyor config (sipsorcery)
+- #19570 Remove cached directories and associated script blocks from appveyor config (sipsorcery)
 - #18640 appveyor: Remove clcache (MarcoFalke)
 
 ### Miscellaneous
