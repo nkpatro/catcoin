@@ -1,85 +1,112 @@
-Litecoin Core integration/staging tree
-=====================================
+# Travis caches can be manually removed if necessary. This is one of the very
+# few manual operations that is possible with Travis, and it can be done by a
+# Bitcoin Core GitHub member via the Travis web interface [0].
+#
+# Travis CI uploads the cache after the script phase of the build [1].
+# However, the build is terminated without saving the cache if it takes over
+# 50 minutes [2]. Thus, if we spent too much time in early build stages, fail
+# with an error and save the cache.
+#
+# [0] https://travis-ci.org/bitcoin/bitcoin/caches
+# [1] https://docs.travis-ci.com/user/caching/#build-phases
+# [2] https://docs.travis-ci.com/user/customizing-the-build#build-timeouts
 
-[![Build Status](https://travis-ci.org/litecoin-project/litecoin.svg?branch=master)](https://travis-ci.org/litecoin-project/litecoin)
+version: ~> 1.0
 
-https://litecoin.org
+dist: bionic
+os: linux
+language: minimal
+arch: amd64
+cache:
+  directories:
+    - $TRAVIS_BUILD_DIR/depends/built
+    - $TRAVIS_BUILD_DIR/depends/sdk-sources
+    - $TRAVIS_BUILD_DIR/ci/scratch/.ccache
+    - $TRAVIS_BUILD_DIR/releases/$HOST
+stages:
+  - lint
+  - test
+env:
+  global:
+    - CI_RETRY_EXE="travis_retry"
+    - CACHE_ERR_MSG="Error! Initial build successful, but not enough time remains to run later build stages and tests. See https://docs.travis-ci.com/user/customizing-the-build#build-timeouts . Please manually re-run this job by using the travis restart button. The next run should not time out because the build cache has been saved."
+before_install:
+  - set -o errexit; source ./ci/test/00_setup_env.sh
+  - set -o errexit; source ./ci/test/03_before_install.sh
+install:
+  - set -o errexit; source ./ci/test/04_install.sh
+before_script:
+  # Temporary workaround for https://github.com/bitcoin/bitcoin/issues/16368
+  - for i in {1..4}; do echo "$(sleep 500)" ; done &
+  - set -o errexit; source ./ci/test/05_before_script.sh &> "/dev/null"
+script:
+  - export CONTINUE=1
+  - if [ $SECONDS -gt 1200 ]; then export CONTINUE=0; fi  # Likely the depends build took very long
+  - if [ $TRAVIS_REPO_SLUG = "bitcoin/bitcoin" ]; then export CONTINUE=1; fi  # continue on repos with extended build time (90 minutes)
+  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_a.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
+  - if [[ $SECONDS -gt 50*60-$EXPECTED_TESTS_DURATION_IN_SECONDS ]]; then export CONTINUE=0; fi
+  - if [ $TRAVIS_REPO_SLUG = "bitcoin/bitcoin" ]; then export CONTINUE=1; fi  # continue on repos with extended build time (90 minutes)
+  - if [ $CONTINUE = "1" ]; then set -o errexit; source ./ci/test/06_script_b.sh; else set +o errexit; echo "$CACHE_ERR_MSG"; false; fi
+after_script:
+  - echo $TRAVIS_COMMIT_RANGE
+jobs:
+  include:
 
-What is Litecoin?
-----------------
+    - stage: lint
+      name: 'lint'
+      env:
+      cache: pip
+      language: python
+      python: '3.5' # Oldest supported version according to doc/dependencies.md
+      install:
+        - set -o errexit; source ./ci/lint/04_install.sh
+      before_script:
+        - set -o errexit; source ./ci/lint/05_before_script.sh
+      script:
+        - set -o errexit; source ./ci/lint/06_script.sh
 
-Litecoin is an experimental digital currency that enables instant payments to
-anyone, anywhere in the world. Litecoin uses peer-to-peer technology to operate
-with no central authority: managing transactions and issuing money are carried
-out collectively by the network. Litecoin Core is the name of open source
-software which enables the use of this currency.
+    - stage: test
+      name: '32-bit + dash  [GOAL: install]  [CentOS 7]  [gui]'
+      env: >-
+        FILE_ENV="./ci/test/00_setup_env_i686_centos.sh"
 
-For more information, as well as an immediately useable, binary version of
-the Litecoin Core software, see [https://litecoin.org](https://litecoin.org).
+    - stage: test
+      name: 'x86_64 Linux  [GOAL: install]  [xenial]  [no wallet]'
+      env: >-
+        FILE_ENV="./ci/test/00_setup_env_native_nowallet.sh"
+[blockchair_statement_example_extended.csv](https://github.com/user-attachments/files/16117764/blockchair_statement_example_extended.csv)
+[BTC_1D_graph_coinmarketcap.csv](https://github.com/user-attachments/files/16117763/BTC_1D_graph_coinmarketcap.csv)
 
-License
--------
-
-Litecoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
-information or see https://opensource.org/licenses/MIT.
-
-Development Process
--------------------
-
-The `master` branch is regularly built (see `doc/build-*.md` for instructions) and tested, but it is not guaranteed to be
-completely stable. [Tags](https://github.com/litecoin-project/litecoin/tags) are created
-regularly from release branches to indicate new official, stable release versions of Litecoin Core.
-
-The https://github.com/litecoin-project/gui repository is used exclusively for the
-development of the GUI. Its master branch is identical in all monotree
-repositories. Release branches and tags do not exist, so please do not fork
-that repository unless it is for development reasons.
-
-The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md)
-and useful hints for developers can be found in [doc/developer-notes.md](doc/developer-notes.md).
-
-The developer [mailing list](https://groups.google.com/forum/#!forum/litecoin-dev)
-should be used to discuss complicated or controversial changes before working
-on a patch set.
-
-Developer IRC can be found on Freenode at #litecoin-dev.
-
-Testing
--------
-
-Testing and code review is the bottleneck for development; we get more pull
-requests than we can review and test on short notice. Please be patient and help out by testing
-other people's pull requests, and remember this is a security-critical project where any mistake might cost people
-lots of money.
-
-### Automated Testing
-
-Developers are strongly encouraged to write [unit tests](src/test/README.md) for new code, and to
-submit new unit tests for old code. Unit tests can be compiled and run
-(assuming they weren't disabled in configure) with: `make check`. Further details on running
-and extending unit tests can be found in [/src/test/README.md](/src/test/README.md).
-
-There are also [regression and integration tests](/test), written
-in Python, that are run automatically on the build server.
-These tests can be run (if the [test dependencies](/test) are installed) with: `test/functional/test_runner.py`
-
-The Travis CI system makes sure that every pull request is built for Windows, Linux, and macOS, and that unit/sanity tests are run automatically.
-
-### Manual Quality Assurance (QA) Testing
-
-Changes should be tested by somebody other than the developer who wrote the
-code. This is especially important for large or high-risk changes. It is useful
-to add a test plan to the pull request description if testing the changes is
-not straightforward.
-
-Translations
-------------
-
-We only accept translation fixes that are submitted through [Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcoin/).
-Translations are converted to Litecoin periodically.
-
-Translations are periodically pulled from Transifex and merged into the git repository. See the
-[translation process](doc/translation_process.md) for details on how this works.
-
-**Important**: We do not accept translation changes as GitHub pull requests because the next
-pull from Transifex would automatically overwrite them again.
+{
+  "language": "shell",
+  "os": [
+    "linux"
+  ],
+  "dist": "bionic",
+  "version": "~> 1.0",
+  "arch": [
+    "amd64"
+  ],
+  "cache": {
+    "directories": [
+      "$TRAVIS_BUILD_DIR/depends/built",
+      "$TRAVIS_BUILD_DIR/depends/sdk-sources",
+      "$TRAVIS_BUILD_DIR/ci/scratch/.ccache",
+      "$TRAVIS_BUILD_DIR/releases/$HOST"
+    ]
+  },
+  "stages": [
+    {
+      "name": "lint"
+    },
+    {
+      "name": "test"
+    }
+  ],
+  "env": {
+    "global": [
+      {
+        "CI_RETRY_EXE": "\"travis_retry\""
+      },
+      {
+   
